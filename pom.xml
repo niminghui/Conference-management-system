@@ -36,6 +36,6 @@
 		</dependency>
   </dependencies>
   <build>
-    <finalName>sms</finalName>
+    <finalName>scb.sms</finalName>
   </build>
 </project>
