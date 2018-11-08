@@ -38,5 +38,4 @@ public class MenuTreeUtilTest {
 		List<Menu> treeList = (ToolFactory.getInstanceOfMenuTreeUtil().turnedToMenuTree(mlist));
 		System.out.println(JSON.toJSONString(treeList));
 	}
-
 }
