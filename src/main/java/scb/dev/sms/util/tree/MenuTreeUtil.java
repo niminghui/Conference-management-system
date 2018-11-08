@@ -19,6 +19,7 @@ package scb.dev.sms.util.tree;
  */
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import scb.dev.sms.sm.pojo.Menu;
@@ -55,6 +56,12 @@ public class MenuTreeUtil {
 				menuTreeList.add(menu);
 			}
 		}
-		return menuTreeList;
+		List<Menu> sortedMenuTree = getSortedChildren(menuTreeList);
+		return sortedMenuTree;
+	}
+
+	private List<Menu> getSortedChildren(List<Menu> children) {
+		Collections.sort(children, new MenuCompare());
+		return children;
 	}
 }

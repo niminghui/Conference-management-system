@@ -28,6 +28,8 @@ public class Menu {
 	private String pid;
 	private String icon;
 	private String url;
+	private Integer sortId;
+
 	// 辅助字段
 	private List<Menu> children;
 
@@ -49,11 +51,12 @@ public class Menu {
 	 * @param name
 	 * @param pid
 	 */
-	public Menu(String id, String name, String pid) {
+	public Menu(String id, String name, String pid, Integer sortId) {
 		this();
 		this.id = id;
 		this.name = name;
 		this.pid = pid;
+		this.sortId = sortId;
 	}
 
 	/**
@@ -176,4 +179,23 @@ public class Menu {
 		this.children = children;
 	}
 
+	/**
+	 * sortId.
+	 *
+	 * @return the sortId
+	 * @since JDK 1.8
+	 */
+	public Integer getSortId() {
+		return sortId;
+	}
+
+	/**
+	 * sortId.
+	 *
+	 * @param sortId the sortId to set
+	 * @since JDK 1.8
+	 */
+	public void setSortId(Integer sortId) {
+		this.sortId = sortId;
+	}
 }
