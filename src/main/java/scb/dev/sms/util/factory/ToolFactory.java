@@ -9,6 +9,7 @@
 package scb.dev.sms.util.factory;
 
 import scb.dev.sms.util.date.DateTool;
+import scb.dev.sms.util.tree.MenuTreeUtil;
 
 /**
  * ClassName: ToolFactory <br/>
@@ -22,5 +23,9 @@ import scb.dev.sms.util.date.DateTool;
 public class ToolFactory {
 	public static DateTool getInstanceOfDateTool() {
 		return new DateTool();
+	}
+
+	public static MenuTreeUtil getInstanceOfMenuTreeUtil() {
+		return new MenuTreeUtil();
 	}
 }
