@@ -12,7 +12,7 @@ import java.util.TimeZone;
 
 /**
  * ClassName: ZoneTool <br/>
- * Description: TODO ADD REASON(可选). <br/>
+ * Description: ZoneTool. <br/>
  * <br/>
  *
  * @author Minghui.Ni

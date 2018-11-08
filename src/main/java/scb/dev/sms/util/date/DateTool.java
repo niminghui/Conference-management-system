@@ -13,7 +13,7 @@ import java.util.Date;
 
 /**
  * ClassName: DateTool <br/>
- * Description: TODO Date and String Convert. <br/>
+ * Description: Date and String Convert. <br/>
  * <br/>
  *
  * @author Minghui.Ni

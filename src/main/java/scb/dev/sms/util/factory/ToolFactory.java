@@ -9,11 +9,10 @@
 package scb.dev.sms.util.factory;
 
 import scb.dev.sms.util.date.DateTool;
-import scb.dev.sms.util.tree.TreeTool;
 
 /**
  * ClassName: ToolFactory <br/>
- * Description: TODO ADD REASON(可选). <br/>
+ * Description: ToolFactory. <br/>
  * <br/>
  *
  * @author Minghui.Ni
@@ -23,9 +22,5 @@ import scb.dev.sms.util.tree.TreeTool;
 public class ToolFactory {
 	public static DateTool getInstanceOfDateTool() {
 		return new DateTool();
-	}
-
-	public static TreeTool getInstanceOfTreeTool() {
-		return new TreeTool();
 	}
 }

@@ -17,7 +17,7 @@ import scb.dev.sms.util.tool.MD5Utils;
 
 /**
  * ClassName: TokenIDFactory <br/>
- * Description: TODO get TokenID and UUID.<br/>
+ * Description: get TokenID and UUID.<br/>
  * <br/>
  *
  * @author Minghui.Ni

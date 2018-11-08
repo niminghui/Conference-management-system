@@ -19,7 +19,7 @@ import scb.dev.sms.sm.vo.AccountVO;
 
 /**
  * ClassName: AccountServiceImpl <br/>
- * Description: TODO ADD REASON(可选). <br/>
+ * Description: AccountServiceImpl. <br/>
  * <br/>
  *
  * @author Minghui.Ni

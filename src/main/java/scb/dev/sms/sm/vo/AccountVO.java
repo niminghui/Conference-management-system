@@ -10,12 +10,11 @@ package scb.dev.sms.sm.vo;
 
 /**
  * ClassName: AccountVO <br/>
- * Description: TODO ADD REASON(可选). <br/><br/>
+ * Description: AccountVO <br/>
  *
  * @author Minghui.Ni
  * @version V1.0
- * @since JDK 1.8
- * date: 2018年10月31日 下午2:12:16 <br/>
+ * @since JDK 1.8 date: 2018年10月31日 下午2:12:16 <br/>
  */
 public class AccountVO {
 

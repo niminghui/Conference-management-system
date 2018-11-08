@@ -17,16 +17,16 @@ import java.util.regex.Pattern;
 import scb.dev.sms.common.CommonEmailType;
 
 /**
- * ClassName: EmailTool <br/>
- * Description: TODO ADD REASON(可选). <br/>
+ * ClassName: ValidateTool <br/>
+ * Description: ValidateTool. <br/>
  * <br/>
  *
  * @author Minghui.Ni
  * @version V1.0
  * @since JDK 1.8 date: 2018年11月1日 下午2:17:03 <br/>
  */
-public class CheckTool {
-	public static String checkEmail(String email) {
+public class ValidateTool {
+	public static String validateEmail(String email) {
 		String emailType = "";
 		String emailPermission = "";
 		String regEx1 = "^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";
@@ -55,7 +55,7 @@ public class CheckTool {
 		return emailType + emailPermission;
 	}
 
-	public static boolean checkCLPSEmail(String email) {
+	public static boolean validateCLPSEmail(String email) {
 		if (email.contains("@")) {
 			String[] strings = email.split("@");
 			if (strings[1].equals("clpsglobal.com")) {
@@ -72,10 +72,10 @@ public class CheckTool {
 		return false;
 	}
 
-	public static List<String> checkCLPSEmailsAndSort(List<String> emails) {
+	public static List<String> validateCLPSEmailsAndSort(List<String> emails) {
 		List<String> checkEmails = new ArrayList<String>();
 		for (String s : emails) {
-			if (checkCLPSEmail(s)) {
+			if (validateCLPSEmail(s)) {
 				checkEmails.add(s);
 			}
 		}

@@ -10,7 +10,7 @@ package scb.dev.sms.common;
 
 /**
  * ClassName: CommanOperationType <br/>
- * Description: TODO Common types of operations. <br/>
+ * Description: 公共操作类型. <br/>
  * <br/>
  *
  * @author Minghui.Ni

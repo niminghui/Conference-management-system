@@ -10,7 +10,7 @@ package scb.dev.sms.common;
 
 /**
  * ClassName: CommonData <br/>
- * Description: TODO ADD REASON(可选). <br/>
+ * Description: 公共数据类. <br/>
  * <br/>
  *
  * @author Minghui.Ni

@@ -10,7 +10,7 @@ package scb.dev.sms.common;
 
 /**
  * ClassName: CommonEmailType <br/>
- * Description: TODO ADD REASON(可选). <br/>
+ * Description: 公共邮件类型. <br/>
  * <br/>
  *
  * @author Minghui.Ni

@@ -10,7 +10,7 @@ package scb.dev.sms.common;
 
 /**
  * ClassName: DateFormat <br/>
- * Description: TODO ADD REASON(可选). <br/>
+ * Description: 日期格式公共类. <br/>
  * <br/>
  *
  * @author Minghui.Ni

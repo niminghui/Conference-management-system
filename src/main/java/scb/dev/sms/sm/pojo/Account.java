@@ -13,7 +13,7 @@ import java.sql.Timestamp;
 
 /**
  * ClassName: Account <br/>
- * Description: TODO ADD REASON(可选). <br/>
+ * Description: Account实体类 <br/>
  * <br/>
  *
  * @author Minghui.Ni

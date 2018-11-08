@@ -16,7 +16,7 @@ import scb.dev.sms.sm.pojo.Account;
 
 /**
  * ClassName: AccountDAOImpl <br/>
- * Description: TODO ADD REASON(可选). <br/>
+ * Description: AccountDAOImpl. <br/>
  * <br/>
  *
  * @author Minghui.Ni
@@ -31,7 +31,7 @@ public class AccountDAOImpl implements AccountDAO {
 	}
 
 	/**
-	 * TODO 简单描述该方法的实现功能（可选）.
+	 * deleteAccountById.
 	 * 
 	 * @see com.clps.dev.sms.sm.dao.AccountDAO#deleteAccountById(java.lang.String)
 	 */
@@ -42,7 +42,7 @@ public class AccountDAOImpl implements AccountDAO {
 	}
 
 	/**
-	 * TODO 简单描述该方法的实现功能（可选）.
+	 * queryAccountByCondition.
 	 * 
 	 * @see com.clps.dev.sms.sm.dao.AccountDAO#queryAccountByCondition()
 	 */
@@ -56,7 +56,7 @@ public class AccountDAOImpl implements AccountDAO {
 	}
 
 	/**
-	 * TODO 简单描述该方法的实现功能（可选）.
+	 * queryAccountById.
 	 * 
 	 * @see com.clps.dev.sms.sm.dao.AccountDAO#queryAccountById(java.lang.String)
 	 */
@@ -67,7 +67,7 @@ public class AccountDAOImpl implements AccountDAO {
 	}
 
 	/**
-	 * TODO 简单描述该方法的实现功能（可选）.
+	 * queryAllAccounts.
 	 * 
 	 * @see com.clps.dev.sms.sm.dao.AccountDAO#queryAllAccounts()
 	 */
@@ -78,7 +78,7 @@ public class AccountDAOImpl implements AccountDAO {
 	}
 
 	/**
-	 * TODO 简单描述该方法的实现功能（可选）.
+	 * saveAccount.
 	 * 
 	 * @see com.clps.dev.sms.sm.dao.AccountDAO#saveAccount(com.clps.dev.sms.pojo.Account)
 	 */
@@ -89,7 +89,7 @@ public class AccountDAOImpl implements AccountDAO {
 	}
 
 	/**
-	 * TODO 简单描述该方法的实现功能（可选）.
+	 * updateAccountById.
 	 * 
 	 * @see com.clps.dev.sms.sm.dao.AccountDAO#updateAccountById(com.clps.dev.sms.pojo.Account)
 	 */

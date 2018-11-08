@@ -14,7 +14,7 @@ import scb.dev.sms.sm.pojo.Account;
 
 /**
  * ClassName: AccountDAO <br/>
- * Description: TODO ADD REASON(可选). <br/>
+ * Description: AccountDAO. <br/>
  * <br/>
  *
  * @author Minghui.Ni
