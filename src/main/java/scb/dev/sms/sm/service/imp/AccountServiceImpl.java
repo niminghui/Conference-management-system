@@ -43,7 +43,7 @@ public class AccountServiceImpl implements IAccountService {
 	}
 
 	/**
-	 * TODO 简单描述该方法的实现功能（可选）.
+	 * addAccount.
 	 * 
 	 * @see com.clps.dev.sms.service.IAccountService#addAccount(com.clps.dev.sms.pojo.Account)
 	 */
@@ -60,7 +60,7 @@ public class AccountServiceImpl implements IAccountService {
 	}
 
 	/**
-	 * TODO 简单描述该方法的实现功能（可选）.
+	 * queryAllAccountVO.
 	 * 
 	 * @see com.clps.dev.sms.service.IAccountService#queryAllAccountVO()
 	 */

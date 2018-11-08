@@ -27,13 +27,13 @@ public class Tree {
 
 	public Tree() {
 		data = null;
-		childs = new ArrayList();
+		childs = new ArrayList<Tree>();
 		childs.clear();
 	}
 
 	public Tree(Object data) {
 		this.data = data;
-		childs = new ArrayList();
+		childs = new ArrayList<Tree>();
 		childs.clear();
 	}
 
