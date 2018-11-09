@@ -1,15 +1,16 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
   http://maven.apache.org/maven-v4_0_0.xsd">
-  
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.scb</groupId>
-  <artifactId>sms</artifactId>
-  <packaging>war</packaging>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>sms Maven Webapp</name>
-  <url>http://maven.apache.org</url>
-  <properties>
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.scb</groupId>
+	<artifactId>sms</artifactId>
+	<packaging>war</packaging>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>sms Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<junit.version>4.12</junit.version>
 		<spring.version>4.3.9.RELEASE</spring.version>
@@ -29,8 +30,8 @@
 		<aspectjweaver.version>1.8.9</aspectjweaver.version>
 		<mybatisgenerator.version>1.3.6</mybatisgenerator.version>
 	</properties>
-  <dependencies>
-    <!-- https://mvnrepository.com/artifact/log4j/log4j -->
+	<dependencies>
+		<!-- https://mvnrepository.com/artifact/log4j/log4j -->
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
@@ -146,11 +147,11 @@
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
 		<dependency>
-		    <groupId>com.alibaba</groupId>
-		    <artifactId>fastjson</artifactId>
-		    <version>1.2.47</version>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.47</version>
 		</dependency>
-		
+
 		<!-- JSTL标签类 -->
 		<dependency>
 			<groupId>jstl</groupId>
@@ -256,8 +257,23 @@
 			<artifactId>poi-excelant</artifactId>
 			<version>3.8</version>
 		</dependency>
-  </dependencies>
-  <build>
-    <finalName>scb.sms</finalName>
-  </build>
+
+        <!-- 加密包 -->
+		<dependency>
+			<groupId>org.mindrot</groupId>
+			<artifactId>jbcrypt</artifactId>
+			<version>0.4</version>
+		</dependency>
+		
+		<!-- commons-long3 -->
+		<dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.7</version>
+       </dependency>
+		
+	</dependencies>
+	<build>
+		<finalName>scb.sms</finalName>
+	</build>
 </project>
