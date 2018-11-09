@@ -32,8 +32,8 @@ public class MenuTreeUtil {
 	 * 
 	 * Description: 将从数据库中读出的Menu平面数据组织成Tree.<br/>
 	 * 
-	 * @param List<MenuEntity> menuList
-	 * @return List<MenuEntity>
+	 * @param List<Menu> menuList
+	 * @return List<Menu>
 	 */
 	public List<Menu> turnedToMenuTree(List<Menu> menuList) {
 		return turnedToMenuTree(ROOT_ID, menuList);
@@ -44,8 +44,8 @@ public class MenuTreeUtil {
 	 * Description: 以某个pid为父节点构建MenuTree.<br/>
 	 * 
 	 * @param String pid
-	 * @param        List<MenuEntity> list
-	 * @return List<MenuEntity>
+	 * @param        List<Menu> list
+	 * @return List<Menu>
 	 */
 	public List<Menu> turnedToMenuTree(String pid, List<Menu> list) {
 		List<Menu> menuTreeList = new ArrayList<Menu>();
@@ -56,12 +56,19 @@ public class MenuTreeUtil {
 				menuTreeList.add(menu);
 			}
 		}
-		List<Menu> sortedMenuTree = getSortedChildren(menuTreeList);
-		return sortedMenuTree;
+		return getSortedChildren(menuTreeList);
 	}
 
+	/**
+	 * 
+	 * Description: 对兄弟结点进行排序. <br/>
+	 * 
+	 * @param List<Menu> children
+	 * @return List<Menu>
+	 */
 	private List<Menu> getSortedChildren(List<Menu> children) {
 		Collections.sort(children, new MenuCompare());
 		return children;
 	}
+
 }
