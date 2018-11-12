@@ -1,10 +1,22 @@
+/*
+Navicat MySQL Data Transfer
 
+Source Server         : MySQL
+Source Server Version : 50549
+Source Host           : 192.168.1.102:3306
+Source Database       : scb_sms
+
+Target Server Type    : MYSQL
+Target Server Version : 50549
+File Encoding         : 65001
+
+Author:Ryan.Li
+Date: 2018-11-12 14:44:58
+*/
 -- ----------------------------
 -- Create database
 -- ----------------------------
-
 CREATE DATABASE scb_sms;
-
 
 -- ----------------------------
 -- Table structure for log_account
@@ -99,10 +111,10 @@ CREATE TABLE `sm_account` (
   `account_id` varchar(32) NOT NULL,
   `account_name` varchar(50) NOT NULL,
   `account_password` varchar(50) NOT NULL,
-  `created_user` varchar(32) NOT NULL,
-  `created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `updated_user` varchar(32) DEFAULT NULL,
-  `updated_time` timestamp NULL DEFAULT NULL,
+  `account_created_user` varchar(32) NOT NULL,
+  `account_created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `account_updated_user` varchar(32) DEFAULT NULL,
+  `account_updated_time` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`account_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -116,10 +128,10 @@ CREATE TABLE `sm_department` (
   `department_abbreviation` varchar(10) NOT NULL,
   `department_pid` varchar(32) NOT NULL,
   `department_orderId` varchar(20) NOT NULL,
-  `created_user` varchar(32) NOT NULL,
-  `created_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
-  `updated_user` varchar(32) DEFAULT NULL,
-  `updated_time` timestamp NULL DEFAULT NULL,
+  `department_created_user` varchar(32) NOT NULL,
+  `department_created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `department_updated_user` varchar(32) DEFAULT NULL,
+  `department_updated_time` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`department_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -138,10 +150,10 @@ CREATE TABLE `sm_employee` (
   `employee_company` varchar(50) NOT NULL,
   `employee_image` mediumblob,
   `employee_entrytime` varchar(35) NOT NULL,
-  `created_user` varchar(50) NOT NULL,
-  `created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `updated_user` varchar(50) DEFAULT NULL,
-  `updated_time` timestamp NULL DEFAULT NULL,
+  `employee_created_user` varchar(50) NOT NULL,
+  `employee_created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `employee_updated_user` varchar(50) DEFAULT NULL,
+  `employee_updated_time` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`employee_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -162,7 +174,7 @@ CREATE TABLE `sm_employee_address` (
 DROP TABLE IF EXISTS `sm_employee_contactinfo`;
 CREATE TABLE `sm_employee_contactinfo` (
   `employee_id` varchar(32) NOT NULL,
-  `employee_landline` varchar(20) DEFAULT NULL,
+  `employee_landline` varchar(50) DEFAULT NULL,
   `employee_phone` varchar(20) DEFAULT NULL,
   `employee_email` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`employee_id`)
@@ -178,10 +190,10 @@ CREATE TABLE `sm_menu` (
   `menu_parentId` varchar(32) NOT NULL,
   `menu_orderId` varchar(20) NOT NULL,
   `menu_url` varchar(100) NOT NULL,
-  `created_user` varchar(32) NOT NULL,
-  `created_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
-  `updated_user` varchar(32) DEFAULT NULL,
-  `updated_time` timestamp NULL DEFAULT NULL,
+  `menu_created_user` varchar(32) NOT NULL,
+  `menu_created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `menu_updated_user` varchar(32) DEFAULT NULL,
+  `menu_updated_time` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`menu_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -193,10 +205,10 @@ CREATE TABLE `sm_position` (
   `position_id` varchar(32) NOT NULL,
   `position_name` varchar(50) NOT NULL,
   `rolegroup_id` varchar(32) DEFAULT NULL,
-  `created_user` varchar(32) NOT NULL,
-  `created_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
-  `updated_user` varchar(32) DEFAULT NULL,
-  `updated_time` timestamp NULL DEFAULT NULL,
+  `position_created_user` varchar(32) NOT NULL,
+  `position_created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `position_updated_user` varchar(32) DEFAULT NULL,
+  `position_updated_time` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`position_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -208,10 +220,10 @@ CREATE TABLE `sm_rolegroup` (
   `rolegroup_id` varchar(32) NOT NULL,
   `rolegroup_name` varchar(50) NOT NULL,
   `rolegroup_described` varchar(200) NOT NULL,
-  `created_user` varchar(32) NOT NULL,
-  `created_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
-  `update_user` varchar(32) DEFAULT NULL,
-  `update_time` timestamp NULL DEFAULT NULL,
+  `rolegroup_created_user` varchar(32) NOT NULL,
+  `rolegroup_created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `rolegroup_updated_user` varchar(32) DEFAULT NULL,
+  `rolegroup_updated_time` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`rolegroup_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
