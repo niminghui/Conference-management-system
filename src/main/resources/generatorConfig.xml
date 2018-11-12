@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+  <context id="context1">
+        <commentGenerator>
+			<property name="suppressAllComments" value="false"/>
+		</commentGenerator>
+    <jdbcConnection connectionURL="jdbc:mysql://192.168.1.102:3306/scb_sms" driverClass="com.mysql.jdbc.Driver" password="1" userId="root" />
+    <javaModelGenerator targetPackage="scb.dev.sms.sm.pojo" targetProject="scb.sms/src/main/java" />
+    <sqlMapGenerator targetPackage="scb.dev.sms.sm.mapper" targetProject="scb.sms/src/main/java" />
+    <javaClientGenerator targetPackage="scb.dev.sms.sm.dao" targetProject="scb.sms/src/main/java" type="XMLMAPPER" >
+    <property name="enableSubPackage" value="false"/>
+     </javaClientGenerator>
+    <table tableName="sm_account" domainObjectName="Account"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">	
+	</table>
+  </context>
+</generatorConfiguration>
