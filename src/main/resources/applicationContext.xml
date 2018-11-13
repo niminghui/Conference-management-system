@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xmlns:p="http://www.springframework.org/schema/p"
-xmlns:context="http://www.springframework.org/schema/context"
-xmlns:mvc="http://www.springframework.org/schema/mvc"
-xmlns:tx="http://www.springframework.org/schema/tx"
-xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
                     http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
                     http://www.springframework.org/schema/context
                     http://www.springframework.org/schema/context/spring-context-4.3.xsd
@@ -16,40 +16,48 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
                     http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
                     http://mybatis.org/schema/mybatis-spring 
                     http://mybatis.org/schema/mybatis-spring-1.2.xsd ">
-                    
- <!-- 扫描该包下的所有需要注册到spring 容器内的类 -->
- <context:component-scan base-package="scb.dev.sms.sm"></context:component-scan>
 
- <!-- 加载配置文件 -->
- <context:property-placeholder location="classpath:db.properties"/>
- 
-     <!-- 数据库连接池 数据库连接池，使用阿里 druid -->
-      <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">    
-           <!-- 数据库基本信息配置 -->  
-           <property name="url" value="${jdbc.url}"/>    
-           <property name="username" value="${jdbc.username}"/>    
-           <property name="password" value="${jdbc.password}"/>    
-           <property name="driverClassName" value="${jdbc.driver}"/>       
-      </bean>  
+	<!-- 扫描该包下的所有需要注册到spring 容器内的类 -->
+	<context:component-scan
+		base-package="scb.dev.sms.sm"></context:component-scan>
 
-    <!-- SqlSessionFactory配置 -->
-    <!-- 让Spring管理SqlSessionFactory使用mybatis和spring整合包中的 -->
-  <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" >
-       <property name="dataSource" ref="dataSource" /> 
-       <property name="mapperLocations" value="classpath:scb/dev/sms/sm/xml/*.xml"></property> 
-    </bean>  
-    
-    <!-- 配置扫描器 -->  
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-     <!-- 扫描scb.dev.sms.sm.dao这个包以及它的子包下的所有映射接口类 -->
-        <property name="basePackage" value="scb.dev.sms.sm.dao"/>
-       <property name="sqlSessionFactoryBeanName"  value="sqlSessionFactory"/> 
-    </bean>   
-    
-   <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">  
-      <property name="dataSource" ref="dataSource" />    
-   </bean>        
-                    
-  <tx:annotation-driven transaction-manager="transactionManager"/>                 
-                                  
- </beans>          
+	<!-- 加载配置文件 -->
+	<context:property-placeholder
+		location="classpath:db.properties" />
+
+	<!-- 数据库连接池，使用阿里 druid -->
+	<bean id="dataSource"
+		class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
+		<!-- 数据库基本信息配置 -->
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="driverClassName" value="${jdbc.driver}" />
+	</bean>
+
+	<!-- SqlSessionFactory配置 -->
+	<!-- 让Spring管理SqlSessionFactory使用mybatis和spring整合包中的 -->
+	<bean id="sqlSessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="mapperLocations"
+			value="classpath:scb/dev/sms/sm/dao/xml/*.xml"></property>
+	</bean>
+
+	<!-- 配置扫描器 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!-- 扫描scb.dev.sms.sm.dao这个包以及它的子包下的所有映射接口类 -->
+		<property name="basePackage" value="scb.dev.sms.sm.dao" />
+		<property name="sqlSessionFactoryBeanName"
+			value="sqlSessionFactory" />
+	</bean>
+
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<tx:annotation-driven
+		transaction-manager="transactionManager" />
+
+</beans>          
