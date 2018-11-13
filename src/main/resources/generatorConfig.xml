@@ -11,8 +11,8 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 		</commentGenerator>
 		<!-- 数据库链接 -->
 	    <jdbcConnection 
-	    	connectionURL="jdbc:mysql://192.168.1.122:3306/scb_sms" 
-	    	driverClass="com.mysql.jdbc.Driver" password="1" userId="root" />
+	    	connectionURL="jdbc:mysql://140.143.160.173:3306/scb_sms" 
+	    	driverClass="com.mysql.jdbc.Driver" password="root" userId="root" />
 	    <!-- 实体类生成路径 -->
 	    <javaModelGenerator 
 	    	targetPackage="scb.dev.sms.sm.pojo" 
