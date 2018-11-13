@@ -22,7 +22,7 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 	<context id="context1">
 	 	<!-- 生成的Java文件的编码 -->
     	<property name="javaFileEncoding" value="UTF-8"/>
-        <commentGenerator>
+        <commentGenerator type="scb。dev.sms.util.MyCommentGenerator">
         	<!-- 是否去除自动生成的注释 -->
 			<property name="suppressAllComments" value="false"/>
 		</commentGenerator>
