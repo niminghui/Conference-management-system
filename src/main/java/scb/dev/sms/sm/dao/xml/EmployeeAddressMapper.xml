@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="scb.dev.sms.sm.dao.EmployeeAddressMapper">
+  <resultMap id="BaseResultMap" type="scb.dev.sms.sm.pojo.EmployeeAddress">
+    <id column="employee_id" jdbcType="VARCHAR" property="employeeId" />
+    <result column="employee_address" jdbcType="VARCHAR" property="employeeAddress" />
+    <result column="employee_nativePlace" jdbcType="VARCHAR" property="employeeNativeplace" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    employee_id, employee_address, employee_nativePlace
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sm_employee_address
+    where employee_id = #{employeeId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sm_employee_address
+    where employee_id = #{employeeId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="scb.dev.sms.sm.pojo.EmployeeAddress">
+    insert into sm_employee_address (employee_id, employee_address, employee_nativePlace
+      )
+    values (#{employeeId,jdbcType=VARCHAR}, #{employeeAddress,jdbcType=VARCHAR}, #{employeeNativeplace,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="scb.dev.sms.sm.pojo.EmployeeAddress">
+    insert into sm_employee_address
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="employeeId != null">
+        employee_id,
+      </if>
+      <if test="employeeAddress != null">
+        employee_address,
+      </if>
+      <if test="employeeNativeplace != null">
+        employee_nativePlace,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="employeeId != null">
+        #{employeeId,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeAddress != null">
+        #{employeeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeNativeplace != null">
+        #{employeeNativeplace,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="scb.dev.sms.sm.pojo.EmployeeAddress">
+    update sm_employee_address
+    <set>
+      <if test="employeeAddress != null">
+        employee_address = #{employeeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeNativeplace != null">
+        employee_nativePlace = #{employeeNativeplace,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where employee_id = #{employeeId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="scb.dev.sms.sm.pojo.EmployeeAddress">
+    update sm_employee_address
+    set employee_address = #{employeeAddress,jdbcType=VARCHAR},
+      employee_nativePlace = #{employeeNativeplace,jdbcType=VARCHAR}
+    where employee_id = #{employeeId,jdbcType=VARCHAR}
+  </update>
+</mapper>

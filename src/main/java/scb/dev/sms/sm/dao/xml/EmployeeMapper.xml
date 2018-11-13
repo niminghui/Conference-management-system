@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="scb.dev.sms.sm.dao.EmployeeMapper">
+  <resultMap id="BaseResultMap" type="scb.dev.sms.sm.pojo.Employee">
+    <id column="employee_id" jdbcType="VARCHAR" property="employeeId" />
+    <result column="employee_name" jdbcType="VARCHAR" property="employeeName" />
+    <result column="employee_nickname" jdbcType="VARCHAR" property="employeeNickname" />
+    <result column="employee_gender" jdbcType="VARCHAR" property="employeeGender" />
+    <result column="position_id" jdbcType="VARCHAR" property="positionId" />
+    <result column="department_id" jdbcType="VARCHAR" property="departmentId" />
+    <result column="employee_status" jdbcType="VARCHAR" property="employeeStatus" />
+    <result column="employee_company" jdbcType="VARCHAR" property="employeeCompany" />
+    <result column="employee_entrytime" jdbcType="TIMESTAMP" property="employeeEntrytime" />
+    <result column="employee_updated_user" jdbcType="VARCHAR" property="employeeUpdatedUser" />
+    <result column="employee_updated_time" jdbcType="TIMESTAMP" property="employeeUpdatedTime" />
+    <result column="employee_created_user" jdbcType="VARCHAR" property="employeeCreatedUser" />
+    <result column="employee_created_time" jdbcType="TIMESTAMP" property="employeeCreatedTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="scb.dev.sms.sm.pojo.Employee">
+    <result column="employee_image" jdbcType="LONGVARBINARY" property="employeeImage" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    employee_id, employee_name, employee_nickname, employee_gender, position_id, department_id, 
+    employee_status, employee_company, employee_entrytime, employee_updated_user, employee_updated_time, 
+    employee_created_user, employee_created_time
+  </sql>
+  <sql id="Blob_Column_List">
+    employee_image
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sm_employee
+    where employee_id = #{employeeId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sm_employee
+    where employee_id = #{employeeId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="scb.dev.sms.sm.pojo.Employee">
+    insert into sm_employee (employee_id, employee_name, employee_nickname, 
+      employee_gender, position_id, department_id, 
+      employee_status, employee_company, employee_entrytime, 
+      employee_updated_user, employee_updated_time, 
+      employee_created_user, employee_created_time, 
+      employee_image)
+    values (#{employeeId,jdbcType=VARCHAR}, #{employeeName,jdbcType=VARCHAR}, #{employeeNickname,jdbcType=VARCHAR}, 
+      #{employeeGender,jdbcType=VARCHAR}, #{positionId,jdbcType=VARCHAR}, #{departmentId,jdbcType=VARCHAR}, 
+      #{employeeStatus,jdbcType=VARCHAR}, #{employeeCompany,jdbcType=VARCHAR}, #{employeeEntrytime,jdbcType=TIMESTAMP}, 
+      #{employeeUpdatedUser,jdbcType=VARCHAR}, #{employeeUpdatedTime,jdbcType=TIMESTAMP}, 
+      #{employeeCreatedUser,jdbcType=VARCHAR}, #{employeeCreatedTime,jdbcType=TIMESTAMP}, 
+      #{employeeImage,jdbcType=LONGVARBINARY})
+  </insert>
+  <insert id="insertSelective" parameterType="scb.dev.sms.sm.pojo.Employee">
+    insert into sm_employee
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="employeeId != null">
+        employee_id,
+      </if>
+      <if test="employeeName != null">
+        employee_name,
+      </if>
+      <if test="employeeNickname != null">
+        employee_nickname,
+      </if>
+      <if test="employeeGender != null">
+        employee_gender,
+      </if>
+      <if test="positionId != null">
+        position_id,
+      </if>
+      <if test="departmentId != null">
+        department_id,
+      </if>
+      <if test="employeeStatus != null">
+        employee_status,
+      </if>
+      <if test="employeeCompany != null">
+        employee_company,
+      </if>
+      <if test="employeeEntrytime != null">
+        employee_entrytime,
+      </if>
+      <if test="employeeUpdatedUser != null">
+        employee_updated_user,
+      </if>
+      <if test="employeeUpdatedTime != null">
+        employee_updated_time,
+      </if>
+      <if test="employeeCreatedUser != null">
+        employee_created_user,
+      </if>
+      <if test="employeeCreatedTime != null">
+        employee_created_time,
+      </if>
+      <if test="employeeImage != null">
+        employee_image,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="employeeId != null">
+        #{employeeId,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeName != null">
+        #{employeeName,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeNickname != null">
+        #{employeeNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeGender != null">
+        #{employeeGender,jdbcType=VARCHAR},
+      </if>
+      <if test="positionId != null">
+        #{positionId,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentId != null">
+        #{departmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeStatus != null">
+        #{employeeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeCompany != null">
+        #{employeeCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeEntrytime != null">
+        #{employeeEntrytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="employeeUpdatedUser != null">
+        #{employeeUpdatedUser,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeUpdatedTime != null">
+        #{employeeUpdatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="employeeCreatedUser != null">
+        #{employeeCreatedUser,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeCreatedTime != null">
+        #{employeeCreatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="employeeImage != null">
+        #{employeeImage,jdbcType=LONGVARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="scb.dev.sms.sm.pojo.Employee">
+    update sm_employee
+    <set>
+      <if test="employeeName != null">
+        employee_name = #{employeeName,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeNickname != null">
+        employee_nickname = #{employeeNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeGender != null">
+        employee_gender = #{employeeGender,jdbcType=VARCHAR},
+      </if>
+      <if test="positionId != null">
+        position_id = #{positionId,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentId != null">
+        department_id = #{departmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeStatus != null">
+        employee_status = #{employeeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeCompany != null">
+        employee_company = #{employeeCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeEntrytime != null">
+        employee_entrytime = #{employeeEntrytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="employeeUpdatedUser != null">
+        employee_updated_user = #{employeeUpdatedUser,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeUpdatedTime != null">
+        employee_updated_time = #{employeeUpdatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="employeeCreatedUser != null">
+        employee_created_user = #{employeeCreatedUser,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeCreatedTime != null">
+        employee_created_time = #{employeeCreatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="employeeImage != null">
+        employee_image = #{employeeImage,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    where employee_id = #{employeeId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="scb.dev.sms.sm.pojo.Employee">
+    update sm_employee
+    set employee_name = #{employeeName,jdbcType=VARCHAR},
+      employee_nickname = #{employeeNickname,jdbcType=VARCHAR},
+      employee_gender = #{employeeGender,jdbcType=VARCHAR},
+      position_id = #{positionId,jdbcType=VARCHAR},
+      department_id = #{departmentId,jdbcType=VARCHAR},
+      employee_status = #{employeeStatus,jdbcType=VARCHAR},
+      employee_company = #{employeeCompany,jdbcType=VARCHAR},
+      employee_entrytime = #{employeeEntrytime,jdbcType=TIMESTAMP},
+      employee_updated_user = #{employeeUpdatedUser,jdbcType=VARCHAR},
+      employee_updated_time = #{employeeUpdatedTime,jdbcType=TIMESTAMP},
+      employee_created_user = #{employeeCreatedUser,jdbcType=VARCHAR},
+      employee_created_time = #{employeeCreatedTime,jdbcType=TIMESTAMP},
+      employee_image = #{employeeImage,jdbcType=LONGVARBINARY}
+    where employee_id = #{employeeId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="scb.dev.sms.sm.pojo.Employee">
+    update sm_employee
+    set employee_name = #{employeeName,jdbcType=VARCHAR},
+      employee_nickname = #{employeeNickname,jdbcType=VARCHAR},
+      employee_gender = #{employeeGender,jdbcType=VARCHAR},
+      position_id = #{positionId,jdbcType=VARCHAR},
+      department_id = #{departmentId,jdbcType=VARCHAR},
+      employee_status = #{employeeStatus,jdbcType=VARCHAR},
+      employee_company = #{employeeCompany,jdbcType=VARCHAR},
+      employee_entrytime = #{employeeEntrytime,jdbcType=TIMESTAMP},
+      employee_updated_user = #{employeeUpdatedUser,jdbcType=VARCHAR},
+      employee_updated_time = #{employeeUpdatedTime,jdbcType=TIMESTAMP},
+      employee_created_user = #{employeeCreatedUser,jdbcType=VARCHAR},
+      employee_created_time = #{employeeCreatedTime,jdbcType=TIMESTAMP}
+    where employee_id = #{employeeId,jdbcType=VARCHAR}
+  </update>
+</mapper>
