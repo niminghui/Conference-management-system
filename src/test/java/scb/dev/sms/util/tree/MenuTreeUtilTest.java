@@ -31,9 +31,9 @@ public class MenuTreeUtilTest {
 
 	@Test
 	public void test() {
-		Menu menu1 = new Menu("1001", "福建", "1", 2);
-		Menu menu2 = new Menu("1001001", "厦门", "1001", 0);
-		Menu menu3 = new Menu("1002", "上海", "1", 1);
+		Menu menu1 = new Menu("1001", "福建", "1", "2");
+		Menu menu2 = new Menu("1001001", "厦门", "1001", "0");
+		Menu menu3 = new Menu("1002", "上海", "1", "1");
 		List<Menu> mlist = Arrays.asList(menu1, menu2, menu3);
 		List<Menu> treeList = (ToolFactory.getInstanceOfMenuTreeUtil().turnedToMenuTree(mlist));
 		System.out.println(JSON.toJSONString(treeList));

@@ -50,8 +50,8 @@ public class MenuTreeUtil {
 	public List<Menu> turnedToMenuTree(String pid, List<Menu> list) {
 		List<Menu> menuTreeList = new ArrayList<Menu>();
 		for (Menu menu : list) {
-			if (menu.getPid().equals(pid)) {
-				List<Menu> childMenuList = turnedToMenuTree(menu.getId(), list);
+			if (menu.getMenuParentid().equals(pid)) {
+				List<Menu> childMenuList = turnedToMenuTree(menu.getMenuId(), list);
 				menu.setChildren(childMenuList);
 				menuTreeList.add(menu);
 			}

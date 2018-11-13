@@ -33,5 +33,15 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 				enableDeleteByExample="false" enableSelectByExample="false"
 				selectByExampleQueryId="false">	
 		</table>
+		<table tableName="sm_menu" domainObjectName="Menu"
+				enableCountByExample="false" enableUpdateByExample="false"
+				enableDeleteByExample="false" enableSelectByExample="false"
+				selectByExampleQueryId="false">
+		</table>
+		<table tableName="sm_rolegroup_grant" domainObjectName="RoleGroupGrant"
+				enableCountByExample="false" enableUpdateByExample="false"
+				enableDeleteByExample="false" enableSelectByExample="false"
+				selectByExampleQueryId="false">
+		</table>
 	</context>
 </generatorConfiguration>

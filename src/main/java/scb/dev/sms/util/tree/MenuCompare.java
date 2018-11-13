@@ -30,7 +30,7 @@ public class MenuCompare implements Comparator<Menu> {
 	 */
 	@Override
 	public int compare(Menu m1, Menu m2) {
-		if (m1.getSortId() < m2.getSortId()) {
+		if (Integer.valueOf(m1.getMenuOrderid()) < Integer.valueOf(m2.getMenuOrderid())) {
 			return -1;
 		}
 		return 1;
