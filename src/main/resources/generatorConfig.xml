@@ -1,20 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<!DOCTYPE generatorConfiguration 
+PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" 
+"http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
 <generatorConfiguration>
-  <context id="context1">
+	<context id="context1">
         <commentGenerator>
+        	<!-- 是否去除自动生成的注释 -->
 			<property name="suppressAllComments" value="false"/>
 		</commentGenerator>
-    <jdbcConnection connectionURL="jdbc:mysql://192.168.1.102:3306/scb_sms" driverClass="com.mysql.jdbc.Driver" password="1" userId="root" />
-    <javaModelGenerator targetPackage="scb.dev.sms.sm.pojo" targetProject="scb.sms/src/main/java" />
-    <sqlMapGenerator targetPackage="scb.dev.sms.sm.mapper" targetProject="scb.sms/src/main/java" />
-    <javaClientGenerator targetPackage="scb.dev.sms.sm.dao" targetProject="scb.sms/src/main/java" type="XMLMAPPER" >
-    <property name="enableSubPackage" value="false"/>
-     </javaClientGenerator>
-    <table tableName="sm_account" domainObjectName="Account"
-			enableCountByExample="false" enableUpdateByExample="false"
-			enableDeleteByExample="false" enableSelectByExample="false"
-			selectByExampleQueryId="false">	
-	</table>
-  </context>
+		<!-- 数据库链接 -->
+	    <jdbcConnection 
+	    	connectionURL="jdbc:mysql://192.168.1.122:3306/scb_sms" 
+	    	driverClass="com.mysql.jdbc.Driver" password="1" userId="root" />
+	    <!-- 实体类生成路径 -->
+	    <javaModelGenerator 
+	    	targetPackage="scb.dev.sms.sm.pojo" 
+	    	targetProject="scb.sms/src/main/java" />
+	    <!-- 映射类生成路径 -->
+	    <sqlMapGenerator 
+	    	targetPackage="scb.dev.sms.sm.dao.mapper" 
+	    	targetProject="scb.sms/src/main/java" />
+	    <!-- 持久层生成路径 -->
+	    <javaClientGenerator 
+	    	targetPackage="scb.dev.sms.sm.dao" 
+	    	targetProject="scb.sms/src/main/java" type="XMLMAPPER" >
+	    	<property name="enableSubPackage" value="false"/>
+	    </javaClientGenerator>
+	    <!-- 数据库信息 -->
+	    <table tableName="sm_account" domainObjectName="Account"
+				enableCountByExample="false" enableUpdateByExample="false"
+				enableDeleteByExample="false" enableSelectByExample="false"
+				selectByExampleQueryId="false">	
+		</table>
+	</context>
 </generatorConfiguration>
