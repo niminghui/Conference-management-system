@@ -171,6 +171,12 @@
 			<artifactId>fastjson</artifactId>
 			<version>${fastjson.version}</version>
 		</dependency>
+		<!-- mail包 -->
+		<dependency>
+   			 <groupId>javax.mail</groupId>
+    			<artifactId>javax.mail-api</artifactId>
+    		<version>1.6.2</version>
+		</dependency>
 
 
 		<dependency>
