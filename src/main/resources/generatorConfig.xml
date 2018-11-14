@@ -7,15 +7,14 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 <generatorConfiguration>
 	<!-- 引入配置文件 -->
 	<properties resource="db.properties" />
-	<!-- context:生成一组对象的环境 id:必选，上下文id，用于在生成错误时提示 defaultModelType:指定生成对象的样式 
-		1，conditional：类似hierarchical； 2，flat：所有内容（主键，blob）等全部生成在一个对象中； 3，hierarchical：主键生成一个XXKey对象(key 
-		class)，Blob等单独生成一个对象，其他简单属性在一个对象中(record class) targetRuntime: 1，MyBatis3：默认的值，生成基于MyBatis3.x以上版本的内容，包括XXXBySample； 
-		2，MyBatis3Simple：类似MyBatis3，只是不生成XXXBySample； introspectedColumnImpl：类全限定名，用于扩展MBG -->
-	<context id="context1">
+	<!-- <context>元素用于指定生成一组对象的环境。例如指定要连接的数据库，要生成对象的类型和要处理的数据库中的表。
+	运行MBG的时候还可以指定要运行的<context>。 -->
+	<!-- flat模式，复合主键不单独作为一个表 -->
+	<context id="context1" defaultModelType="flat">
 		<!-- 生成的Java文件的编码 -->
 		<property name="javaFileEncoding" value="UTF-8" />
-		<commentGenerator
-			type="scb。dev.sms.util.MyCommentGenerator">
+		<!-- 使用自定义的注册信息 -->
+		<commentGenerator type="scb.dev.sms.util.generator.MyCommentGenerator">
 			<!-- 是否去除自动生成的注释 -->
 			<property name="suppressAllComments" value="false" />
 		</commentGenerator>
@@ -39,11 +38,12 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 			<property name="enableSubPackage" value="false" />
 		</javaClientGenerator>
 		<!-- 数据库信息 -->
-		<table tableName="sm_account" domainObjectName="Account"
+		<table tableName="sm_account" domainObjectName="Account" mapperName="AccountDao"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">
 		</table>
+		<!-- 
 		<table tableName="sm_menu" domainObjectName="Menu"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
@@ -54,5 +54,6 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 			enableUpdateByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" selectByExampleQueryId="false">
 		</table>
+		 -->
 	</context>
 </generatorConfiguration>
