@@ -29,7 +29,7 @@ public interface CommonData {
 	public static final String SAVE_FAILURE = "001-002";
 	public static final String UPDATE_FAILURE = "002-002";
 	public static final String DELETE_FAILURE = "003-002";
-	public static final String QUERY_FAILURE = "004-002";
+	public static final String QUERY_FAILURE = "004-0045";
 	
 	
 
