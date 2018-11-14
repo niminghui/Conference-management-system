@@ -258,20 +258,20 @@
 			<version>3.8</version>
 		</dependency>
 
-        <!-- 加密包 -->
+		<!-- 加密包 -->
 		<dependency>
 			<groupId>org.mindrot</groupId>
 			<artifactId>jbcrypt</artifactId>
 			<version>0.4</version>
 		</dependency>
-		
+
 		<!-- commons-long3 -->
 		<dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.7</version>
-       </dependency>
-		
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.7</version>
+		</dependency>
+
 	</dependencies>
 	<build>
 		<finalName>scb.sms</finalName>
