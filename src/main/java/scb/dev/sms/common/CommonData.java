@@ -32,5 +32,6 @@ public interface CommonData {
 	public static final String QUERY_FAILURE = "004-002";
 	
 	
+	 
 
 }

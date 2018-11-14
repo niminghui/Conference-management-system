@@ -28,4 +28,11 @@ public interface CommonEmailType {
 	public static final String EMAIL_PERMISSION_READ = "2000";
 	public static final String EMAIL_PERMISSION_SEND = "3000";
 	public static final String EMAIL_PERMISSION_SEND_AND_READ = "4000";
+	
+	// 邮箱格式
+	public static final String EMAIL_END_WITH = "@clpsglobal.com";	// 邮箱域名格式
+	public static final String EMAIL_HOST="smtp.163.com";
+	public static final String EMAIL_FROM="zither_chen@163.com";
+	public static final String EMAIL_USERNAME="zither_chen@163.com";
+	public static final String EMAIL_PASSWORD="CHENKE517CHENKE";
 }
