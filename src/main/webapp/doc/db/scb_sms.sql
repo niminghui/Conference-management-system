@@ -10,7 +10,8 @@ Target Server Type    : MYSQL
 Target Server Version : 50723
 File Encoding         : 65001
 
-Date: 2018-11-13 21:07:00
+Author:Ryan.Li
+Date: 2018-11-14 22:59:45
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -117,13 +118,13 @@ CREATE TABLE `log_sysparam` (
 -- ----------------------------
 DROP TABLE IF EXISTS `sm_account`;
 CREATE TABLE `sm_account` (
-  `account_id` varchar(32) NOT NULL DEFAULT '1' COMMENT '账户编号',
+  `account_id` varchar(32) NOT NULL DEFAULT '' COMMENT '账户编号',
   `account_name` varchar(50) NOT NULL COMMENT '账户名称',
   `account_password` varchar(50) NOT NULL COMMENT '账户密码',
   `account_updated_user` varchar(32) DEFAULT NULL COMMENT '修改人名',
   `account_updated_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
-  `employee_id` varchar(32) NOT NULL COMMENT '职员编号',
-  PRIMARY KEY (`account_id`)
+  PRIMARY KEY (`account_id`),
+  UNIQUE KEY `account_name` (`account_name`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -144,7 +145,9 @@ CREATE TABLE `sm_department` (
   `department_updated_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   `department_created_user` varchar(32) NOT NULL COMMENT '创建人名',
   `department_created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  PRIMARY KEY (`department_id`)
+  PRIMARY KEY (`department_id`),
+  UNIQUE KEY `department_name` (`department_name`) USING BTREE,
+  UNIQUE KEY `department_abbreviation` (`department_abbreviation`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -152,7 +155,7 @@ CREATE TABLE `sm_department` (
 -- ----------------------------
 DROP TABLE IF EXISTS `sm_employee`;
 CREATE TABLE `sm_employee` (
-  `employee_id` varchar(32) NOT NULL DEFAULT '1' COMMENT '职员编号',
+  `employee_id` varchar(32) NOT NULL DEFAULT '' COMMENT '职员编号',
   `employee_name` varchar(50) NOT NULL COMMENT '职员姓名',
   `employee_nickname` varchar(50) NOT NULL COMMENT '职员昵称',
   `employee_gender` varchar(2) NOT NULL COMMENT '职员性别',
@@ -166,7 +169,9 @@ CREATE TABLE `sm_employee` (
   `employee_updated_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   `employee_created_user` varchar(50) NOT NULL COMMENT '创建人名',
   `employee_created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  PRIMARY KEY (`employee_id`)
+  `employee_work_id` char(7) NOT NULL,
+  PRIMARY KEY (`employee_id`),
+  UNIQUE KEY `employee_work_id` (`employee_work_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -206,7 +211,8 @@ CREATE TABLE `sm_menu` (
   `menu_updated_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   `menu_created_user` varchar(32) NOT NULL COMMENT '创建人名',
   `menu_created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  PRIMARY KEY (`menu_id`)
+  PRIMARY KEY (`menu_id`),
+  UNIQUE KEY `menu_name` (`menu_name`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -231,7 +237,8 @@ CREATE TABLE `sm_position` (
   `position_updated_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   `position_created_user` varchar(32) NOT NULL COMMENT '创建人名',
   `position_created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  PRIMARY KEY (`position_id`)
+  PRIMARY KEY (`position_id`),
+  UNIQUE KEY `position_name` (`position_name`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -260,7 +267,8 @@ CREATE TABLE `sm_rolegroup` (
   `rolegroup_updated_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   `rolegroup_created_user` varchar(32) NOT NULL COMMENT '创建人名',
   `rolegroup_created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  PRIMARY KEY (`rolegroup_id`)
+  PRIMARY KEY (`rolegroup_id`),
+  UNIQUE KEY `rolegroup_name` (`rolegroup_name`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -340,26 +348,10 @@ CREATE TRIGGER `log_sysparam_auto_uuid` BEFORE INSERT ON `log_sysparam` FOR EACH
 END
 ;;
 DELIMITER ;
-DROP TRIGGER IF EXISTS `account_auto_uuid`;
-DELIMITER ;;
-CREATE TRIGGER `account_auto_uuid` BEFORE INSERT ON `sm_account` FOR EACH ROW BEGIN
- if new.account_id = '1' THEN set new.account_id = (select REPLACE(uuid(), '-', ''));
- end if;
-END
-;;
-DELIMITER ;
 DROP TRIGGER IF EXISTS `department_auto_uuid`;
 DELIMITER ;;
 CREATE TRIGGER `department_auto_uuid` BEFORE INSERT ON `sm_department` FOR EACH ROW BEGIN
  if new.department_id = '1' THEN set new.department_id = (select REPLACE(uuid(), '-', ''));
- end if;
-END
-;;
-DELIMITER ;
-DROP TRIGGER IF EXISTS `employee_auto_uuid`;
-DELIMITER ;;
-CREATE TRIGGER `employee_auto_uuid` BEFORE INSERT ON `sm_employee` FOR EACH ROW BEGIN
- if new.employee_id = '1' THEN set new.employee_id = (select REPLACE(uuid(), '-', ''));
  end if;
 END
 ;;
