@@ -11,13 +11,25 @@
   <sql id="Base_Column_List">
     account_id, account_name, account_password, account_updated_user, account_updated_time
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="selectByAccountId" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from sm_account
     where account_id = #{accountId,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+  <select id="selectByAccountName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sm_account
+    where account_name = #{accountName,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAccountIdByAccountName" parameterType="java.lang.String" resultType="String">
+    select 
+	account_id
+    from sm_account
+    where account_name = #{accountName,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByAccountId" parameterType="java.lang.String">
     delete from sm_account
     where account_id = #{accountId,jdbcType=VARCHAR}
   </delete>
@@ -66,7 +78,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="scb.dev.sms.sm.pojo.Account">
+  <update id="updateByAccountIdSelective" parameterType="scb.dev.sms.sm.pojo.Account">
     update sm_account
     <set>
       <if test="accountName != null">
@@ -84,7 +96,7 @@
     </set>
     where account_id = #{accountId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="scb.dev.sms.sm.pojo.Account">
+  <update id="updateByAccountId" parameterType="scb.dev.sms.sm.pojo.Account">
     update sm_account
     set account_name = #{accountName,jdbcType=VARCHAR},
       account_password = #{accountPassword,jdbcType=VARCHAR},
