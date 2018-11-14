@@ -38,13 +38,13 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 			<property name="enableSubPackage" value="false" />
 		</javaClientGenerator>
 		<!-- 数据库信息 -->
-		
+		<!-- 
 		<table tableName="sm_account" domainObjectName="Account" mapperName="AccountDao"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">
 		</table>
-		<!-- 
+		
 		<table tableName="sm_menu" domainObjectName="Menu"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
@@ -57,5 +57,20 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 			enableSelectByExample="false" selectByExampleQueryId="false">
 		</table>
 		 -->
+		 <table tableName="sm_employee" domainObjectName="Employee" mapperName="EmployeeDao"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		<table tableName="sm_employee_address" domainObjectName="EmployeeAddress" mapperName="EmployeeAddressDao"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		<table tableName="sm_employee_contactinfo" domainObjectName="EmployeeContactInfo" mapperName="EmployeeContactInfoDao"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
 	</context>
 </generatorConfiguration>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="scb.dev.sms.sm.dao.EmployeeContactInfoDao">
+  <resultMap id="BaseResultMap" type="scb.dev.sms.sm.pojo.EmployeeContactInfo">
+    <id column="employee_id" jdbcType="VARCHAR" property="employeeId" />
+    <result column="employee_landline" jdbcType="VARCHAR" property="employeeLandline" />
+    <result column="employee_phone" jdbcType="VARCHAR" property="employeePhone" />
+    <result column="employee_email" jdbcType="VARCHAR" property="employeeEmail" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    employee_id, employee_landline, employee_phone, employee_email
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sm_employee_contactinfo
+    where employee_id = #{employeeId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sm_employee_contactinfo
+    where employee_id = #{employeeId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="scb.dev.sms.sm.pojo.EmployeeContactInfo">
+    insert into sm_employee_contactinfo (employee_id, employee_landline, employee_phone, 
+      employee_email)
+    values (#{employeeId,jdbcType=VARCHAR}, #{employeeLandline,jdbcType=VARCHAR}, #{employeePhone,jdbcType=VARCHAR}, 
+      #{employeeEmail,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="scb.dev.sms.sm.pojo.EmployeeContactInfo">
+    insert into sm_employee_contactinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="employeeId != null">
+        employee_id,
+      </if>
+      <if test="employeeLandline != null">
+        employee_landline,
+      </if>
+      <if test="employeePhone != null">
+        employee_phone,
+      </if>
+      <if test="employeeEmail != null">
+        employee_email,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="employeeId != null">
+        #{employeeId,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeLandline != null">
+        #{employeeLandline,jdbcType=VARCHAR},
+      </if>
+      <if test="employeePhone != null">
+        #{employeePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeEmail != null">
+        #{employeeEmail,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="scb.dev.sms.sm.pojo.EmployeeContactInfo">
+    update sm_employee_contactinfo
+    <set>
+      <if test="employeeLandline != null">
+        employee_landline = #{employeeLandline,jdbcType=VARCHAR},
+      </if>
+      <if test="employeePhone != null">
+        employee_phone = #{employeePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeEmail != null">
+        employee_email = #{employeeEmail,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where employee_id = #{employeeId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="scb.dev.sms.sm.pojo.EmployeeContactInfo">
+    update sm_employee_contactinfo
+    set employee_landline = #{employeeLandline,jdbcType=VARCHAR},
+      employee_phone = #{employeePhone,jdbcType=VARCHAR},
+      employee_email = #{employeeEmail,jdbcType=VARCHAR}
+    where employee_id = #{employeeId,jdbcType=VARCHAR}
+  </update>
+</mapper>
