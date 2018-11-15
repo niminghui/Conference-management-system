@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="scb.dev.sms.sm.dao.PositionDao">
+  <resultMap id="BaseResultMap" type="scb.dev.sms.sm.pojo.Position">
+    <id column="position_id" jdbcType="VARCHAR" property="positionId" />
+    <result column="position_name" jdbcType="VARCHAR" property="positionName" />
+    <result column="rolegroup_id" jdbcType="VARCHAR" property="rolegroupId" />
+    <result column="position_updated_user" jdbcType="VARCHAR" property="positionUpdatedUser" />
+    <result column="position_updated_time" jdbcType="TIMESTAMP" property="positionUpdatedTime" />
+    <result column="position_created_user" jdbcType="VARCHAR" property="positionCreatedUser" />
+    <result column="position_created_time" jdbcType="TIMESTAMP" property="positionCreatedTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    position_id, position_name, rolegroup_id, position_updated_user, position_updated_time, 
+    position_created_user, position_created_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sm_position
+    where position_id = #{positionId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sm_position
+    where position_id = #{positionId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="scb.dev.sms.sm.pojo.Position">
+    insert into sm_position (position_id, position_name, rolegroup_id, 
+      position_updated_user, position_updated_time, 
+      position_created_user, position_created_time
+      )
+    values (#{positionId,jdbcType=VARCHAR}, #{positionName,jdbcType=VARCHAR}, #{rolegroupId,jdbcType=VARCHAR}, 
+      #{positionUpdatedUser,jdbcType=VARCHAR}, #{positionUpdatedTime,jdbcType=TIMESTAMP}, 
+      #{positionCreatedUser,jdbcType=VARCHAR}, #{positionCreatedTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="scb.dev.sms.sm.pojo.Position">
+    insert into sm_position
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="positionId != null">
+        position_id,
+      </if>
+      <if test="positionName != null">
+        position_name,
+      </if>
+      <if test="rolegroupId != null">
+        rolegroup_id,
+      </if>
+      <if test="positionUpdatedUser != null">
+        position_updated_user,
+      </if>
+      <if test="positionUpdatedTime != null">
+        position_updated_time,
+      </if>
+      <if test="positionCreatedUser != null">
+        position_created_user,
+      </if>
+      <if test="positionCreatedTime != null">
+        position_created_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="positionId != null">
+        #{positionId,jdbcType=VARCHAR},
+      </if>
+      <if test="positionName != null">
+        #{positionName,jdbcType=VARCHAR},
+      </if>
+      <if test="rolegroupId != null">
+        #{rolegroupId,jdbcType=VARCHAR},
+      </if>
+      <if test="positionUpdatedUser != null">
+        #{positionUpdatedUser,jdbcType=VARCHAR},
+      </if>
+      <if test="positionUpdatedTime != null">
+        #{positionUpdatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="positionCreatedUser != null">
+        #{positionCreatedUser,jdbcType=VARCHAR},
+      </if>
+      <if test="positionCreatedTime != null">
+        #{positionCreatedTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="scb.dev.sms.sm.pojo.Position">
+    update sm_position
+    <set>
+      <if test="positionName != null">
+        position_name = #{positionName,jdbcType=VARCHAR},
+      </if>
+      <if test="rolegroupId != null">
+        rolegroup_id = #{rolegroupId,jdbcType=VARCHAR},
+      </if>
+      <if test="positionUpdatedUser != null">
+        position_updated_user = #{positionUpdatedUser,jdbcType=VARCHAR},
+      </if>
+      <if test="positionUpdatedTime != null">
+        position_updated_time = #{positionUpdatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="positionCreatedUser != null">
+        position_created_user = #{positionCreatedUser,jdbcType=VARCHAR},
+      </if>
+      <if test="positionCreatedTime != null">
+        position_created_time = #{positionCreatedTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where position_id = #{positionId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="scb.dev.sms.sm.pojo.Position">
+    update sm_position
+    set position_name = #{positionName,jdbcType=VARCHAR},
+      rolegroup_id = #{rolegroupId,jdbcType=VARCHAR},
+      position_updated_user = #{positionUpdatedUser,jdbcType=VARCHAR},
+      position_updated_time = #{positionUpdatedTime,jdbcType=TIMESTAMP},
+      position_created_user = #{positionCreatedUser,jdbcType=VARCHAR},
+      position_created_time = #{positionCreatedTime,jdbcType=TIMESTAMP}
+    where position_id = #{positionId,jdbcType=VARCHAR}
+  </update>
+</mapper>
