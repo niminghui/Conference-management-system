@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="scb.dev.sms.sm.dao.Log_logonDao">
+  <resultMap id="BaseResultMap" type="scb.dev.sms.sm.pojo.Log_logon">
+    <id column="log_logon_id" jdbcType="VARCHAR" property="logLogonId" />
+    <result column="log_logon_operator_type" jdbcType="VARCHAR" property="logLogonOperatorType" />
+    <result column="log_logon_operator_eid" jdbcType="VARCHAR" property="logLogonOperatorEid" />
+    <result column="log_logon_operator_time" jdbcType="TIMESTAMP" property="logLogonOperatorTime" />
+    <result column="log_logon_ip" jdbcType="VARCHAR" property="logLogonIp" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    log_logon_id, log_logon_operator_type, log_logon_operator_eid, log_logon_operator_time, 
+    log_logon_ip
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from log_logon
+    where log_logon_id = #{logLogonId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from log_logon
+    where log_logon_id = #{logLogonId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="scb.dev.sms.sm.pojo.Log_logon">
+    insert into log_logon (log_logon_id, log_logon_operator_type, 
+      log_logon_operator_eid, log_logon_operator_time, 
+      log_logon_ip)
+    values (#{logLogonId,jdbcType=VARCHAR}, #{logLogonOperatorType,jdbcType=VARCHAR}, 
+      #{logLogonOperatorEid,jdbcType=VARCHAR}, #{logLogonOperatorTime,jdbcType=TIMESTAMP}, 
+      #{logLogonIp,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="scb.dev.sms.sm.pojo.Log_logon">
+    insert into log_logon
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="logLogonId != null">
+        log_logon_id,
+      </if>
+      <if test="logLogonOperatorType != null">
+        log_logon_operator_type,
+      </if>
+      <if test="logLogonOperatorEid != null">
+        log_logon_operator_eid,
+      </if>
+      <if test="logLogonOperatorTime != null">
+        log_logon_operator_time,
+      </if>
+      <if test="logLogonIp != null">
+        log_logon_ip,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="logLogonId != null">
+        #{logLogonId,jdbcType=VARCHAR},
+      </if>
+      <if test="logLogonOperatorType != null">
+        #{logLogonOperatorType,jdbcType=VARCHAR},
+      </if>
+      <if test="logLogonOperatorEid != null">
+        #{logLogonOperatorEid,jdbcType=VARCHAR},
+      </if>
+      <if test="logLogonOperatorTime != null">
+        #{logLogonOperatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logLogonIp != null">
+        #{logLogonIp,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="scb.dev.sms.sm.pojo.Log_logon">
+    update log_logon
+    <set>
+      <if test="logLogonOperatorType != null">
+        log_logon_operator_type = #{logLogonOperatorType,jdbcType=VARCHAR},
+      </if>
+      <if test="logLogonOperatorEid != null">
+        log_logon_operator_eid = #{logLogonOperatorEid,jdbcType=VARCHAR},
+      </if>
+      <if test="logLogonOperatorTime != null">
+        log_logon_operator_time = #{logLogonOperatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logLogonIp != null">
+        log_logon_ip = #{logLogonIp,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where log_logon_id = #{logLogonId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="scb.dev.sms.sm.pojo.Log_logon">
+    update log_logon
+    set log_logon_operator_type = #{logLogonOperatorType,jdbcType=VARCHAR},
+      log_logon_operator_eid = #{logLogonOperatorEid,jdbcType=VARCHAR},
+      log_logon_operator_time = #{logLogonOperatorTime,jdbcType=TIMESTAMP},
+      log_logon_ip = #{logLogonIp,jdbcType=VARCHAR}
+    where log_logon_id = #{logLogonId,jdbcType=VARCHAR}
+  </update>
+</mapper>

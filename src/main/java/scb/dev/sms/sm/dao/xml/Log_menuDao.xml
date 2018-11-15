@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="scb.dev.sms.sm.dao.Log_menuDao">
+  <resultMap id="BaseResultMap" type="scb.dev.sms.sm.pojo.Log_menu">
+    <id column="log_menu_id" jdbcType="VARCHAR" property="logMenuId" />
+    <result column="log_menu_operator_type" jdbcType="VARCHAR" property="logMenuOperatorType" />
+    <result column="log_menu_operator_eid" jdbcType="VARCHAR" property="logMenuOperatorEid" />
+    <result column="log_menu_operator_time" jdbcType="TIMESTAMP" property="logMenuOperatorTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    log_menu_id, log_menu_operator_type, log_menu_operator_eid, log_menu_operator_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from log_menu
+    where log_menu_id = #{logMenuId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from log_menu
+    where log_menu_id = #{logMenuId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="scb.dev.sms.sm.pojo.Log_menu">
+    insert into log_menu (log_menu_id, log_menu_operator_type, log_menu_operator_eid, 
+      log_menu_operator_time)
+    values (#{logMenuId,jdbcType=VARCHAR}, #{logMenuOperatorType,jdbcType=VARCHAR}, #{logMenuOperatorEid,jdbcType=VARCHAR}, 
+      #{logMenuOperatorTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="scb.dev.sms.sm.pojo.Log_menu">
+    insert into log_menu
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="logMenuId != null">
+        log_menu_id,
+      </if>
+      <if test="logMenuOperatorType != null">
+        log_menu_operator_type,
+      </if>
+      <if test="logMenuOperatorEid != null">
+        log_menu_operator_eid,
+      </if>
+      <if test="logMenuOperatorTime != null">
+        log_menu_operator_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="logMenuId != null">
+        #{logMenuId,jdbcType=VARCHAR},
+      </if>
+      <if test="logMenuOperatorType != null">
+        #{logMenuOperatorType,jdbcType=VARCHAR},
+      </if>
+      <if test="logMenuOperatorEid != null">
+        #{logMenuOperatorEid,jdbcType=VARCHAR},
+      </if>
+      <if test="logMenuOperatorTime != null">
+        #{logMenuOperatorTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="scb.dev.sms.sm.pojo.Log_menu">
+    update log_menu
+    <set>
+      <if test="logMenuOperatorType != null">
+        log_menu_operator_type = #{logMenuOperatorType,jdbcType=VARCHAR},
+      </if>
+      <if test="logMenuOperatorEid != null">
+        log_menu_operator_eid = #{logMenuOperatorEid,jdbcType=VARCHAR},
+      </if>
+      <if test="logMenuOperatorTime != null">
+        log_menu_operator_time = #{logMenuOperatorTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where log_menu_id = #{logMenuId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="scb.dev.sms.sm.pojo.Log_menu">
+    update log_menu
+    set log_menu_operator_type = #{logMenuOperatorType,jdbcType=VARCHAR},
+      log_menu_operator_eid = #{logMenuOperatorEid,jdbcType=VARCHAR},
+      log_menu_operator_time = #{logMenuOperatorTime,jdbcType=TIMESTAMP}
+    where log_menu_id = #{logMenuId,jdbcType=VARCHAR}
+  </update>
+</mapper>

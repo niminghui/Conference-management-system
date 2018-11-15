@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="scb.dev.sms.sm.dao.Log_sysparam">
+  <resultMap id="BaseResultMap" type="scb.dev.sms.sm.pojo.Log_sysparam">
+    <id column="log_sysparam_id" jdbcType="VARCHAR" property="logSysparamId" />
+    <result column="log_sysparam_operator_type" jdbcType="VARCHAR" property="logSysparamOperatorType" />
+    <result column="log_sysparam_operator_eid" jdbcType="VARCHAR" property="logSysparamOperatorEid" />
+    <result column="log_sysparam_operator_time" jdbcType="TIMESTAMP" property="logSysparamOperatorTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    log_sysparam_id, log_sysparam_operator_type, log_sysparam_operator_eid, log_sysparam_operator_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from log_sysparam
+    where log_sysparam_id = #{logSysparamId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from log_sysparam
+    where log_sysparam_id = #{logSysparamId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="scb.dev.sms.sm.pojo.Log_sysparam">
+    insert into log_sysparam (log_sysparam_id, log_sysparam_operator_type, 
+      log_sysparam_operator_eid, log_sysparam_operator_time
+      )
+    values (#{logSysparamId,jdbcType=VARCHAR}, #{logSysparamOperatorType,jdbcType=VARCHAR}, 
+      #{logSysparamOperatorEid,jdbcType=VARCHAR}, #{logSysparamOperatorTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="scb.dev.sms.sm.pojo.Log_sysparam">
+    insert into log_sysparam
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="logSysparamId != null">
+        log_sysparam_id,
+      </if>
+      <if test="logSysparamOperatorType != null">
+        log_sysparam_operator_type,
+      </if>
+      <if test="logSysparamOperatorEid != null">
+        log_sysparam_operator_eid,
+      </if>
+      <if test="logSysparamOperatorTime != null">
+        log_sysparam_operator_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="logSysparamId != null">
+        #{logSysparamId,jdbcType=VARCHAR},
+      </if>
+      <if test="logSysparamOperatorType != null">
+        #{logSysparamOperatorType,jdbcType=VARCHAR},
+      </if>
+      <if test="logSysparamOperatorEid != null">
+        #{logSysparamOperatorEid,jdbcType=VARCHAR},
+      </if>
+      <if test="logSysparamOperatorTime != null">
+        #{logSysparamOperatorTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="scb.dev.sms.sm.pojo.Log_sysparam">
+    update log_sysparam
+    <set>
+      <if test="logSysparamOperatorType != null">
+        log_sysparam_operator_type = #{logSysparamOperatorType,jdbcType=VARCHAR},
+      </if>
+      <if test="logSysparamOperatorEid != null">
+        log_sysparam_operator_eid = #{logSysparamOperatorEid,jdbcType=VARCHAR},
+      </if>
+      <if test="logSysparamOperatorTime != null">
+        log_sysparam_operator_time = #{logSysparamOperatorTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where log_sysparam_id = #{logSysparamId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="scb.dev.sms.sm.pojo.Log_sysparam">
+    update log_sysparam
+    set log_sysparam_operator_type = #{logSysparamOperatorType,jdbcType=VARCHAR},
+      log_sysparam_operator_eid = #{logSysparamOperatorEid,jdbcType=VARCHAR},
+      log_sysparam_operator_time = #{logSysparamOperatorTime,jdbcType=TIMESTAMP}
+    where log_sysparam_id = #{logSysparamId,jdbcType=VARCHAR}
+  </update>
+</mapper>

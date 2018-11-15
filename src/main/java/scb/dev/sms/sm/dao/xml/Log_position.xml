@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="scb.dev.sms.sm.dao.Log_position">
+  <resultMap id="BaseResultMap" type="scb.dev.sms.sm.pojo.Log_position">
+    <id column="log_position_id" jdbcType="VARCHAR" property="logPositionId" />
+    <result column="log_position_operator_type" jdbcType="VARCHAR" property="logPositionOperatorType" />
+    <result column="log_position_operator_eid" jdbcType="VARCHAR" property="logPositionOperatorEid" />
+    <result column="log_position_operator_time" jdbcType="TIMESTAMP" property="logPositionOperatorTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    log_position_id, log_position_operator_type, log_position_operator_eid, log_position_operator_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from log_position
+    where log_position_id = #{logPositionId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from log_position
+    where log_position_id = #{logPositionId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="scb.dev.sms.sm.pojo.Log_position">
+    insert into log_position (log_position_id, log_position_operator_type, 
+      log_position_operator_eid, log_position_operator_time
+      )
+    values (#{logPositionId,jdbcType=VARCHAR}, #{logPositionOperatorType,jdbcType=VARCHAR}, 
+      #{logPositionOperatorEid,jdbcType=VARCHAR}, #{logPositionOperatorTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="scb.dev.sms.sm.pojo.Log_position">
+    insert into log_position
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="logPositionId != null">
+        log_position_id,
+      </if>
+      <if test="logPositionOperatorType != null">
+        log_position_operator_type,
+      </if>
+      <if test="logPositionOperatorEid != null">
+        log_position_operator_eid,
+      </if>
+      <if test="logPositionOperatorTime != null">
+        log_position_operator_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="logPositionId != null">
+        #{logPositionId,jdbcType=VARCHAR},
+      </if>
+      <if test="logPositionOperatorType != null">
+        #{logPositionOperatorType,jdbcType=VARCHAR},
+      </if>
+      <if test="logPositionOperatorEid != null">
+        #{logPositionOperatorEid,jdbcType=VARCHAR},
+      </if>
+      <if test="logPositionOperatorTime != null">
+        #{logPositionOperatorTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="scb.dev.sms.sm.pojo.Log_position">
+    update log_position
+    <set>
+      <if test="logPositionOperatorType != null">
+        log_position_operator_type = #{logPositionOperatorType,jdbcType=VARCHAR},
+      </if>
+      <if test="logPositionOperatorEid != null">
+        log_position_operator_eid = #{logPositionOperatorEid,jdbcType=VARCHAR},
+      </if>
+      <if test="logPositionOperatorTime != null">
+        log_position_operator_time = #{logPositionOperatorTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where log_position_id = #{logPositionId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="scb.dev.sms.sm.pojo.Log_position">
+    update log_position
+    set log_position_operator_type = #{logPositionOperatorType,jdbcType=VARCHAR},
+      log_position_operator_eid = #{logPositionOperatorEid,jdbcType=VARCHAR},
+      log_position_operator_time = #{logPositionOperatorTime,jdbcType=TIMESTAMP}
+    where log_position_id = #{logPositionId,jdbcType=VARCHAR}
+  </update>
+</mapper>

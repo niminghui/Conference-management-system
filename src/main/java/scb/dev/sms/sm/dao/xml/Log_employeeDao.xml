@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="scb.dev.sms.sm.dao.Log_employeeDao">
+  <resultMap id="BaseResultMap" type="scb.dev.sms.sm.pojo.Log_employee">
+    <id column="log_employee_id" jdbcType="VARCHAR" property="logEmployeeId" />
+    <result column="log_employee_operator_type" jdbcType="VARCHAR" property="logEmployeeOperatorType" />
+    <result column="log_employee_operator_eid" jdbcType="VARCHAR" property="logEmployeeOperatorEid" />
+    <result column="log_employee_operator_time" jdbcType="TIMESTAMP" property="logEmployeeOperatorTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    log_employee_id, log_employee_operator_type, log_employee_operator_eid, log_employee_operator_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from log_employee
+    where log_employee_id = #{logEmployeeId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from log_employee
+    where log_employee_id = #{logEmployeeId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="scb.dev.sms.sm.pojo.Log_employee">
+    insert into log_employee (log_employee_id, log_employee_operator_type, 
+      log_employee_operator_eid, log_employee_operator_time
+      )
+    values (#{logEmployeeId,jdbcType=VARCHAR}, #{logEmployeeOperatorType,jdbcType=VARCHAR}, 
+      #{logEmployeeOperatorEid,jdbcType=VARCHAR}, #{logEmployeeOperatorTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="scb.dev.sms.sm.pojo.Log_employee">
+    insert into log_employee
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="logEmployeeId != null">
+        log_employee_id,
+      </if>
+      <if test="logEmployeeOperatorType != null">
+        log_employee_operator_type,
+      </if>
+      <if test="logEmployeeOperatorEid != null">
+        log_employee_operator_eid,
+      </if>
+      <if test="logEmployeeOperatorTime != null">
+        log_employee_operator_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="logEmployeeId != null">
+        #{logEmployeeId,jdbcType=VARCHAR},
+      </if>
+      <if test="logEmployeeOperatorType != null">
+        #{logEmployeeOperatorType,jdbcType=VARCHAR},
+      </if>
+      <if test="logEmployeeOperatorEid != null">
+        #{logEmployeeOperatorEid,jdbcType=VARCHAR},
+      </if>
+      <if test="logEmployeeOperatorTime != null">
+        #{logEmployeeOperatorTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="scb.dev.sms.sm.pojo.Log_employee">
+    update log_employee
+    <set>
+      <if test="logEmployeeOperatorType != null">
+        log_employee_operator_type = #{logEmployeeOperatorType,jdbcType=VARCHAR},
+      </if>
+      <if test="logEmployeeOperatorEid != null">
+        log_employee_operator_eid = #{logEmployeeOperatorEid,jdbcType=VARCHAR},
+      </if>
+      <if test="logEmployeeOperatorTime != null">
+        log_employee_operator_time = #{logEmployeeOperatorTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where log_employee_id = #{logEmployeeId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="scb.dev.sms.sm.pojo.Log_employee">
+    update log_employee
+    set log_employee_operator_type = #{logEmployeeOperatorType,jdbcType=VARCHAR},
+      log_employee_operator_eid = #{logEmployeeOperatorEid,jdbcType=VARCHAR},
+      log_employee_operator_time = #{logEmployeeOperatorTime,jdbcType=TIMESTAMP}
+    where log_employee_id = #{logEmployeeId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="scb.dev.sms.sm.dao.DepartmentDao">
+  <resultMap id="BaseResultMap" type="scb.dev.sms.sm.pojo.Department">
+    <id column="department_id" jdbcType="VARCHAR" property="departmentId" />
+    <result column="department_name" jdbcType="VARCHAR" property="departmentName" />
+    <result column="department_abbreviation" jdbcType="VARCHAR" property="departmentAbbreviation" />
+    <result column="department_pid" jdbcType="VARCHAR" property="departmentPid" />
+    <result column="department_orderId" jdbcType="VARCHAR" property="departmentOrderid" />
+    <result column="department_phone" jdbcType="VARCHAR" property="departmentPhone" />
+    <result column="department_email" jdbcType="VARCHAR" property="departmentEmail" />
+    <result column="department_detail" jdbcType="VARCHAR" property="departmentDetail" />
+    <result column="department_head" jdbcType="VARCHAR" property="departmentHead" />
+    <result column="department_updated_user" jdbcType="VARCHAR" property="departmentUpdatedUser" />
+    <result column="department_updated_time" jdbcType="TIMESTAMP" property="departmentUpdatedTime" />
+    <result column="department_created_user" jdbcType="VARCHAR" property="departmentCreatedUser" />
+    <result column="department_created_time" jdbcType="TIMESTAMP" property="departmentCreatedTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    department_id, department_name, department_abbreviation, department_pid, department_orderId, 
+    department_phone, department_email, department_detail, department_head, department_updated_user, 
+    department_updated_time, department_created_user, department_created_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sm_department
+    where department_id = #{departmentId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sm_department
+    where department_id = #{departmentId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="scb.dev.sms.sm.pojo.Department">
+    insert into sm_department (department_id, department_name, department_abbreviation, 
+      department_pid, department_orderId, department_phone, 
+      department_email, department_detail, department_head, 
+      department_updated_user, department_updated_time, 
+      department_created_user, department_created_time
+      )
+    values (#{departmentId,jdbcType=VARCHAR}, #{departmentName,jdbcType=VARCHAR}, #{departmentAbbreviation,jdbcType=VARCHAR}, 
+      #{departmentPid,jdbcType=VARCHAR}, #{departmentOrderid,jdbcType=VARCHAR}, #{departmentPhone,jdbcType=VARCHAR}, 
+      #{departmentEmail,jdbcType=VARCHAR}, #{departmentDetail,jdbcType=VARCHAR}, #{departmentHead,jdbcType=VARCHAR}, 
+      #{departmentUpdatedUser,jdbcType=VARCHAR}, #{departmentUpdatedTime,jdbcType=TIMESTAMP}, 
+      #{departmentCreatedUser,jdbcType=VARCHAR}, #{departmentCreatedTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="scb.dev.sms.sm.pojo.Department">
+    insert into sm_department
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="departmentId != null">
+        department_id,
+      </if>
+      <if test="departmentName != null">
+        department_name,
+      </if>
+      <if test="departmentAbbreviation != null">
+        department_abbreviation,
+      </if>
+      <if test="departmentPid != null">
+        department_pid,
+      </if>
+      <if test="departmentOrderid != null">
+        department_orderId,
+      </if>
+      <if test="departmentPhone != null">
+        department_phone,
+      </if>
+      <if test="departmentEmail != null">
+        department_email,
+      </if>
+      <if test="departmentDetail != null">
+        department_detail,
+      </if>
+      <if test="departmentHead != null">
+        department_head,
+      </if>
+      <if test="departmentUpdatedUser != null">
+        department_updated_user,
+      </if>
+      <if test="departmentUpdatedTime != null">
+        department_updated_time,
+      </if>
+      <if test="departmentCreatedUser != null">
+        department_created_user,
+      </if>
+      <if test="departmentCreatedTime != null">
+        department_created_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="departmentId != null">
+        #{departmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName != null">
+        #{departmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentAbbreviation != null">
+        #{departmentAbbreviation,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentPid != null">
+        #{departmentPid,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentOrderid != null">
+        #{departmentOrderid,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentPhone != null">
+        #{departmentPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentEmail != null">
+        #{departmentEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentDetail != null">
+        #{departmentDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentHead != null">
+        #{departmentHead,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentUpdatedUser != null">
+        #{departmentUpdatedUser,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentUpdatedTime != null">
+        #{departmentUpdatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="departmentCreatedUser != null">
+        #{departmentCreatedUser,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentCreatedTime != null">
+        #{departmentCreatedTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="scb.dev.sms.sm.pojo.Department">
+    update sm_department
+    <set>
+      <if test="departmentName != null">
+        department_name = #{departmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentAbbreviation != null">
+        department_abbreviation = #{departmentAbbreviation,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentPid != null">
+        department_pid = #{departmentPid,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentOrderid != null">
+        department_orderId = #{departmentOrderid,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentPhone != null">
+        department_phone = #{departmentPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentEmail != null">
+        department_email = #{departmentEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentDetail != null">
+        department_detail = #{departmentDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentHead != null">
+        department_head = #{departmentHead,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentUpdatedUser != null">
+        department_updated_user = #{departmentUpdatedUser,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentUpdatedTime != null">
+        department_updated_time = #{departmentUpdatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="departmentCreatedUser != null">
+        department_created_user = #{departmentCreatedUser,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentCreatedTime != null">
+        department_created_time = #{departmentCreatedTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where department_id = #{departmentId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="scb.dev.sms.sm.pojo.Department">
+    update sm_department
+    set department_name = #{departmentName,jdbcType=VARCHAR},
+      department_abbreviation = #{departmentAbbreviation,jdbcType=VARCHAR},
+      department_pid = #{departmentPid,jdbcType=VARCHAR},
+      department_orderId = #{departmentOrderid,jdbcType=VARCHAR},
+      department_phone = #{departmentPhone,jdbcType=VARCHAR},
+      department_email = #{departmentEmail,jdbcType=VARCHAR},
+      department_detail = #{departmentDetail,jdbcType=VARCHAR},
+      department_head = #{departmentHead,jdbcType=VARCHAR},
+      department_updated_user = #{departmentUpdatedUser,jdbcType=VARCHAR},
+      department_updated_time = #{departmentUpdatedTime,jdbcType=TIMESTAMP},
+      department_created_user = #{departmentCreatedUser,jdbcType=VARCHAR},
+      department_created_time = #{departmentCreatedTime,jdbcType=TIMESTAMP}
+    where department_id = #{departmentId,jdbcType=VARCHAR}
+  </update>
+</mapper>

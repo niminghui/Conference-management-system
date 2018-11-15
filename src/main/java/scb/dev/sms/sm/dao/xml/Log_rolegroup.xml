@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="scb.dev.sms.sm.dao.Log_rolegroup">
+  <resultMap id="BaseResultMap" type="scb.dev.sms.sm.pojo.Log_rolegroup">
+    <id column="log_rolegroup_id" jdbcType="VARCHAR" property="logRolegroupId" />
+    <result column="log_rolegroup_operator_type" jdbcType="VARCHAR" property="logRolegroupOperatorType" />
+    <result column="log_rolegroup_operator_eid" jdbcType="VARCHAR" property="logRolegroupOperatorEid" />
+    <result column="log_rolegroup_operator_time" jdbcType="TIMESTAMP" property="logRolegroupOperatorTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    log_rolegroup_id, log_rolegroup_operator_type, log_rolegroup_operator_eid, log_rolegroup_operator_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from log_rolegroup
+    where log_rolegroup_id = #{logRolegroupId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from log_rolegroup
+    where log_rolegroup_id = #{logRolegroupId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="scb.dev.sms.sm.pojo.Log_rolegroup">
+    insert into log_rolegroup (log_rolegroup_id, log_rolegroup_operator_type, 
+      log_rolegroup_operator_eid, log_rolegroup_operator_time
+      )
+    values (#{logRolegroupId,jdbcType=VARCHAR}, #{logRolegroupOperatorType,jdbcType=VARCHAR}, 
+      #{logRolegroupOperatorEid,jdbcType=VARCHAR}, #{logRolegroupOperatorTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="scb.dev.sms.sm.pojo.Log_rolegroup">
+    insert into log_rolegroup
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="logRolegroupId != null">
+        log_rolegroup_id,
+      </if>
+      <if test="logRolegroupOperatorType != null">
+        log_rolegroup_operator_type,
+      </if>
+      <if test="logRolegroupOperatorEid != null">
+        log_rolegroup_operator_eid,
+      </if>
+      <if test="logRolegroupOperatorTime != null">
+        log_rolegroup_operator_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="logRolegroupId != null">
+        #{logRolegroupId,jdbcType=VARCHAR},
+      </if>
+      <if test="logRolegroupOperatorType != null">
+        #{logRolegroupOperatorType,jdbcType=VARCHAR},
+      </if>
+      <if test="logRolegroupOperatorEid != null">
+        #{logRolegroupOperatorEid,jdbcType=VARCHAR},
+      </if>
+      <if test="logRolegroupOperatorTime != null">
+        #{logRolegroupOperatorTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="scb.dev.sms.sm.pojo.Log_rolegroup">
+    update log_rolegroup
+    <set>
+      <if test="logRolegroupOperatorType != null">
+        log_rolegroup_operator_type = #{logRolegroupOperatorType,jdbcType=VARCHAR},
+      </if>
+      <if test="logRolegroupOperatorEid != null">
+        log_rolegroup_operator_eid = #{logRolegroupOperatorEid,jdbcType=VARCHAR},
+      </if>
+      <if test="logRolegroupOperatorTime != null">
+        log_rolegroup_operator_time = #{logRolegroupOperatorTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where log_rolegroup_id = #{logRolegroupId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="scb.dev.sms.sm.pojo.Log_rolegroup">
+    update log_rolegroup
+    set log_rolegroup_operator_type = #{logRolegroupOperatorType,jdbcType=VARCHAR},
+      log_rolegroup_operator_eid = #{logRolegroupOperatorEid,jdbcType=VARCHAR},
+      log_rolegroup_operator_time = #{logRolegroupOperatorTime,jdbcType=TIMESTAMP}
+    where log_rolegroup_id = #{logRolegroupId,jdbcType=VARCHAR}
+  </update>
+</mapper>

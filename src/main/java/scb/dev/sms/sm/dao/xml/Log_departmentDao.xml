@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="scb.dev.sms.sm.dao.Log_departmentDao">
+  <resultMap id="BaseResultMap" type="scb.dev.sms.sm.pojo.Log_department">
+    <id column="log_department_id" jdbcType="VARCHAR" property="logDepartmentId" />
+    <result column="log_department_operator_type" jdbcType="VARCHAR" property="logDepartmentOperatorType" />
+    <result column="log_department_operator_eid" jdbcType="VARCHAR" property="logDepartmentOperatorEid" />
+    <result column="log_department_operator_time" jdbcType="TIMESTAMP" property="logDepartmentOperatorTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    log_department_id, log_department_operator_type, log_department_operator_eid, log_department_operator_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from log_department
+    where log_department_id = #{logDepartmentId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from log_department
+    where log_department_id = #{logDepartmentId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="scb.dev.sms.sm.pojo.Log_department">
+    insert into log_department (log_department_id, log_department_operator_type, 
+      log_department_operator_eid, log_department_operator_time
+      )
+    values (#{logDepartmentId,jdbcType=VARCHAR}, #{logDepartmentOperatorType,jdbcType=VARCHAR}, 
+      #{logDepartmentOperatorEid,jdbcType=VARCHAR}, #{logDepartmentOperatorTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="scb.dev.sms.sm.pojo.Log_department">
+    insert into log_department
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="logDepartmentId != null">
+        log_department_id,
+      </if>
+      <if test="logDepartmentOperatorType != null">
+        log_department_operator_type,
+      </if>
+      <if test="logDepartmentOperatorEid != null">
+        log_department_operator_eid,
+      </if>
+      <if test="logDepartmentOperatorTime != null">
+        log_department_operator_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="logDepartmentId != null">
+        #{logDepartmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="logDepartmentOperatorType != null">
+        #{logDepartmentOperatorType,jdbcType=VARCHAR},
+      </if>
+      <if test="logDepartmentOperatorEid != null">
+        #{logDepartmentOperatorEid,jdbcType=VARCHAR},
+      </if>
+      <if test="logDepartmentOperatorTime != null">
+        #{logDepartmentOperatorTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="scb.dev.sms.sm.pojo.Log_department">
+    update log_department
+    <set>
+      <if test="logDepartmentOperatorType != null">
+        log_department_operator_type = #{logDepartmentOperatorType,jdbcType=VARCHAR},
+      </if>
+      <if test="logDepartmentOperatorEid != null">
+        log_department_operator_eid = #{logDepartmentOperatorEid,jdbcType=VARCHAR},
+      </if>
+      <if test="logDepartmentOperatorTime != null">
+        log_department_operator_time = #{logDepartmentOperatorTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where log_department_id = #{logDepartmentId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="scb.dev.sms.sm.pojo.Log_department">
+    update log_department
+    set log_department_operator_type = #{logDepartmentOperatorType,jdbcType=VARCHAR},
+      log_department_operator_eid = #{logDepartmentOperatorEid,jdbcType=VARCHAR},
+      log_department_operator_time = #{logDepartmentOperatorTime,jdbcType=TIMESTAMP}
+    where log_department_id = #{logDepartmentId,jdbcType=VARCHAR}
+  </update>
+</mapper>
