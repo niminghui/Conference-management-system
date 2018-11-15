@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * ClassName: AccountController <br/>
- * Description: TODO ADD REASON(可选). <br/>
+ * Description: AccountController. <br/>
  * <br/>
  *
  * @author Minghui.Ni
