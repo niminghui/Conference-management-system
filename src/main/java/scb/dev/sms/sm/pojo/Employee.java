@@ -1,9 +1,26 @@
 package scb.dev.sms.sm.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Employee {
+/**
+ * 
+ * ClassName: Employee <br/>
+ * Description: 员工 类<br/><br/>
+ * date: 2018年11月15日 上午10:29:51 <br/>
+ *
+ * @author ryan。li
+ * @version V1.0
+ * @since JDK 1.8
+ */
+public class Employee implements Serializable{
     /**
+	 * serialVersionUID
+	 * @since JDK 1.8
+	 */
+	private static final long serialVersionUID = -1323025868695548024L;
+
+	/**
      * 职员编号
      */
     private String employeeId;
@@ -317,7 +334,23 @@ public class Employee {
     public void setEmployeeImage(byte[] employeeImage) {
         this.employeeImage = employeeImage;
     }
-
+    
+    /**
+     *  构造方法
+     * Creates a new instance of Employee.
+     *
+     * @param employeeId
+     * @param employeeName
+     * @param employeeNickname
+     * @param employeeGender
+     * @param positionId
+     * @param departmentId
+     * @param employeeStatus
+     * @param employeeCompany
+     * @param employeeUpdatedUser
+     * @param employeeCreatedUser
+     * @param employeeWorkId
+     */
 	public Employee(String employeeId, String employeeName, String employeeNickname, String employeeGender,
 			String positionId, String departmentId, String employeeStatus, String employeeCompany,
 			String employeeUpdatedUser, String employeeCreatedUser, String employeeWorkId) {

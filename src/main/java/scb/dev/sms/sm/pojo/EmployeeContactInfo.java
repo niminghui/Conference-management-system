@@ -1,7 +1,24 @@
 package scb.dev.sms.sm.pojo;
 
-public class EmployeeContactInfo {
+import java.io.Serializable;
+/**
+ * 
+ * ClassName: EmployeeContactInfo <br/>
+ * Description:员工联系方式类<br/><br/>
+ * date: 2018年11月15日 上午10:33:42 <br/>
+ *
+ * @author ryan。li
+ * @version V1.0
+ * @since JDK 1.8
+ */
+public class EmployeeContactInfo implements Serializable{
     /**
+	 * serialVersionUID
+	 * @since JDK 1.8
+	 */
+	private static final long serialVersionUID = 6837063750126750697L;
+
+	/**
      * 职员编号
      */
     private String employeeId;
