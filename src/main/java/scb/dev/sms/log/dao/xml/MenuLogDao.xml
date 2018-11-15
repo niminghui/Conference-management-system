@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="scb.dev.sms.sm.dao.Log_menuDao">
-  <resultMap id="BaseResultMap" type="scb.dev.sms.sm.pojo.Log_menu">
+<mapper namespace="scb.dev.sms.log.dao.MenuLogDao">
+  <resultMap id="BaseResultMap" type="scb.dev.sms.log.pojo.MenuLog">
     <id column="log_menu_id" jdbcType="VARCHAR" property="logMenuId" />
     <result column="log_menu_operator_type" jdbcType="VARCHAR" property="logMenuOperatorType" />
     <result column="log_menu_operator_eid" jdbcType="VARCHAR" property="logMenuOperatorEid" />
@@ -20,13 +20,13 @@
     delete from log_menu
     where log_menu_id = #{logMenuId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="scb.dev.sms.sm.pojo.Log_menu">
+  <insert id="insert" parameterType="scb.dev.sms.log.pojo.MenuLog">
     insert into log_menu (log_menu_id, log_menu_operator_type, log_menu_operator_eid, 
       log_menu_operator_time)
     values (#{logMenuId,jdbcType=VARCHAR}, #{logMenuOperatorType,jdbcType=VARCHAR}, #{logMenuOperatorEid,jdbcType=VARCHAR}, 
       #{logMenuOperatorTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="scb.dev.sms.sm.pojo.Log_menu">
+  <insert id="insertSelective" parameterType="scb.dev.sms.log.pojo.MenuLog">
     insert into log_menu
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="logMenuId != null">
@@ -57,7 +57,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="scb.dev.sms.sm.pojo.Log_menu">
+  <update id="updateByPrimaryKeySelective" parameterType="scb.dev.sms.log.pojo.MenuLog">
     update log_menu
     <set>
       <if test="logMenuOperatorType != null">
@@ -72,7 +72,7 @@
     </set>
     where log_menu_id = #{logMenuId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="scb.dev.sms.sm.pojo.Log_menu">
+  <update id="updateByPrimaryKey" parameterType="scb.dev.sms.log.pojo.MenuLog">
     update log_menu
     set log_menu_operator_type = #{logMenuOperatorType,jdbcType=VARCHAR},
       log_menu_operator_eid = #{logMenuOperatorEid,jdbcType=VARCHAR},

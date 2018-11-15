@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="scb.dev.sms.sm.dao.Log_employeeDao">
-  <resultMap id="BaseResultMap" type="scb.dev.sms.sm.pojo.Log_employee">
+<mapper namespace="scb.dev.sms.log.dao.EmployeeLogDao">
+  <resultMap id="BaseResultMap" type="scb.dev.sms.log.pojo.EmployeeLog">
     <id column="log_employee_id" jdbcType="VARCHAR" property="logEmployeeId" />
     <result column="log_employee_operator_type" jdbcType="VARCHAR" property="logEmployeeOperatorType" />
     <result column="log_employee_operator_eid" jdbcType="VARCHAR" property="logEmployeeOperatorEid" />
@@ -20,7 +20,7 @@
     delete from log_employee
     where log_employee_id = #{logEmployeeId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="scb.dev.sms.sm.pojo.Log_employee">
+  <insert id="insert" parameterType="scb.dev.sms.log.pojo.EmployeeLog">
     insert into log_employee (log_employee_id, log_employee_operator_type, 
       log_employee_operator_eid, log_employee_operator_time
       )
@@ -28,7 +28,7 @@
       #{logEmployeeOperatorEid,jdbcType=VARCHAR}, #{logEmployeeOperatorTime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="scb.dev.sms.sm.pojo.Log_employee">
+  <insert id="insertSelective" parameterType="scb.dev.sms.log.pojo.EmployeeLog">
     insert into log_employee
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="logEmployeeId != null">
@@ -59,7 +59,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="scb.dev.sms.sm.pojo.Log_employee">
+  <update id="updateByPrimaryKeySelective" parameterType="scb.dev.sms.log.pojo.EmployeeLog">
     update log_employee
     <set>
       <if test="logEmployeeOperatorType != null">
@@ -74,7 +74,7 @@
     </set>
     where log_employee_id = #{logEmployeeId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="scb.dev.sms.sm.pojo.Log_employee">
+  <update id="updateByPrimaryKey" parameterType="scb.dev.sms.log.pojo.EmployeeLog">
     update log_employee
     set log_employee_operator_type = #{logEmployeeOperatorType,jdbcType=VARCHAR},
       log_employee_operator_eid = #{logEmployeeOperatorEid,jdbcType=VARCHAR},

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="scb.dev.sms.sm.dao.Log_accountDao">
-  <resultMap id="BaseResultMap" type="scb.dev.sms.sm.pojo.Log_account">
+<mapper namespace="scb.dev.sms.log.dao.AccountLogDao">
+  <resultMap id="BaseResultMap" type="scb.dev.sms.log.pojo.AccountLog">
     <id column="log_account_id" jdbcType="VARCHAR" property="logAccountId" />
     <result column="log_account_operator_type" jdbcType="VARCHAR" property="logAccountOperatorType" />
     <result column="log_account_operator_eid" jdbcType="VARCHAR" property="logAccountOperatorEid" />
@@ -20,7 +20,7 @@
     delete from log_account
     where log_account_id = #{logAccountId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="scb.dev.sms.sm.pojo.Log_account">
+  <insert id="insert" parameterType="scb.dev.sms.log.pojo.AccountLog">
     insert into log_account (log_account_id, log_account_operator_type, 
       log_account_operator_eid, log_account_operator_time
       )
@@ -28,7 +28,7 @@
       #{logAccountOperatorEid,jdbcType=VARCHAR}, #{logAccountOperatorTime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="scb.dev.sms.sm.pojo.Log_account">
+  <insert id="insertSelective" parameterType="scb.dev.sms.log.pojo.AccountLog">
     insert into log_account
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="logAccountId != null">
@@ -59,7 +59,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="scb.dev.sms.sm.pojo.Log_account">
+  <update id="updateByPrimaryKeySelective" parameterType="scb.dev.sms.log.pojo.AccountLog">
     update log_account
     <set>
       <if test="logAccountOperatorType != null">
@@ -74,7 +74,7 @@
     </set>
     where log_account_id = #{logAccountId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="scb.dev.sms.sm.pojo.Log_account">
+  <update id="updateByPrimaryKey" parameterType="scb.dev.sms.log.pojo.AccountLog">
     update log_account
     set log_account_operator_type = #{logAccountOperatorType,jdbcType=VARCHAR},
       log_account_operator_eid = #{logAccountOperatorEid,jdbcType=VARCHAR},

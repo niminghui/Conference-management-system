@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="scb.dev.sms.sm.dao.Log_logonDao">
-  <resultMap id="BaseResultMap" type="scb.dev.sms.sm.pojo.Log_logon">
+<mapper namespace="scb.dev.sms.log.dao.LogonLogDao">
+  <resultMap id="BaseResultMap" type="scb.dev.sms.log.pojo.LogonLog">
     <id column="log_logon_id" jdbcType="VARCHAR" property="logLogonId" />
     <result column="log_logon_operator_type" jdbcType="VARCHAR" property="logLogonOperatorType" />
     <result column="log_logon_operator_eid" jdbcType="VARCHAR" property="logLogonOperatorEid" />
@@ -22,7 +22,7 @@
     delete from log_logon
     where log_logon_id = #{logLogonId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="scb.dev.sms.sm.pojo.Log_logon">
+  <insert id="insert" parameterType="scb.dev.sms.log.pojo.LogonLog">
     insert into log_logon (log_logon_id, log_logon_operator_type, 
       log_logon_operator_eid, log_logon_operator_time, 
       log_logon_ip)
@@ -30,7 +30,7 @@
       #{logLogonOperatorEid,jdbcType=VARCHAR}, #{logLogonOperatorTime,jdbcType=TIMESTAMP}, 
       #{logLogonIp,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="scb.dev.sms.sm.pojo.Log_logon">
+  <insert id="insertSelective" parameterType="scb.dev.sms.log.pojo.LogonLog">
     insert into log_logon
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="logLogonId != null">
@@ -67,7 +67,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="scb.dev.sms.sm.pojo.Log_logon">
+  <update id="updateByPrimaryKeySelective" parameterType="scb.dev.sms.log.pojo.LogonLog">
     update log_logon
     <set>
       <if test="logLogonOperatorType != null">
@@ -85,7 +85,7 @@
     </set>
     where log_logon_id = #{logLogonId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="scb.dev.sms.sm.pojo.Log_logon">
+  <update id="updateByPrimaryKey" parameterType="scb.dev.sms.log.pojo.LogonLog">
     update log_logon
     set log_logon_operator_type = #{logLogonOperatorType,jdbcType=VARCHAR},
       log_logon_operator_eid = #{logLogonOperatorEid,jdbcType=VARCHAR},

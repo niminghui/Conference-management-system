@@ -1,8 +1,8 @@
-package scb.dev.sms.sm.pojo;
+package scb.dev.sms.log.pojo;
 
 import java.util.Date;
 
-public class Log_department {
+public class DepartmentLog {
     /**
      * 
      */

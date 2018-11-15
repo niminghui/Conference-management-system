@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="scb.dev.sms.sm.dao.Log_rolegroup">
-  <resultMap id="BaseResultMap" type="scb.dev.sms.sm.pojo.Log_rolegroup">
+<mapper namespace="scb.dev.sms.log.dao.RoleGroupLogDao">
+  <resultMap id="BaseResultMap" type="scb.dev.sms.log.pojo.RoleGroupLog">
     <id column="log_rolegroup_id" jdbcType="VARCHAR" property="logRolegroupId" />
     <result column="log_rolegroup_operator_type" jdbcType="VARCHAR" property="logRolegroupOperatorType" />
     <result column="log_rolegroup_operator_eid" jdbcType="VARCHAR" property="logRolegroupOperatorEid" />
@@ -20,7 +20,7 @@
     delete from log_rolegroup
     where log_rolegroup_id = #{logRolegroupId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="scb.dev.sms.sm.pojo.Log_rolegroup">
+  <insert id="insert" parameterType="scb.dev.sms.log.pojo.RoleGroupLog">
     insert into log_rolegroup (log_rolegroup_id, log_rolegroup_operator_type, 
       log_rolegroup_operator_eid, log_rolegroup_operator_time
       )
@@ -28,7 +28,7 @@
       #{logRolegroupOperatorEid,jdbcType=VARCHAR}, #{logRolegroupOperatorTime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="scb.dev.sms.sm.pojo.Log_rolegroup">
+  <insert id="insertSelective" parameterType="scb.dev.sms.log.pojo.RoleGroupLog">
     insert into log_rolegroup
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="logRolegroupId != null">
@@ -59,7 +59,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="scb.dev.sms.sm.pojo.Log_rolegroup">
+  <update id="updateByPrimaryKeySelective" parameterType="scb.dev.sms.log.pojo.RoleGroupLog">
     update log_rolegroup
     <set>
       <if test="logRolegroupOperatorType != null">
@@ -74,7 +74,7 @@
     </set>
     where log_rolegroup_id = #{logRolegroupId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="scb.dev.sms.sm.pojo.Log_rolegroup">
+  <update id="updateByPrimaryKey" parameterType="scb.dev.sms.log.pojo.RoleGroupLog">
     update log_rolegroup
     set log_rolegroup_operator_type = #{logRolegroupOperatorType,jdbcType=VARCHAR},
       log_rolegroup_operator_eid = #{logRolegroupOperatorEid,jdbcType=VARCHAR},

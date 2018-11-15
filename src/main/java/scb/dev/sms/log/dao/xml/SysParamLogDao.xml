@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="scb.dev.sms.sm.dao.Log_sysparam">
-  <resultMap id="BaseResultMap" type="scb.dev.sms.sm.pojo.Log_sysparam">
+<mapper namespace="scb.dev.sms.log.dao.SysParamLogDao">
+  <resultMap id="BaseResultMap" type="scb.dev.sms.log.pojo.SysParamLog">
     <id column="log_sysparam_id" jdbcType="VARCHAR" property="logSysparamId" />
     <result column="log_sysparam_operator_type" jdbcType="VARCHAR" property="logSysparamOperatorType" />
     <result column="log_sysparam_operator_eid" jdbcType="VARCHAR" property="logSysparamOperatorEid" />
@@ -20,7 +20,7 @@
     delete from log_sysparam
     where log_sysparam_id = #{logSysparamId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="scb.dev.sms.sm.pojo.Log_sysparam">
+  <insert id="insert" parameterType="scb.dev.sms.log.pojo.SysParamLog">
     insert into log_sysparam (log_sysparam_id, log_sysparam_operator_type, 
       log_sysparam_operator_eid, log_sysparam_operator_time
       )
@@ -28,7 +28,7 @@
       #{logSysparamOperatorEid,jdbcType=VARCHAR}, #{logSysparamOperatorTime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="scb.dev.sms.sm.pojo.Log_sysparam">
+  <insert id="insertSelective" parameterType="scb.dev.sms.log.pojo.SysParamLog">
     insert into log_sysparam
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="logSysparamId != null">
@@ -59,7 +59,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="scb.dev.sms.sm.pojo.Log_sysparam">
+  <update id="updateByPrimaryKeySelective" parameterType="scb.dev.sms.log.pojo.SysParamLog">
     update log_sysparam
     <set>
       <if test="logSysparamOperatorType != null">
@@ -74,7 +74,7 @@
     </set>
     where log_sysparam_id = #{logSysparamId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="scb.dev.sms.sm.pojo.Log_sysparam">
+  <update id="updateByPrimaryKey" parameterType="scb.dev.sms.log.pojo.SysParamLog">
     update log_sysparam
     set log_sysparam_operator_type = #{logSysparamOperatorType,jdbcType=VARCHAR},
       log_sysparam_operator_eid = #{logSysparamOperatorEid,jdbcType=VARCHAR},

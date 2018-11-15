@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="scb.dev.sms.sm.dao.Log_departmentDao">
-  <resultMap id="BaseResultMap" type="scb.dev.sms.sm.pojo.Log_department">
+<mapper namespace="scb.dev.sms.log.dao.DepartmentLogDao">
+  <resultMap id="BaseResultMap" type="scb.dev.sms.log.pojo.DepartmentLog">
     <id column="log_department_id" jdbcType="VARCHAR" property="logDepartmentId" />
     <result column="log_department_operator_type" jdbcType="VARCHAR" property="logDepartmentOperatorType" />
     <result column="log_department_operator_eid" jdbcType="VARCHAR" property="logDepartmentOperatorEid" />
@@ -20,7 +20,7 @@
     delete from log_department
     where log_department_id = #{logDepartmentId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="scb.dev.sms.sm.pojo.Log_department">
+  <insert id="insert" parameterType="scb.dev.sms.log.pojo.DepartmentLog">
     insert into log_department (log_department_id, log_department_operator_type, 
       log_department_operator_eid, log_department_operator_time
       )
@@ -28,7 +28,7 @@
       #{logDepartmentOperatorEid,jdbcType=VARCHAR}, #{logDepartmentOperatorTime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="scb.dev.sms.sm.pojo.Log_department">
+  <insert id="insertSelective" parameterType="scb.dev.sms.log.pojo.DepartmentLog">
     insert into log_department
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="logDepartmentId != null">
@@ -59,7 +59,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="scb.dev.sms.sm.pojo.Log_department">
+  <update id="updateByPrimaryKeySelective" parameterType="scb.dev.sms.log.pojo.DepartmentLog">
     update log_department
     <set>
       <if test="logDepartmentOperatorType != null">
@@ -74,7 +74,7 @@
     </set>
     where log_department_id = #{logDepartmentId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="scb.dev.sms.sm.pojo.Log_department">
+  <update id="updateByPrimaryKey" parameterType="scb.dev.sms.log.pojo.DepartmentLog">
     update log_department
     set log_department_operator_type = #{logDepartmentOperatorType,jdbcType=VARCHAR},
       log_department_operator_eid = #{logDepartmentOperatorEid,jdbcType=VARCHAR},
