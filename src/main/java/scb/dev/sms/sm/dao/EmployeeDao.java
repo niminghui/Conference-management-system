@@ -1,5 +1,7 @@
 package scb.dev.sms.sm.dao;
 
+import java.util.List;
+
 import scb.dev.sms.sm.pojo.Employee;
 
 /**
@@ -20,7 +22,7 @@ public interface EmployeeDao {
 	 * @mbg.generated  2018-11-13
 	 */
 
-    int deleteByPrimaryKey(String employeeId);
+    int deleteByEmployeeId(String employeeId);
 
     /**
 	 * 插入一个员工
@@ -44,26 +46,93 @@ public interface EmployeeDao {
      *@return 查到的员工对象
      * @mbg.generated 2018-11-14
      */
-    Employee selectByPrimaryKey(String employeeId);
+    Employee selectByEmployeeId(String employeeId);
+    
+    /**
+     *根据员工姓名查询员工
+     *@param employeeName 员工姓名
+     *@return 查到的员工对象集合
+     * @mbg.generated 2018-11-14
+     */
+    List<Employee> selectByEmployeeName(String employeeName);
 
+    /**
+     *根据员工工号查询员工
+     *@param employeeWorkId 员工工号
+     *@return 查到的员工对象
+     * @mbg.generated 2018-11-14
+     */
+    Employee selectByEmployeeWorkId(String employeeWorkId);
+    
+    /**
+     *根据员工昵称查询员工
+     *@param employeeNickname 员工昵称
+     *@return 查到的员工对象集合
+     * @mbg.generated 2018-11-14
+     */
+    List<Employee> selectByEmployeeNickname(String employeeNickname);
+
+    /**
+     *根据员工职位编号查询员工
+     *@param employeePositionId 员工职位编号
+     *@return 查到的员工对象集合
+     * @mbg.generated 2018-11-14
+     */
+    List<Employee> selectByEmployeePositionId(String employeePositionId);
+
+    /**
+     *根据员工部门编号查询员工
+     *@param employeeDepartmentId 员工部门编号
+     *@return 查到的员工对象集合
+     * @mbg.generated 2018-11-14
+     */
+    List<Employee> selectByEmployeeDepartmentId(String employeeDepartmentId);
+
+    /**
+     *根据员工状态查询员工
+     *@param employeeStatus 员工状态
+     *@return 查到的员工对象集合
+     * @mbg.generated 2018-11-14
+     */
+    List<Employee> selectByEmployeeStatus(String employeeStatus);
+
+    /**
+     *根据员工公司查询员工
+     *@param employeeCompany 员工公司
+     *@return 查到的员工对象集合
+     * @mbg.generated 2018-11-14
+     */
+    List<Employee> selectByEmployeeCompany(String employeeCompany);
+
+    /**
+     *查询所有员工
+     *@return 查到的员工对象集合
+     * @mbg.generated 2018-11-14
+     */
+    List<Employee> selectAllEmployee();
+    
+    
+    
+    
+    
     /**
      *根据员工编号修改对象中指定字段
      *@param record 员工对象
      * @mbg.generated 2018-11-14
      */
-    int updateByPrimaryKeySelective(Employee record);
+    int updateByEmployeeIdSelective(Employee record);
 
     /**
      *根据员工编号修改记录中所有属性为对象中的属性值
      *@param record 员工对象
      * @mbg.generated 2018-11-14
      */
-    int updateByPrimaryKeyWithBLOBs(Employee record);
+    int updateByEmployeeIdWithBLOBs(Employee record);
 
     /**
      *根据员工编号修改记录中除员工照片外所有属性为对象中的属性值
      *@param record 员工对象
      * @mbg.generated 2018-11-14
      */
-    int updateByPrimaryKey(Employee record);
+    int updateByEmployeeId(Employee record);
 }

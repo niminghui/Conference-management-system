@@ -26,4 +26,31 @@ public interface IAccountService {
 	 * @return String 创建账户成功与否信息
 	 */
 	public String initAccount(String employee_id, String employee_nickname);
+
+	/**
+	 * 
+	 * Description: 登录时校验账户名称与密码的合法性.<br/>
+	 * 
+	 * @param String account_name,String account_pwd
+	 * @return String 校验结果信息
+	 */
+	public String validateAccount(String account_name, String account_pwd);
+
+	/**
+	 * 
+	 * Description: 修改账户名字.<br/>
+	 * 
+	 * @param String account_id, String new_accountName
+	 * @return String 修改结果信息
+	 */
+	public String updateAccountName(String account_id, String new_accountName);
+
+	/**
+	 * 
+	 * Description: 修改账户密码.<br/>
+	 * 
+	 * @param String account_id, String new_accountName
+	 * @return String 修改结果信息
+	 */
+	public String updateAccountPwd(String account_id, String new_pwd);
 }

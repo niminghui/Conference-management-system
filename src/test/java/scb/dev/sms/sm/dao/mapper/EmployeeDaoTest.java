@@ -1,5 +1,6 @@
 package scb.dev.sms.sm.dao.mapper;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import org.apache.log4j.Logger;
@@ -11,6 +12,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.alibaba.fastjson.JSONObject;
 
 import scb.dev.sms.sm.dao.EmployeeDao;
 import scb.dev.sms.sm.pojo.Employee;
@@ -44,12 +47,12 @@ public class EmployeeDaoTest {
 
 	
 	@Test
-	public void testDeleteByPrimaryKey() {
+	public void testDeleteByEmployeeId() {
 
 		logger.info("insert");
 		try {
 			// 断言删除行数为1
-			Assert.assertEquals(1, mapper.deleteByPrimaryKey("db5c8659e7b111e8b8cd525400c2a9d6"));
+			Assert.assertEquals(1, mapper.deleteByEmployeeId("db5c8659e7b111e8b8cd525400c2a9d6"));
 			logger.info("success");
 		} catch (Exception e) {
 			logger.info("fail");
@@ -76,9 +79,9 @@ public class EmployeeDaoTest {
 	@Test
 	public void testInsertSelective() {
 
-		Employee employee = new Employee(TokenIDFactory.getUUID(), "田冬菊", "Linda", "女",
+		Employee employee = new Employee(TokenIDFactory.getUUID(), "陈丽", "Linda", "女",
 				"127ab7d18903fe0916ac74df896cdac6", "0c8723ad251acd5225fbc56743d813ad", "001", "渣打", "1467312",
-				"1467312", "1592364");
+				"1467312", "1592378");
 		logger.info("InsertSelective");
 		try {
 			// 断言修改行数为1
@@ -90,11 +93,47 @@ public class EmployeeDaoTest {
 	}
 
 	@Test
-	public void testSelectByPrimaryKey() {
-		logger.info("SelectByPrimaryKey");
+	public void testSelectByEmployeeId() {
+		logger.info("SelectByEmployeeId");
 		try {
 			// 断言查询不为空
-			assertNotNull(mapper.selectByPrimaryKey("db4726b7e7b111e8b8cd525400c2a9d6"));
+			assertNotNull(mapper.selectByEmployeeId("5278b78c070d4a28a930ea4975eaaee7"));
+			logger.info("success");
+		} catch (Exception e) {
+			logger.info("fail");
+		}
+	}
+	
+	@Test
+	public void testSelectByEmployeeWorkId() {
+		logger.info("SelectByEmployeeWorkId");
+		try {
+			// 断言查询不为空
+			assertNotNull(mapper.selectByEmployeeWorkId("1592368"));
+			logger.info("success");
+		} catch (Exception e) {
+			logger.info("fail");
+		}
+	}
+	
+	@Test
+	public void testSelectByEmployeeName() {
+		logger.info("SelectByEmployeeName");
+		try {
+			// 断言查询不为空
+			assertNotNull(mapper.selectByEmployeeName("陈丽"));
+			logger.info("success");
+		} catch (Exception e) {
+			logger.info("fail");
+		}
+	}
+	
+	@Test
+	public void testSelectByEmployeeNickname() {
+		logger.info("selectByEmployeeNickname");
+		try {
+			// 断言查询不为空
+			assertNotNull(mapper.selectByEmployeeNickname("Mary"));
 			logger.info("success");
 		} catch (Exception e) {
 			logger.info("fail");
@@ -102,15 +141,80 @@ public class EmployeeDaoTest {
 	}
 
 	@Test
-	public void testUpdateByPrimaryKeySelective() {
+	public void testSelectByEmployeePositionId() {
+		logger.info("SelectByEmployeeName");
+		try {
+			// 断言查询不为空
+			assertNotNull(mapper.selectByEmployeePositionId("127ab7d18903fe0916ac74df896cdac6"));
+			assertEquals(8, mapper.selectByEmployeePositionId("127ab7d18903fe0916ac74df896cdac6").size());
+			logger.info("success");
+		} catch (Exception e) {
+			logger.info("fail");
+		}
+	}
 
-		Employee employee = new Employee(TokenIDFactory.getUUID(), "田冬菊", "Linda", "女",
+	@Test
+	public void testSelectByEmployeeDepartmentId() {
+		logger.info("selectByEmployeeDepartmentId");
+		try {
+			// 断言查询不为空
+			assertNotNull(mapper.selectByEmployeeDepartmentId("0c8723ad251acd5225fbc56743d813ad"));
+			assertEquals(8, mapper.selectByEmployeeDepartmentId("0c8723ad251acd5225fbc56743d813ad").size());
+			logger.info("success");
+		} catch (Exception e) {
+			logger.info("fail");
+		}
+	}
+
+	@Test
+	public void testSelectByEmployeeStatus() {
+		logger.info("selectByEmployeeStatus");
+		try {
+			// 断言查询不为空
+			assertNotNull(mapper.selectByEmployeeStatus("001"));
+			assertEquals(7, mapper.selectByEmployeeStatus("001").size());
+			logger.info("success");
+		} catch (Exception e) {
+			logger.info("fail");
+		}
+	}
+
+	@Test
+	public void testSelectByEmployeeCompany() {
+		logger.info("selectByEmployeeCompany");
+		try {
+			// 断言查询不为空
+			assertNotNull(mapper.selectByEmployeeCompany("渣打"));
+			assertEquals(8, mapper.selectByEmployeeCompany("渣打").size());
+			logger.info("success");
+		} catch (Exception e) {
+			logger.info("fail");
+		}
+	}
+
+	@Test
+	public void testSelectAllEmployee() {
+		logger.info("selectAllEmployee");
+		try {
+			// 断言查询不为空
+			assertNotNull(mapper.selectAllEmployee());
+			assertEquals(8, mapper.selectAllEmployee().size());
+			logger.info("success");
+		} catch (Exception e) {
+			logger.info("fail");
+		}
+	}
+
+	@Test
+	public void testUpdateByEmployeeIdSelective() {
+
+		Employee employee = new Employee("5278b78c070d4a28a930ea4975eaaee7", "田冬菊", "Linda", "女",
 				"127ab7d18903fe0916ac74df896cdac6", "0c8723ad251acd5225fbc56743d813ad", "002", "渣打", "1467312",
 				"1467312", "1592364");
 		logger.info("UpdateByPrimaryKeySelective");
 		try {
 			// 断言修改行数为1
-			Assert.assertEquals(1, mapper.updateByPrimaryKeySelective(employee));
+			Assert.assertEquals(1, mapper.updateByEmployeeIdSelective(employee));
 			logger.info("success");
 		} catch (Exception e) {
 			logger.info("fail");
@@ -118,15 +222,15 @@ public class EmployeeDaoTest {
 	}
 
 	@Test
-	public void testUpdateByPrimaryKeyWithBLOBs() {
+	public void testUpdateByEmployeeIdWithBLOBs() {
 
-		Employee employee = new Employee(TokenIDFactory.getUUID(), "田冬菊", "Linda", "女",
+		Employee employee = new Employee("5278b78c070d4a28a930ea4975eaaee7", "田冬菊", "Linda", "女",
 				"127ab7d18903fe0916ac74df896cdac6", "0c8723ad251acd5225fbc56743d813ad", "003", "渣打", "1467312",
 				"1467312", "1592364");
 		logger.info("UpdateByPrimaryKeyWithBLOBs");
 		try {
 			// 断言修改行数为1
-			Assert.assertEquals(1, mapper.updateByPrimaryKeyWithBLOBs(employee));
+			Assert.assertEquals(1, mapper.updateByEmployeeIdWithBLOBs(employee));
 			logger.info("success");
 		} catch (Exception e) {
 			logger.info("fail");
@@ -134,20 +238,21 @@ public class EmployeeDaoTest {
 	}
 
 	@Test
-	public void testUpdateByPrimaryKey() {
+	public void testUpdateByEmployeeId() {
 
-		Employee employee = new Employee(TokenIDFactory.getUUID(), "田冬菊", "Linda", "女",
+		Employee employee = new Employee("5278b78c070d4a28a930ea4975eaaee7", "田冬菊", "Linda", "女",
 				"127ab7d18903fe0916ac74df896cdac6", "0c8723ad251acd5225fbc56743d813ad", "004", "渣打", "1467312",
 				"1467312", "1592364");
 		logger.info("UpdateByPrimaryKey");
 		try {
 			// 断言修改行数为1
-			Assert.assertEquals(1, mapper.updateByPrimaryKey(employee));
+			Assert.assertEquals(1, mapper.updateByEmployeeId(employee));
 			logger.info("success");
 		} catch (Exception e) {
 			logger.info("fail");
 		}
 
 	}
+	
 
 }
