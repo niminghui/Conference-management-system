@@ -367,5 +367,11 @@ public class Employee implements Serializable{
 		this.employeeCreatedUser = employeeCreatedUser;
 		this.employeeWorkId = employeeWorkId;
 	}
+	/**
+	 * 默认构造函数
+	 * Creates a new instance of Employee.
+	 *
+	 */
+	public Employee() {}
     
 }

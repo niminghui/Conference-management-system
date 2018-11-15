@@ -28,7 +28,7 @@
   <sql id="Blob_Column_List">
     employee_image
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+  <select id="selectByEmployeeId" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
     select 
     <include refid="Base_Column_List" />
     ,
@@ -36,7 +36,70 @@
     from sm_employee
     where employee_id = #{employeeId,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+  <select id="selectByEmployeeName" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+  	select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sm_employee
+    where employee_name = #{employeeName,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByEmployeeWorkId" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+  	select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sm_employee
+    where employee_work_id = #{employeeWorkId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByEmployeeNickname" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+  	select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sm_employee
+    where employee_nickname = #{employeeNickname,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByEmployeePositionId" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+  	select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sm_employee
+    where position_id = #{employeePositionId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByEmployeeDepartmentId" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+  	select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sm_employee
+    where department_id = #{employeeDepartmentId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByEmployeeStatus" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+  	select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sm_employee
+    where employee_status = #{employeeStatus,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByEmployeeCompany" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+  	select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sm_employee
+    where employee_company = #{employeeCompany,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAllEmployee" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+  	select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sm_employee
+  </select>
+  <delete id="deleteByEmployeeId" parameterType="java.lang.String">
     delete from sm_employee
     where employee_id = #{employeeId,jdbcType=VARCHAR}
   </delete>
@@ -151,7 +214,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="scb.dev.sms.sm.pojo.Employee">
+  <update id="updateByEmployeeIdSelective" parameterType="scb.dev.sms.sm.pojo.Employee">
     update sm_employee
     <set>
       <if test="employeeName != null">
@@ -199,7 +262,7 @@
     </set>
     where employee_id = #{employeeId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="scb.dev.sms.sm.pojo.Employee">
+  <update id="updateByEmployeeIdWithBLOBs" parameterType="scb.dev.sms.sm.pojo.Employee">
     update sm_employee
     set employee_name = #{employeeName,jdbcType=VARCHAR},
       employee_nickname = #{employeeNickname,jdbcType=VARCHAR},
@@ -217,7 +280,7 @@
       employee_image = #{employeeImage,jdbcType=LONGVARBINARY}
     where employee_id = #{employeeId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="scb.dev.sms.sm.pojo.Employee">
+  <update id="updateByEmployeeId" parameterType="scb.dev.sms.sm.pojo.Employee">
     update sm_employee
     set employee_name = #{employeeName,jdbcType=VARCHAR},
       employee_nickname = #{employeeNickname,jdbcType=VARCHAR},
