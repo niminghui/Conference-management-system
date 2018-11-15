@@ -35,7 +35,7 @@ public class Account implements Serializable {
 	private String accountName;
 
 	/**
-	 * 账户密码
+	 * 账户密码 -> 密码以加密形式存放在数据库中， 当进行密码匹对时，将用户输入的密码进行同样的加密，然后与数据库中保存的加密密码进行比对
 	 */
 	private String accountPassword;
 
