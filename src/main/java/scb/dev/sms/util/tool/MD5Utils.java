@@ -12,7 +12,7 @@ import java.security.MessageDigest;
 
 /**
  * ClassName: MD5Utils <br/>
- * Description: TODO MD5 encryption tool class. <br/>
+ * Description: MD5 encryption tool class. <br/>
  * <br/>
  *
  * @author Minghui.Ni

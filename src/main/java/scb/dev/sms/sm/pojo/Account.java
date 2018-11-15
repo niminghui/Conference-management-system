@@ -1,8 +1,29 @@
 package scb.dev.sms.sm.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Account {
+import org.springframework.stereotype.Component;
+
+/**
+ * 
+ * ClassName: Account <br/>
+ * Description: Account Entity. <br/>
+ * <br/>
+ *
+ * @author Minghui.Ni
+ * @version V1.0
+ * @since JDK 1.8 date: 2018年11月15日 上午9:15:45 <br/>
+ */
+@Component
+public class Account implements Serializable {
+	/**
+	 * serialVersionUID:serialVersionUID.
+	 * 
+	 * @since JDK 1.8
+	 */
+	private static final long serialVersionUID = 8325668433070357674L;
+
 	/**
 	 * 账户编号
 	 */
