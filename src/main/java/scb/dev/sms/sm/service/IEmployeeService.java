@@ -3,8 +3,6 @@ package scb.dev.sms.sm.service;
 import java.util.List;
 
 import scb.dev.sms.sm.pojo.Employee;
-import scb.dev.sms.sm.pojo.EmployeeAddress;
-import scb.dev.sms.sm.pojo.EmployeeContactInfo;
 /**
  * ClassName: IEmployeeService <br/>
  * Description: 员工服务层 <br/><br/>
@@ -26,9 +24,6 @@ public interface IEmployeeService {
 	 * editEmployee:编辑员工信息. <br/>
 	 * @param employee:要编辑的员工信息
 	 * @return 编辑结果信息
-	 *
-	 * @author ryan.li
-	 * @since JDK 1.8
 	 */
 	String editEmployee(Employee employee);
 	
@@ -36,8 +31,50 @@ public interface IEmployeeService {
 	 * queryAllEmployee:查询全部员工. <br/>
 	 * @return 所有员工信息集合
 	 *
-	 * @author ryan.li
-	 * @since JDK 1.8
 	 */
 	List<Employee> queryAllEmployee();
+	
+	/**
+	 * queryByEmployeeId:根据员工编号查询员工. <br/>
+	 * @param employeeId 
+	 * @return 员工对象
+	 */
+	Employee queryByEmployeeId(String employeeId);
+	
+	/**
+	 * queryByEmployeeName:根据员工姓名查询员工. <br/>
+	 * @param employeeName 
+	 * @return 员工对象集合
+	 */
+	List<Employee> queryByEmployeeName(String employeeName);
+	
+	/**
+	 * queryByEmployeeWorkId:根据员工工号查询员工. <br/>
+	 * @param employeeWorkId
+	 * @return 员工对象
+	 */
+	Employee queryByEmployeeWorkId(String employeeWorkId);
+	
+	/**
+	 * queryByEmployeePositionId:根据员工职位编号查询员工. <br/>
+	 * @param employeePositionId
+	 * @return 员工对象集合
+	 */
+	List<Employee> queryByEmployeePositionId(String employeePositionId);
+	
+	/**
+	 * queryByEmployeeDepartmentId:根据员工部门编号查询员工. <br/>
+	 * @param employeeDepartmentId
+	 * @return 员工对象集合
+	 */
+	List<Employee> queryByEmployeeDepartmentId(String employeeDepartmentId);
+	
+	/**
+	 * queryByEmployeeStatus:根据员工状态查询员工. <br/>
+	 * @param employeeStatus
+	 * @return 员工对象集合
+	 */
+	List<Employee> queryByEmployeeStatus(String employeeStatus);
+	
+	
 }

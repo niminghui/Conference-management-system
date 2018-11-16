@@ -41,14 +41,14 @@
     employee_created_user, employee_created_time, employee_work_id
   </sql>
   <sql id="Join_Column_List">
-  	e.employee_id as employee_id, employee_name, employee_nickname, employee_gender, position_id, department_id, 
+  	e.employee_id as employee_id, employee_name, employee_nickname, employee_gender, p.position_name as position_id, d.department_name as department_id, 
     employee_status, employee_company, employee_entrytime, employee_updated_user, employee_updated_time, 
     employee_created_user, employee_created_time, employee_work_id,employee_image
   </sql>
   <sql id="Blob_Column_List">
     employee_image
   </sql>
-  <select id="selectAllEmployeeWithAddAndCon" parameterType="java.lang.String" resultMap="employeeWithAddressAndContact">
+  <select id="selectAllEmployeeWithAddAndCon" resultMap="employeeWithAddressAndContact">
   	select
   	<include refid="Join_Column_List"></include>
   	,
@@ -57,6 +57,99 @@
   	from sm_employee e
   	inner join sm_employee_address a on e.employee_id=a.employee_id
   	inner join sm_employee_contactinfo c on c.employee_id=e.employee_id
+  	inner join sm_position p on p.position_id=e.position_id
+  	inner join sm_department d on d.department_id=e.department_id
+  	where employee_status='001'
+  	order by employee_created_time desc
+  </select>
+  <select id="selectByEmployeeNameWithAddAndCon" parameterType="java.lang.String" resultMap="employeeWithAddressAndContact">
+  	select
+  	<include refid="Join_Column_List"></include>
+  	,
+  	employee_landline,employee_phone,employee_email,
+  	employee_address,employee_nativePlace
+  	from sm_employee e
+  	inner join sm_employee_address a on e.employee_id=a.employee_id
+  	inner join sm_employee_contactinfo c on c.employee_id=e.employee_id
+  	inner join sm_position p on p.position_id=e.position_id
+  	inner join sm_department d on d.department_id=e.department_id
+  	where employee_status='001'
+  	and employee_name=#{employeeName,jdbcType=VARCHAR}
+  	order by employee_created_time desc
+  </select>
+  <select id="selectByEmployeeIdWithAddAndCon" parameterType="java.lang.String" resultMap="employeeWithAddressAndContact">
+  	select
+  	<include refid="Join_Column_List"></include>
+  	,
+  	employee_landline,employee_phone,employee_email,
+  	employee_address,employee_nativePlace
+  	from sm_employee e
+  	inner join sm_employee_address a on e.employee_id=a.employee_id
+  	inner join sm_employee_contactinfo c on c.employee_id=e.employee_id
+  	inner join sm_position p on p.position_id=e.position_id
+  	inner join sm_department d on d.department_id=e.department_id
+  	where employee_status='001'
+  	and e.employee_id=#{employeeId,jdbcType=VARCHAR}
+  	order by employee_created_time desc
+  </select>
+  <select id="selectByEmployeeWorkIdWithAddAndCon" parameterType="java.lang.String" resultMap="employeeWithAddressAndContact">
+  	select
+  	<include refid="Join_Column_List"></include>
+  	,
+  	employee_landline,employee_phone,employee_email,
+  	employee_address,employee_nativePlace
+  	from sm_employee e
+  	inner join sm_employee_address a on e.employee_id=a.employee_id
+  	inner join sm_employee_contactinfo c on c.employee_id=e.employee_id
+  	inner join sm_position p on p.position_id=e.position_id
+  	inner join sm_department d on d.department_id=e.department_id
+  	where employee_status='001'
+  	and employee_work_id=#{employeeWorkId,jdbcType=VARCHAR}
+  	order by employee_created_time desc
+  </select>
+  <select id="selectByEmployeePositionIdWithAddAndCon" parameterType="java.lang.String" resultMap="employeeWithAddressAndContact">
+  	select
+  	<include refid="Join_Column_List"></include>
+  	,
+  	employee_landline,employee_phone,employee_email,
+  	employee_address,employee_nativePlace
+  	from sm_employee e
+  	inner join sm_employee_address a on e.employee_id=a.employee_id
+  	inner join sm_employee_contactinfo c on c.employee_id=e.employee_id
+  	inner join sm_position p on p.position_id=e.position_id
+  	inner join sm_department d on d.department_id=e.department_id
+  	where employee_status='001'
+  	and e.position_id=#{employeePositionId,jdbcType=VARCHAR}
+  	order by employee_created_time desc
+  </select>
+  <select id="selectByEmployeeDepartmentIdWithAddAndCon" parameterType="java.lang.String" resultMap="employeeWithAddressAndContact">
+  	select
+  	<include refid="Join_Column_List"></include>
+  	,
+  	employee_landline,employee_phone,employee_email,
+  	employee_address,employee_nativePlace
+  	from sm_employee e
+  	inner join sm_employee_address a on e.employee_id=a.employee_id
+  	inner join sm_employee_contactinfo c on c.employee_id=e.employee_id
+  	inner join sm_position p on p.position_id=e.position_id
+  	inner join sm_department d on d.department_id=e.department_id
+  	where employee_status='001'
+  	and e.department_id=#{employeeDepartmentId,jdbcType=VARCHAR}
+  	order by employee_created_time desc
+  </select>
+  <select id="selectByEmployeeStatusWithAddAndCon" parameterType="java.lang.String" resultMap="employeeWithAddressAndContact">
+  	select
+  	<include refid="Join_Column_List"></include>
+  	,
+  	employee_landline,employee_phone,employee_email,
+  	employee_address,employee_nativePlace
+  	from sm_employee e
+  	inner join sm_employee_address a on e.employee_id=a.employee_id
+  	inner join sm_employee_contactinfo c on c.employee_id=e.employee_id
+  	inner join sm_position p on p.position_id=e.position_id
+  	inner join sm_department d on d.department_id=e.department_id
+  	where employee_status=#{employeeStatus,jdbcType=VARCHAR}
+  	order by employee_created_time desc
   </select>
   <select id="selectByEmployeeId" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
     select 

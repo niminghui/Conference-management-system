@@ -117,11 +117,35 @@ public class EmployeeDaoTest {
 	}
 	
 	@Test
+	public void testSelectByEmployeeWorkIdWithAddAndCon() {
+		logger.info("SelectByEmployeeWorkId");
+		try {
+			// 断言查询不为空
+			assertNotNull(mapper.selectByEmployeeWorkIdWithAddAndCon("1592368"));
+			logger.info("success");
+		} catch (Exception e) {
+			logger.info("fail");
+		}
+	}
+	
+	@Test
 	public void testSelectByEmployeeName() {
 		logger.info("SelectByEmployeeName");
 		try {
 			// 断言查询不为空
 			assertNotNull(mapper.selectByEmployeeName("陈丽"));
+			logger.info("success");
+		} catch (Exception e) {
+			logger.info("fail");
+		}
+	}
+	
+	@Test
+	public void testSelectByEmployeeNameWithAddAndCon() {
+		logger.info("SelectByEmployeeName");
+		try {
+			// 断言查询不为空
+			assertNotNull(mapper.selectByEmployeeNameWithAddAndCon("陈丽"));
 			logger.info("success");
 		} catch (Exception e) {
 			logger.info("fail");
@@ -146,7 +170,20 @@ public class EmployeeDaoTest {
 		try {
 			// 断言查询不为空
 			assertNotNull(mapper.selectByEmployeePositionId("127ab7d18903fe0916ac74df896cdac6"));
-			assertEquals(8, mapper.selectByEmployeePositionId("127ab7d18903fe0916ac74df896cdac6").size());
+			assertEquals(10, mapper.selectByEmployeePositionId("127ab7d18903fe0916ac74df896cdac6").size());
+			logger.info("success");
+		} catch (Exception e) {
+			logger.info("fail");
+		}
+	}
+	
+	@Test
+	public void testSelectByEmployeePositionIdWithAddAndCon() {
+		logger.info("SelectByEmployeeName");
+		try {
+			// 断言查询不为空
+			assertNotNull(mapper.selectByEmployeePositionIdWithAddAndCon("127ab7d18903fe0916ac74df896cdac6"));
+			assertEquals(2, mapper.selectByEmployeePositionIdWithAddAndCon("127ab7d18903fe0916ac74df896cdac6").size());
 			logger.info("success");
 		} catch (Exception e) {
 			logger.info("fail");
@@ -159,12 +196,26 @@ public class EmployeeDaoTest {
 		try {
 			// 断言查询不为空
 			assertNotNull(mapper.selectByEmployeeDepartmentId("0c8723ad251acd5225fbc56743d813ad"));
-			assertEquals(8, mapper.selectByEmployeeDepartmentId("0c8723ad251acd5225fbc56743d813ad").size());
+			assertEquals(10, mapper.selectByEmployeeDepartmentId("0c8723ad251acd5225fbc56743d813ad").size());
 			logger.info("success");
 		} catch (Exception e) {
 			logger.info("fail");
 		}
 	}
+	
+	@Test
+	public void testSelectByEmployeeDepartmentIdWithAddAndCon() {
+		logger.info("selectByEmployeeDepartmentId");
+		try {
+			// 断言查询不为空
+			assertNotNull(mapper.selectByEmployeeDepartmentIdWithAddAndCon("0c8723ad251acd5225fbc56743d813ad"));
+			assertEquals(2, mapper.selectByEmployeeDepartmentIdWithAddAndCon("0c8723ad251acd5225fbc56743d813ad").size());
+			logger.info("success");
+		} catch (Exception e) {
+			logger.info("fail");
+		}
+	}
+
 
 	@Test
 	public void testSelectByEmployeeStatus() {
@@ -172,13 +223,26 @@ public class EmployeeDaoTest {
 		try {
 			// 断言查询不为空
 			assertNotNull(mapper.selectByEmployeeStatus("001"));
-			assertEquals(7, mapper.selectByEmployeeStatus("001").size());
+			assertEquals(9, mapper.selectByEmployeeStatus("001").size());
 			logger.info("success");
 		} catch (Exception e) {
 			logger.info("fail");
 		}
 	}
 
+	@Test
+	public void testSelectByEmployeeStatusWithAddAndCon() {
+		logger.info("selectByEmployeeStatus");
+		try {
+			// 断言查询不为空
+			assertNotNull(mapper.selectByEmployeeStatusWithAddAndCon("001"));
+			assertEquals(2, mapper.selectByEmployeeStatusWithAddAndCon("001").size());
+			logger.info("success");
+		} catch (Exception e) {
+			logger.info("fail");
+		}
+	}
+	
 	@Test
 	public void testSelectByEmployeeCompany() {
 		logger.info("selectByEmployeeCompany");
@@ -205,6 +269,7 @@ public class EmployeeDaoTest {
 			e.printStackTrace();
 		}
 	}
+	
 	
 	@Test
 	public void testSelectAllEmployee() {
