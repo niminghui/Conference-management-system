@@ -14,7 +14,7 @@ import scb.dev.sms.sm.pojo.Menu;
 
 /**
  * ClassName: MenuCompare <br/>
- * Description: TODO ADD REASON(可选). <br/>
+ * Description: MenuCompare. <br/>
  * <br/>
  *
  * @author Minghui.Ni

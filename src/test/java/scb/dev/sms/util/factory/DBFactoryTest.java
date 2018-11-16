@@ -14,7 +14,7 @@ import org.junit.Test;
 
 /**
  * ClassName: DBFactoryTest <br/>
- * Description: TODO ADD REASON(可选). <br/>
+ * Description: DBFactoryTest. <br/>
  * <br/>
  *
  * @author Minghui.Ni
@@ -31,16 +31,12 @@ public class DBFactoryTest {
 		try {
 			DBFactory.getConnection();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
