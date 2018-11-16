@@ -94,7 +94,15 @@ public class Employee implements Serializable{
      * 职员照片
      */
     private byte[] employeeImage;
-
+    /**
+     * 职员地址
+     */
+    private EmployeeAddress employeeAddress;
+    /**
+     * 职员信息
+     */
+    private EmployeeContactInfo employeeContactInfo;
+    
     /**
      * 职员编号
      * @return employee_id 职员编号
@@ -336,6 +344,38 @@ public class Employee implements Serializable{
     }
     
     /**
+     * 职员地址
+     * @return employeeAddress 职员地址
+     */
+    public final EmployeeAddress getEmployeeAddress() {
+		return employeeAddress;
+	}
+    
+    /**
+     * 职员地址
+     * @param employeeAddress 职员地址
+     */
+	public final void setEmployeeAddress(EmployeeAddress employeeAddress) {
+		this.employeeAddress = employeeAddress;
+	}
+	
+	/**
+     * 职员联系方式
+     * @return employeeContactInfo 职员联系方式
+     */
+	public final EmployeeContactInfo getEmployeeContactInfo() {
+		return employeeContactInfo;
+	}
+	
+	 /**
+     * 职员联系方式
+     * @param employeeContactInfo 职员联系方式
+     */
+	public final void setEmployeeContactInfo(EmployeeContactInfo employeeContactInfo) {
+		this.employeeContactInfo = employeeContactInfo;
+	}
+
+	/**
      *  构造方法
      * Creates a new instance of Employee.
      *

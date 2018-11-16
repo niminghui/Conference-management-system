@@ -112,7 +112,7 @@ public interface EmployeeDao {
     List<Employee> selectAllEmployee();
     
     
-    
+    List<Employee> selectAllEmployeeWithAddAndCon();
     
     
     /**

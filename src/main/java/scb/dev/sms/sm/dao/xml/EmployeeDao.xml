@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="scb.dev.sms.sm.dao.EmployeeDao">
+  <resultMap type="scb.dev.sms.sm.pojo.EmployeeAddress" id="AddressResult">
+		<id property="employeeId" column="employee_id"/>
+		<result property="employeeAddress" column="employee_address"/>
+		<result property="employeeNativeplace" column="employee_nativePlace"/>
+  </resultMap>
+  <resultMap type="scb.dev.sms.sm.pojo.EmployeeContactInfo" id="ContactInfoResult">
+		<id property="employeeId" column="employee_id"/>
+		<result property="employeeLandline" column="employee_landline"/>
+		<result property="employeePhone" column="employee_phone"/>
+		<result property="employeeEmail" column="employee_email"/>
+  </resultMap>
   <resultMap id="BaseResultMap" type="scb.dev.sms.sm.pojo.Employee">
     <id column="employee_id" jdbcType="VARCHAR" property="employeeId" />
     <result column="employee_name" jdbcType="VARCHAR" property="employeeName" />
@@ -17,6 +28,10 @@
     <result column="employee_created_time" jdbcType="TIMESTAMP" property="employeeCreatedTime" />
     <result column="employee_work_id" jdbcType="CHAR" property="employeeWorkId" />
   </resultMap>
+  <resultMap extends="ResultMapWithBLOBs" id="employeeWithAddressAndContact" type="scb.dev.sms.sm.pojo.Employee">
+  	<association property="employeeAddress" resultMap="AddressResult" />
+  	<association property="employeeContactInfo" resultMap="ContactInfoResult" />
+  </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="scb.dev.sms.sm.pojo.Employee">
     <result column="employee_image" jdbcType="LONGVARBINARY" property="employeeImage" />
   </resultMap>
@@ -25,9 +40,24 @@
     employee_status, employee_company, employee_entrytime, employee_updated_user, employee_updated_time, 
     employee_created_user, employee_created_time, employee_work_id
   </sql>
+  <sql id="Join_Column_List">
+  	e.employee_id as employee_id, employee_name, employee_nickname, employee_gender, position_id, department_id, 
+    employee_status, employee_company, employee_entrytime, employee_updated_user, employee_updated_time, 
+    employee_created_user, employee_created_time, employee_work_id,employee_image
+  </sql>
   <sql id="Blob_Column_List">
     employee_image
   </sql>
+  <select id="selectAllEmployeeWithAddAndCon" parameterType="java.lang.String" resultMap="employeeWithAddressAndContact">
+  	select
+  	<include refid="Join_Column_List"></include>
+  	,
+  	employee_landline,employee_phone,employee_email,
+  	employee_address,employee_nativePlace
+  	from sm_employee e
+  	inner join sm_employee_address a on e.employee_id=a.employee_id
+  	inner join sm_employee_contactinfo c on c.employee_id=e.employee_id
+  </select>
   <select id="selectByEmployeeId" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
     select 
     <include refid="Base_Column_List" />
