@@ -193,6 +193,20 @@ public class EmployeeDaoTest {
 	}
 
 	@Test
+	public void testSelectAllEmployeeWithAddAndCon() {
+		logger.info("selectAllEmployee");
+		try {
+			// 断言查询不为空
+			assertNotNull(mapper.selectAllEmployeeWithAddAndCon());
+			//assertEquals(8, mapper.selectAllEmployee().size());
+			System.out.println(JSONObject.toJSONString(mapper.selectAllEmployeeWithAddAndCon()));
+			logger.info("success");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
 	public void testSelectAllEmployee() {
 		logger.info("selectAllEmployee");
 		try {
@@ -209,7 +223,7 @@ public class EmployeeDaoTest {
 	public void testUpdateByEmployeeIdSelective() {
 
 		Employee employee = new Employee("5278b78c070d4a28a930ea4975eaaee7", "田冬菊", "Linda", "女",
-				"127ab7d18903fe0916ac74df896cdac6", "0c8723ad251acd5225fbc56743d813ad", "002", "渣打", "1467312",
+				"127ab7d18903fe0916ac74df896cdac6", "0c8723ad251acd5225fbc56743d813ad", "002", "华钦", "1467312",
 				"1467312", "1592364");
 		logger.info("UpdateByPrimaryKeySelective");
 		try {

@@ -101,4 +101,42 @@ public class EmployeeContactInfo implements Serializable{
     public void setEmployeeEmail(String employeeEmail) {
         this.employeeEmail = employeeEmail;
     }
+    
+    /**
+     * Creates a new instance of EmployeeContactInfo.
+     * 无参构造方法
+     */
+    public EmployeeContactInfo() {}
+	
+    /**
+	 * Creates a new instance of EmployeeContactInfo.
+	 * 有参构造方法
+	 * @param employeeLandline
+	 * @param employeePhone
+	 * @param employeeEmail
+	 */
+	public EmployeeContactInfo(String employeeLandline, String employeePhone, String employeeEmail) {
+		super();
+		this.employeeLandline = employeeLandline;
+		this.employeePhone = employeePhone;
+		this.employeeEmail = employeeEmail;
+	}
+
+	/**
+	 * Creates a new instance of EmployeeContactInfo.
+	 * 有参构造方法
+	 * @param employeeId
+	 * @param employeeLandline
+	 * @param employeePhone
+	 * @param employeeEmail
+	 */
+	public EmployeeContactInfo(String employeeId, String employeeLandline, String employeePhone, String employeeEmail) {
+		super();
+		this.employeeId = employeeId;
+		this.employeeLandline = employeeLandline;
+		this.employeePhone = employeePhone;
+		this.employeeEmail = employeeEmail;
+	}
+    
+    
 }

@@ -1,8 +1,9 @@
 package scb.dev.sms.sm.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class RoleGroupGrant {
+public class RoleGroupGrant implements Serializable{
     /**
      * 角色组编号
      */

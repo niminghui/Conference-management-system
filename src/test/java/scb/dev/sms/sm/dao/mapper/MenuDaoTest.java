@@ -9,15 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import scb.dev.sms.sm.dao.MenuMapper;
+import scb.dev.sms.sm.dao.MenuDao;
 import scb.dev.sms.sm.pojo.Menu;
 
 @ContextConfiguration("/applicationContext.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
-public class MenuMapperTest {
+public class MenuDaoTest {
 
 	@Autowired
-	private MenuMapper menuMapper;
+	private MenuDao menuMapper;
 
 	@Test
 	public void insert() {
@@ -32,7 +32,7 @@ public class MenuMapperTest {
 
 	@Test
 	public void select() {
-		assertEquals(menuMapper.selectByPrimaryKey("a26c545ce7c011e8b8cd525400c2a9d6").getMenuName(), "联系我们");
+		assertEquals(menuMapper.selectByPrimaryKey("284a37d6e7c111e8b8cd525400c2a9d6").getMenuName(), "发起会议");
 	}
 
 	@Test

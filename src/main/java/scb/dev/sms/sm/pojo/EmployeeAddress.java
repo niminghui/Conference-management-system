@@ -87,4 +87,36 @@ public class EmployeeAddress implements Serializable {
 	public void setEmployeeNativeplace(String employeeNativeplace) {
 		this.employeeNativeplace = employeeNativeplace;
 	}
+	
+	/**
+	 * Creates a new instance of EmployeeAddress.
+	 * 有参构造方法
+	 * @param employeeAddress
+	 * @param employeeNativeplace
+	 */
+	public EmployeeAddress(String employeeAddress, String employeeNativeplace) {
+		super();
+		this.employeeAddress = employeeAddress;
+		this.employeeNativeplace = employeeNativeplace;
+	}
+	/**
+	 * Creates a new instance of EmployeeAddress.
+	 * 有参构造方法
+	 * @param employeeId
+	 * @param employeeAddress
+	 * @param employeeNativeplace
+	 */
+	public EmployeeAddress(String employeeId, String employeeAddress, String employeeNativeplace) {
+		super();
+		this.employeeId = employeeId;
+		this.employeeAddress = employeeAddress;
+		this.employeeNativeplace = employeeNativeplace;
+	}
+
+	/**
+	 * Creates a new instance of EmployeeAddress.
+	 * 无参构造方法
+	 */
+	public EmployeeAddress() {}
+	
 }
