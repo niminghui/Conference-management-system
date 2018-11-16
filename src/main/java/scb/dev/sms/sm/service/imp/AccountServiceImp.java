@@ -45,7 +45,11 @@ public class AccountServiceImp implements IAccountService {
 		account.setAccountName(employee_nickname);
 		// 账户初始密码随机生成
 		account.setAccountPassword(TokenIDFactory.get8BitUUID());
-		return accountDao.insertSelective(account) == 1 ? "success" : "error";
+		System.out.println("id:" + account.getAccountId());
+		System.out.println("nickname:" + account.getAccountName());
+		System.out.println("pwd:" + account.getAccountPassword());
+		System.out.println(accountDao);
+		return accountDao.insert(account) == 1 ? "success" : "error";
 	}
 
 	/**

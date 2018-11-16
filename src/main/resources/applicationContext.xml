@@ -19,7 +19,7 @@
 
 	<!-- 扫描该包下的所有需要注册到spring 容器内的类 -->
 	<context:component-scan
-		base-package="scb.dev.sms.sm"></context:component-scan>
+		base-package="scb.dev.sms.sm.*"></context:component-scan>
 
 	<!-- 加载配置文件 -->
 	<context:property-placeholder
