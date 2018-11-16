@@ -13,7 +13,7 @@ import java.io.Serializable;
  */
 public class EmployeeAddress implements Serializable{
     /**
-	 * serialVersionUID:TODO
+	 * serialVersionUID
 	 * @since JDK 1.8
 	 */
 	private static final long serialVersionUID = -6493167562411041609L;
