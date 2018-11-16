@@ -19,35 +19,66 @@ import java.util.List;
  *
  * @author Zither.Chen
  * @version V1.0
- * @Description: 职员业务接口.
+ * @Description: Position实现类接口
  * @Date: 2018/11/16 11:06 <br/>
  * @since JDK 1.8
  */
 public interface IPositionService {
-    /**
-     * 用于删除职位信息，涉及级联删除，删除职位的同时会删除相关职位的员工信息
-     * @param positionId 删除职位的主键
-     * @return 返回删除结果；若返回true，表示删除成功；否则表示删除失败。
-     */
-   public String  removePosition(String positionId);
 
-    /**
-     * 添加新的职位信息
-     * @param position 职位信息对象
-     * @return 返回添加的结果，若返回true,表示添加成功
-     */
-   public String insertPosition(Position position);
+	
+	/**
+	 * 
+	 * queryPositionById： 查询指定职位信息
+	 * @param positionId
+	 * @return
+	 */
+	public Position  queryPositionById(Integer positionId);
+	
+	/**
+	 * 
+	 * modifyPositionInfo:更新职位信息
+	 * @param position
+	 */
+	public  void modifyPositionInfo(Position position) ;
+	
+	
+	
+	/**
+	 * 
+	 * removePosition：删除职位信息
+	 * @param pos
+	 */
+	String removePosition(String positionId);
 
-    /**
-     * 修改某职位信息
-     * @param position 修改的职位信息
-     * @return 
-     */
-   public String changePosition(Position position);
+	/**
+	 * insertPosition:(插入职位信息). <br/>
+	 * @author Zither.Chen
+	 * @param pos
+	 * @since JDK 1.8
+	 */
+	String insertPosition(Position position);
 
-    /**
-     * 获取所有职位名称
-     * @return 
-     */
-   public String queryAllPosition();
+
+	/**
+	 * 
+	 * queryAllPosititon：查询所有职位信息 
+	 * @return
+	 */
+	String queryAllPosition();
+
+	/**
+	 * changePosition:(改变职位信息). <br/>
+	 * @author Zither.Chen
+	 * @param pos
+	 * @since JDK 1.8
+	 */
+	String changePosition(Position position);
+
+	/**
+	 * removePosition:(移除职位). <br/>
+	 * @author Zither.Chen
+	 * @param pos
+	 * @since JDK 1.8
+	 */
+	void removePosition(Position pos);
 }
