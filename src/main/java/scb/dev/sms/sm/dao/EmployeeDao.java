@@ -2,6 +2,8 @@ package scb.dev.sms.sm.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import scb.dev.sms.sm.pojo.Employee;
 
 /**
@@ -135,4 +137,5 @@ public interface EmployeeDao {
      * @mbg.generated 2018-11-14
      */
     int updateByEmployeeId(Employee record);
+    int deleteDepartmentInEmployee(@Param("employeeStatus")String employeeStatus,  @Param("departmentId")String departmentId);
 }

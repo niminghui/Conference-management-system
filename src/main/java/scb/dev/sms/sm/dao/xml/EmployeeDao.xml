@@ -327,4 +327,10 @@
       employee_work_id = #{employeeWorkId,jdbcType=CHAR}
     where employee_id = #{employeeId,jdbcType=VARCHAR}
   </update>
+  <update id="deleteDepartmentInEmployee" >
+   update sm_employee
+   set employee_status = #{employeeStatus,jdbcType=VARCHAR},
+   department_id = #{departmentId,jdbcType=VARCHAR}
+   where department_id = #{departmentId,jdbcType=VARCHAR},
+  </update>
 </mapper>

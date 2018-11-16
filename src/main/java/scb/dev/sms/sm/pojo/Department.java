@@ -1,9 +1,17 @@
 package scb.dev.sms.sm.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Department {
+import org.springframework.stereotype.Component;
+@Component
+public class Department implements Serializable{
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      * 部门编号
      */
     private String departmentId;
