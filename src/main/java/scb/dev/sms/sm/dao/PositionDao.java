@@ -3,6 +3,7 @@ package scb.dev.sms.sm.dao;
 import java.util.List;
 
 import scb.dev.sms.sm.pojo.Position;
+import scb.dev.sms.util.tool.PagingVO;
 /**
  * 
  * ClassName: PositionDao <br/>
@@ -76,4 +77,10 @@ public interface PositionDao {
 	 * @since JDK 1.8
 	 */
 	Position selectByPrimaryKey(Integer positionId);
+	
+	List<Position> selectByPositionName(String positionName);
+
+	int getCountPosition();
+
+	List<Position> findByPaging(PagingVO pageVo);
 }

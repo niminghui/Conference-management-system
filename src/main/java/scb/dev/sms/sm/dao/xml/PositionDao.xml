@@ -14,12 +14,43 @@
     position_id, position_name, rolegroup_id, position_updated_user, position_updated_time, 
     position_created_user, position_created_time
   </sql>
+  <!--  查询position操作 -->
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from sm_position
     where position_id = #{positionId,jdbcType=VARCHAR}
   </select>
+  <!-- 根据职位名称模糊查询 -->
+  <select id="selectByPositionName"
+	parameterType="java.lang.String" resultMap="BaseResultMap">
+	select
+	<include refid="Base_Column_List" />
+	from sm_position
+	where position_name like "%"#{positionName,jdbcType=VARCHAR}"%"
+  </select>
+  <select id="selectAllPositionInfo"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sm_position
+    where position_isVaild = 1
+  </select>
+  <select id="getCountPosition"  resultType="java.lang.Integer">
+    select count(*)
+    from sm_position
+  </select>
+	<select id="findByPaging"
+		parameterType="scb.dev.sms.util.tool.PagingVO"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sm_position
+		where position_isVaild = 1 ORDER BY
+		position_updated_datetime DESC
+		limit #{toPageNo}, #{pageSize}
+	</select>
+	
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from sm_position
     where position_id = #{positionId,jdbcType=VARCHAR}
