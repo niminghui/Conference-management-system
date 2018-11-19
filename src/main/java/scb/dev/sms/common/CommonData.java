@@ -30,8 +30,11 @@ public interface CommonData {
 	public static final String UPDATE_FAILURE = "002-002";
 	public static final String DELETE_FAILURE = "003-002";
 	public static final String QUERY_FAILURE = "004-002";
-	
-	
-	 
+
+	public static final String STRING_SUCCESS = "success";
+	public static final String STRING_FAILURE = "failure";
+
+	public static final String STRING_NOTFOUND = "not found";
+	public static final String STRING_EXIST = "already exist";
 
 }
