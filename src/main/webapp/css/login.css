@@ -1,0 +1,91 @@
+@CHARSET "UTF-8";
+.operation {	/*登录操作界面*/
+	position: absolute;
+	right: 200px;
+	top: 75px;
+	z-index: 9;
+	background: rgba(255,255,255,0.65);
+	width: 420px;
+	height: 480px;
+	padding: 20px;
+		-webkit-box-sizing: border-box;
+	  	-moz-box-sizing: border-box;
+	    box-sizing: border-box;		
+	border-radius: 20px;
+	border: 1px solid #e6e6e6;
+}
+.btn{
+	width: 300px;
+	border: 0px solid #9c9c9c;
+	margin: 0px auto;
+	font-size: 20px;
+	line-height: 40px;
+	border-radius: 12px;
+	-moz-border-radius: 12px;
+	-webkit-border-radius: 12px;
+	color: #fff!important;	/*字体颜色*/
+	text-shadow: 0px 1px 2px #5b8d2b;
+	background: rgb(131,175,155);
+	position: relative;
+	left: 38px;
+	top: 0px;
+}
+
+#title{
+	font-size: 24px;
+	color: #EB9316;
+	text-align: center;
+}
+
+.input{
+	/*设置div元素的大小*/
+	max-width: 520px;
+	height: 55px;
+	/*设置内外边距*/
+	margin: 20px auto;
+	padding: 1px;
+	/*设置元素的内边距和边框不会改变它的宽度*/
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+	    box-sizing: border-box;
+	/*设置元素的边框为圆矩形*/
+	border-radius: 30px;
+	/*设置边界样式*/
+	border: 1px solid #e6e6e6;
+	/*设置背景颜色*/
+	background: #FFF;
+	position: relative;
+}
+.fillAreas{
+	max-width: 400px;
+	height: 16px;
+	position: relative;
+}
+.loginImg{
+	position:absolute;
+	left: 18px;
+	top: 5px;
+	height: 40px;
+}
+#yzmImg{
+	position:absolute;
+	right: 18px;
+	top: 0px;
+}
+
+input[type="text"],input[type="password"]{
+	border: 0px solid #FFF;
+	margin-left: 50px;
+	padding: 2px;
+	width: 78%;
+	height: 95%;
+	font-size: 20px;
+	background: #fff;
+}
+#uyzm{
+	width: 50%;
+}
+
+input:focus {
+    outline:none;
+}
