@@ -9,8 +9,8 @@
 package scb.dev.sms.sm.service;
 
 
-import javafx.geometry.Pos;
 import scb.dev.sms.sm.pojo.Position;
+import scb.dev.sms.util.tool.PagingVO;
 
 import java.util.List;
 
@@ -32,14 +32,14 @@ public interface IPositionService {
 	 * @param positionId
 	 * @return
 	 */
-	public Position  queryPositionById(Integer positionId);
+	Position queryPositionById(Integer positionId);
 	
 	/**
 	 * 
 	 * modifyPositionInfo:更新职位信息
 	 * @param position
 	 */
-	public  void modifyPositionInfo(Position position) ;
+	String modifyPositionInfo(Position position) ;
 	
 	
 	
@@ -64,21 +64,38 @@ public interface IPositionService {
 	 * queryAllPosititon：查询所有职位信息 
 	 * @return
 	 */
-	String queryAllPosition();
+	List<Position> queryAllPosition();
 
 	/**
-	 * changePosition:(改变职位信息). <br/>
-	 * @author Zither.Chen
-	 * @param pos
-	 * @since JDK 1.8
+	 * 
+	 * @Title: getCountPosition   
+	 * @Description: 获取职位信息数量   
+	 * @param: @return      
+	 * @return: int      
+	 * @throws
 	 */
-	String changePosition(Position position);
+	int getCountPosition();
 
 	/**
-	 * removePosition:(移除职位). <br/>
-	 * @author Zither.Chen
-	 * @param pos
-	 * @since JDK 1.8
+	 * 
+	 * @Title: findByPaging   
+	 * @Description: 通过分页查询职位信息   
+	 * @param: @param pageVo
+	 * @param: @return      
+	 * @return: List<Position>      
+	 * @throws
 	 */
-	void removePosition(Position pos);
+	List<Position> findByPaging(PagingVO pageVo);
+
+	/**
+	 * 
+	 * @Title: selectByPositionName   
+	 * @Description: 通过职位名称查询相应的职位信息   
+	 * @param: @param positionName
+	 * @param: @return      
+	 * @return: List<Position>      
+	 * @throws
+	 */
+	List<Position> selectByPositionName(String positionName);
+
 }

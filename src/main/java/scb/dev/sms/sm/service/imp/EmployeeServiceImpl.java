@@ -41,6 +41,8 @@ public class EmployeeServiceImpl implements IEmployeeService {
 	
 	private List<Employee> employeeList;
 	
+	private Employee employee;
+	
 	private Logger logger = Logger.getLogger(Logger.class);
 	
 	@Override
@@ -89,6 +91,90 @@ public class EmployeeServiceImpl implements IEmployeeService {
 	public List<Employee> queryAllEmployee() {
 		logger.info("queryAllEmployee");
 		employeeList = employeeDao.selectAllEmployeeWithAddAndCon();
+		if(employeeList!=null) {
+			logger.error(CommonData.QUERY_SUCCESS);
+			return employeeList;
+		}
+		else {
+			logger.error(CommonData.QUERY_FAILURE);
+			return null;
+		}
+	}
+
+	@Override
+	public Employee queryByEmployeeId(String employeeId) {
+		logger.info("queryByEmployeeName");
+		employee = employeeDao.selectByEmployeeIdWithAddAndCon(employeeId);
+		if(employee!=null) {
+			logger.error(CommonData.QUERY_SUCCESS);
+			return employee;
+		}
+		else {
+			logger.error(CommonData.QUERY_FAILURE);
+			return null;
+		}
+	}
+
+	@Override
+	public List<Employee> queryByEmployeeName(String employeeName) {
+		logger.info("queryByEmployeeName");
+		employeeList = employeeDao.selectByEmployeeNameWithAddAndCon(employeeName);
+		if(employeeList!=null) {
+			logger.error(CommonData.QUERY_SUCCESS);
+			return employeeList;
+		}
+		else {
+			logger.error(CommonData.QUERY_FAILURE);
+			return null;
+		}
+	}
+
+	@Override
+	public Employee queryByEmployeeWorkId(String employeeWorkId) {
+		logger.info("queryByEmployeeWorkId");
+		employee = employeeDao.selectByEmployeeWorkIdWithAddAndCon(employeeWorkId);
+		if(employee!=null) {
+			logger.error(CommonData.QUERY_SUCCESS);
+			return employee;
+		}
+		else {
+			logger.error(CommonData.QUERY_FAILURE);
+			return null;
+		}
+	}
+
+	@Override
+	public List<Employee> queryByEmployeePositionId(String employeePositionId) {
+		logger.info("queryByEmployeePositionId");
+		employeeList = employeeDao.selectByEmployeePositionIdWithAddAndCon(employeePositionId);
+		if(employeeList!=null) {
+			logger.error(CommonData.QUERY_SUCCESS);
+			return employeeList;
+		}
+		else {
+			logger.error(CommonData.QUERY_FAILURE);
+			return null;
+		}
+	}
+
+	@Override
+	public List<Employee> queryByEmployeeDepartmentId(String employeeDepartmentId) {
+		logger.info("queryByEmployeeDepartmentId");
+		employeeList = employeeDao.selectByEmployeeDepartmentIdWithAddAndCon(employeeDepartmentId);
+		if(employeeList!=null) {
+			logger.error(CommonData.QUERY_SUCCESS);
+			return employeeList;
+		}
+		else {
+			logger.error(CommonData.QUERY_FAILURE);
+			return null;
+		}
+	}
+
+	@Override
+	public List<Employee> queryByEmployeeStatus(String employeeStatus) {
+		logger.info("queryAllEmployee");
+		employeeList = employeeDao.selectByEmployeeStatusWithAddAndCon(employeeStatus);
 		if(employeeList!=null) {
 			logger.error(CommonData.QUERY_SUCCESS);
 			return employeeList;

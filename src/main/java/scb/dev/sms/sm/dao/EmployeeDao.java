@@ -51,12 +51,28 @@ public interface EmployeeDao {
     Employee selectByEmployeeId(String employeeId);
     
     /**
+     *根据员工编号查询员工
+     *@param employeeId 员工编号
+     *@return 查到的员工对象
+     * @mbg.generated 2018-11-14
+     */
+    Employee selectByEmployeeIdWithAddAndCon(String employeeId);
+    
+    /**
      *根据员工姓名查询员工
      *@param employeeName 员工姓名
      *@return 查到的员工对象集合
      * @mbg.generated 2018-11-14
      */
     List<Employee> selectByEmployeeName(String employeeName);
+    
+    /**
+     *根据员工姓名查询员工
+     *@param employeeName 员工姓名
+     *@return 查到的员工对象集合
+     * @mbg.generated 2018-11-14
+     */
+    List<Employee> selectByEmployeeNameWithAddAndCon(String employeeName);
 
     /**
      *根据员工工号查询员工
@@ -65,6 +81,14 @@ public interface EmployeeDao {
      * @mbg.generated 2018-11-14
      */
     Employee selectByEmployeeWorkId(String employeeWorkId);
+    
+    /**
+     *根据员工工号查询员工
+     *@param employeeWorkId 员工工号
+     *@return 查到的员工对象
+     * @mbg.generated 2018-11-14
+     */
+    Employee selectByEmployeeWorkIdWithAddAndCon(String employeeWorkId);
     
     /**
      *根据员工昵称查询员工
@@ -81,6 +105,14 @@ public interface EmployeeDao {
      * @mbg.generated 2018-11-14
      */
     List<Employee> selectByEmployeePositionId(String employeePositionId);
+    
+    /**
+     *根据员工职位编号查询员工
+     *@param employeePositionId 员工职位编号
+     *@return 查到的员工对象集合
+     * @mbg.generated 2018-11-14
+     */
+    List<Employee> selectByEmployeePositionIdWithAddAndCon(String employeePositionId);
 
     /**
      *根据员工部门编号查询员工
@@ -89,6 +121,14 @@ public interface EmployeeDao {
      * @mbg.generated 2018-11-14
      */
     List<Employee> selectByEmployeeDepartmentId(String employeeDepartmentId);
+    
+    /**
+     *根据员工部门编号查询员工
+     *@param employeeDepartmentId 员工部门编号
+     *@return 查到的员工对象集合
+     * @mbg.generated 2018-11-14
+     */
+    List<Employee> selectByEmployeeDepartmentIdWithAddAndCon(String employeeDepartmentId);
 
     /**
      *根据员工状态查询员工
@@ -97,6 +137,14 @@ public interface EmployeeDao {
      * @mbg.generated 2018-11-14
      */
     List<Employee> selectByEmployeeStatus(String employeeStatus);
+    
+    /**
+     *根据员工状态查询员工
+     *@param employeeStatus 员工状态
+     *@return 查到的员工对象集合
+     * @mbg.generated 2018-11-14
+     */
+    List<Employee> selectByEmployeeStatusWithAddAndCon(String employeeStatus);
 
     /**
      *根据员工公司查询员工
@@ -113,7 +161,11 @@ public interface EmployeeDao {
      */
     List<Employee> selectAllEmployee();
     
-    
+    /**
+     * 查询所有员工，包含员工地址和联系方式
+     *@return 查到的员工对象集合
+     * @mbg.generated 2018-11-14
+     */
     List<Employee> selectAllEmployeeWithAddAndCon();
     
     

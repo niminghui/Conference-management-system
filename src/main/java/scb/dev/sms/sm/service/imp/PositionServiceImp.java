@@ -1,11 +1,4 @@
-/**
- * Project Name:scb.sms
- * File Name:PositionServiceImp.java
- * Package Name:scb.dev.sms.sm.service.imp
- * Date:2018年11月16日下午2:07:25
- * Copyright (c) 2018, erwin.wang@clpsglobal.com All Rights Reserved.
- *
- */
+
 package scb.dev.sms.sm.service.imp;
 
 import java.util.List;
@@ -14,118 +7,167 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import scb.dev.sms.common.CommonData;
 import scb.dev.sms.sm.dao.PositionDao;
 import scb.dev.sms.sm.pojo.Position;
 import scb.dev.sms.sm.service.IPositionService;
+import scb.dev.sms.util.tool.PagingVO;
 
 /**
- * ClassName: PositionService <br/>
- * Description: 
- * date: 2018年11月15日 下午2:50:52 <br/>
- *
- * @author Zither.Chen
- * @version V1.0
- * @since JDK 1.8
+ * 
+ * @ClassName:  PositionServiceImp   
+ * @Description:TODO(职位信息service层实现类)   
+ * @author: Steven.Lee 
+ * @date:   2018年11月18日 下午5:53:43   
+ *     
+ * @Copyright: 2018 www.tydic.com Inc. All rights reserved.
  */
 @Service
 public class PositionServiceImp implements IPositionService {
 
 	private Logger logger=Logger.getLogger(this.getClass());
-	@Autowired
-	private PositionDao mapper;
-	/**
-	 * 查询所有职位信息
-	 * @see com.scb.dev.sms.sm.service.IPositionService#queryAllPosititon()
-	 */
 	
-	public List<Position> queryAllPosititon() {
-		List<Position> lp=mapper.selectAllPositionInfo();
-	    logger.info("查询所有职位信息成功");
-		return lp;
-	}
+	@Autowired
+	private PositionDao positionDao;
 
-	/**
-	 * 通过职位ID查询对应职位信息
-	 * @see com.scb.dev.sms.sm.service.IPositionService#queryPositionById()
+	/*
+	 * 通过职位ID查询出相应的职位信息
+	 * @see scb.dev.sms.sm.service.IPositionService#queryPositionById(java.lang.Integer)
 	 */
 	@Override
 	public Position queryPositionById(Integer positionId) {
-		Position pos=mapper.selectByPrimaryKey(positionId);
-		logger.info("查询指定职位信息成功");
-		return pos;
+		Position position = positionDao.selectByPrimaryKey(positionId);
+		if (position!=null) {
+			logger.info(CommonData.QUERY_SUCCESS);
+			return position;
+		}else {
+			logger.info(CommonData.QUERY_FAILURE);
+			return null;
+		}
 	}
 
-	/**
-	 * 
-	 *  修改职位信息
-	 * @see com.scb.dev.sms.sm.service.IPositionService#modifyPositionInfo(com.scb.dev.sms.sm.pojo.Position)
+	/*
+	 * 修改职位信息
+	 * @see scb.dev.sms.sm.service.IPositionService#modifyPositionInfo(scb.dev.sms.sm.pojo.Position)
 	 */
 	@Override
-	public void modifyPositionInfo(Position position) {
-		Position pos=position;
-		if(mapper.updateByPrimaryKey(pos)>0) {
-			logger.info("职位信息更新成功");
-		}else
-			logger.info("职位信息更新失败");
-		
+	public String modifyPositionInfo(Position position) {
+		if (position!=null) {
+			if (positionDao.updateByPrimaryKeySelective(position)>0) {
+				return CommonData.UPDATE_SUCCESS;
+			}else {
+				return CommonData.UPDATE_FAILURE;
+			}
+		}
+		return CommonData.UPDATE_FAILURE;
 	}
 
-	/**
-	 * 
-	 * 删除职位信息
-	 * @see com.scb.dev.sms.sm.service.IPositionService#removePosition(java.lang.Integer)
-	 */
-	@Override 
-	public void removePosition(Position pos) {
-		Position position=pos;
-		int result=mapper.deleteByPrimaryKey(position.getPositionId());
-		if(result>0) {
-			logger.info("职位信息删除成功");
-		}else
-			logger.info("职位信息删除失败");
-		
-	}
-
-	/**
-	 * TODO 简单描述该方法的实现功能（可选）.
+	/*
+	 * 通过职位ID删除相应的职位信息
 	 * @see scb.dev.sms.sm.service.IPositionService#removePosition(java.lang.String)
 	 */
 	@Override
 	public String removePosition(String positionId) {
-		// TODO Auto-generated method stub
-		return null;
+		if (positionDao.deleteByPrimaryKey(positionId)>0) {
+			return CommonData.DELETE_SUCCESS;
+		}else {
+			return CommonData.DELETE_FAILURE;
+		}
 	}
 
-	/**
-	 * TODO 简单描述该方法的实现功能（可选）.
+	/*
+	 * 新增职位信息
 	 * @see scb.dev.sms.sm.service.IPositionService#insertPosition(scb.dev.sms.sm.pojo.Position)
 	 */
 	@Override
 	public String insertPosition(Position position) {
-		// TODO Auto-generated method stub
-		return null;
+		if(position!=null) {
+			if (positionDao.insertSelective(position)>0) {
+				return CommonData.SAVE_SUCCESS;
+			}else {
+				return CommonData.SAVE_FAILURE;
+			}
+		}
+		return CommonData.SAVE_FAILURE;
 	}
 
-	/**
-	 * TODO 简单描述该方法的实现功能（可选）.
+	/*
+	 * 查询所有职位信息
 	 * @see scb.dev.sms.sm.service.IPositionService#queryAllPosition()
 	 */
 	@Override
-	public String queryAllPosition() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Position> queryAllPosition() {
+		List<Position> positionInfos = positionDao.selectAllPositionInfo();
+		if (positionInfos!=null) {
+			logger.info(CommonData.QUERY_SUCCESS);
+			return positionInfos;
+		}else {
+			logger.info(CommonData.QUERY_FAILURE);
+			return null;
+		}
 	}
 
 	/**
-	 * TODO 简单描述该方法的实现功能（可选）.
-	 * @see scb.dev.sms.sm.service.IPositionService#changePosition(scb.dev.sms.sm.pojo.Position)
+	 * 
+	 * <p>Title: getCountPosition</p>   
+	 * <p>Description: 获取职位信息条数</p>   
+	 * @return   
+	 * @see scb.dev.sms.sm.service.IPositionService#getCountPosition()
 	 */
 	@Override
-	public String changePosition(Position position) {
-		// TODO Auto-generated method stub
-		return null;
+	public int getCountPosition() {
+		int count=this.positionDao.getCountPosition();
+		if(count>0){
+			logger.info(CommonData.QUERY_SUCCESS);
+			return count;
+		}
+		else{
+			logger.error(CommonData.QUERY_FAILURE);
+			return 0;
+		}
+		
+	}
+
+	/**
+	 * 
+	 * <p>Title: findByPaging</p>   
+	 * <p>Description: 通过分页查询职位信息</p>   
+	 * @param pageVo
+	 * @return   
+	 * @see scb.dev.sms.sm.service.IPositionService#findByPaging(scb.dev.sms.util.tool.PagingVO)
+	 */
+	@Override
+	public List<Position> findByPaging(PagingVO pageVo) {
+		List<Position> positions = this.positionDao.findByPaging(pageVo);
+		if (positions != null) {
+			logger.info(CommonData.QUERY_SUCCESS);
+			return positions;
+		} else{
+			logger.error(CommonData.QUERY_FAILURE);
+			return null;
+		}
+	}
+
+	/**
+	 * 
+	 * <p>Title: selectByPositionName</p>   
+	 * <p>Description: 通过职位名称查询相应的职位信息   </p>   
+	 * @param positionName
+	 * @return   
+	 * @see scb.dev.sms.sm.service.IPositionService#selectByPositionName(java.lang.String)
+	 */
+	@Override
+	public List<Position> selectByPositionName(String positionName) {
+		List<Position> positions = this.positionDao.selectByPositionName(positionName);
+		if (positions != null) {
+			logger.info(CommonData.QUERY_SUCCESS);
+			return positions;
+		} else{
+			logger.error(CommonData.QUERY_FAILURE);
+			return null;
+		}
 	}
 	
-
 }
+
 

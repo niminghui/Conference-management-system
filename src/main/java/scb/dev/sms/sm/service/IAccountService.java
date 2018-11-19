@@ -53,4 +53,13 @@ public interface IAccountService {
 	 * @return String 修改结果信息
 	 */
 	public String updateAccountPwd(String account_id, String new_pwd);
+
+	/**
+	 * 
+	 * Description: 通过账户名字得到账户编号.<br/>
+	 * 
+	 * @param String account_name
+	 * @return String
+	 */
+	public String getAccountID(String account_name);
 }

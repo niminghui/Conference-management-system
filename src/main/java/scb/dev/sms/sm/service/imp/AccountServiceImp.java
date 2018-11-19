@@ -11,6 +11,7 @@ package scb.dev.sms.sm.service.imp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import scb.dev.sms.common.CommonData;
 import scb.dev.sms.sm.dao.AccountDao;
 import scb.dev.sms.sm.pojo.Account;
 import scb.dev.sms.sm.service.IAccountService;
@@ -45,7 +46,7 @@ public class AccountServiceImp implements IAccountService {
 		account.setAccountName(employee_nickname);
 		// 账户初始密码随机生成
 		account.setAccountPassword(TokenIDFactory.get8BitUUID());
-		return accountDao.insert(account) == 1 ? "success" : "error";
+		return accountDao.insert(account) == 1 ? CommonData.STRING_SUCCESS : CommonData.STRING_FAILURE;
 	}
 
 	/**
@@ -57,11 +58,11 @@ public class AccountServiceImp implements IAccountService {
 	public String validateAccount(String account_name, String account_pwd) {
 		Account account = accountDao.selectByAccountName(account_name);
 		if (account == null)
-			return "This account is't found.";
+			return CommonData.STRING_ACCOUNT_NOTFOUND;
 		String password = MD5Utils.MD5(account_pwd);
 		if (account.getAccountName().equals(account_name) && account.getAccountPassword().equals(password))
-			return "success";
-		return "Password error";
+			return CommonData.STRING_SUCCESS;
+		return CommonData.STRING_FAILURE;
 	}
 
 	/**
@@ -74,9 +75,9 @@ public class AccountServiceImp implements IAccountService {
 	public String updateAccountName(String account_id, String new_accountName) {
 		Account account = accountDao.selectByAccountId(account_id);
 		if (accountDao.selectAccountIdByAccountName(new_accountName) != null)
-			return new_accountName + " " + "already exist.";
+			return CommonData.STRING_ACCOUNT_EXIST;
 		account.setAccountName(new_accountName);
-		return accountDao.updateByAccountId(account) == 1 ? "success" : "error";
+		return accountDao.updateByAccountId(account) == 1 ? CommonData.STRING_SUCCESS : CommonData.STRING_FAILURE;
 	}
 
 	/**
@@ -90,7 +91,17 @@ public class AccountServiceImp implements IAccountService {
 		Account account = accountDao.selectByAccountId(account_id);
 		String password = MD5Utils.MD5(new_pwd);
 		account.setAccountPassword(password);
-		return accountDao.updateByAccountId(account) == 1 ? "success" : "error";
+		return accountDao.updateByAccountId(account) == 1 ? CommonData.STRING_SUCCESS : CommonData.STRING_FAILURE;
+	}
+
+	/**
+	 * Description: 通过账户名字得到账户编号.<br/>
+	 * 
+	 * @see scb.dev.sms.sm.service.IAccountService#getAccountID(java.lang.String)
+	 */
+	@Override
+	public String getAccountID(String account_name) {
+		return accountDao.selectAccountIdByAccountName(account_name);
 	}
 
 }
