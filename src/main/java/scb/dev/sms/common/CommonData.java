@@ -31,7 +31,10 @@ public interface CommonData {
 	public static final String DELETE_FAILURE = "003-002";
 	public static final String QUERY_FAILURE = "004-002";
 	
-	
-	 
+	//status参数  0: 未激活  1：已激活  2：离职  3：部门解散待业  
+	public static final String STATUS_UNUSED="0";
+	public static final String STATUS_INUSED="1";
+	public static final String STATUS_LEAVE_OFFICE="2";
+	public static final String STATUS_DISSOLVE="3";
 
 }

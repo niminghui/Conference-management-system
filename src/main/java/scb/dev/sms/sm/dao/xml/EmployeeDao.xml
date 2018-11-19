@@ -329,8 +329,7 @@
   </update>
   <update id="deleteDepartmentInEmployee" >
    update sm_employee
-   set employee_status = #{employeeStatus,jdbcType=VARCHAR},
-   department_id = #{departmentId,jdbcType=VARCHAR}
-   where department_id = #{departmentId,jdbcType=VARCHAR},
+   set employee_status = #{employeeStatus,jdbcType=VARCHAR}
+   where department_id = #{departmentId,jdbcType=VARCHAR}
   </update>
 </mapper>

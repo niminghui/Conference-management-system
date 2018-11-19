@@ -16,6 +16,27 @@
     <result column="department_created_user" jdbcType="VARCHAR" property="departmentCreatedUser" />
     <result column="department_created_time" jdbcType="TIMESTAMP" property="departmentCreatedTime" />
   </resultMap>
+  <resultMap id="TreeResultMap" type="scb.dev.sms.sm.pojo.Department">
+    <id column="department_id" jdbcType="VARCHAR" property="departmentId" />
+    <result column="department_name" jdbcType="VARCHAR" property="departmentName" />
+    <result column="department_abbreviation" jdbcType="VARCHAR" property="departmentAbbreviation" />
+    <result column="department_pid" jdbcType="VARCHAR" property="departmentPid" />
+    <result column="department_orderId" jdbcType="VARCHAR" property="departmentOrderid" />
+    <result column="department_phone" jdbcType="VARCHAR" property="departmentPhone" />
+    <result column="department_email" jdbcType="VARCHAR" property="departmentEmail" />
+    <result column="department_detail" jdbcType="VARCHAR" property="departmentDetail" />
+    <result column="department_head" jdbcType="VARCHAR" property="departmentHead" />
+    <result column="department_updated_user" jdbcType="VARCHAR" property="departmentUpdatedUser" />
+    <result column="department_updated_time" jdbcType="TIMESTAMP" property="departmentUpdatedTime" />
+    <result column="department_created_user" jdbcType="VARCHAR" property="departmentCreatedUser" />
+    <result column="department_created_time" jdbcType="TIMESTAMP" property="departmentCreatedTime" />
+    <collection property="departments"  column="department_id" select="selectSubDep"></collection>
+  </resultMap>
+  <resultMap id="PathResultMap" type="scb.dev.sms.sm.pojo.Department">
+    <id column="department_id" jdbcType="VARCHAR" property="departmentId" />
+    <result column="department_name" jdbcType="VARCHAR" property="departmentName" />
+    <result column="department_id" jdbcType="VARCHAR" property="departmentId" />
+  </resultMap>
   <sql id="Base_Column_List">
     department_id, department_name, department_abbreviation, department_pid, department_orderId, 
     department_phone, department_email, department_detail, department_head, department_updated_user, 
@@ -26,6 +47,29 @@
     <include refid="Base_Column_List" />
     from sm_department
     where department_id = #{departmentId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectSubClassByDepartmentId" parameterType="java.lang.String" resultMap="PathResultMap">
+  select department_name,department_id from sm_department where department_pid = #{departmentId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAllDepartment"  resultMap="BaseResultMap">
+   select 
+    <include refid="Base_Column_List" />
+    from sm_department
+  </select>
+  <select id="selectTreeDepartment" resultMap="TreeResultMap">
+  select * from sm_department where department_pid="1";
+  </select>
+  <select id="selectSubDep" resultMap="TreeResultMap" parameterType="java.lang.String"> 
+  select * from sm_department where department_pid=#{departmentId,jdbcType=VARCHAR}
+  </select>
+  <select id="findOneDepartmentById"  parameterType="java.lang.String" resultMap="BaseResultMap">
+  select * from sm_department where department_id=#{departmentId,jdbcType=VARCHAR}
+  </select>
+  <select id="findOneDepartmentByAbbrev"  parameterType="java.lang.String" resultMap="BaseResultMap">
+  select * from sm_department where  department_abbreviation=#{departmentAbbreviation,jdbcType=VARCHAR}
+  </select>
+  <select id="selectCountByPid" parameterType="java.lang.String" resultType="Integer">
+  select count(*) from sm_department where department_id=#{departmentPid,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from sm_department
@@ -188,4 +232,5 @@
       department_created_time = #{departmentCreatedTime,jdbcType=TIMESTAMP}
     where department_id = #{departmentId,jdbcType=VARCHAR}
   </update>
+  
 </mapper>

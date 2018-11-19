@@ -11,7 +11,6 @@ package scb.dev.sms.sm.service.imp;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,7 +37,7 @@ public class PositionServiceImp implements IPositionService {
 	 * 查询所有职位信息
 	 * @see com.scb.dev.sms.sm.service.IPositionService#queryAllPosititon()
 	 */
-	@Test
+	
 	public List<Position> queryAllPosititon() {
 		List<Position> lp=mapper.selectAllPositionInfo();
 	    logger.info("查询所有职位信息成功");

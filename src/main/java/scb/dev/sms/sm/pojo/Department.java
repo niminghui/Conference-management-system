@@ -1,7 +1,10 @@
 package scb.dev.sms.sm.pojo;
 
+
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.stereotype.Component;
 @Component
@@ -76,6 +79,10 @@ public class Department implements Serializable{
      */
     private Date departmentCreatedTime;
 
+    /**
+     * 存放子部门
+     */
+    private List<Department> departments=new ArrayList<>();
     /**
      * 部门编号
      * @return department_id 部门编号
@@ -283,4 +290,25 @@ public class Department implements Serializable{
     public void setDepartmentCreatedTime(Date departmentCreatedTime) {
         this.departmentCreatedTime = departmentCreatedTime;
     }
+
+	public List<Department> getDepartments() {
+		return departments;
+	}
+
+	public void setDepartments(List<Department> departments) {
+		this.departments = departments;
+	}
+
+	@Override
+	public String toString() {
+		return "Department [departmentId=" + departmentId + ", departmentName=" + departmentName
+				+ ", departmentAbbreviation=" + departmentAbbreviation + ", departmentPid=" + departmentPid
+				+ ", departmentOrderid=" + departmentOrderid + ", departmentPhone=" + departmentPhone
+				+ ", departmentEmail=" + departmentEmail + ", departmentDetail=" + departmentDetail
+				+ ", departmentHead=" + departmentHead + ", departmentUpdatedUser=" + departmentUpdatedUser
+				+ ", departmentUpdatedTime=" + departmentUpdatedTime + ", departmentCreatedUser="
+				+ departmentCreatedUser + ", departmentCreatedTime=" + departmentCreatedTime + ", departments="
+				+ departments + "]";
+	}
+	
 }
