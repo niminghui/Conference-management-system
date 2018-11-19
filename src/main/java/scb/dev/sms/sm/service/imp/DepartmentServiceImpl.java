@@ -38,12 +38,12 @@ public class DepartmentServiceImpl implements IDepartmentService {
 
 		// status参数 0: 未激活 1：已激活 2：离职 3：部门解散待业
 		if (departmentId == null)
-			return "error";
+			return CommonData.STRING_FAILURE;
 		if (!deleteDepAndSubClassById(departmentId))
-			return "error";
+			return CommonData.STRING_FAILURE;
 		employeeDao.deleteDepartmentInEmployee(CommonData.STATUS_DISSOLVE, departmentId);
 
-		return departmentDao.deleteByPrimaryKey(departmentId) == 1 ? "success" : "error";
+		return departmentDao.deleteByPrimaryKey(departmentId) == 1 ? CommonData.STRING_SUCCESS : CommonData.STRING_FAILURE;
 	}
 
 	/**
@@ -56,12 +56,12 @@ public class DepartmentServiceImpl implements IDepartmentService {
 	@Override
 	public String updateDepartmentByDepartmentId(Department department) {
 		if (department.getDepartmentId() == null)
-			return "error";
+			return CommonData.STRING_FAILURE;
 		
 		if (department.getDepartmentPid() != null)
 			if (selectCountByPid(department.getDepartmentPid()) == 0)
-				return "error";
-		return departmentDao.updateByPrimaryKeySelective(department) == 1 ? "success" : "error";
+				return CommonData.STRING_FAILURE;
+		return departmentDao.updateByPrimaryKeySelective(department) == 1 ? CommonData.STRING_SUCCESS : CommonData.STRING_FAILURE;
 	}
 
 	/**
@@ -80,13 +80,13 @@ public class DepartmentServiceImpl implements IDepartmentService {
 			department.setDepartmentPid("1");
 		// 判断必须相是否存在
 		if (!checkDepartmentIfQualified(department)) {
-			return "error";
+			return CommonData.STRING_FAILURE;
 		}
 		//判断父类是否存在
 		if (department.getDepartmentPid() != null)
 			if (selectCountByPid(department.getDepartmentPid()) == 0)
-				return "error";
-		return departmentDao.insertSelective(department) == 1 ? "success" : "error";
+				return CommonData.STRING_FAILURE;
+		return departmentDao.insertSelective(department) == 1 ? CommonData.STRING_SUCCESS : CommonData.STRING_FAILURE;
 	}
 
 	/**
