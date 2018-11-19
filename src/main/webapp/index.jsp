@@ -53,6 +53,8 @@
 			</div>
 			<br /> <input type="submit" name="submit" class="btn" value="登录" />
 			<div class="fillAreas"></div>
+		</form>
+		<form action="/scb.sms/enroll" id="enrollForm" method="post">
 			<input type="submit" name="submit" class="btn" value="立即注册" />
 		</form>
 	</div>

@@ -34,7 +34,7 @@ public interface CommonData {
 	public static final String STRING_SUCCESS = "success";
 	public static final String STRING_FAILURE = "failure";
 
-	public static final String STRING_NOTFOUND = "not found";
-	public static final String STRING_EXIST = "already exist";
+	public static final String STRING_ACCOUNT_NOTFOUND = "Account is't found.";
+	public static final String STRING_ACCOUNT_EXIST = "Account already exist.";
 
 }

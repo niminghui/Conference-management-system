@@ -62,7 +62,7 @@ public class IAccountServiceTest {
 	@Test
 	public void testValidateAccount() {
 		String account_name = "Steve_Ni";
-		String account_password = "123";
+		String account_password = "123456";
 		String message = accountService.validateAccount(account_name, account_password);
 		Assert.assertEquals("success", message);
 	}

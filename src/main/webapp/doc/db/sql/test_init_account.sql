@@ -33,5 +33,11 @@ CREATE TABLE `sm_account` (
 -- ----------------------------
 -- Records of sm_employee
 -- ----------------------------
-insert into sm_account values(replace(uuid(),'-',''), 'Amy_Li', '123', NULL, NULL);
-insert into sm_account values(replace(uuid(),'-',''), 'Steve_Ni', '147258369', NULL, NULL);
+/**
+ * 密码为123456
+ */
+insert into sm_account values(replace(uuid(),'-',''), 'Amy_Li', 'e10adc3949ba59abbe56e057f20f883e', NULL, NULL);
+/*
+ * 密码为123456
+ */
+insert into sm_account values(replace(uuid(),'-',''), 'Steve_Ni', 'e10adc3949ba59abbe56e057f20f883e', NULL, NULL);

@@ -58,7 +58,7 @@ public class AccountServiceImp implements IAccountService {
 	public String validateAccount(String account_name, String account_pwd) {
 		Account account = accountDao.selectByAccountName(account_name);
 		if (account == null)
-			return CommonData.STRING_NOTFOUND;
+			return CommonData.STRING_ACCOUNT_NOTFOUND;
 		String password = MD5Utils.MD5(account_pwd);
 		if (account.getAccountName().equals(account_name) && account.getAccountPassword().equals(password))
 			return CommonData.STRING_SUCCESS;
@@ -75,7 +75,7 @@ public class AccountServiceImp implements IAccountService {
 	public String updateAccountName(String account_id, String new_accountName) {
 		Account account = accountDao.selectByAccountId(account_id);
 		if (accountDao.selectAccountIdByAccountName(new_accountName) != null)
-			return CommonData.STRING_EXIST;
+			return CommonData.STRING_ACCOUNT_EXIST;
 		account.setAccountName(new_accountName);
 		return accountDao.updateByAccountId(account) == 1 ? CommonData.STRING_SUCCESS : CommonData.STRING_FAILURE;
 	}
@@ -92,6 +92,16 @@ public class AccountServiceImp implements IAccountService {
 		String password = MD5Utils.MD5(new_pwd);
 		account.setAccountPassword(password);
 		return accountDao.updateByAccountId(account) == 1 ? CommonData.STRING_SUCCESS : CommonData.STRING_FAILURE;
+	}
+
+	/**
+	 * Description: 通过账户名字得到账户编号.<br/>
+	 * 
+	 * @see scb.dev.sms.sm.service.IAccountService#getAccountID(java.lang.String)
+	 */
+	@Override
+	public String getAccountID(String account_name) {
+		return accountDao.selectAccountIdByAccountName(account_name);
 	}
 
 }
