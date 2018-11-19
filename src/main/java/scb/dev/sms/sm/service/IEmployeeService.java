@@ -3,6 +3,7 @@ package scb.dev.sms.sm.service;
 import java.util.List;
 
 import scb.dev.sms.sm.pojo.Employee;
+import scb.dev.sms.util.tool.PagingVO;
 /**
  * ClassName: IEmployeeService <br/>
  * Description: 员工服务层 <br/><br/>
@@ -32,7 +33,7 @@ public interface IEmployeeService {
 	 * @return 所有员工信息集合
 	 *
 	 */
-	List<Employee> queryAllEmployee();
+	List<Employee> queryAllEmployee(PagingVO pageVo);
 	
 	/**
 	 * queryByEmployeeId:根据员工编号查询员工. <br/>
@@ -76,5 +77,10 @@ public interface IEmployeeService {
 	 */
 	List<Employee> queryByEmployeeStatus(String employeeStatus);
 	
-	
+	/**
+	 * getCountEmployee:查询员工数量. <br/>
+	 * @param 
+	 * @return 员工数量
+	 */
+	int getCountEmployee();
 }

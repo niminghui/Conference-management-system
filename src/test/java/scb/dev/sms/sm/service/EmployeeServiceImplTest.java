@@ -17,6 +17,7 @@ import scb.dev.sms.sm.pojo.Employee;
 import scb.dev.sms.sm.pojo.EmployeeAddress;
 import scb.dev.sms.sm.pojo.EmployeeContactInfo;
 import scb.dev.sms.sm.service.IEmployeeService;
+import scb.dev.sms.util.tool.PagingVO;
 /**
  * ClassName: EmployeeServiceImplTest <br/>
  * Description: 员工服务层测试类. <br/><br/>
@@ -64,7 +65,7 @@ public class EmployeeServiceImplTest {
 
 	@Test
 	public void testQueryAllEmployee() {
-		assertEquals(2, employeeService.queryAllEmployee().size());
+		assertEquals(2, employeeService.queryAllEmployee(new PagingVO()).size());
 		
 	}
 	
@@ -101,6 +102,12 @@ public class EmployeeServiceImplTest {
 	@Test
 	public void testQueryByEmployeeName() {
 		assertEquals(1, employeeService.queryByEmployeeName("田广利").size());
+		
+	}
+	
+	@Test
+	public void testGetCountEmployee() {
+		assertEquals(2, employeeService.getCountEmployee());
 		
 	}
 

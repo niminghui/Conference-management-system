@@ -48,6 +48,16 @@
   <sql id="Blob_Column_List">
     employee_image
   </sql>
+  <select id="getCountEmployee" resultType="java.lang.Integer">
+  	select 
+  	count(e.employee_id)
+  	from sm_employee e
+  	inner join sm_employee_address a on e.employee_id=a.employee_id
+  	inner join sm_employee_contactinfo c on c.employee_id=e.employee_id
+  	inner join sm_position p on p.position_id=e.position_id
+  	inner join sm_department d on d.department_id=e.department_id
+  	where employee_status='001'
+  </select>
   <select id="selectAllEmployeeWithAddAndCon" resultMap="employeeWithAddressAndContact">
   	select
   	<include refid="Join_Column_List"></include>
@@ -61,6 +71,7 @@
   	inner join sm_department d on d.department_id=e.department_id
   	where employee_status='001'
   	order by employee_created_time desc
+  	limit #{toPageNo}, #{pageSize}
   </select>
   <select id="selectByEmployeeNameWithAddAndCon" parameterType="java.lang.String" resultMap="employeeWithAddressAndContact">
   	select

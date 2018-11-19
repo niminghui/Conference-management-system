@@ -18,6 +18,7 @@ import com.alibaba.fastjson.JSONObject;
 import scb.dev.sms.sm.dao.EmployeeDao;
 import scb.dev.sms.sm.pojo.Employee;
 import scb.dev.sms.util.factory.TokenIDFactory;
+import scb.dev.sms.util.tool.PagingVO;
 
 /**
  * 
@@ -261,9 +262,9 @@ public class EmployeeDaoTest {
 		logger.info("selectAllEmployee");
 		try {
 			// 断言查询不为空
-			assertNotNull(mapper.selectAllEmployeeWithAddAndCon());
+			assertNotNull(mapper.selectAllEmployeeWithAddAndCon(new PagingVO()));
 			//assertEquals(8, mapper.selectAllEmployee().size());
-			System.out.println(JSONObject.toJSONString(mapper.selectAllEmployeeWithAddAndCon()));
+			System.out.println(JSONObject.toJSONString(mapper.selectAllEmployeeWithAddAndCon(new PagingVO())));
 			logger.info("success");
 		} catch (Exception e) {
 			e.printStackTrace();
