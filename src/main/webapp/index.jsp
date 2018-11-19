@@ -32,22 +32,24 @@
 	<div class="operation">
 		<h2 id="title">会议管理系统</h2>
 		<br />
-		<form action="wpServlet" id="indexForm" method="post" onsubmit="">
+		<form action="/scb.sms/login" id="indexForm" method="post" onsubmit="">
 			<input type="hidden" name="opt" value="login" />
 			<div class="input">
-				<img src="img/login-id.png" alt="用户密码" class="loginImg" /> &nbsp; <input
-					type="text" name="uid" id="uid" autocomplete="off"
-					placeholder="请输入登录帐号" />
+				<img src="img/login-id.png" alt="用户密码" class="loginImg" /> 
+				&nbsp; 
+				<input type="text" name="uid" id="uid" autocomplete="off" placeholder="请输入登录帐号" />
 			</div>
 			<div class="input">
-				<img src="img/login-pwd.png" alt="用户密码" class="loginImg" /> &nbsp; <input
-					type="password" name="upwd" id="upwd" placeholder="请输入登录密码" />
+				<img src="img/login-pwd.png" alt="用户密码" class="loginImg" /> 
+				&nbsp; 
+				<input type="password" name="upwd" id="upwd" placeholder="请输入登录密码" />
 			</div>
 			<div class="input">
-				<img src="img/login-yzm.jpg" alt="验证码" class="loginImg" /> &nbsp;
-				&nbsp; <input type="text" name="uyzm" id="uyzm" placeholder="请输入验证码">
-				&nbsp; <img border=0 id="yzmImg" alt="点击重新加载"
-					src="/scb.sms/yzm" onclick="changeYZM();" />
+				<img src="img/login-yzm.jpg" alt="验证码" class="loginImg" /> 
+				&nbsp; &nbsp; 
+				<input type="text" name="uyzm" id="uyzm" placeholder="请输入验证码">
+				&nbsp; 
+				<img border=0 id="yzmImg" alt="点击重新加载" src="/scb.sms/yzm" onclick="changeYZM();" />
 			</div>
 			<br /> <input type="submit" name="submit" class="btn" value="登录" />
 			<div class="fillAreas"></div>
