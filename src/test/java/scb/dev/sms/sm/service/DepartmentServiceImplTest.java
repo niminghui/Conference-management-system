@@ -1,9 +1,11 @@
 package scb.dev.sms.sm.service;
 
 import static org.junit.Assert.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.junit.After;
@@ -15,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import scb.dev.sms.common.CommonData;
 import scb.dev.sms.sm.pojo.Department;
 import scb.dev.sms.sm.service.IDepartmentService;
 
@@ -27,84 +30,80 @@ public class DepartmentServiceImplTest {
 	@Autowired
 	private Department department = new Department();
 	private Logger logger = Logger.getLogger(Logger.class);
-
+	
 	@Before
 	public void setUp() throws Exception {
+		logger.info("测试Department开始");
 	}
 
 	@After
 	public void tearDown() throws Exception {
+		logger.info("测试结束");
 	}
 
 	@Test
 	public void testInsertDepartment() {
 
-		// try {
-		logger.info("测试InsertDepartment");
-		department.setDepartmentName("部门名称3");
-		department.setDepartmentPid("c881fb7a747d4ba9bab5898a9e57e455");
-		department.setDepartmentAbbreviation("RB3");
+		
+		department.setDepartmentName("部门名称4");
+		department.setDepartmentPid("0da29d223d8d48eeb11caa85fc6c95ee");
+		department.setDepartmentAbbreviation("RB4");
 		department.setDepartmentOrderid("003");
 		department.setDepartmentCreatedUser("ZK");
-		department.setDepartmentCreatedTime(new Date());
+		
 
-		Assert.assertEquals("success", departmentService.insertDepartment(department));
-		logger.info("成功");
-//		}catch (Exception e) {
-//			// TODO: handle exception
-//			logger.info("fail");
-//		}
+		assertEquals(CommonData.STRING_SUCCESS, departmentService.insertDepartment(department));
+		
+
 	}
     @Test
 	public void testupdateDepartment() {
-
-		// try {
-		logger.info("测试updateDepartment");
+		
 		department.setDepartmentName("部门名称6");
 		// department.setDepartmentPid("1");
 		department.setDepartmentAbbreviation("RB6");
 		department.setDepartmentId("7630a31b226c48aab4c2558e524e30e1");
 		Assert.assertEquals("success", departmentService.updateDepartmentByDepartmentId(department));
-		logger.info("成功");
-//		}catch (Exception e) {
-//			// TODO: handle exception
-//			logger.info("fail");
-//		}
+		
+
 	}
     
     @Test
     public void testdeleteById() {
-    	logger.info("测试deleteDepartment");
+    	
     	department.setDepartmentId("e908a5b2638f46558af768305d24c4eb");
     	Assert.assertEquals("success", departmentService.deleteDepartmentByDepartmentId(department.getDepartmentId()));
-    	logger.info("成功");
+    	
     }
     
     @Test
-    public void testfindDepartmentsInfo() {
-    	logger.info("测试findDepartment");
+    public void testfindTreeDepartmentsInfo() {
     	
-    	ArrayList<Department> departments=(ArrayList<Department>) departmentService.findTreeDepartmentsInfo();
+    	
+    	List<Department> departments=(ArrayList<Department>) departmentService.findTreeDepartmentsInfo();
     	 for(Department department:departments )
     		 System.out.println(department.toString());
-    	logger.info("成功");
+    	
     }
     @Test
     public void testfindDepartmentById() {
-    	logger.info("测试findDepartment");
     	
-    	Department department=departmentService.findOneDepartmentById("7630a31b226c48aab4c2558e524e30e1");
+    	
+    	department=departmentService.findOneDepartmentById("7630a31b226c48aab4c2558e524e30e1");
     	System.out.println(department.toString());
-    	logger.info("成功");
+    	
     }
     
     @Test
     public void testfindDepartmentByAbbrev() {
-    	logger.info("测试findDepartment");
-    	
-    	Department department=departmentService.findOneDepartmentByAbbrev("RB2");
+    	department=departmentService.findOneDepartmentByAbbrev("RB2");
     	System.out.println(department.toString());
-    	logger.info("成功");
+        
+    }
+    @Test
+    public void findOneDepartmentByName() {
+    	department=departmentService.findOneDepartmentByName("零售银行");
+    	logger.info(department.toString());
     }
 
 }

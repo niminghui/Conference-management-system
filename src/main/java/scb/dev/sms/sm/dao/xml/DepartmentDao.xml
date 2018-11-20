@@ -71,6 +71,9 @@
   <select id="selectCountByPid" parameterType="java.lang.String" resultType="Integer">
   select count(*) from sm_department where department_id=#{departmentPid,jdbcType=VARCHAR}
   </select>
+  <select id="findOneDepartmentByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+  select * from sm_department where department_name=#{departmentName,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from sm_department
     where department_id = #{departmentId,jdbcType=VARCHAR}

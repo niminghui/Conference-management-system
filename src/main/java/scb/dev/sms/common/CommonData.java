@@ -37,7 +37,7 @@ public interface CommonData {
 	public static final String STATUS_INUSED="1";
 	public static final String STATUS_LEAVE_OFFICE="2";
 	public static final String STATUS_DISSOLVE="3";
-
+	public static final String DEPARTMENT_PID="1";
 
 	public static final String STRING_SUCCESS = "success";
 	public static final String STRING_FAILURE = "failure";

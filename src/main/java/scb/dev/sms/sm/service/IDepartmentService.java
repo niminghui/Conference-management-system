@@ -12,7 +12,7 @@ import scb.dev.sms.sm.pojo.Department;
  * @Description: Department实现类接口
  * @Date: 2018/11/16 11:06 <br/>
  * @since JDK 1.8
- * @param 不为空的参数有：department_id  department_name  department_abbreviation  department_pid department_orderId department_created_user department_created_time
+ * @param 不为空的参数有  department_name  department_abbreviation  department_pid department_orderId department_created_user 
  */
 public interface IDepartmentService {
 	/**
@@ -75,6 +75,14 @@ public interface IDepartmentService {
 	 * @return Department，查找的部门信息
 	 */
 	public Department findOneDepartmentByAbbrev(String departmentAbbreviation);
+	/**
+	 * 
+	 * Description: 通过部门名称查找一个部门信息.<br/>
+	 * 
+	 * @param 
+	 * @return Department，查找的部门信息
+	 */
+	public Department findOneDepartmentByName(String departmentName);
 
 	
 	

@@ -14,6 +14,9 @@ import scb.dev.sms.sm.dao.EmployeeDao;
 import scb.dev.sms.sm.pojo.Department;
 import scb.dev.sms.sm.service.IDepartmentService;
 import scb.dev.sms.util.factory.TokenIDFactory;
+import scb.dev.sms.util.tree.DepartmentCompare2;
+import scb.dev.sms.util.tree.DepartmentTreeUtil2;
+import scb.dev.sms.util.tree.MenuTreeUtil;
 
 @Transactional
 @Service
@@ -25,6 +28,7 @@ public class DepartmentServiceImpl implements IDepartmentService {
 	@Autowired
 	private EmployeeDao employeeDao;
 
+	List<Department> departments;
 	/**
 	 * 
 	 * Description: 通过id删除指定部门,必须指定id.<br/>
@@ -55,7 +59,7 @@ public class DepartmentServiceImpl implements IDepartmentService {
 	 */
 	@Override
 	public String updateDepartmentByDepartmentId(Department department) {
-		if (department.getDepartmentId() == null)
+		if (department.getDepartmentId().equals("")||department.getDepartmentId()==null)
 			return CommonData.STRING_FAILURE;
 		
 		if (department.getDepartmentPid() != null)
@@ -74,14 +78,17 @@ public class DepartmentServiceImpl implements IDepartmentService {
 	@Override
 	public String insertDepartment(Department department) {
 
-		department.setDepartmentId(TokenIDFactory.getUUID());
+	
 		// 如果是主部门，设置父类pid为1（字符串）
-		if (department.getDepartmentPid() == null)
-			department.setDepartmentPid("1");
-		// 判断必须相是否存在
+		if (department.getDepartmentPid().equals("")||department.getDepartmentPid()==null)
+			department.setDepartmentPid(CommonData.DEPARTMENT_PID);
+		// 判断必须项是否存在
 		if (!checkDepartmentIfQualified(department)) {
 			return CommonData.STRING_FAILURE;
 		}
+		//创建时插入修改人
+		department.setDepartmentUpdatedUser(department.getDepartmentCreatedUser());
+		
 		//判断父类是否存在
 		if (department.getDepartmentPid() != null)
 			if (selectCountByPid(department.getDepartmentPid()) == 0)
@@ -98,13 +105,16 @@ public class DepartmentServiceImpl implements IDepartmentService {
 	 */
 	@Override
 	public List<Department> findDepartmentsInfo() {
-		ArrayList<Department> departments = (ArrayList<Department>) departmentDao.selectAllDepartment();
+		departments = (ArrayList<Department>) departmentDao.selectAllDepartment();
 		return departments;
 	}
 
 	@Override
 	public List<Department> findTreeDepartmentsInfo() {
-		ArrayList<Department> departments = (ArrayList<Department>) departmentDao.selectTreeDepartment();
+	//	List<Department> departments = (ArrayList<Department>) departmentDao.selectTreeDepartment();
+		departments =departmentDao.selectAllDepartment();
+		DepartmentTreeUtil2 departmentTreeUtil2=new DepartmentTreeUtil2();
+		departments=departmentTreeUtil2.turnedToDepartmentTree(departments);
 		return departments;
 	}
 
@@ -114,6 +124,10 @@ public class DepartmentServiceImpl implements IDepartmentService {
 		return departmentDao.findOneDepartmentById(departmentId);
 	}
 
+	public Department findOneDepartmentByName(String departmentName) {
+		return departmentDao.findOneDepartmentByName(departmentName);
+	}
+	
 	@Override
 	public Department findOneDepartmentByAbbrev(String departmentAbbreviation) {
 		return departmentDao.findOneDepartmentByAbbrev(departmentAbbreviation);
@@ -128,22 +142,21 @@ public class DepartmentServiceImpl implements IDepartmentService {
 	 */
 
 	private boolean checkDepartmentIfQualified(Department department) {
-		if (department.getDepartmentId() == null || department.getDepartmentName() == null
+		if (department.getDepartmentName() == null  //department.getDepartmentId() == null || 
 				|| department.getDepartmentOrderid() == null || department.getDepartmentCreatedUser() == null
-				|| department.getDepartmentCreatedTime() == null || department.getDepartmentPid() == null
-				|| department.getDepartmentAbbreviation() == null)
+				 || department.getDepartmentPid() == null
+				|| department.getDepartmentAbbreviation() == null)  //|| department.getDepartmentCreatedTime() == null
 			return false;
 		return true;
 	}
 
 	private boolean deleteDepAndSubClassById(String departmentId) {
 		List<Department> dList = departmentDao.selectSubClassByDepartmentId(departmentId);
-		System.out.println("dList---------------" + dList.size());
 		if (dList.size() != 0) {
 			for (int i = 0; i < dList.size(); i++) {
 				boolean ifsuccess = deleteDepAndSubClassById(dList.get(i).getDepartmentId());
 				if (!ifsuccess) {
-					return false;
+					return ifsuccess;
 				}
 				employeeDao.deleteDepartmentInEmployee(CommonData.STATUS_DISSOLVE, dList.get(i).getDepartmentId());
 				departmentDao.deleteByPrimaryKey(dList.get(i).getDepartmentId());
@@ -157,7 +170,7 @@ public class DepartmentServiceImpl implements IDepartmentService {
 
 	}
 
-	public int selectCountByPid(String departmentPid) {
+	private int selectCountByPid(String departmentPid) {
 		
 		return departmentDao.selectCountByPid(departmentPid);
 	}
