@@ -117,4 +117,5 @@
       rolegroup_created_time = #{rolegroupCreatedTime,jdbcType=TIMESTAMP}
     where rolegroup_id = #{rolegroupId,jdbcType=VARCHAR}
   </update>
+  
 </mapper>

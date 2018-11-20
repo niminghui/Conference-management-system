@@ -81,10 +81,22 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 			selectByExampleQueryId="false">
 		</table>
 		 -->
+		 <table tableName="sm_permission" domainObjectName="Permission" mapperName="PermissionDao"
+   enableCountByExample="false" enableUpdateByExample="false"
+   enableDeleteByExample="false" enableSelectByExample="false"
+   selectByExampleQueryId="false">
+  </table>
+   <table tableName="sm_rolegroup" domainObjectName="RoleGroup" mapperName="RoleGroupDao"
+   enableCountByExample="false" enableUpdateByExample="false"
+   enableDeleteByExample="false" enableSelectByExample="false"
+   selectByExampleQueryId="false">
+  </table>
+		 <!--  
 		<table tableName="sm_position_grant" domainObjectName="PositionGrant" mapperName="PositionGrantDao"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">
 		</table>
+		-->
 	</context>
 </generatorConfiguration>

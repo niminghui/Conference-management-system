@@ -55,4 +55,5 @@
     set permission_name = #{permissionName,jdbcType=VARCHAR}
     where permission_id = #{permissionId,jdbcType=VARCHAR}
   </update>
+  
 </mapper>
