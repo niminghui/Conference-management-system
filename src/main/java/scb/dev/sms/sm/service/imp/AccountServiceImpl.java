@@ -28,7 +28,7 @@ import scb.dev.sms.util.tool.MD5Utils;
  * @since JDK 1.8 date: 2018年11月15日 上午11:08:20 <br/>
  */
 @Service
-public class AccountServiceImp implements IAccountService {
+public class AccountServiceImpl implements IAccountService {
 	@Autowired
 	private AccountDao accountDao;
 
