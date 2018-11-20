@@ -74,11 +74,17 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 			selectByExampleQueryId="false">
 		</table>
 		-->
+		<!-- 
 		<table tableName="sm_position" domainObjectName="Position" mapperName="PositionDao"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">
 		</table>
-		
+		 -->
+		<table tableName="sm_position_grant" domainObjectName="PositionGrant" mapperName="PositionGrantDao"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
 	</context>
 </generatorConfiguration>

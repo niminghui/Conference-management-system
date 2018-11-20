@@ -3,7 +3,11 @@ package scb.dev.sms.sm.dao;
 import java.util.List;
 
 import scb.dev.sms.sm.pojo.Menu;
-
+/**
+ * 
+ * @author Weilei
+ *
+ */
 public interface MenuDao {
 
 	/**
