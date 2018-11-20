@@ -1,4 +1,4 @@
-package scb.dev.sms.sm.dao.mapper;
+package scb.dev.sms.sm.dao;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
