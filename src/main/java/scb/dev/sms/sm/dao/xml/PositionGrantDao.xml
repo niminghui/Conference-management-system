@@ -1,106 +1,164 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="scb.dev.sms.sm.dao.PositionGrantDao">
-  <resultMap id="BaseResultMap" type="scb.dev.sms.sm.pojo.PositionGrant">
-    <id column="pg_position_id" jdbcType="VARCHAR" property="pgPositionId" />
-    <id column="pg_menu_id" jdbcType="VARCHAR" property="pgMenuId" />
-    <result column="pg_created_user" jdbcType="VARCHAR" property="pgCreatedUser" />
-    <result column="pg_created_time" jdbcType="TIMESTAMP" property="pgCreatedTime" />
-    <result column="pg_updated_user" jdbcType="VARCHAR" property="pgUpdatedUser" />
-    <result column="pg_updated_time" jdbcType="TIMESTAMP" property="pgUpdatedTime" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    pg_position_id, pg_menu_id, pg_created_user, pg_created_time, pg_updated_user, pg_updated_time
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from sm_position_grant
-    where pg_position_id = #{pgPositionId,jdbcType=VARCHAR}
-      and pg_menu_id = #{pgMenuId,jdbcType=VARCHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="map">
-    delete from sm_position_grant
-    where pg_position_id = #{pgPositionId,jdbcType=VARCHAR}
-      and pg_menu_id = #{pgMenuId,jdbcType=VARCHAR}
-  </delete>
-  <insert id="insert" parameterType="scb.dev.sms.sm.pojo.PositionGrant">
-    insert into sm_position_grant (pg_position_id, pg_menu_id, pg_created_user, 
-      pg_created_time, pg_updated_user, pg_updated_time
-      )
-    values (#{pgPositionId,jdbcType=VARCHAR}, #{pgMenuId,jdbcType=VARCHAR}, #{pgCreatedUser,jdbcType=VARCHAR}, 
-      #{pgCreatedTime,jdbcType=TIMESTAMP}, #{pgUpdatedUser,jdbcType=VARCHAR}, #{pgUpdatedTime,jdbcType=TIMESTAMP}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="scb.dev.sms.sm.pojo.PositionGrant">
-    insert into sm_position_grant
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="pgPositionId != null">
-        pg_position_id,
-      </if>
-      <if test="pgMenuId != null">
-        pg_menu_id,
-      </if>
-      <if test="pgCreatedUser != null">
-        pg_created_user,
-      </if>
-      <if test="pgCreatedTime != null">
-        pg_created_time,
-      </if>
-      <if test="pgUpdatedUser != null">
-        pg_updated_user,
-      </if>
-      <if test="pgUpdatedTime != null">
-        pg_updated_time,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="pgPositionId != null">
-        #{pgPositionId,jdbcType=VARCHAR},
-      </if>
-      <if test="pgMenuId != null">
-        #{pgMenuId,jdbcType=VARCHAR},
-      </if>
-      <if test="pgCreatedUser != null">
-        #{pgCreatedUser,jdbcType=VARCHAR},
-      </if>
-      <if test="pgCreatedTime != null">
-        #{pgCreatedTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="pgUpdatedUser != null">
-        #{pgUpdatedUser,jdbcType=VARCHAR},
-      </if>
-      <if test="pgUpdatedTime != null">
-        #{pgUpdatedTime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="scb.dev.sms.sm.pojo.PositionGrant">
-    update sm_position_grant
-    <set>
-      <if test="pgCreatedUser != null">
-        pg_created_user = #{pgCreatedUser,jdbcType=VARCHAR},
-      </if>
-      <if test="pgCreatedTime != null">
-        pg_created_time = #{pgCreatedTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="pgUpdatedUser != null">
-        pg_updated_user = #{pgUpdatedUser,jdbcType=VARCHAR},
-      </if>
-      <if test="pgUpdatedTime != null">
-        pg_updated_time = #{pgUpdatedTime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where pg_position_id = #{pgPositionId,jdbcType=VARCHAR}
-      and pg_menu_id = #{pgMenuId,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="scb.dev.sms.sm.pojo.PositionGrant">
-    update sm_position_grant
-    set pg_created_user = #{pgCreatedUser,jdbcType=VARCHAR},
-      pg_created_time = #{pgCreatedTime,jdbcType=TIMESTAMP},
-      pg_updated_user = #{pgUpdatedUser,jdbcType=VARCHAR},
-      pg_updated_time = #{pgUpdatedTime,jdbcType=TIMESTAMP}
-    where pg_position_id = #{pgPositionId,jdbcType=VARCHAR}
-      and pg_menu_id = #{pgMenuId,jdbcType=VARCHAR}
-  </update>
+	<resultMap id="BaseResultMap"
+		type="scb.dev.sms.sm.pojo.PositionGrant">
+		<id column="pg_position_id" jdbcType="VARCHAR"
+			property="pgPositionId" />
+		<id column="pg_menu_id" jdbcType="VARCHAR" property="pgMenuId" />
+		<result column="pg_created_user" jdbcType="VARCHAR"
+			property="pgCreatedUser" />
+		<result column="pg_created_time" jdbcType="TIMESTAMP"
+			property="pgCreatedTime" />
+		<result column="pg_updated_user" jdbcType="VARCHAR"
+			property="pgUpdatedUser" />
+		<result column="pg_updated_time" jdbcType="TIMESTAMP"
+			property="pgUpdatedTime" />
+	</resultMap>
+	<resultMap id="MenuResultMap" type="scb.dev.sms.sm.pojo.Menu">
+		<!-- WARNING - @mbg.generated This element is automatically generated by 
+			MyBatis Generator, do not modify. This element was generated on Tue Nov 13 
+			15:20:27 CST 2018. -->
+		<id column="menu_id" jdbcType="VARCHAR" property="menuId" />
+		<result column="menu_name" jdbcType="VARCHAR"
+			property="menuName" />
+		<result column="menu_parentId" jdbcType="VARCHAR"
+			property="menuParentid" />
+		<result column="menu_orderId" jdbcType="VARCHAR"
+			property="menuOrderid" />
+		<result column="menu_url" jdbcType="VARCHAR" property="menuUrl" />
+		<result column="menu_updated_user" jdbcType="VARCHAR"
+			property="menuUpdatedUser" />
+		<result column="menu_updated_time" jdbcType="TIMESTAMP"
+			property="menuUpdatedTime" />
+		<result column="menu_created_user" jdbcType="VARCHAR"
+			property="menuCreatedUser" />
+		<result column="menu_created_time" jdbcType="TIMESTAMP"
+			property="menuCreatedTime" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		pg_position_id, pg_menu_id, pg_created_user,
+		pg_created_time, pg_updated_user,
+		pg_updated_time
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="map"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sm_position_grant
+		where pg_position_id =
+		#{pgPositionId,jdbcType=VARCHAR}
+		and pg_menu_id =
+		#{pgMenuId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="map">
+		delete from
+		sm_position_grant
+		where pg_position_id =
+		#{pgPositionId,jdbcType=VARCHAR}
+		and pg_menu_id =
+		#{pgMenuId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert"
+		parameterType="scb.dev.sms.sm.pojo.PositionGrant">
+		insert into sm_position_grant (pg_position_id,
+		pg_menu_id, pg_created_user,
+		pg_created_time, pg_updated_user,
+		pg_updated_time
+		)
+		values (#{pgPositionId,jdbcType=VARCHAR},
+		#{pgMenuId,jdbcType=VARCHAR},
+		#{pgCreatedUser,jdbcType=VARCHAR},
+		#{pgCreatedTime,jdbcType=TIMESTAMP},
+		#{pgUpdatedUser,jdbcType=VARCHAR}, #{pgUpdatedTime,jdbcType=TIMESTAMP}
+		)
+	</insert>
+	<insert id="insertSelective"
+		parameterType="scb.dev.sms.sm.pojo.PositionGrant">
+		insert into sm_position_grant
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="pgPositionId != null">
+				pg_position_id,
+			</if>
+			<if test="pgMenuId != null">
+				pg_menu_id,
+			</if>
+			<if test="pgCreatedUser != null">
+				pg_created_user,
+			</if>
+			<if test="pgCreatedTime != null">
+				pg_created_time,
+			</if>
+			<if test="pgUpdatedUser != null">
+				pg_updated_user,
+			</if>
+			<if test="pgUpdatedTime != null">
+				pg_updated_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="pgPositionId != null">
+				#{pgPositionId,jdbcType=VARCHAR},
+			</if>
+			<if test="pgMenuId != null">
+				#{pgMenuId,jdbcType=VARCHAR},
+			</if>
+			<if test="pgCreatedUser != null">
+				#{pgCreatedUser,jdbcType=VARCHAR},
+			</if>
+			<if test="pgCreatedTime != null">
+				#{pgCreatedTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="pgUpdatedUser != null">
+				#{pgUpdatedUser,jdbcType=VARCHAR},
+			</if>
+			<if test="pgUpdatedTime != null">
+				#{pgUpdatedTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="scb.dev.sms.sm.pojo.PositionGrant">
+		update sm_position_grant
+		<set>
+			<if test="pgCreatedUser != null">
+				pg_created_user = #{pgCreatedUser,jdbcType=VARCHAR},
+			</if>
+			<if test="pgCreatedTime != null">
+				pg_created_time = #{pgCreatedTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="pgUpdatedUser != null">
+				pg_updated_user = #{pgUpdatedUser,jdbcType=VARCHAR},
+			</if>
+			<if test="pgUpdatedTime != null">
+				pg_updated_time = #{pgUpdatedTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where pg_position_id = #{pgPositionId,jdbcType=VARCHAR}
+		and pg_menu_id
+		= #{pgMenuId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="scb.dev.sms.sm.pojo.PositionGrant">
+		update sm_position_grant
+		set pg_created_user =
+		#{pgCreatedUser,jdbcType=VARCHAR},
+		pg_created_time =
+		#{pgCreatedTime,jdbcType=TIMESTAMP},
+		pg_updated_user =
+		#{pgUpdatedUser,jdbcType=VARCHAR},
+		pg_updated_time =
+		#{pgUpdatedTime,jdbcType=TIMESTAMP}
+		where pg_position_id =
+		#{pgPositionId,jdbcType=VARCHAR}
+		and pg_menu_id =
+		#{pgMenuId,jdbcType=VARCHAR}
+	</update>
+	<select id="getOwnMenu" parameterType="java.lang.String"
+		resultMap="MenuResultMap">
+		select m.* from sm_menu m inner join sm_position_grant g on
+		m.menu_id =
+		g.pg_menu_id and
+		g.pg_position_id=#{pgPositionId,jdbcType=VARCHAR}
+	</select>
 </mapper>

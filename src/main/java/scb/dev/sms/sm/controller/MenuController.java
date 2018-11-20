@@ -13,6 +13,7 @@ import com.alibaba.fastjson.JSON;
 
 import scb.dev.sms.sm.pojo.Menu;
 import scb.dev.sms.sm.service.IMenuService;
+import scb.dev.sms.sm.service.IPositionGrantService;
 
 @RestController
 @RequestMapping("/menu")
@@ -21,13 +22,21 @@ public class MenuController {
 	@Resource
 	private IMenuService menuService;
 
+	@Resource
+	private IPositionGrantService positionGrantServie;
+
 	@PostMapping("/getMenu")
 	public Menu getMenu(String menuId) {
 		return menuService.queryMenu(menuId);
 	}
-	
+
+	@PostMapping("/getOwnMenu")
+	public String getOwnMenu(String positionId) {
+		return JSON.toJSONString(positionGrantServie.getOwnMenu(positionId));
+	}
+
 	@PostMapping("/getAllMenu")
-	public String getAllMenu(){
+	public String getAllMenu() {
 		return JSON.toJSONString(menuService.queryAllMenu());
 	}
 
@@ -43,6 +52,5 @@ public class MenuController {
 		menuService.updateMenu(menuId, menuName, menuOrderId, menuUrl, updateUserName);
 		return "";
 	}
-	
-	
+
 }
