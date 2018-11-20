@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="scb.dev.sms.sm.dao.RoleGroupDao">
+  <resultMap id="BaseResultMap" type="scb.dev.sms.sm.pojo.RoleGroup">
+    <id column="rolegroup_id" jdbcType="VARCHAR" property="rolegroupId" />
+    <result column="rolegroup_name" jdbcType="VARCHAR" property="rolegroupName" />
+    <result column="rolegroup_described" jdbcType="VARCHAR" property="rolegroupDescribed" />
+    <result column="rolegroup_updated_user" jdbcType="VARCHAR" property="rolegroupUpdatedUser" />
+    <result column="rolegroup_updated_time" jdbcType="TIMESTAMP" property="rolegroupUpdatedTime" />
+    <result column="rolegroup_created_user" jdbcType="VARCHAR" property="rolegroupCreatedUser" />
+    <result column="rolegroup_created_time" jdbcType="TIMESTAMP" property="rolegroupCreatedTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    rolegroup_id, rolegroup_name, rolegroup_described, rolegroup_updated_user, rolegroup_updated_time, 
+    rolegroup_created_user, rolegroup_created_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sm_rolegroup
+    where rolegroup_id = #{rolegroupId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sm_rolegroup
+    where rolegroup_id = #{rolegroupId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="scb.dev.sms.sm.pojo.RoleGroup">
+    insert into sm_rolegroup (rolegroup_id, rolegroup_name, rolegroup_described, 
+      rolegroup_updated_user, rolegroup_updated_time, 
+      rolegroup_created_user, rolegroup_created_time
+      )
+    values (#{rolegroupId,jdbcType=VARCHAR}, #{rolegroupName,jdbcType=VARCHAR}, #{rolegroupDescribed,jdbcType=VARCHAR}, 
+      #{rolegroupUpdatedUser,jdbcType=VARCHAR}, #{rolegroupUpdatedTime,jdbcType=TIMESTAMP}, 
+      #{rolegroupCreatedUser,jdbcType=VARCHAR}, #{rolegroupCreatedTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="scb.dev.sms.sm.pojo.RoleGroup">
+    insert into sm_rolegroup
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rolegroupId != null">
+        rolegroup_id,
+      </if>
+      <if test="rolegroupName != null">
+        rolegroup_name,
+      </if>
+      <if test="rolegroupDescribed != null">
+        rolegroup_described,
+      </if>
+      <if test="rolegroupUpdatedUser != null">
+        rolegroup_updated_user,
+      </if>
+      <if test="rolegroupUpdatedTime != null">
+        rolegroup_updated_time,
+      </if>
+      <if test="rolegroupCreatedUser != null">
+        rolegroup_created_user,
+      </if>
+      <if test="rolegroupCreatedTime != null">
+        rolegroup_created_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rolegroupId != null">
+        #{rolegroupId,jdbcType=VARCHAR},
+      </if>
+      <if test="rolegroupName != null">
+        #{rolegroupName,jdbcType=VARCHAR},
+      </if>
+      <if test="rolegroupDescribed != null">
+        #{rolegroupDescribed,jdbcType=VARCHAR},
+      </if>
+      <if test="rolegroupUpdatedUser != null">
+        #{rolegroupUpdatedUser,jdbcType=VARCHAR},
+      </if>
+      <if test="rolegroupUpdatedTime != null">
+        #{rolegroupUpdatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rolegroupCreatedUser != null">
+        #{rolegroupCreatedUser,jdbcType=VARCHAR},
+      </if>
+      <if test="rolegroupCreatedTime != null">
+        #{rolegroupCreatedTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="scb.dev.sms.sm.pojo.RoleGroup">
+    update sm_rolegroup
+    <set>
+      <if test="rolegroupName != null">
+        rolegroup_name = #{rolegroupName,jdbcType=VARCHAR},
+      </if>
+      <if test="rolegroupDescribed != null">
+        rolegroup_described = #{rolegroupDescribed,jdbcType=VARCHAR},
+      </if>
+      <if test="rolegroupUpdatedUser != null">
+        rolegroup_updated_user = #{rolegroupUpdatedUser,jdbcType=VARCHAR},
+      </if>
+      <if test="rolegroupUpdatedTime != null">
+        rolegroup_updated_time = #{rolegroupUpdatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rolegroupCreatedUser != null">
+        rolegroup_created_user = #{rolegroupCreatedUser,jdbcType=VARCHAR},
+      </if>
+      <if test="rolegroupCreatedTime != null">
+        rolegroup_created_time = #{rolegroupCreatedTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where rolegroup_id = #{rolegroupId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="scb.dev.sms.sm.pojo.RoleGroup">
+    update sm_rolegroup
+    set rolegroup_name = #{rolegroupName,jdbcType=VARCHAR},
+      rolegroup_described = #{rolegroupDescribed,jdbcType=VARCHAR},
+      rolegroup_updated_user = #{rolegroupUpdatedUser,jdbcType=VARCHAR},
+      rolegroup_updated_time = #{rolegroupUpdatedTime,jdbcType=TIMESTAMP},
+      rolegroup_created_user = #{rolegroupCreatedUser,jdbcType=VARCHAR},
+      rolegroup_created_time = #{rolegroupCreatedTime,jdbcType=TIMESTAMP}
+    where rolegroup_id = #{rolegroupId,jdbcType=VARCHAR}
+  </update>
+</mapper>
