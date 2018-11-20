@@ -25,7 +25,8 @@
 	<sql id="Base_Column_List">
 		menu_id, menu_name, menu_parentId, menu_orderId, menu_url,
 		menu_updated_user, menu_updated_time,
-		menu_created_user, menu_created_time
+		menu_created_user,
+		menu_created_time
 	</sql>
 	<select id="selectByPrimaryKey" parameterType="java.lang.String"
 		resultMap="BaseResultMap">
@@ -35,17 +36,21 @@
 		where menu_id = #{menuId,jdbcType=VARCHAR}
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-		delete from sm_menu
+		delete from
+		sm_menu
 		where menu_id = #{menuId,jdbcType=VARCHAR}
 	</delete>
 	<insert id="insert" parameterType="scb.dev.sms.sm.pojo.Menu">
-		insert into sm_menu (menu_id, menu_name, menu_parentId,
+		insert into sm_menu (menu_id,
+		menu_name, menu_parentId,
 		menu_orderId, menu_url, menu_updated_user,
 		menu_updated_time, menu_created_user, menu_created_time
 		)
-		values (#{menuId,jdbcType=VARCHAR}, #{menuName,jdbcType=VARCHAR},
+		values
+		(#{menuId,jdbcType=VARCHAR}, #{menuName,jdbcType=VARCHAR},
 		#{menuParentid,jdbcType=VARCHAR},
-		#{menuOrderid,jdbcType=VARCHAR}, #{menuUrl,jdbcType=VARCHAR}, #{menuUpdatedUser,jdbcType=VARCHAR},
+		#{menuOrderid,jdbcType=VARCHAR},
+		#{menuUrl,jdbcType=VARCHAR}, #{menuUpdatedUser,jdbcType=VARCHAR},
 		#{menuUpdatedTime,jdbcType=TIMESTAMP},
 		#{menuCreatedUser,jdbcType=VARCHAR},
 		#{menuCreatedTime,jdbcType=TIMESTAMP}
@@ -133,13 +138,15 @@
 				menu_updated_user = #{menuUpdatedUser,jdbcType=VARCHAR},
 			</if>
 			<if test="menuUpdatedTime != null">
-				menu_updated_time = #{menuUpdatedTime,jdbcType=TIMESTAMP},
+				menu_updated_time =
+				#{menuUpdatedTime,jdbcType=TIMESTAMP},
 			</if>
 			<if test="menuCreatedUser != null">
 				menu_created_user = #{menuCreatedUser,jdbcType=VARCHAR},
 			</if>
 			<if test="menuCreatedTime != null">
-				menu_created_time = #{menuCreatedTime,jdbcType=TIMESTAMP},
+				menu_created_time =
+				#{menuCreatedTime,jdbcType=TIMESTAMP},
 			</if>
 		</set>
 		where menu_id = #{menuId,jdbcType=VARCHAR}
@@ -147,14 +154,30 @@
 	<update id="updateByPrimaryKey"
 		parameterType="scb.dev.sms.sm.pojo.Menu">
 		update sm_menu
-		set menu_name = #{menuName,jdbcType=VARCHAR},
-		menu_parentId = #{menuParentid,jdbcType=VARCHAR},
-		menu_orderId = #{menuOrderid,jdbcType=VARCHAR},
-		menu_url = #{menuUrl,jdbcType=VARCHAR},
-		menu_updated_user = #{menuUpdatedUser,jdbcType=VARCHAR},
-		menu_updated_time = #{menuUpdatedTime,jdbcType=TIMESTAMP},
-		menu_created_user = #{menuCreatedUser,jdbcType=VARCHAR},
-		menu_created_time = #{menuCreatedTime,jdbcType=TIMESTAMP}
-		where menu_id = #{menuId,jdbcType=VARCHAR}
+		set menu_name =
+		#{menuName,jdbcType=VARCHAR},
+		menu_parentId =
+		#{menuParentid,jdbcType=VARCHAR},
+		menu_orderId =
+		#{menuOrderid,jdbcType=VARCHAR},
+		menu_url =
+		#{menuUrl,jdbcType=VARCHAR},
+		menu_updated_user =
+		#{menuUpdatedUser,jdbcType=VARCHAR},
+		menu_updated_time =
+		#{menuUpdatedTime,jdbcType=TIMESTAMP},
+		menu_created_user =
+		#{menuCreatedUser,jdbcType=VARCHAR},
+		menu_created_time =
+		#{menuCreatedTime,jdbcType=TIMESTAMP}
+		where menu_id =
+		#{menuId,jdbcType=VARCHAR}
 	</update>
+	<select id="selectAllMenu" resultMap="BaseResultMap">
+		select
+		*
+		from
+		sm_menu
+	</select>
+
 </mapper>

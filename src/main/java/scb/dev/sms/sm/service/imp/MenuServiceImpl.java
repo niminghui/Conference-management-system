@@ -10,6 +10,7 @@ import scb.dev.sms.sm.dao.MenuDao;
 import scb.dev.sms.sm.pojo.Menu;
 import scb.dev.sms.sm.pojo.Menu.Builder;
 import scb.dev.sms.sm.service.IMenuService;
+import scb.dev.sms.util.factory.ToolFactory;
 
 /**
  * 
@@ -30,7 +31,8 @@ public class MenuServiceImpl implements IMenuService {
 
 	@Override
 	public List<Menu> queryAllMenu() {
-		return null;
+		List<Menu> menuList = menuDao.selectAllMenu();
+		return ToolFactory.getInstanceOfMenuTreeUtil().turnedToMenuTree(menuList);
 	}
 
 	@Override

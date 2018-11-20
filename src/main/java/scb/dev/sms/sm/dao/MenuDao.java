@@ -1,5 +1,7 @@
 package scb.dev.sms.sm.dao;
 
+import java.util.List;
+
 import scb.dev.sms.sm.pojo.Menu;
 
 public interface MenuDao {
@@ -39,4 +41,6 @@ public interface MenuDao {
 	 * @mbg.generated  Tue Nov 13 16:30:40 CST 2018
 	 */
 	int updateByPrimaryKey(Menu record);
+	
+	List<Menu> selectAllMenu();
 }
