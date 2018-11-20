@@ -48,7 +48,7 @@
   <sql id="Blob_Column_List">
     employee_image
   </sql>
-  <select id="getCountEmployee" resultType="java.lang.Integer">
+  <select id="getCountEmployee" parameterType="java.lang.String" resultType="java.lang.Integer">
   	select 
   	count(e.employee_id)
   	from sm_employee e
@@ -57,6 +57,10 @@
   	inner join sm_position p on p.position_id=e.position_id
   	inner join sm_department d on d.department_id=e.department_id
   	where employee_status='001'
+  	<if test = "_parameter!=''">
+  		and employee_name like "%"#{employeeName}"%"
+  	</if>
+  	
   </select>
   <select id="selectAllEmployeeWithAddAndCon" resultMap="employeeWithAddressAndContact">
   	select
@@ -73,7 +77,7 @@
   	order by employee_created_time desc
   	limit #{toPageNo}, #{pageSize}
   </select>
-  <select id="selectByEmployeeNameWithAddAndCon" parameterType="java.lang.String" resultMap="employeeWithAddressAndContact">
+  <select id="selectByEmployeeNameWithAddAndCon" resultMap="employeeWithAddressAndContact">
   	select
   	<include refid="Join_Column_List"></include>
   	,
@@ -85,8 +89,9 @@
   	inner join sm_position p on p.position_id=e.position_id
   	inner join sm_department d on d.department_id=e.department_id
   	where employee_status='001'
-  	and employee_name=#{employeeName,jdbcType=VARCHAR}
+  	and employee_name like "%"#{employeeName,jdbcType=VARCHAR}"%"
   	order by employee_created_time desc
+  	limit #{toPageNo}, #{pageSize}
   </select>
   <select id="selectByEmployeeIdWithAddAndCon" parameterType="java.lang.String" resultMap="employeeWithAddressAndContact">
   	select

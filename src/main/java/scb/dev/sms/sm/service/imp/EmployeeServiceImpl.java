@@ -47,13 +47,11 @@ public class EmployeeServiceImpl implements IEmployeeService {
 	private Logger logger = Logger.getLogger(Logger.class);
 	
 	@Override
-	public String initEmployee(Employee employee) {
+	public String initEmployee(Employee employee,EmployeeAddress employeeAddress,
+			EmployeeContactInfo employeeContactInfo) {
 		logger.info("initEmployee");
 		try {
-			String employeeId=TokenIDFactory.getUUID();
-			
-			EmployeeAddress employeeAddress=employee.getEmployeeAddress();
-			EmployeeContactInfo employeeContactInfo=employee.getEmployeeContactInfo();
+			String employeeId=TokenIDFactory.getUUID();		
 			
 			employee.setEmployeeId(employeeId);
 			employeeAddress.setEmployeeId(employeeId);
@@ -74,12 +72,13 @@ public class EmployeeServiceImpl implements IEmployeeService {
 	}
 
 	@Override
-	public String editEmployee(Employee employee) {
+	public String editEmployee(Employee employee,EmployeeAddress employeeAddress,
+			EmployeeContactInfo employeeContactInfo) {
 		logger.info("editEmployee");
 		try {
 			employeeDao.updateByEmployeeIdSelective(employee);
-			employeeAddressDao.updateByPrimaryKeySelective(employee.getEmployeeAddress());
-			employeeContactInfoDao.updateByPrimaryKeySelective(employee.getEmployeeContactInfo());
+			employeeAddressDao.updateByPrimaryKeySelective(employeeAddress);
+			employeeContactInfoDao.updateByPrimaryKeySelective(employeeContactInfo);
 		}catch(Exception e) {
 			logger.error(CommonData.UPDATE_FAILURE);
 			return CommonData.UPDATE_FAILURE;
@@ -187,9 +186,9 @@ public class EmployeeServiceImpl implements IEmployeeService {
 	}
 
 	@Override
-	public int getCountEmployee() {
+	public int getCountEmployee(String employeeName) {
 		logger.info("getCountEmployee");
-		return employeeDao.getCountEmployee();
+		return employeeDao.getCountEmployee(employeeName);
 	}
 	
 

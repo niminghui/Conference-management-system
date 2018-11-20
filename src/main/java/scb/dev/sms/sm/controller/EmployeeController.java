@@ -17,7 +17,7 @@ import scb.dev.sms.sm.service.IEmployeeService;
 import scb.dev.sms.util.tool.PagingVO;
 
 @Controller
-@RequestMapping("/employee")
+@RequestMapping("/sm")
 public class EmployeeController {
 	
 	@Resource
@@ -25,7 +25,7 @@ public class EmployeeController {
 	//页码对象
 	private PagingVO pagingVO=new PagingVO();
 	
-	private List<Employee> employeeList;
+	private List<Employee> employees;
 	
 	/**
 	 * 
@@ -39,21 +39,10 @@ public class EmployeeController {
 	 */
 	@RequestMapping(value="/employeeList",method=RequestMethod.GET)
 	public String queryAllEmployeeInfo(Model model,Integer page) {
-		//设置总页数
-		pagingVO.setTotalCount(this.employeeService.getCountEmployee());
-        if (page == null || page == 0) {
-            pagingVO.setToPageNo(1);
-            employeeList = this.employeeService.queryAllEmployee(pagingVO);
-        } else {
-            pagingVO.setToPageNo(page);//设置要前往的页码
-            employeeList = this.employeeService.queryAllEmployee(pagingVO);
-        }
-        if(null!=employeeList){
-        model.addAttribute("employeeList", employeeList);
-        model.addAttribute("pagingVO", pagingVO);
-        }
 		
-		return "employeeList";
+		paging(model,page);
+		
+		return "sms/employee_list";
 	}
 	
 	/**
@@ -66,11 +55,11 @@ public class EmployeeController {
 	 * @return: String      
 	 * @throws
 	 */
-	@RequestMapping(value="/employeeQuery",method=RequestMethod.GET)
+	@RequestMapping(value="/queryOneEmployee",method=RequestMethod.GET)
 	public String queryEmployeeById(Model model,String employeeId) {
 		Employee employee = employeeService.queryByEmployeeId(employeeId);
 		model.addAttribute("employee", employee);
-		return "";
+		return "sms/employee";
 	}
 	
 	
@@ -94,25 +83,12 @@ public class EmployeeController {
 		employee.setEmployeeCreatedUser((String)request.getSession().getAttribute("account"));
 		//设置职位更改人
 		employee.setEmployeeUpdatedUser(employee.getEmployeeCreatedUser());
-		employee.setEmployeeAddress(employeeAddress);
-		employee.setEmployeeContactInfo(employeeContactInfo);
 		
-		employeeService.initEmployee(employee);
+		employeeService.initEmployee(employee,employeeAddress,employeeContactInfo);
 		
-		pagingVO.setTotalCount(this.employeeService.getCountEmployee());
-        if (page == null || page == 0) {
-            pagingVO.setToPageNo(1);
-            employeeList = this.employeeService.queryAllEmployee(pagingVO);
-        } else {
-            pagingVO.setToPageNo(page);//设置要前往的页码
-            employeeList = this.employeeService.queryAllEmployee(pagingVO);
-        }
-        if(null!=employeeList){
-        model.addAttribute("employeeList", employeeList);
-        model.addAttribute("pagingVO", pagingVO);
-        }
+		paging(model,page);
 		
-        return "employeeList";
+        return "sms/employee_list";
 	}
 	
 	/**
@@ -136,7 +112,7 @@ public class EmployeeController {
 			
 		}
 
-		return "sms/position_edit";
+		return "sms/employee_edit";
 	}
 	
 	/**
@@ -155,25 +131,40 @@ public class EmployeeController {
 	public String editEmployee(HttpServletRequest request, Model model,Integer page,
 			Employee employee,EmployeeAddress employeeAddress,EmployeeContactInfo employeeContactInfo) {
 		employee.setEmployeeUpdatedUser((String)request.getSession().getAttribute("account"));
-		employee.setEmployeeAddress(employeeAddress);
-		employee.setEmployeeContactInfo(employeeContactInfo);
 		
-		employeeService.editEmployee(employee);
+		employeeService.editEmployee(employee,employeeAddress,employeeContactInfo);
+		paging(model,page);
 		
-		pagingVO.setTotalCount(this.employeeService.getCountEmployee());
-        if (page == null || page == 0) {
-            pagingVO.setToPageNo(1);
-            employeeList = this.employeeService.queryAllEmployee(pagingVO);
-        } else {
-            pagingVO.setToPageNo(page);//设置要前往的页码
-            employeeList = this.employeeService.queryAllEmployee(pagingVO);
-        }
-        if(null!=employeeList){
-        model.addAttribute("employeeList", employeeList);
-        model.addAttribute("pagingVO", pagingVO);
-        }
-		
-        return "employeeList";
+        return "sms/employee_list";
 	}
 	
+	
+	
+	
+	
+	/**
+	 * 
+	 * paging:(分页查询操作). <br/>
+	 * @param model 
+	 * @param page 当前页数
+	 *
+	 * @author ryan.li
+	 * @since JDK 1.8
+	 */
+	public void paging(Model model,Integer page) {
+		
+		pagingVO.setTotalCount(this.employeeService.getCountEmployee(""));
+		System.out.println(pagingVO.getTotalCount());
+        if (page == null || page == 0) {
+            pagingVO.setToPageNo(1);
+            employees = this.employeeService.queryAllEmployee(pagingVO);
+        } else {
+            pagingVO.setToPageNo(page);//设置要前往的页码
+            employees = this.employeeService.queryAllEmployee(pagingVO);
+        }
+        if(null!=employees){
+        model.addAttribute("employees", employees);
+        model.addAttribute("pagingVO", pagingVO);
+        }
+	}
 }
