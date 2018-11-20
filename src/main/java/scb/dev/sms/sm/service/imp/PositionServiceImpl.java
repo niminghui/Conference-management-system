@@ -23,7 +23,7 @@ import scb.dev.sms.util.tool.PagingVO;
  * @Copyright: 2018 www.tydic.com Inc. All rights reserved.
  */
 @Service
-public class PositionServiceImp implements IPositionService {
+public class PositionServiceImpl implements IPositionService {
 
 	private Logger logger=Logger.getLogger(this.getClass());
 	

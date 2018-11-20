@@ -16,6 +16,7 @@ import scb.dev.sms.sm.pojo.EmployeeContactInfo;
 import scb.dev.sms.sm.service.IAccountService;
 import scb.dev.sms.sm.service.IEmployeeService;
 import scb.dev.sms.util.factory.TokenIDFactory;
+import scb.dev.sms.util.tool.PagingVO;
 
 /**
  * 
@@ -88,9 +89,9 @@ public class EmployeeServiceImpl implements IEmployeeService {
 	}
 
 	@Override
-	public List<Employee> queryAllEmployee() {
+	public List<Employee> queryAllEmployee(PagingVO pageVO) {
 		logger.info("queryAllEmployee");
-		employeeList = employeeDao.selectAllEmployeeWithAddAndCon();
+		employeeList = employeeDao.selectAllEmployeeWithAddAndCon(pageVO);
 		if(employeeList!=null) {
 			logger.error(CommonData.QUERY_SUCCESS);
 			return employeeList;
@@ -183,6 +184,12 @@ public class EmployeeServiceImpl implements IEmployeeService {
 			logger.error(CommonData.QUERY_FAILURE);
 			return null;
 		}
+	}
+
+	@Override
+	public int getCountEmployee() {
+		logger.info("getCountEmployee");
+		return employeeDao.getCountEmployee();
 	}
 	
 

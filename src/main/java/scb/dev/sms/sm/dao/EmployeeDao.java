@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import scb.dev.sms.sm.pojo.Employee;
+import scb.dev.sms.util.tool.PagingVO;
 
 /**
  * 
@@ -166,7 +167,7 @@ public interface EmployeeDao {
      *@return 查到的员工对象集合
      * @mbg.generated 2018-11-14
      */
-    List<Employee> selectAllEmployeeWithAddAndCon();
+    List<Employee> selectAllEmployeeWithAddAndCon(PagingVO pageVo);
     
     
     /**
@@ -189,5 +190,11 @@ public interface EmployeeDao {
      * @mbg.generated 2018-11-14
      */
     int updateByEmployeeId(Employee record);
+   
+    /**
+     *查询员工数量
+     * @mbg.generated 2018-11-14
+     */
+    int getCountEmployee();
     int deleteDepartmentInEmployee(@Param("employeeStatus")String employeeStatus,  @Param("departmentId")String departmentId);
 }
