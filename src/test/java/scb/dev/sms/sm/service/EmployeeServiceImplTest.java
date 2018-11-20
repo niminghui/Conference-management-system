@@ -10,8 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.alibaba.fastjson.JSONObject;
-
 import scb.dev.sms.common.CommonData;
 import scb.dev.sms.sm.pojo.Employee;
 import scb.dev.sms.sm.pojo.EmployeeAddress;
@@ -35,11 +33,12 @@ public class EmployeeServiceImplTest {
 	private IEmployeeService employeeService;
 	
 	private Employee employee;
-	
+	private EmployeeAddress employeeAddress;
+	private EmployeeContactInfo employeeContactInfo;
 	@Before
 	public void setUp() throws Exception {
-		EmployeeAddress employeeAddress=new EmployeeAddress("a22b77ae681c45929b6a2301139c3638","河北省石家庄市井陉县","河北省石家庄市无极县");
-		EmployeeContactInfo employeeContactInfo = new EmployeeContactInfo("a22b77ae681c45929b6a2301139c3638","85701234", "15267945623", "ryan.li@sc.com");
+		employeeAddress=new EmployeeAddress("a22b77ae681c45929b6a2301139c3638","河北省石家庄市井陉县","河北省石家庄市无极县");
+		employeeContactInfo = new EmployeeContactInfo("a22b77ae681c45929b6a2301139c3638","85701234", "15267945623", "ryan.li@sc.com");
 		employee = new Employee("a22b77ae681c45929b6a2301139c3638", "田广利", "Jerry", "男",
 				"127ab7d18903fe0916ac74df896cdac6", "0c8723ad251acd5225fbc56743d813ad", "002", "华钦", "1467312",
 				"1467312", "1592345");
@@ -54,13 +53,13 @@ public class EmployeeServiceImplTest {
 	@Test
 	public void testInitEmployee() {
 		
-		assertEquals(CommonData.SAVE_SUCCESS, employeeService.initEmployee(employee));
+		assertEquals(CommonData.SAVE_SUCCESS, employeeService.initEmployee(employee,employeeAddress,employeeContactInfo));
 	}
 
 	@Test
 	public void testEditEmployee() {
 		
-		assertEquals(CommonData.UPDATE_SUCCESS, employeeService.editEmployee(employee));
+		assertEquals(CommonData.UPDATE_SUCCESS, employeeService.editEmployee(employee,employeeAddress,employeeContactInfo));
 	}
 
 	@Test
@@ -107,7 +106,7 @@ public class EmployeeServiceImplTest {
 	
 	@Test
 	public void testGetCountEmployee() {
-		assertEquals(2, employeeService.getCountEmployee());
+		assertEquals(1, employeeService.getCountEmployee("and employee_name like '%田广利%'"));
 		
 	}
 

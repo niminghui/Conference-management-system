@@ -195,6 +195,8 @@ public interface EmployeeDao {
      *查询员工数量
      * @mbg.generated 2018-11-14
      */
-    int getCountEmployee();
+    int getCountEmployee(String employeeName);
+    
+    
     int deleteDepartmentInEmployee(@Param("employeeStatus")String employeeStatus,  @Param("departmentId")String departmentId);
 }

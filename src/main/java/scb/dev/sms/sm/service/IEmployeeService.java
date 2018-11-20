@@ -3,6 +3,8 @@ package scb.dev.sms.sm.service;
 import java.util.List;
 
 import scb.dev.sms.sm.pojo.Employee;
+import scb.dev.sms.sm.pojo.EmployeeAddress;
+import scb.dev.sms.sm.pojo.EmployeeContactInfo;
 import scb.dev.sms.util.tool.PagingVO;
 /**
  * ClassName: IEmployeeService <br/>
@@ -19,14 +21,16 @@ public interface IEmployeeService {
 	 * @param employee:要增加的员工信息
 	 * @return 添加结果信息
 	 */
-	String initEmployee(Employee employee);
+	String initEmployee(Employee employee,EmployeeAddress employeeAddress,
+			EmployeeContactInfo employeeContactInfo);
 	
 	/**
 	 * editEmployee:编辑员工信息. <br/>
 	 * @param employee:要编辑的员工信息
 	 * @return 编辑结果信息
 	 */
-	String editEmployee(Employee employee);
+	String editEmployee(Employee employee,EmployeeAddress employeeAddress,
+			EmployeeContactInfo employeeContactInfo);
 	
 	/**
 	 * queryAllEmployee:查询全部员工. <br/>
@@ -82,5 +86,5 @@ public interface IEmployeeService {
 	 * @param 
 	 * @return 员工数量
 	 */
-	int getCountEmployee();
+	int getCountEmployee(String employeeName);
 }
