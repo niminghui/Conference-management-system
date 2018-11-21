@@ -4,8 +4,10 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,7 +22,7 @@ import scb.dev.sms.sm.service.IPositionGrantService;
  *
  */
 @RestController
-@RequestMapping("/menu")
+@RequestMapping(value="/menu",produces="text/html;charset=utf-8")
 public class MenuController {
 
 	@Resource
@@ -56,5 +58,13 @@ public class MenuController {
 		menuService.updateMenu(menuId, menuName, menuOrderId, menuUrl, updateUserName);
 		return "";
 	}
+	
+	@RequestMapping(value="/menuList",method=RequestMethod.GET)
+	public String showMenu() {
+		return "redirect:index.jsp";
+	}
+	
+	
+	
 
 }
