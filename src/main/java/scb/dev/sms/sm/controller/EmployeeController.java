@@ -73,22 +73,23 @@ public class EmployeeController {
 	 */
 	@RequestMapping(value = "/goAddEmployee", method = RequestMethod.GET)
 	public String goAddEmployee() {
-		return "sms/employee_add";
+		return "employee_add";
 	}
 	
-	@RequestMapping(value="/addEmployee",method=RequestMethod.GET)
-	public String addEmployee(Model model,Integer page,Employee employee,EmployeeAddress employeeAddress,
+	@RequestMapping(value="/addEmployee",method=RequestMethod.POST)
+	public String addEmployee(Model model,Integer page,Employee employee,EmployeeAddress address,
 			EmployeeContactInfo employeeContactInfo,HttpServletRequest request) {
 		
-		employee.setEmployeeCreatedUser((String)request.getSession().getAttribute("account"));
+		//employee.setEmployeeCreatedUser((String)request.getSession().getAttribute("account"));
+		employee.setEmployeeCreatedUser("0dea625ffbac4a64b5cb264bc7932357");
 		//设置职位更改人
 		employee.setEmployeeUpdatedUser(employee.getEmployeeCreatedUser());
 		
-		employeeService.initEmployee(employee,employeeAddress,employeeContactInfo);
+		employeeService.initEmployee(employee,address,employeeContactInfo);
 		
 		paging(model,page);
 		
-        return "sms/employee_list";
+        return "employee_list";
 	}
 	
 	/**

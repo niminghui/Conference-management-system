@@ -15,6 +15,7 @@ import scb.dev.sms.sm.pojo.Employee;
 import scb.dev.sms.sm.pojo.EmployeeAddress;
 import scb.dev.sms.sm.pojo.EmployeeContactInfo;
 import scb.dev.sms.sm.service.IEmployeeService;
+import scb.dev.sms.sm.service.imp.EmployeeServiceImpl;
 import scb.dev.sms.util.tool.PagingVO;
 /**
  * ClassName: EmployeeServiceImplTest <br/>
@@ -37,9 +38,9 @@ public class EmployeeServiceImplTest {
 	private EmployeeContactInfo employeeContactInfo;
 	@Before
 	public void setUp() throws Exception {
-		employeeAddress=new EmployeeAddress("a22b77ae681c45929b6a2301139c3638","河北省石家庄市井陉县","河北省石家庄市无极县");
-		employeeContactInfo = new EmployeeContactInfo("a22b77ae681c45929b6a2301139c3638","85701234", "15267945623", "ryan.li@sc.com");
-		employee = new Employee("a22b77ae681c45929b6a2301139c3638", "田广利", "Jerry", "男",
+		employeeAddress=new EmployeeAddress("363877ae681c45929b6a2301139c3638","河北省石家庄市井陉县","河北省石家庄市无极县");
+		employeeContactInfo = new EmployeeContactInfo("363877ae681c45929b6a2301139c3638","85701234", "15267945623", "ryan.li@sc.com");
+		employee = new Employee("363877ae681c45929b6a2301139c3638", "田文宇", "Jac.Tian", "男",
 				"127ab7d18903fe0916ac74df896cdac6", "0c8723ad251acd5225fbc56743d813ad", "002", "华钦", "1467312",
 				"1467312", "1592345");
 		employee.setEmployeeAddress(employeeAddress);
@@ -106,8 +107,14 @@ public class EmployeeServiceImplTest {
 	
 	@Test
 	public void testGetCountEmployee() {
-		assertEquals(1, employeeService.getCountEmployee("and employee_name like '%田广利%'"));
+		assertEquals(1, employeeService.getCountEmployee("田广利"));
 		
 	}
-
+	@Test
+	public void testSetWorkId() {
+		EmployeeServiceImpl e = new EmployeeServiceImpl();
+		
+		e.setWorkId(employee);
+		
+	}
 }
