@@ -36,11 +36,11 @@
 		<property name="username" value="${jdbc.username}" />
 		<property name="password" value="${jdbc.password}" />
 		<!-- 配置初始化大小 最小 最大 --> 
-	  	<property name="initialSize" value="${initialSize}" /> 
-	  	<property name="minIdle" value="${minIdle}" /> 
-	  	<property name="maxActive" value="${maxActive}" />
+	  	<property name="initialSize" value="${jdbc.initialSize}" /> 
+	  	<property name="minIdle" value="${jdbc.minIdle}" /> 
+	  	<property name="maxActive" value="${jdbc.maxActive}" />
 	 	<!-- 配置获取连接等待超时的时间 --> 
-	  	<property name="maxWait" value="${maxWait}" />
+	  	<property name="maxWait" value="${jdbc.maxWait}" />
 	</bean>
 
 	<!-- SqlSessionFactory配置 -->
