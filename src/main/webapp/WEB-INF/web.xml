@@ -37,7 +37,7 @@
 			默认加载的是/WEB-INF/servlet名称-servlet.xml（即springmvc-servlet.xml） -->
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>/WEB-INF/spring-mvc.xml</param-value>
+			<param-value>/WEB-INF/conf/spring-mvc.xml</param-value>
 		</init-param>
 		<!-- 表示servlet随服务启动 -->
 		<load-on-startup>1</load-on-startup>

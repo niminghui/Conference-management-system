@@ -14,7 +14,11 @@ import com.alibaba.fastjson.JSON;
 import scb.dev.sms.sm.pojo.Menu;
 import scb.dev.sms.sm.service.IMenuService;
 import scb.dev.sms.sm.service.IPositionGrantService;
-
+/**
+ * 
+ * @author Weilei
+ *
+ */
 @RestController
 @RequestMapping("/menu")
 public class MenuController {
