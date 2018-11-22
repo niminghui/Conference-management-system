@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import scb.dev.sms.common.CommonData;
 import scb.dev.sms.sm.service.IAccountService;
@@ -90,15 +91,13 @@ public class AccountController {
 	}
 
 	@PostMapping("/login")
-	public String login(HttpServletRequest request, HttpServletResponse response) {
-		String uyzm = request.getParameter("uyzm");
+	public String login(HttpServletRequest request, @RequestParam("uyzm") String uyzm,
+			@RequestParam("uid") String account_name, @RequestParam("upwd") String account_pwd) {
 		String yzm = request.getSession().getAttribute("yzm").toString();
 		if (!yzm.equals(uyzm)) {
 			request.getSession().setAttribute("message", CommonData.STRING_YZMERROR);
 			return "redirect:index.jsp";
 		}
-		String account_name = request.getParameter("uid").trim();
-		String account_pwd = request.getParameter("upwd").trim();
 		String info = accountService.validateAccount(account_name, account_pwd);
 		if (info.equals(CommonData.STRING_SUCCESS)) {
 			String account_id = accountService.getAccountID(account_name);
