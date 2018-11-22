@@ -13,10 +13,10 @@ import org.springframework.stereotype.Service;
 
 import scb.dev.sms.common.CommonData;
 import scb.dev.sms.sm.dao.AccountDao;
+import scb.dev.sms.sm.dao.EmployeeDao;
 import scb.dev.sms.sm.pojo.Account;
 import scb.dev.sms.sm.pojo.Employee;
 import scb.dev.sms.sm.service.IAccountService;
-import scb.dev.sms.sm.service.IEmployeeService;
 import scb.dev.sms.util.factory.TokenIDFactory;
 import scb.dev.sms.util.tool.MD5Utils;
 
@@ -35,7 +35,7 @@ public class AccountServiceImpl implements IAccountService {
 	private AccountDao accountDao;
 
 	@Autowired
-	private IEmployeeService employeeService;
+	private EmployeeDao employeeDao;
 
 	/**
 	 * Description: 创建职员时调用此方法，用于同步初始化职员账户. 创建成功时返回，用户的初始密码。
@@ -65,7 +65,9 @@ public class AccountServiceImpl implements IAccountService {
 		Account account = accountDao.selectByAccountName(account_name);
 		if (account == null)
 			return CommonData.STRING_ACCOUNT_NOTFOUND;
-		Employee employee = employeeService.queryByEmployeeId(account.getAccountId());
+		Employee employee = employeeDao.selectByEmployeeId(account.getAccountId());
+		if (employee == null)
+			return CommonData.STRING_ACCOUNT_NOTFOUND;
 		// 当职员账户未激活或离职时，不予登录
 		if (CommonData.STATUS_UNUSED.equals(employee.getEmployeeStatus())) {
 			return CommonData.STRING_ACCOUNT_NOTACTIVATED;
