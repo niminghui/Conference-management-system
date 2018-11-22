@@ -14,7 +14,9 @@ import org.springframework.stereotype.Service;
 import scb.dev.sms.common.CommonData;
 import scb.dev.sms.sm.dao.AccountDao;
 import scb.dev.sms.sm.pojo.Account;
+import scb.dev.sms.sm.pojo.Employee;
 import scb.dev.sms.sm.service.IAccountService;
+import scb.dev.sms.sm.service.IEmployeeService;
 import scb.dev.sms.util.factory.TokenIDFactory;
 import scb.dev.sms.util.tool.MD5Utils;
 
@@ -32,8 +34,11 @@ public class AccountServiceImpl implements IAccountService {
 	@Autowired
 	private AccountDao accountDao;
 
+	@Autowired
+	private IEmployeeService employeeService;
+
 	/**
-	 * Description: 创建职员时调用此方法，用于同步初始化职员账户.
+	 * Description: 创建职员时调用此方法，用于同步初始化职员账户. 创建成功时返回，用户的初始密码。
 	 * 
 	 * @see scb.dev.sms.sm.service.IAccountService#initAccount(java.lang.String)
 	 */
@@ -45,8 +50,9 @@ public class AccountServiceImpl implements IAccountService {
 		// 账户初始名称为职员昵称
 		account.setAccountName(employee_nickname);
 		// 账户初始密码随机生成
-		account.setAccountPassword(TokenIDFactory.get8BitUUID());
-		return accountDao.insert(account) == 1 ? CommonData.STRING_SUCCESS : CommonData.STRING_FAILURE;
+		String password = TokenIDFactory.get8BitUUID();
+		account.setAccountPassword(MD5Utils.MD5(password));
+		return accountDao.insert(account) == 1 ? password : CommonData.STRING_FAILURE;
 	}
 
 	/**
@@ -59,9 +65,17 @@ public class AccountServiceImpl implements IAccountService {
 		Account account = accountDao.selectByAccountName(account_name);
 		if (account == null)
 			return CommonData.STRING_ACCOUNT_NOTFOUND;
-		String password = MD5Utils.MD5(account_pwd);
-		if (account.getAccountName().equals(account_name) && account.getAccountPassword().equals(password))
-			return CommonData.STRING_SUCCESS;
+		Employee employee = employeeService.queryByEmployeeId(account.getAccountId());
+		// 当职员账户未激活或离职时，不予登录
+		if (CommonData.STATUS_UNUSED.equals(employee.getEmployeeStatus())) {
+			return CommonData.STRING_ACCOUNT_NOTACTIVATED;
+		} else if (CommonData.STATUS_LEAVE_OFFICE.equals(employee.getEmployeeStatus())) {
+			return CommonData.STRING_HASLEFT;
+		} else {
+			String password = MD5Utils.MD5(account_pwd);
+			if (account.getAccountName().equals(account_name) && account.getAccountPassword().equals(password))
+				return CommonData.STRING_SUCCESS;
+		}
 		return CommonData.STRING_FAILURE;
 	}
 

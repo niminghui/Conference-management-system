@@ -94,7 +94,7 @@ public class AccountController {
 		String uyzm = request.getParameter("uyzm");
 		String yzm = request.getSession().getAttribute("yzm").toString();
 		if (!yzm.equals(uyzm)) {
-			request.getSession().setAttribute("message", "验证码错误");
+			request.getSession().setAttribute("message", CommonData.STRING_YZMERROR);
 			return "redirect:index.jsp";
 		}
 		String account_name = request.getParameter("uid").trim();
@@ -102,8 +102,9 @@ public class AccountController {
 		String info = accountService.validateAccount(account_name, account_pwd);
 		if (info.equals(CommonData.STRING_SUCCESS)) {
 			String account_id = accountService.getAccountID(account_name);
-			// 将该用户的AccountID放入session
+			// 将该用户的AccountID和AccountName放入session
 			request.getSession().setAttribute("account_id", account_id);
+			request.getSession().setAttribute("account_name", account_name);
 			// 将该用户的功能菜单放入session
 			// Menu功能未做好，待续
 			return "user";

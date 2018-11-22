@@ -31,19 +31,23 @@ public interface CommonData {
 	public static final String DELETE_FAILURE = "003-002";
 	public static final String QUERY_FAILURE = "004-002";
 
-	
-	//status参数  0: 未激活  1：已激活  2：离职  3：部门解散待业  
-	public static final String STATUS_UNUSED="0";
-	public static final String STATUS_INUSED="1";
-	public static final String STATUS_LEAVE_OFFICE="2";
-	public static final String STATUS_DISSOLVE="3";
-	public static final String DEPARTMENT_PID="1";
+	// status参数 0：未激活 1：已激活 2：离职 3：部门解散待业
+	public static final String STATUS_UNUSED = "000";
+	public static final String STATUS_INUSED = "001";
+	public static final String STATUS_LEAVE_OFFICE = "002";
+	public static final String STATUS_DISSOLVE = "003";
+
+	public static final String DEPARTMENT_PID = "1";
 
 	public static final String STRING_SUCCESS = "success";
 	public static final String STRING_FAILURE = "failure";
 
 	public static final String STRING_ACCOUNT_NOTFOUND = "Account is't found.";
 	public static final String STRING_ACCOUNT_EXIST = "Account already exist.";
+	public static final String STRING_ACCOUNT_NOTACTIVATED = "Account not activated.";
 
+	// 职员已离职
+	public static final String STRING_HASLEFT = "Employee has left.";
 
+	public static final String STRING_YZMERROR = "Verification code error.";
 }
