@@ -17,8 +17,7 @@ import scb.dev.sms.log.service.IAccountLogService;
 
 /**
  * ClassName: AccountLogServiceImpl <br/>
- * Description: TODO ADD REASON(可选). <br/>
- * <br/>
+ * Description: AccountLogServiceImpl <br/>
  * date: 2018年11月16日 上午10:17:20 <br/>
  * 
  * @author Oscar.Zhang

@@ -12,7 +12,7 @@ import scb.dev.sms.log.pojo.SysParamLog;
 
 /**
  * ClassName: ISysParamLogService <br/>
- * Description: TODO ADD REASON(可选). <br/><br/>
+ * Description: ISysParamLogService <br/>
  * date: 2018年11月16日 上午10:54:28 <br/>
  *
  * @author Oscar.Zhang
@@ -22,5 +22,6 @@ import scb.dev.sms.log.pojo.SysParamLog;
 
 public interface ISysParamLogService {
 	public String addSysParamLog(SysParamLog sysParamLog);
+
 	public String deleteSysparamLog(String SysParamLogId);
 }

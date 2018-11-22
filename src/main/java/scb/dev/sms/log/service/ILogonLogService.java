@@ -12,7 +12,7 @@ import scb.dev.sms.log.pojo.LogonLog;
 
 /**
  * ClassName: ILogonLogService <br/>
- * Description: TODO ADD REASON(可选). <br/><br/>
+ * Description: ILogonLogService <br/>
  * date: 2018年11月16日 上午10:34:49 <br/>
  *
  * @author Oscar.Zhang
@@ -21,5 +21,6 @@ import scb.dev.sms.log.pojo.LogonLog;
  */
 public interface ILogonLogService {
 	public String addlogonLog(LogonLog logonLog);
+
 	public String deleteLogonLog(String LogonLogId);
 }

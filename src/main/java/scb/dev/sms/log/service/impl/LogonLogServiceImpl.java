@@ -16,7 +16,7 @@ import scb.dev.sms.log.service.ILogonLogService;
 
 /**
  * ClassName: LogonLogServiceImpl <br/>
- * Description: TODO ADD REASON(可选). <br/><br/>
+ * Description: LogonLogServiceImpl <br/>
  * date: 2018年11月16日 上午10:36:15 <br/>
  *
  * @author Oscar.Zhang
@@ -26,22 +26,26 @@ import scb.dev.sms.log.service.ILogonLogService;
 public class LogonLogServiceImpl implements ILogonLogService {
 	@Autowired
 	LogonLogDao logonLogDao;
+
 	/**
 	 * 添加logonLog日志
+	 * 
 	 * @see scb.dev.sms.log.service.ILogonLogService#addlogonLog(scb.dev.sms.log.pojo.LogonLog)
 	 */
 	@Override
 	public String addlogonLog(LogonLog logonLog) {
-		return logonLogDao.insert(logonLog)==1?"SUCCESS":"ERROR";
+		return logonLogDao.insert(logonLog) == 1 ? "SUCCESS" : "ERROR";
 	}
+
 	/**
 	 * 删除logonLog日志
+	 * 
 	 * @see scb.dev.sms.log.service.ILogonLogService#deleteLogonLog(java.lang.String)
 	 */
 	@Override
 	public String deleteLogonLog(String LogonLogId) {
 
-		return logonLogDao.deleteByPrimaryKey(LogonLogId)==1?"SUCCESS":"ERROR";
+		return logonLogDao.deleteByPrimaryKey(LogonLogId) == 1 ? "SUCCESS" : "ERROR";
 	}
 
 }

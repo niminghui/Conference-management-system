@@ -16,7 +16,7 @@ import scb.dev.sms.log.service.IPositionLogService;
 
 /**
  * ClassName: PositionLogServiceImpl <br/>
- * Description: TODO ADD REASON(可选). <br/><br/>
+ * Description: PositionLogServiceImpl <br/>
  * date: 2018年11月16日 上午10:45:11 <br/>
  *
  * @author Oscar.Zhang
@@ -26,22 +26,26 @@ import scb.dev.sms.log.service.IPositionLogService;
 public class PositionLogServiceImpl implements IPositionLogService {
 	@Autowired
 	PositionLogDao positionLogDao;
+
 	/**
 	 * 添加PositionLog日志
+	 * 
 	 * @see scb.dev.sms.log.service.IPositionLogService#addPositionLog(scb.dev.sms.log.pojo.PositionLog)
 	 */
 	@Override
 	public String addPositionLog(PositionLog positionLog) {
-		return positionLogDao.insert(positionLog)==1?"SUCCESS":"ERROR";
+		return positionLogDao.insert(positionLog) == 1 ? "SUCCESS" : "ERROR";
 	}
+
 	/**
 	 * 删除PositionLog日志
+	 * 
 	 * @see scb.dev.sms.log.service.IPositionLogService#deletePositionLog(java.lang.String)
 	 */
 	@Override
 	public String deletePositionLog(String PositionLogId) {
-		
-		return positionLogDao.deleteByPrimaryKey(PositionLogId)==1?"SUCCESS":"ERROR";
+
+		return positionLogDao.deleteByPrimaryKey(PositionLogId) == 1 ? "SUCCESS" : "ERROR";
 	}
 
 }
