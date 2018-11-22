@@ -23,9 +23,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import scb.dev.sms.common.CommonData;
+import scb.dev.sms.sm.pojo.LoginInfo;
 import scb.dev.sms.sm.service.IAccountService;
 
 /**
@@ -91,19 +91,18 @@ public class AccountController {
 	}
 
 	@PostMapping("/login")
-	public String login(HttpServletRequest request, @RequestParam("uyzm") String uyzm,
-			@RequestParam("uid") String account_name, @RequestParam("upwd") String account_pwd) {
+	public String login(HttpServletRequest request, LoginInfo loginInfo) {
 		String yzm = request.getSession().getAttribute("yzm").toString();
-		if (!yzm.equals(uyzm)) {
+		if (!yzm.equals(loginInfo.getUyzm())) {
 			request.getSession().setAttribute("message", CommonData.STRING_YZMERROR);
 			return "redirect:index.jsp";
 		}
-		String info = accountService.validateAccount(account_name, account_pwd);
+		String info = accountService.validateAccount(loginInfo.getAccount_name(), loginInfo.getAccount_pwd());
 		if (info.equals(CommonData.STRING_SUCCESS)) {
-			String account_id = accountService.getAccountID(account_name);
+			String account_id = accountService.getAccountID(loginInfo.getAccount_name());
 			// 将该用户的AccountID和AccountName放入session
 			request.getSession().setAttribute("account_id", account_id);
-			request.getSession().setAttribute("account_name", account_name);
+			request.getSession().setAttribute("account_name", loginInfo.getAccount_name());
 			// 将该用户的功能菜单放入session
 			// Menu功能未做好，待续
 			return "user";
