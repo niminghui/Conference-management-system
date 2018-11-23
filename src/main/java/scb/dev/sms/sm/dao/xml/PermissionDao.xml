@@ -125,4 +125,5 @@
         order by permission_updated_datetime DESC
         limit #{toPageNo}, #{pageSize}
     </select>
+    
 </mapper>

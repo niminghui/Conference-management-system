@@ -9,7 +9,7 @@ import scb.dev.sms.util.tool.PagingVO;
 /**
  * 
 	* @desc: clps.mms
-	* @author: Harley.gu
+	
 	* @createTime: 2018年5月14日 上午9:43:45
 	* @description:接口设置
 	* @history:

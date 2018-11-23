@@ -25,7 +25,6 @@ import scb.dev.sms.util.tool.PagingVO;
 
 
 
-
 @Service("permissionService")
 public class PermissionServiceImpl implements IPermissionService{
 	
@@ -35,7 +34,7 @@ public class PermissionServiceImpl implements IPermissionService{
 	*  
 	*  
 	* @return 
-	* @see com.clps.mms.sm.service.IPermission#queryAllPermission() 
+	
 	*/
 
 	public List<Permission> queryAllPermission() {
@@ -63,8 +62,8 @@ public class PermissionServiceImpl implements IPermissionService{
 	*  
 	* @param permissionId
 	* @return 
-	* @see com.clps.mms.sm.service.IPermissionService#deleteByPermissionId(java.lang.Integer) 
-	*/
+	* @see */
+	
 
 	public String deleteByPermissionId(Integer permissionId) {
 		if(permissionDao.deleteByPermissionId(permissionId)>0){
@@ -92,7 +91,7 @@ public class PermissionServiceImpl implements IPermissionService{
 	*  
 	* @param permissionId
 	* @return 
-	* @see com.clps.mms.sm.service.IPermissionService#queryPermissionByPermissionId(java.lang.Integer) 
+	* @see rvice.IPermissionService#queryPermissionByPermissionId(java.lang.Integer) 
 	*/
 
 	public Permission queryPermissionByPermissionId(Integer permissionId) {
@@ -104,7 +103,7 @@ public class PermissionServiceImpl implements IPermissionService{
 	*  
 	* @param permissionRecipient
 	* @return 
-	* @see com.clps.mms.sm.service.IPermissionService#queryPermissionByName(java.lang.String) 
+	* @see sm.service.IPermissionService#queryPermissionByName(java.lang.String) 
 	*/
 
 	public List<Permission> queryPermissionByName(String permissionName) {

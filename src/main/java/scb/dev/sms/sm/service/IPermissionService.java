@@ -16,7 +16,7 @@ import scb.dev.sms.util.tool.PagingVO;
 /**
  * 
 	* @desc: clps.mms
-	* @author: Harley.gu
+
 	* @createTime: 2018年5月14日 上午10:06:08
 	* @version: v1.0
  */
