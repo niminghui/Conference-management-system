@@ -63,6 +63,7 @@ public interface PermissionDao {
     * @return int 
     * @throws
     */
+	
 	int insertPermission(Permission record);
    /**
     * 

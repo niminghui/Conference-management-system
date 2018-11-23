@@ -11,6 +11,7 @@ public class Permission {
     /**
      * 
      */
+    
     private String permissionName;
 
     /**

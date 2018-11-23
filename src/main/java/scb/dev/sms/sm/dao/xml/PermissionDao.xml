@@ -103,6 +103,7 @@
       </if>
     </trim>
   </insert>
+  
   <!-- 修改权限 -->
   <update id="updatePermission" parameterType="com.scb.dev.sms.sm.pojo.Permission">
     update sm_permission

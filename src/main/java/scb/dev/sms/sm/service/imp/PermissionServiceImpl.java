@@ -10,15 +10,16 @@ package scb.dev.sms.sm.service.imp;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import scb.dev.sms.common.SupportConstant;
-import scb.dev.sms.common.CommonData;
+
 import scb.dev.sms.sm.dao.PermissionDao;
 import scb.dev.sms.sm.pojo.Permission;
 import scb.dev.sms.sm.service.IPermissionService;
 import scb.dev.sms.util.tool.PagingVO;
+
 
 
 
