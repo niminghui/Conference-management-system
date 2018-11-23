@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +23,7 @@ import scb.dev.sms.sm.service.IPositionGrantService;
  * @author Weilei
  *
  */
-@RestController
+@Controller
 @RequestMapping(value="/menu",produces="text/html;charset=utf-8")
 public class MenuController {
 
@@ -31,32 +33,64 @@ public class MenuController {
 	@Resource
 	private IPositionGrantService positionGrantServie;
 
-	@PostMapping("/getMenu")
+	/**
+	 * 展示单条菜单信息
+	 * @param menuId
+	 * @return
+	 */
+	@RequestMapping("/getMenu")
 	public Menu getMenu(String menuId) {
 		return menuService.queryMenu(menuId);
 	}
 
-	@PostMapping("/getOwnMenu")
+	/**
+	 * 展示个人所能看到的菜单信息
+	 * @param positionId
+	 * @return
+	 */
+	@RequestMapping("/getOwnMenu")
 	public String getOwnMenu(String positionId) {
 		return JSON.toJSONString(positionGrantServie.getOwnMenu(positionId));
 	}
 
-	@PostMapping("/getAllMenu")
-	public String getAllMenu() {
-		return JSON.toJSONString(menuService.queryAllMenu());
+	/**
+	 * 不分权限的所有菜单
+	 * @return
+	 */
+	@RequestMapping("/getAllMenu")
+	public String getAllMenu(Model model) {
+		model.addAttribute("menus",menuService);
+		//return JSON.toJSONString(menuService.queryAllMenu());
+		return "menu_list"; 
 	}
 
-	@PostMapping("/addMenu")
+	/**
+	 * 添加菜单
+	 * @param menuName
+	 * @param menuParentId
+	 * @param createUserName
+	 * @return
+	 */
+	@RequestMapping("/addMenu")
 	public String addMenu(String menuName, String menuParentId, String createUserName) {
 		menuService.addMenu(menuName, menuParentId, createUserName);
-		return "sm/menu_addresult";
+		return "menu_addresult";
 	}
 
-	@PostMapping("/updateMenu")
+	/**
+	 * 修改菜单
+	 * @param menuId
+	 * @param menuName
+	 * @param menuOrderId
+	 * @param menuUrl
+	 * @param updateUserName
+	 * @return
+	 */
+	@RequestMapping("/updateMenu")
 	public String updateMenu(String menuId, String menuName, String menuOrderId, String menuUrl,
 			String updateUserName) {
 		menuService.updateMenu(menuId, menuName, menuOrderId, menuUrl, updateUserName);
-		return "";
+		return "menu_update";
 	}
 	
 	@RequestMapping(value="/menuList",method=RequestMethod.GET)
