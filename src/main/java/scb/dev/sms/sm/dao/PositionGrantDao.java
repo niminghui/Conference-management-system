@@ -1,6 +1,10 @@
 package scb.dev.sms.sm.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
+
+import scb.dev.sms.sm.pojo.Menu;
 import scb.dev.sms.sm.pojo.PositionGrant;
 /**
  * 
@@ -43,4 +47,11 @@ public interface PositionGrantDao {
      * @mbg.generated 2018-11-20
      */
     int updateByPrimaryKey(PositionGrant record);
+    
+    /**
+     * 根据每个人的职位不同查询他们的菜单
+     * @param positionId
+     * @return
+     */
+    List<Menu> getOwnMenu(String pgPositionId);
 }

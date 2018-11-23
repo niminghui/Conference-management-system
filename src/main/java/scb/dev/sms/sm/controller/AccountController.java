@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import scb.dev.sms.common.CommonData;
+import scb.dev.sms.sm.pojo.LoginInfo;
 import scb.dev.sms.sm.service.IAccountService;
 
 /**
@@ -43,7 +44,7 @@ public class AccountController {
 	private IAccountService accountService;
 
 	@GetMapping("/yzm")
-	public void yzm(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public void returnYZM(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		// 设置页面不缓存
 		response.setHeader("Pragma", "No-cache");
 		response.setHeader("Cache-Control", "no-cache");
@@ -90,20 +91,18 @@ public class AccountController {
 	}
 
 	@PostMapping("/login")
-	public String login(HttpServletRequest request, HttpServletResponse response) {
-		String uyzm = request.getParameter("uyzm");
+	public String loginValidate(HttpServletRequest request, LoginInfo loginInfo) {
 		String yzm = request.getSession().getAttribute("yzm").toString();
-		if (!yzm.equals(uyzm)) {
-			request.getSession().setAttribute("message", "验证码错误");
+		if (!yzm.equals(loginInfo.getUyzm())) {
+			request.getSession().setAttribute("message", CommonData.STRING_YZMERROR);
 			return "redirect:index.jsp";
 		}
-		String account_name = request.getParameter("uid").trim();
-		String account_pwd = request.getParameter("upwd").trim();
-		String info = accountService.validateAccount(account_name, account_pwd);
+		String info = accountService.validateAccount(loginInfo.getAccount_name(), loginInfo.getAccount_pwd());
 		if (info.equals(CommonData.STRING_SUCCESS)) {
-			String account_id = accountService.getAccountID(account_name);
-			// 将该用户的AccountID放入session
+			String account_id = accountService.getAccountID(loginInfo.getAccount_name());
+			// 将该用户的AccountID和AccountName放入session
 			request.getSession().setAttribute("account_id", account_id);
+			request.getSession().setAttribute("account_name", loginInfo.getAccount_name());
 			// 将该用户的功能菜单放入session
 			// Menu功能未做好，待续
 			return "user";
@@ -117,4 +116,12 @@ public class AccountController {
 	public String enroll() {
 		return "enroll";
 	}
+
+	@GetMapping("/quit")
+	public String writeOff(HttpServletRequest request) {
+		request.getSession().invalidate();// 将用户信息注销
+		request.getSession().setAttribute("message", "用户已经注销");
+		return "redirect:index.jsp";
+	}
+
 }

@@ -27,7 +27,7 @@ public class EmployeeAddress implements Serializable {
 	/**
 	 * 职员现住址
 	 */
-	private String employeeAddress;
+	private String employeeAddressStr;
 
 	/**
 	 * 职员籍贯
@@ -57,8 +57,8 @@ public class EmployeeAddress implements Serializable {
 	 * 
 	 * @return employee_address 职员现住址
 	 */
-	public String getEmployeeAddress() {
-		return employeeAddress;
+	public String getEmployeeAddressStr() {
+		return employeeAddressStr;
 	}
 
 	/**
@@ -66,8 +66,8 @@ public class EmployeeAddress implements Serializable {
 	 * 
 	 * @param employeeAddress 职员现住址
 	 */
-	public void setEmployeeAddress(String employeeAddress) {
-		this.employeeAddress = employeeAddress;
+	public void setEmployeeAddressStr(String employeeAddressStr) {
+		this.employeeAddressStr = employeeAddressStr;
 	}
 
 	/**
@@ -94,9 +94,9 @@ public class EmployeeAddress implements Serializable {
 	 * @param employeeAddress
 	 * @param employeeNativeplace
 	 */
-	public EmployeeAddress(String employeeAddress, String employeeNativeplace) {
+	public EmployeeAddress(String employeeAddressStr, String employeeNativeplace) {
 		super();
-		this.employeeAddress = employeeAddress;
+		this.employeeAddressStr = employeeAddressStr;
 		this.employeeNativeplace = employeeNativeplace;
 	}
 	/**
@@ -106,10 +106,10 @@ public class EmployeeAddress implements Serializable {
 	 * @param employeeAddress
 	 * @param employeeNativeplace
 	 */
-	public EmployeeAddress(String employeeId, String employeeAddress, String employeeNativeplace) {
+	public EmployeeAddress(String employeeId, String employeeAddressStr, String employeeNativeplace) {
 		super();
 		this.employeeId = employeeId;
-		this.employeeAddress = employeeAddress;
+		this.employeeAddressStr = employeeAddressStr;
 		this.employeeNativeplace = employeeNativeplace;
 	}
 

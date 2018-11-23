@@ -1,5 +1,7 @@
 package scb.dev.sms.sm.service.imp;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -51,19 +53,16 @@ public class EmployeeServiceImpl implements IEmployeeService {
 			EmployeeContactInfo employeeContactInfo) {
 		logger.info("initEmployee");
 		try {
-			String employeeId=TokenIDFactory.getUUID();		
 			
-			employee.setEmployeeId(employeeId);
-			employeeAddress.setEmployeeId(employeeId);
-			employeeContactInfo.setEmployeeId(employeeId);
-			
+			setWorkId(employee);
 			employeeDao.insertSelective(employee);
 			employeeAddressDao.insertSelective(employeeAddress);
 			employeeContactInfoDao.insertSelective(employeeContactInfo);
 			
-			accountService.initAccount(employeeId, employee.getEmployeeNickname());
+			accountService.initAccount(employee.getEmployeeId(), employee.getEmployeeNickname());
 		}
 		catch(Exception e) {
+			e.printStackTrace();
 			logger.error(CommonData.SAVE_FAILURE);
 			return CommonData.SAVE_FAILURE;
 		}
@@ -191,5 +190,38 @@ public class EmployeeServiceImpl implements IEmployeeService {
 		return employeeDao.getCountEmployee(employeeName);
 	}
 	
+	
+	public String getCurrentYearAndMonth() {
+		SimpleDateFormat sdf=new SimpleDateFormat("yyMM");
+		String yearAndMonth=sdf.format(new Date());
+		return yearAndMonth;
+	}
+	
+	public void setWorkId(Employee employee) {
+		String yearMonth=getCurrentYearAndMonth();
+		String maxWorkId=employeeDao.selectMaxWorkIdByYearAndMonth(yearMonth);
+		if(maxWorkId==null) {
+			employee.setEmployeeWorkId(yearMonth+"001");
+		}
+		else {
+			int num=Integer.parseInt(maxWorkId.substring(4));
+			String endString=String.valueOf(num+1);
+			if(endString.length()==1) {
+				endString="00"+endString;
+			}
+			else if(endString.length()==2) {
+				endString="0"+endString;
+			}
+			employee.setEmployeeWorkId(yearMonth+endString);
+		}
+		System.out.println(employee.getEmployeeWorkId());
+		
+	}
+
+	@Override
+	public int editEmployee(Employee employee) {
+		
+		return employeeDao.updateByEmployeeIdSelective(employee);
+	}
 
 }

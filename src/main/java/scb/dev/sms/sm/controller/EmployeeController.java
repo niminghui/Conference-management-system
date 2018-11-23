@@ -9,11 +9,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
+import scb.dev.sms.common.CommonData;
+import scb.dev.sms.sm.dao.DepartmentDao;
+import scb.dev.sms.sm.pojo.Department;
 import scb.dev.sms.sm.pojo.Employee;
 import scb.dev.sms.sm.pojo.EmployeeAddress;
 import scb.dev.sms.sm.pojo.EmployeeContactInfo;
+import scb.dev.sms.sm.pojo.Position;
 import scb.dev.sms.sm.service.IEmployeeService;
+import scb.dev.sms.sm.service.IPositionService;
+import scb.dev.sms.util.factory.TokenIDFactory;
+import scb.dev.sms.util.tool.JMail;
 import scb.dev.sms.util.tool.PagingVO;
 
 @Controller
@@ -22,6 +28,14 @@ public class EmployeeController {
 	
 	@Resource
 	private IEmployeeService employeeService;
+	
+	@Resource
+	private DepartmentDao departmentDao;
+	
+	@Resource
+	private IPositionService positionService;
+	
+	
 	//页码对象
 	private PagingVO pagingVO=new PagingVO();
 	
@@ -32,17 +46,17 @@ public class EmployeeController {
 	 * @Title: employeeList   
 	 * @Description: 点击查询标签，跳转到employee_list.jsp查询界面   
 	 * @param: @param model
-	 * @param: @param page
+	 * @param: @param pageNo
 	 * @param: @return      
 	 * @return: String      
 	 * @throws
 	 */
-	@RequestMapping(value="/employeeList",method=RequestMethod.GET)
-	public String queryAllEmployeeInfo(Model model,Integer page) {
+	@RequestMapping(value="/employee/list",method=RequestMethod.GET)
+	public String queryAllEmployeeInfo(Model model,Integer pageNo) {
 		
-		paging(model,page);
+		paging(model,pageNo);
 		
-		return "sms/employee_list";
+		return "employee_list";
 	}
 	
 	/**
@@ -55,11 +69,11 @@ public class EmployeeController {
 	 * @return: String      
 	 * @throws
 	 */
-	@RequestMapping(value="/queryOneEmployee",method=RequestMethod.GET)
+	@RequestMapping(value="/employee",method=RequestMethod.GET)
 	public String queryEmployeeById(Model model,String employeeId) {
 		Employee employee = employeeService.queryByEmployeeId(employeeId);
 		model.addAttribute("employee", employee);
-		return "sms/employee";
+		return "employee";
 	}
 	
 	
@@ -71,24 +85,49 @@ public class EmployeeController {
 	 * @return: String      
 	 * @throws
 	 */
-	@RequestMapping(value = "/goAddEmployee", method = RequestMethod.GET)
-	public String goAddEmployee() {
-		return "sms/employee_add";
+	@RequestMapping(value = "/employee/goadd", method = RequestMethod.GET)
+	public String goAddEmployee(Model model) {
+		List<Position> positions=positionService.queryAllPosition();
+		List<Department> departments=departmentDao.selectAllDepartment();
+		model.addAttribute("positions", positions);
+		model.addAttribute("departments", departments);
+		return "employee_add";
 	}
 	
-	@RequestMapping(value="/addEmployee",method=RequestMethod.GET)
-	public String addEmployee(Model model,Integer page,Employee employee,EmployeeAddress employeeAddress,
-			EmployeeContactInfo employeeContactInfo,HttpServletRequest request) {
+	@RequestMapping(value="/employee/add",method=RequestMethod.POST)
+	public String addEmployee(Model model,Integer pageNo,Employee employee,EmployeeAddress address,
+			EmployeeContactInfo employeeContactInfo,HttpServletRequest request) throws Exception {
 		
-		employee.setEmployeeCreatedUser((String)request.getSession().getAttribute("account"));
+		String employeeId=TokenIDFactory.getUUID();		
+		
+		employee.setEmployeeId(employeeId);
+		address.setEmployeeId(employeeId);
+		employeeContactInfo.setEmployeeId(employeeId);
+		//employee.setEmployeeCreatedUser((String)request.getSession().getAttribute("account"));
+		employee.setEmployeeCreatedUser("0dea625ffbac4a64b5cb264bc7932357");
 		//设置职位更改人
 		employee.setEmployeeUpdatedUser(employee.getEmployeeCreatedUser());
 		
-		employeeService.initEmployee(employee,employeeAddress,employeeContactInfo);
+		employeeService.initEmployee(employee,address,employeeContactInfo);
+		String url = request.getScheme()+"://"+ request.getServerName()+":"+
+				request.getServerPort()+request.getContextPath()+"/sm/employee/active?employeeId="+employee.getEmployeeId();
 		
-		paging(model,page);
+		String content=CommonData.MAIL_CONTENT+"<a href='"+url+"'>"+url+"</a>";
 		
-        return "sms/employee_list";
+		JMail.sendMail(CommonData.MAIL_FROM, CommonData.MAIL_USER, CommonData.MAIL_PASSWORD, 
+				employeeContactInfo.getEmployeeEmail(), CommonData.MAIL_TITLE, content);
+		
+		//paging(model,pageNo);
+		model.addAttribute("email", employeeContactInfo.getEmployeeEmail());
+        return "employee_active_tip";
+	}
+	
+	@RequestMapping(value="/employee/active")
+	public String activeAccount(Employee employee) {
+		employee.setEmployeeStatus(CommonData.STATUS_INUSED);
+		
+		employeeService.editEmployee(employee);
+		return "employee_active_success";
 	}
 	
 	/**
@@ -97,22 +136,26 @@ public class EmployeeController {
 	 * @Description: 点击修改标签，跳转到employee_edit.jsp编辑界面   
 	 * @param: @param request
 	 * @param: @param model
-	 * @param: @param page
+	 * @param: @param pageNo
 	 * @param: @return      
 	 * @return: String      
 	 * @throws
 	 */
-	@RequestMapping(value = "/goEditEmployee", method = RequestMethod.GET)
-	public String goEditEmployee(HttpServletRequest request, Model model,Integer page) {
+	@RequestMapping(value = "/employee/goedit", method = RequestMethod.GET)
+	public String goEditEmployee(HttpServletRequest request, Model model,Integer pageNo) {
 		String employeeId = request.getParameter("employeeId");
 		Employee employee = employeeService.queryByEmployeeId(employeeId);
 		if(null!=employee){
 			model.addAttribute("employee", employee);
-			model.addAttribute("page",page);
+			model.addAttribute("pageNo",pageNo);
 			
 		}
+		List<Position> positions=positionService.queryAllPosition();
+		List<Department> departments=departmentDao.selectAllDepartment();
+		model.addAttribute("positions", positions);
+		model.addAttribute("departments", departments);
 
-		return "sms/employee_edit";
+		return "employee_edit";
 	}
 	
 	/**
@@ -122,46 +165,68 @@ public class EmployeeController {
 	 * @param: @param request
 	 * @param: @param model
 	 * @param: @param position
-	 * @param: @param page
+	 * @param: @param pageNo
 	 * @param: @return      
 	 * @return: String      
 	 * @throws
 	 */
-	@RequestMapping(value="/editEmployee",method=RequestMethod.GET)
-	public String editEmployee(HttpServletRequest request, Model model,Integer page,
+	@RequestMapping(value="/employee/edit",method=RequestMethod.POST)
+	public String editEmployee(HttpServletRequest request, Model model,Integer pageNo,
 			Employee employee,EmployeeAddress employeeAddress,EmployeeContactInfo employeeContactInfo) {
 		employee.setEmployeeUpdatedUser((String)request.getSession().getAttribute("account"));
-		
+
 		employeeService.editEmployee(employee,employeeAddress,employeeContactInfo);
-		paging(model,page);
+		paging(model,pageNo);
 		
-        return "sms/employee_list";
+        return "redirect:employeeList";
 	}
 	
 	
-	
+	/**
+	 * 
+	 * @Title: editEmployee   
+	 * @Description: 提交更新form表单，跳转到employee_list.jsp查询界面
+	 * @param: @param request
+	 * @param: @param model
+	 * @param: @param position
+	 * @param: @param pageNo
+	 * @param: @return      
+	 * @return: String      
+	 * @throws
+	 */
+	@RequestMapping(value="/employee/toleave")
+	public String editEmployeeStatusToLeave(HttpServletRequest request, Model model,Integer pageNo,
+			Employee employee,EmployeeAddress employeeAddress,EmployeeContactInfo employeeContactInfo) {
+		employee.setEmployeeUpdatedUser((String)request.getSession().getAttribute("account"));
+		employee.setEmployeeStatus(CommonData.STATUS_LEAVE_OFFICE);
+		employeeService.editEmployee(employee,employeeAddress,employeeContactInfo);
+		paging(model,pageNo);
+		
+        return "redirect:employeeList";
+	}
 	
 	
 	/**
 	 * 
 	 * paging:(分页查询操作). <br/>
 	 * @param model 
-	 * @param page 当前页数
+	 * @param pageNo 当前页数
 	 *
 	 * @author ryan.li
 	 * @since JDK 1.8
 	 */
-	public void paging(Model model,Integer page) {
+	public void paging(Model model,Integer pageNo) {
 		
 		pagingVO.setTotalCount(this.employeeService.getCountEmployee(""));
-		System.out.println(pagingVO.getTotalCount());
-        if (page == null || page == 0) {
+		
+        if (pageNo == null || pageNo == 0) {
             pagingVO.setToPageNo(1);
             employees = this.employeeService.queryAllEmployee(pagingVO);
         } else {
-            pagingVO.setToPageNo(page);//设置要前往的页码
+            pagingVO.setToPageNo(pageNo);//设置要前往的页码
             employees = this.employeeService.queryAllEmployee(pagingVO);
         }
+        
         if(null!=employees){
         model.addAttribute("employees", employees);
         model.addAttribute("pagingVO", pagingVO);

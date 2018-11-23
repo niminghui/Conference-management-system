@@ -16,7 +16,7 @@ import scb.dev.sms.log.service.IEmployeeLogService;
 
 /**
  * ClassName: EmployeeLogServiceImpl <br/>
- * Description: TODO ADD REASON(可选). <br/><br/>
+ * Description: EmployeeLogServiceImpl <br/>
  * date: 2018年11月16日 上午10:27:43 <br/>
  *
  * @author Oscar.Zhang
@@ -24,25 +24,29 @@ import scb.dev.sms.log.service.IEmployeeLogService;
  * @since JDK 1.8
  */
 public class EmployeeLogServiceImpl implements IEmployeeLogService {
-	
+
 	@Autowired
 	EmployeeLogDao employeeLogDao;
+
 	/**
 	 * 添加employeeLog日志
+	 * 
 	 * @see scb.dev.sms.log.service.IEmployeeLogService#addEmployeeLog(scb.dev.sms.log.pojo.EmployeeLog)
 	 */
 	@Override
 	public String addEmployeeLog(EmployeeLog employeeLog) {
-		return employeeLogDao.insert(employeeLog)==1?"SUCCESS":"ERROR";
+		return employeeLogDao.insert(employeeLog) == 1 ? "SUCCESS" : "ERROR";
 	}
+
 	/**
 	 * 删除employee日志
+	 * 
 	 * @see scb.dev.sms.log.service.IEmployeeLogService#deleteEmployeeLog(java.lang.String)
 	 */
 	@Override
 	public String deleteEmployeeLog(String EmployeeLogId) {
-	
-		return employeeLogDao.deleteByPrimaryKey(EmployeeLogId)==1?"SUCCESS":"ERROR";
+
+		return employeeLogDao.deleteByPrimaryKey(EmployeeLogId) == 1 ? "SUCCESS" : "ERROR";
 	}
 
 }

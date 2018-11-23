@@ -33,7 +33,7 @@
     select 
     <include refid="Base_Column_List" />
     from sm_position
-    where position_isVaild = 1
+   
   </select>
   <select id="getCountPosition"  resultType="java.lang.Integer">
     select count(*)

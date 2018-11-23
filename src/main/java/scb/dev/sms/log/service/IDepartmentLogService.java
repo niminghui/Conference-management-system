@@ -12,7 +12,7 @@ import scb.dev.sms.log.pojo.DepartmentLog;
 
 /**
  * ClassName: IDepartmentLogService <br/>
- * Description: TODO ADD REASON(可选). <br/><br/>
+ * Description: IDepartmentLogService <br/>
  * date: 2018年11月16日 上午10:22:46 <br/>
  *
  * @author Oscar.Zhang
@@ -21,5 +21,6 @@ import scb.dev.sms.log.pojo.DepartmentLog;
  */
 public interface IDepartmentLogService {
 	public String addDepartmentLog(DepartmentLog departmentLog);
+
 	public String deleteDepartmentLog(String DepartmentLogId);
 }

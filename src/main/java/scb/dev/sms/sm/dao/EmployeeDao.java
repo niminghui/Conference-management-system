@@ -197,6 +197,11 @@ public interface EmployeeDao {
      */
     int getCountEmployee(String employeeName);
     
+    /**
+     *查询某年某月最晚入职的员工工号
+     * @mbg.generated 2018-11-14
+     */
+    String selectMaxWorkIdByYearAndMonth(String yearMonth);
     
     int deleteDepartmentInEmployee(@Param("employeeStatus")String employeeStatus,  @Param("departmentId")String departmentId);
 }

@@ -3,7 +3,7 @@
 <mapper namespace="scb.dev.sms.sm.dao.EmployeeAddressDao">
   <resultMap id="BaseResultMap" type="scb.dev.sms.sm.pojo.EmployeeAddress">
     <id column="employee_id" jdbcType="VARCHAR" property="employeeId" />
-    <result column="employee_address" jdbcType="VARCHAR" property="employeeAddress" />
+    <result column="employee_address" jdbcType="VARCHAR" property="employeeAddressStr" />
     <result column="employee_nativePlace" jdbcType="VARCHAR" property="employeeNativeplace" />
   </resultMap>
   <sql id="Base_Column_List">
@@ -22,7 +22,7 @@
   <insert id="insert" parameterType="scb.dev.sms.sm.pojo.EmployeeAddress">
     insert into sm_employee_address (employee_id, employee_address, employee_nativePlace
       )
-    values (#{employeeId,jdbcType=VARCHAR}, #{employeeAddress,jdbcType=VARCHAR}, #{employeeNativeplace,jdbcType=VARCHAR}
+    values (#{employeeId,jdbcType=VARCHAR}, #{employeeAddressStr,jdbcType=VARCHAR}, #{employeeNativeplace,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="scb.dev.sms.sm.pojo.EmployeeAddress">
@@ -31,7 +31,7 @@
       <if test="employeeId != null">
         employee_id,
       </if>
-      <if test="employeeAddress != null">
+      <if test="employeeAddressStr != null">
         employee_address,
       </if>
       <if test="employeeNativeplace != null">
@@ -42,8 +42,8 @@
       <if test="employeeId != null">
         #{employeeId,jdbcType=VARCHAR},
       </if>
-      <if test="employeeAddress != null">
-        #{employeeAddress,jdbcType=VARCHAR},
+      <if test="employeeAddressStr != null">
+        #{employeeAddressStr,jdbcType=VARCHAR},
       </if>
       <if test="employeeNativeplace != null">
         #{employeeNativeplace,jdbcType=VARCHAR},
@@ -53,8 +53,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="scb.dev.sms.sm.pojo.EmployeeAddress">
     update sm_employee_address
     <set>
-      <if test="employeeAddress != null">
-        employee_address = #{employeeAddress,jdbcType=VARCHAR},
+      <if test="employeeAddressStr != null">
+        employee_address = #{employeeAddressStr,jdbcType=VARCHAR},
       </if>
       <if test="employeeNativeplace != null">
         employee_nativePlace = #{employeeNativeplace,jdbcType=VARCHAR},
@@ -64,7 +64,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="scb.dev.sms.sm.pojo.EmployeeAddress">
     update sm_employee_address
-    set employee_address = #{employeeAddress,jdbcType=VARCHAR},
+    set employee_address = #{employeeAddressStr,jdbcType=VARCHAR},
       employee_nativePlace = #{employeeNativeplace,jdbcType=VARCHAR}
     where employee_id = #{employeeId,jdbcType=VARCHAR}
   </update>

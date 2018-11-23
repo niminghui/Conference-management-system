@@ -87,4 +87,12 @@ public interface IEmployeeService {
 	 * @return 员工数量
 	 */
 	int getCountEmployee(String employeeName);
+	
+	/**
+	 * 
+	 * editEmployee:employee单表修改. <br/>
+	 * @param empoloy
+	 * @return 编辑结果信息
+	 */
+	int editEmployee(Employee employee);
 }

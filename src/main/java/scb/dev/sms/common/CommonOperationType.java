@@ -18,9 +18,9 @@ package scb.dev.sms.common;
  * @since JDK 1.8 date: 2018年10月31日 下午9:34:07 <br/>
  */
 public interface CommonOperationType {
-	public static final String LOGIN = "00000001";
-	public static final String REGISTER = "00000002";
-	public static final String REMENBER_PASSWORD = "00000003";
-	public static final String FORGET_PASSWORD = "00000004";
-	public static final String LOGOUT = "00000005";
+	public static final String LOGIN = "login";
+	public static final String REGISTER = "register";
+	public static final String REMENBER_PASSWORD = "remen_pwd";
+	public static final String FORGET_PASSWORD = "forget_pwd";
+	public static final String LOGOUT = "logout";
 }

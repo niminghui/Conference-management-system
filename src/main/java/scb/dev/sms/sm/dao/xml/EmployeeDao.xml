@@ -3,7 +3,7 @@
 <mapper namespace="scb.dev.sms.sm.dao.EmployeeDao">
   <resultMap type="scb.dev.sms.sm.pojo.EmployeeAddress" id="AddressResult">
 		<id property="employeeId" column="employee_id"/>
-		<result property="employeeAddress" column="employee_address"/>
+		<result property="employeeAddressStr" column="employee_address"/>
 		<result property="employeeNativeplace" column="employee_nativePlace"/>
   </resultMap>
   <resultMap type="scb.dev.sms.sm.pojo.EmployeeContactInfo" id="ContactInfoResult">
@@ -58,9 +58,12 @@
   	inner join sm_department d on d.department_id=e.department_id
   	where employee_status='001'
   	<if test = "_parameter!=''">
-  		and employee_name like "%"#{employeeName}"%"
+  		and employee_name like concat('%',#{employeeName},'%')
   	</if>
   	
+  </select>
+  <select id="selectMaxWorkIdByYearAndMonth" parameterType="java.lang.String" resultType="java.lang.String">
+  	select employee_work_id from sm_employee where employee_work_id like concat(#{yearMonth},'%') order by employee_work_id desc limit 0,1
   </select>
   <select id="selectAllEmployeeWithAddAndCon" resultMap="employeeWithAddressAndContact">
   	select
@@ -89,7 +92,7 @@
   	inner join sm_position p on p.position_id=e.position_id
   	inner join sm_department d on d.department_id=e.department_id
   	where employee_status='001'
-  	and employee_name like "%"#{employeeName,jdbcType=VARCHAR}"%"
+  	and employee_name like concat('%',#{employeeName},'%')
   	order by employee_created_time desc
   	limit #{toPageNo}, #{pageSize}
   </select>
