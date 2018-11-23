@@ -2,58 +2,126 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="scb.dev.sms.sm.dao.PermissionDao">
   <resultMap id="BaseResultMap" type="scb.dev.sms.sm.pojo.Permission">
-    <id column="permission_id" jdbcType="VARCHAR" property="permissionId" />
+    <id column="permission_id" jdbcType="INTEGER" property="permissionId" />
     <result column="permission_name" jdbcType="VARCHAR" property="permissionName" />
+    <result column="permission_comment" jdbcType="VARCHAR" property="permissionComment" />
+    <result column="permission_created_datetime" jdbcType="TIMESTAMP" property="permissionCreatedDatetime" />
+    <result column="permission_created_name" jdbcType="VARCHAR" property="permissionCreatedName" />
+    <result column="permission_updated_datetime" jdbcType="TIMESTAMP" property="permissionUpdatedDatetime" />
+    <result column="permission_updated_name" jdbcType="VARCHAR" property="permissionUpdatedName" />
+    <result column="permission_isvisible" jdbcType="INTEGER" property="permissionIsvisible" />
+    <result column="permission_default" jdbcType="VARCHAR" property="permissionDefault" />
   </resultMap>
   <sql id="Base_Column_List">
-    permission_id, permission_name
+    permission_id, permission_name, permission_comment, permission_created_datetime, 
+    permission_created_name, permission_updated_datetime, permission_updated_name, permission_isvisible, 
+    permission_default
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <!-- 根据权限id查询 -->
+  <select id="queryPermissionByPermissionId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from sm_permission
-    where permission_id = #{permissionId,jdbcType=VARCHAR}
+    where permission_id = #{permissionId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+  <!-- 查询所有权限 -->
+  <select id="queryAllPermission" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from sm_permission
+  </select>
+  <!-- 根据权限id删除-->
+  <delete id="deleteByPermissionId" parameterType="java.lang.Integer">
     delete from sm_permission
-    where permission_id = #{permissionId,jdbcType=VARCHAR}
+    where permission_id = #{permissionId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="scb.dev.sms.sm.pojo.Permission">
-    insert into sm_permission (permission_id, permission_name)
-    values (#{permissionId,jdbcType=VARCHAR}, #{permissionName,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="scb.dev.sms.sm.pojo.Permission">
+  <!-- 根据权限名称查询 -->
+    <select id="queryPermissionByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sm_permission
+    where permission_name like "%"#{permissionName,jdbcType=VARCHAR}"%"
+  </select>
+  <!-- 新增权限 -->
+  <insert id="insertPermission" parameterType="com.scb.dev.sms.sm.pojo.Permission">
+    <selectKey keyProperty="permissionId" order="BEFORE" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into sm_permission
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="permissionId != null">
-        permission_id,
-      </if>
+      permission_id,
       <if test="permissionName != null">
         permission_name,
       </if>
+      <if test="permissionComment != null">
+        permission_comment,
+      </if>
+      <if test="permissionCreatedDatetime != null">
+        permission_created_datetime,
+      </if>
+      <if test="permissionCreatedName != null">
+        permission_created_name,
+      </if>
+      <if test="permissionUpdatedDatetime != null">
+        permission_updated_datetime,
+      </if>
+      <if test="permissionUpdatedName != null">
+        permission_updated_name,
+      </if>
+      <if test="permissionIsvisible != null">
+        permission_isvisible,
+      </if>
+      <if test="permissionDefault != null">
+        permission_default,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="permissionId != null">
-        #{permissionId,jdbcType=VARCHAR},
-      </if>
+      #{permissionId,jdbcType=INTEGER},
       <if test="permissionName != null">
         #{permissionName,jdbcType=VARCHAR},
       </if>
+      <if test="permissionComment != null">
+        #{permissionComment,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionCreatedDatetime != null">
+        #{permissionCreatedDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="permissionCreatedName != null">
+        #{permissionCreatedName,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionUpdatedDatetime != null">
+        #{permissionUpdatedDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="permissionUpdatedName != null">
+        #{permissionUpdatedName,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionIsvisible != null">
+        #{permissionIsvisible,jdbcType=INTEGER},
+      </if>
+      <if test="permissionDefault != null">
+        #{permissionDefault,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="scb.dev.sms.sm.pojo.Permission">
+  <!-- 修改权限 -->
+  <update id="updatePermission" parameterType="com.scb.dev.sms.sm.pojo.Permission">
     update sm_permission
-    <set>
-      <if test="permissionName != null">
-        permission_name = #{permissionName,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where permission_id = #{permissionId,jdbcType=VARCHAR}
+    set permission_name = #{permissionName,jdbcType=VARCHAR},
+      permission_comment = #{permissionComment,jdbcType=VARCHAR},
+      permission_created_datetime = #{permissionCreatedDatetime,jdbcType=TIMESTAMP},
+      permission_created_name = #{permissionCreatedName,jdbcType=VARCHAR},
+      permission_updated_datetime = #{permissionUpdatedDatetime,jdbcType=TIMESTAMP},
+      permission_updated_name = #{permissionUpdatedName,jdbcType=VARCHAR},
+      permission_isvisible = #{permissionIsvisible,jdbcType=INTEGER},
+      permission_default = #{permissionDefault,jdbcType=VARCHAR}
+    where permission_id = #{permissionId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="scb.dev.sms.sm.pojo.Permission">
-    update sm_permission
-    set permission_name = #{permissionName,jdbcType=VARCHAR}
-    where permission_id = #{permissionId,jdbcType=VARCHAR}
-  </update>
-  
+    <select id="getCountPermission" parameterType="com.scb.dev.sms.sm.pojo.Permission" resultType="java.lang.Integer" >
+    select count(*) from sm_permission
+  </select>
+      <select id="findByPaging" parameterType="com.scb.dev.sms.util.tool.PagingVO" resultMap="BaseResultMap">
+        select * from sm_permission
+        order by permission_updated_datetime DESC
+        limit #{toPageNo}, #{pageSize}
+    </select>
 </mapper>
