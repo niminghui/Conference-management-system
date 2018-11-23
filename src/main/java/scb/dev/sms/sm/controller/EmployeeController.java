@@ -178,7 +178,7 @@ public class EmployeeController {
 		employeeService.editEmployee(employee,employeeAddress,employeeContactInfo);
 		paging(model,pageNo);
 		
-        return "redirect:employeeList";
+        return "redirect:list";
 	}
 	
 	
@@ -202,7 +202,7 @@ public class EmployeeController {
 		employeeService.editEmployee(employee,employeeAddress,employeeContactInfo);
 		paging(model,pageNo);
 		
-        return "redirect:employeeList";
+        return "redirect:list";
 	}
 	
 	
