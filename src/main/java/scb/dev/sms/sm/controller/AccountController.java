@@ -25,12 +25,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import scb.dev.sms.common.CommonData;
-import scb.dev.sms.common.CommonOperationType;
-import scb.dev.sms.log.pojo.AccountLog;
-import scb.dev.sms.log.service.IAccountLogService;
 import scb.dev.sms.sm.pojo.LoginInfo;
 import scb.dev.sms.sm.service.IAccountService;
-import scb.dev.sms.util.factory.TokenIDFactory;
 
 /**
  * ClassName: AccountController <br/>
@@ -47,11 +43,8 @@ public class AccountController {
 	@Resource
 	private IAccountService accountService;
 
-	@Resource
-	private IAccountLogService accountLogService;
-
 	@GetMapping("/yzm")
-	public void yzm(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public void returnYZM(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		// 设置页面不缓存
 		response.setHeader("Pragma", "No-cache");
 		response.setHeader("Cache-Control", "no-cache");
@@ -98,7 +91,7 @@ public class AccountController {
 	}
 
 	@PostMapping("/login")
-	public String login(HttpServletRequest request, LoginInfo loginInfo) {
+	public String loginValidate(HttpServletRequest request, LoginInfo loginInfo) {
 		String yzm = request.getSession().getAttribute("yzm").toString();
 		if (!yzm.equals(loginInfo.getUyzm())) {
 			request.getSession().setAttribute("message", CommonData.STRING_YZMERROR);
@@ -112,11 +105,6 @@ public class AccountController {
 			request.getSession().setAttribute("account_name", loginInfo.getAccount_name());
 			// 将该用户的功能菜单放入session
 			// Menu功能未做好，待续
-			AccountLog accountLog = new AccountLog();
-			accountLog.setLogAccountId(TokenIDFactory.getUUID());
-			accountLog.setLogAccountOperatorEid(account_id);
-			accountLog.setLogAccountOperatorType(CommonOperationType.LOGIN);
-			accountLogService.addAccountLog(accountLog);
 			return "user";
 		} else {
 			request.getSession().setAttribute("message", info);
