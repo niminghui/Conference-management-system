@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import scb.dev.sms.sm.dao.EmployeeDao;
 import scb.dev.sms.sm.dao.PositionGrantDao;
 import scb.dev.sms.sm.pojo.Menu;
 import scb.dev.sms.sm.pojo.PositionGrant;
@@ -18,12 +19,13 @@ public class PositonGrantServiceImpl implements IPositionGrantService {
 
 	@Autowired
 	private PositionGrantDao positionGrantDao;
+	
+	@Autowired
+	private EmployeeDao employeeDao;
 
 	@Override
-	public List<Menu> getOwnMenu(String positionId) {
-		if (positionId == null) {
-			throw new RuntimeException("positonId 为空");
-		}
+	public List<Menu> getOwnMenu(String accountId) {
+		String positionId = employeeDao.selectByEmployeeId(accountId).getPositionId();
 		List<Menu> menuList = positionGrantDao.getOwnMenu(positionId);
 		return ToolFactory.getInstanceOfMenuTreeUtil().turnedToMenuTree(menuList);
 	}

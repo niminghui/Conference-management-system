@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import scb.dev.sms.common.CommonData;
 import scb.dev.sms.sm.pojo.LoginInfo;
 import scb.dev.sms.sm.service.IAccountService;
+import scb.dev.sms.sm.service.IPositionGrantService;
 
 /**
  * ClassName: AccountController <br/>
@@ -42,6 +43,8 @@ public class AccountController {
 
 	@Resource
 	private IAccountService accountService;
+	
+	@Resource IPositionGrantService positionGrantService;
 
 	@GetMapping("/yzm")
 	public void returnYZM(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -104,6 +107,7 @@ public class AccountController {
 			request.getSession().setAttribute("account_id", account_id);
 			request.getSession().setAttribute("account_name", loginInfo.getAccount_name());
 			// 将该用户的功能菜单放入session
+			//request.getSession().setAttribute("menu", positionGrantService.getOwnMenu(account_id));
 			// Menu功能未做好，待续
 			return "user";
 		} else {
