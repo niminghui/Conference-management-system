@@ -9,10 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.alibaba.fastjson.JSONObject;
-
 import scb.dev.sms.common.CommonData;
 import scb.dev.sms.sm.dao.DepartmentDao;
 import scb.dev.sms.sm.pojo.Department;
@@ -20,9 +16,10 @@ import scb.dev.sms.sm.pojo.Employee;
 import scb.dev.sms.sm.pojo.EmployeeAddress;
 import scb.dev.sms.sm.pojo.EmployeeContactInfo;
 import scb.dev.sms.sm.pojo.Position;
-import scb.dev.sms.sm.service.IDepartmentService;
 import scb.dev.sms.sm.service.IEmployeeService;
 import scb.dev.sms.sm.service.IPositionService;
+import scb.dev.sms.util.factory.TokenIDFactory;
+import scb.dev.sms.util.tool.JMail;
 import scb.dev.sms.util.tool.PagingVO;
 
 @Controller
@@ -54,7 +51,7 @@ public class EmployeeController {
 	 * @return: String      
 	 * @throws
 	 */
-	@RequestMapping(value="/employeeList",method=RequestMethod.GET)
+	@RequestMapping(value="/employee/list",method=RequestMethod.GET)
 	public String queryAllEmployeeInfo(Model model,Integer pageNo) {
 		
 		paging(model,pageNo);
@@ -72,11 +69,11 @@ public class EmployeeController {
 	 * @return: String      
 	 * @throws
 	 */
-	@RequestMapping(value="/queryOneEmployee",method=RequestMethod.GET)
+	@RequestMapping(value="/employee",method=RequestMethod.GET)
 	public String queryEmployeeById(Model model,String employeeId) {
 		Employee employee = employeeService.queryByEmployeeId(employeeId);
 		model.addAttribute("employee", employee);
-		return "sms/employee";
+		return "employee";
 	}
 	
 	
@@ -88,7 +85,7 @@ public class EmployeeController {
 	 * @return: String      
 	 * @throws
 	 */
-	@RequestMapping(value = "/goAddEmployee", method = RequestMethod.GET)
+	@RequestMapping(value = "/employee/goadd", method = RequestMethod.GET)
 	public String goAddEmployee(Model model) {
 		List<Position> positions=positionService.queryAllPosition();
 		List<Department> departments=departmentDao.selectAllDepartment();
@@ -97,20 +94,40 @@ public class EmployeeController {
 		return "employee_add";
 	}
 	
-	@RequestMapping(value="/addEmployee",method=RequestMethod.POST)
+	@RequestMapping(value="/employee/add",method=RequestMethod.POST)
 	public String addEmployee(Model model,Integer pageNo,Employee employee,EmployeeAddress address,
-			EmployeeContactInfo employeeContactInfo,HttpServletRequest request) {
+			EmployeeContactInfo employeeContactInfo,HttpServletRequest request) throws Exception {
 		
+		String employeeId=TokenIDFactory.getUUID();		
+		
+		employee.setEmployeeId(employeeId);
+		address.setEmployeeId(employeeId);
+		employeeContactInfo.setEmployeeId(employeeId);
 		//employee.setEmployeeCreatedUser((String)request.getSession().getAttribute("account"));
 		employee.setEmployeeCreatedUser("0dea625ffbac4a64b5cb264bc7932357");
 		//设置职位更改人
 		employee.setEmployeeUpdatedUser(employee.getEmployeeCreatedUser());
 		
 		employeeService.initEmployee(employee,address,employeeContactInfo);
+		String url = request.getScheme()+"://"+ request.getServerName()+":"+
+				request.getServerPort()+request.getContextPath()+"/sm/employee/active?employeeId="+employee.getEmployeeId();
 		
-		paging(model,pageNo);
+		String content=CommonData.MAIL_CONTENT+"<a href='"+url+"'>"+url+"</a>";
 		
-        return "redirect:employeeList";
+		JMail.sendMail(CommonData.MAIL_FROM, CommonData.MAIL_USER, CommonData.MAIL_PASSWORD, 
+				employeeContactInfo.getEmployeeEmail(), CommonData.MAIL_TITLE, content);
+		
+		//paging(model,pageNo);
+		model.addAttribute("email", employeeContactInfo.getEmployeeEmail());
+        return "employee_active_tip";
+	}
+	
+	@RequestMapping(value="/employee/active")
+	public String activeAccount(Employee employee) {
+		employee.setEmployeeStatus(CommonData.STATUS_INUSED);
+		
+		employeeService.editEmployee(employee);
+		return "employee_active_success";
 	}
 	
 	/**
@@ -124,7 +141,7 @@ public class EmployeeController {
 	 * @return: String      
 	 * @throws
 	 */
-	@RequestMapping(value = "/goEditEmployee", method = RequestMethod.GET)
+	@RequestMapping(value = "/employee/goedit", method = RequestMethod.GET)
 	public String goEditEmployee(HttpServletRequest request, Model model,Integer pageNo) {
 		String employeeId = request.getParameter("employeeId");
 		Employee employee = employeeService.queryByEmployeeId(employeeId);
@@ -153,7 +170,7 @@ public class EmployeeController {
 	 * @return: String      
 	 * @throws
 	 */
-	@RequestMapping(value="/editEmployee",method=RequestMethod.POST)
+	@RequestMapping(value="/employee/edit",method=RequestMethod.POST)
 	public String editEmployee(HttpServletRequest request, Model model,Integer pageNo,
 			Employee employee,EmployeeAddress employeeAddress,EmployeeContactInfo employeeContactInfo) {
 		employee.setEmployeeUpdatedUser((String)request.getSession().getAttribute("account"));
@@ -177,7 +194,7 @@ public class EmployeeController {
 	 * @return: String      
 	 * @throws
 	 */
-	@RequestMapping(value="/editEmployeeToLeave")
+	@RequestMapping(value="/employee/toleave")
 	public String editEmployeeStatusToLeave(HttpServletRequest request, Model model,Integer pageNo,
 			Employee employee,EmployeeAddress employeeAddress,EmployeeContactInfo employeeContactInfo) {
 		employee.setEmployeeUpdatedUser((String)request.getSession().getAttribute("account"));

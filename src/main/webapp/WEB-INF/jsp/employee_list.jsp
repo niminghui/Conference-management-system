@@ -50,7 +50,7 @@
           <td>${employee.employeeContactInfo.employeeLandline }</td>
           <td>${employee.employeeContactInfo.employeePhone }</td>
           <td>${employee.employeeContactInfo.employeeEmail }</td>
-          <td><div class="button-group"> <a class="button border-main" href="${basepath }/sm/goEditEmployee?employeeId=${employee.employeeId}"><span class="icon-edit"></span> 修改</a> <a class="button border-red" href="javascript:void(0)" onclick="return del('${employee.employeeId}')"><span class="icon-trash-o"></span> 删除</a> </div></td>
+          <td><div class="button-group"> <a class="button border-main" href="${basepath }/sm/employee/goedit?employeeId=${employee.employeeId}"><span class="icon-edit"></span> 修改</a> <a class="button border-red" href="javascript:void(0)" onclick="return del('${employee.employeeId}')"><span class="icon-trash-o"></span> 删除</a> </div></td>
         </tr>
         </c:forEach>
       
@@ -65,7 +65,7 @@
 		 $("#pagelist").mypage({
 			pageNo:${pagingVO.curentPageNo},
 			params:"",
-			url:"${basepath }/sm/employeeList",
+			url:"${basepath }/sm/employee/list",
 			totalPage:${pagingVO.totalCount} 
 		}); 
 	});
@@ -81,7 +81,7 @@ function changesearch(){
 //单个删除
 function del(id){
 	if(confirm("您确定要删除吗?")){
-		window.location.href="${basepath}/sm/editEmployeeToLeave?employeeId="+id;
+		window.location.href="${basepath}/sm/employee/toleave?employeeId="+id;
 	}
 }
 
