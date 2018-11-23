@@ -116,4 +116,12 @@ public class AccountController {
 	public String enroll() {
 		return "enroll";
 	}
+
+	@GetMapping("/quit")
+	public String writeOff(HttpServletRequest request) {
+		request.getSession().invalidate();// 将用户信息注销
+		request.getSession().setAttribute("message", "用户已经注销");
+		return "redirect:index.jsp";
+	}
+
 }

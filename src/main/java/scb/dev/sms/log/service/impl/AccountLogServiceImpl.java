@@ -11,6 +11,7 @@ package scb.dev.sms.log.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import scb.dev.sms.common.CommonData;
 import scb.dev.sms.log.dao.AccountLogDao;
 import scb.dev.sms.log.pojo.AccountLog;
 import scb.dev.sms.log.service.IAccountLogService;
@@ -37,7 +38,7 @@ public class AccountLogServiceImpl implements IAccountLogService {
 	 */
 	@Override
 	public String addAccountLog(AccountLog accountLog) {
-		return accountLogDao.insert(accountLog) == 1 ? "SUCCESS" : "ERROR";
+		return accountLogDao.insert(accountLog) == 1 ? CommonData.STRING_SUCCESS : CommonData.STRING_FAILURE;
 	}
 
 	/**
@@ -47,7 +48,8 @@ public class AccountLogServiceImpl implements IAccountLogService {
 	 */
 	@Override
 	public String deleteAccountLog(String AccountLogId) {
-		return accountLogDao.deleteByPrimaryKey(AccountLogId) == 1 ? "SUCCESS" : "ERROR";
+		return accountLogDao.deleteByPrimaryKey(AccountLogId) == 1 ? CommonData.STRING_SUCCESS
+				: CommonData.STRING_FAILURE;
 	}
 
 }

@@ -15,11 +15,13 @@ import org.apache.log4j.Logger;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import scb.dev.sms.common.CommonData;
 import scb.dev.sms.common.CommonOperationType;
 import scb.dev.sms.log.pojo.AccountLog;
 import scb.dev.sms.log.service.IAccountLogService;
@@ -44,11 +46,30 @@ public class LoginAspect {
 
 	private Logger logger = Logger.getLogger(LoginAspect.class);
 
+	/**
+	 * 
+	 * Description: 登录操作切点.<br/>
+	 */
 	@Pointcut("execution(* scb.dev.sms.sm.controller.AccountController.loginValidate(..))")
 	public void loginPointCut() {
 
 	}
 
+	/**
+	 * 
+	 * Description: 注销操作切点.<br/>
+	 */
+	@Pointcut("execution(* scb.dev.sms.sm.controller.AccountController.writeOff(..))")
+	public void logoutPointCut() {
+
+	}
+
+	/**
+	 * 
+	 * Description: 用户登录时记录其登录信息并写入数据库 .<br/>
+	 * 
+	 * @param JoinPoint joinPoint
+	 */
 	@After("loginPointCut()")
 	public void loginAfter(JoinPoint joinPoint) {
 		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
@@ -59,7 +80,33 @@ public class LoginAspect {
 		accountLog.setLogAccountId(TokenIDFactory.getUUID());
 		accountLog.setLogAccountOperatorEid(account_id);
 		accountLog.setLogAccountOperatorType(CommonOperationType.LOGIN);
-		accountLogService.addAccountLog(accountLog);
-		logger.info("login after: add login log");
+		if (CommonData.STRING_SUCCESS.equals(accountLogService.addAccountLog(accountLog))) {
+			logger.info("login after: add login log success");
+		} else {
+			logger.error("login after: add login log failure");
+		}
+	}
+
+	/**
+	 * 
+	 * Description: 用户注销时记录其信息并写入数据库 .<br/>
+	 * 
+	 * @param JoinPoint joinPoint
+	 */
+	@Before("logoutPointCut()")
+	public void logoutBefore(JoinPoint joinPoint) {
+		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
+				.getRequest();
+		String account_name = (String) request.getSession().getAttribute("account_name");
+		String account_id = accountService.getAccountID(account_name);
+		AccountLog accountLog = new AccountLog();
+		accountLog.setLogAccountId(TokenIDFactory.getUUID());
+		accountLog.setLogAccountOperatorEid(account_id);
+		accountLog.setLogAccountOperatorType(CommonOperationType.LOGOUT);
+		if (CommonData.STRING_SUCCESS.equals(accountLogService.addAccountLog(accountLog))) {
+			logger.info("logout before: add logout log success");
+		} else {
+			logger.error("logout before: add logout log failure");
+		}
 	}
 }
