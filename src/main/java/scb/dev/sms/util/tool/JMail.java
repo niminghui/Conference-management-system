@@ -20,21 +20,14 @@ import java.util.Properties;
  * Description: TODO ADD REASON(可选). <br/><br/>
  * date: 2018年11月22日 下午10:42:00 <br/>
  *
- * @author erwin.wang
+ * @author Zither.Chen
  * @version V1.0
  * @since JDK 1.8
  */
 
 public class JMail {
 	
-	//测试方法
-	public static void main(String[] args) throws Exception {
-    	
-        sendMail("zither_chen@163.com", "zither_chen", "CHENKE517",
-                "1533672306@qq.com",
-                "Java Mail 测试邮件",
-                "123");
-    }
+	
 	
 	
     public static void sendMail(String fromMail, String user, String password,
