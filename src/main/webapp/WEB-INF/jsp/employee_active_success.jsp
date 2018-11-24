@@ -26,7 +26,7 @@ a{color:#0ae;}
         <span style="display:none;"><i class="icon-frown-o"></i>操作失败!</span>
   
    </div>
-    <h4 class="smaller">页面自动 <a id="href" href="<?php echo($jumpUrl); ?>">跳转</a> 等待时间： <b id="wait"><?php echo($waitSecond); ?></b></h4> 
+    <h4 class="smaller"><a href="${basepath }">去登录</a> </h4> 
    
 </div>
 

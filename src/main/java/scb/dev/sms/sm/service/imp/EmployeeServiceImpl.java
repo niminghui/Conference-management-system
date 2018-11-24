@@ -79,6 +79,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
 			employeeAddressDao.updateByPrimaryKeySelective(employeeAddress);
 			employeeContactInfoDao.updateByPrimaryKeySelective(employeeContactInfo);
 		}catch(Exception e) {
+			e.printStackTrace();
 			logger.error(CommonData.UPDATE_FAILURE);
 			return CommonData.UPDATE_FAILURE;
 		}

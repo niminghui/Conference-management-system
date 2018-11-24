@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import scb.dev.sms.common.CommonData;
@@ -110,24 +111,16 @@ public class EmployeeController {
 		
 		employeeService.initEmployee(employee,address,employeeContactInfo);
 		String url = request.getScheme()+"://"+ request.getServerName()+":"+
-				request.getServerPort()+request.getContextPath()+"/sm/employee/active?employeeId="+employee.getEmployeeId();
+				request.getServerPort()+request.getContextPath()+"/sm/employee/active/"+employee.getEmployeeId();
 		
-		String content=CommonData.MAIL_CONTENT+"<a href='"+url+"'>"+url+"</a>";
-		
+		String content=CommonData.MAIL_CONTENT_FRONT+"<a href='"+url+"'>"+url+"</a>";
+		System.out.println(content);
 		JMail.sendMail(CommonData.MAIL_FROM, CommonData.MAIL_USER, CommonData.MAIL_PASSWORD, 
 				employeeContactInfo.getEmployeeEmail(), CommonData.MAIL_TITLE, content);
 		
 		//paging(model,pageNo);
 		model.addAttribute("email", employeeContactInfo.getEmployeeEmail());
         return "employee_active_tip";
-	}
-	
-	@RequestMapping(value="/employee/active")
-	public String activeAccount(Employee employee) {
-		employee.setEmployeeStatus(CommonData.STATUS_INUSED);
-		
-		employeeService.editEmployee(employee);
-		return "employee_active_success";
 	}
 	
 	/**
@@ -164,13 +157,13 @@ public class EmployeeController {
 	 * @Description: 提交更新form表单，跳转到employee_list.jsp查询界面
 	 * @param: @param request
 	 * @param: @param model
-	 * @param: @param position
+	 * @param: @param employee
 	 * @param: @param pageNo
 	 * @param: @return      
 	 * @return: String      
 	 * @throws
 	 */
-	@RequestMapping(value="/employee/edit",method=RequestMethod.POST)
+	@RequestMapping(value="/employee/edit",method=RequestMethod.PUT)
 	public String editEmployee(HttpServletRequest request, Model model,Integer pageNo,
 			Employee employee,EmployeeAddress employeeAddress,EmployeeContactInfo employeeContactInfo) {
 		employee.setEmployeeUpdatedUser((String)request.getSession().getAttribute("account"));
@@ -188,21 +181,43 @@ public class EmployeeController {
 	 * @Description: 提交更新form表单，跳转到employee_list.jsp查询界面
 	 * @param: @param request
 	 * @param: @param model
-	 * @param: @param position
+	 * @param: @param employeeId
 	 * @param: @param pageNo
 	 * @param: @return      
 	 * @return: String      
 	 * @throws
 	 */
-	@RequestMapping(value="/employee/toleave")
-	public String editEmployeeStatusToLeave(HttpServletRequest request, Model model,Integer pageNo,
-			Employee employee,EmployeeAddress employeeAddress,EmployeeContactInfo employeeContactInfo) {
+	@RequestMapping(value="/employee/toleave/{employeeId}",method=RequestMethod.PUT)
+	public String editEmployeeStatusToLeave(HttpServletRequest request, Model model,Integer pageNo,@PathVariable("employeeId")String employeeId) {
+		Employee employee = new Employee();
+		employee.setEmployeeId(employeeId);
 		employee.setEmployeeUpdatedUser((String)request.getSession().getAttribute("account"));
 		employee.setEmployeeStatus(CommonData.STATUS_LEAVE_OFFICE);
-		employeeService.editEmployee(employee,employeeAddress,employeeContactInfo);
+		employeeService.editEmployee(employee);
 		paging(model,pageNo);
 		
-        return "redirect:list";
+        return "redirect:../list";
+	}
+	
+	/**
+	 * 
+	 * activeAccount:激活账户. <br/>
+	 * @param employeeId
+	 * @throws
+	 * @return
+	 *
+	 * @author ryan.li
+	 * @since JDK 1.8
+	 */
+	@RequestMapping(value="/employee/active/{employeeId}")
+	public String activeAccount(@PathVariable("employeeId") String employeeId) {
+		Employee employee = new Employee();
+		
+		employee.setEmployeeId(employeeId);
+		employee.setEmployeeStatus(CommonData.STATUS_INUSED);
+		
+		employeeService.editEmployee(employee);
+		return "employee_active_success";
 	}
 	
 	

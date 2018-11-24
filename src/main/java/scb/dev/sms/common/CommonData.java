@@ -59,5 +59,6 @@ public interface CommonData {
 	
 	public static final String MAIL_TITLE = "账户激活";
 	
-	public static final String MAIL_CONTENT = "请点击下方链接完成注册：<br>";
+	public static final String MAIL_CONTENT_FRONT = "请点击下方链接完成注册：<br>";
+	
 }

@@ -26,21 +26,9 @@ a{color:#0ae;}
         <span style="display:none;"><i class="icon-frown-o"></i>操作失败!</span>
   
    </div>
-    <h4 class="smaller">页面自动 <a id="href" href="<?php echo($jumpUrl); ?>">跳转</a> 等待时间： <b id="wait"><?php echo($waitSecond); ?></b></h4> 
+    <h4 class="smaller"><a id="href" href="${basepath }/sm/employee/list">返回员工列表</a></h4> 
    
 </div>
 
-<script type="text/javascript">
-(function(){
-var wait = document.getElementById('wait'),href = document.getElementById('href').href;
-var interval = setInterval(function(){
-	var time = --wait.innerHTML;
-	if(time <= 0) {
-		location.href = href;
-		clearInterval(interval);
-	};
-}, 1000);
-})();
-</script>
 </body>
 </html>
