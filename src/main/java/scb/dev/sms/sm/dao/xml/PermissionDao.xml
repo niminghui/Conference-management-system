@@ -43,7 +43,7 @@
     where permission_name like "%"#{permissionName,jdbcType=VARCHAR}"%"
   </select>
   <!-- 新增权限 -->
-  <insert id="insertPermission" parameterType="com.scb.dev.sms.sm.pojo.Permission">
+  <insert id="insertPermission" parameterType="scb.dev.sms.sm.pojo.Permission">
     <selectKey keyProperty="permissionId" order="BEFORE" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -105,7 +105,7 @@
   </insert>
   
   <!-- 修改权限 -->
-  <update id="updatePermission" parameterType="com.scb.dev.sms.sm.pojo.Permission">
+  <update id="updatePermission" parameterType="scb.dev.sms.sm.pojo.Permission">
     update sm_permission
     set permission_name = #{permissionName,jdbcType=VARCHAR},
       permission_comment = #{permissionComment,jdbcType=VARCHAR},
@@ -117,10 +117,10 @@
       permission_default = #{permissionDefault,jdbcType=VARCHAR}
     where permission_id = #{permissionId,jdbcType=INTEGER}
   </update>
-    <select id="getCountPermission" parameterType="com.scb.dev.sms.sm.pojo.Permission" resultType="java.lang.Integer" >
+    <select id="getCountPermission" parameterType="scb.dev.sms.sm.pojo.Permission" resultType="java.lang.Integer" >
     select count(*) from sm_permission
   </select>
-      <select id="findByPaging" parameterType="com.scb.dev.sms.util.tool.PagingVO" resultMap="BaseResultMap">
+      <select id="findByPaging" parameterType="scb.dev.sms.util.tool.PagingVO" resultMap="BaseResultMap">
         select * from sm_permission
         order by permission_updated_datetime DESC
         limit #{toPageNo}, #{pageSize}
