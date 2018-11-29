@@ -12,7 +12,7 @@ import scb.dev.sms.log.pojo.DepartmentLog;
 
 /**
  * ClassName: IDepartmentLogService <br/>
- * Description: TODO ADD REASON(可选). <br/><br/>
+ * Description: 
  * date: 2018年11月16日 上午10:22:46 <br/>
  *
  * @author Oscar.Zhang

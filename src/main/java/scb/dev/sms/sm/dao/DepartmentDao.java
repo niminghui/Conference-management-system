@@ -68,12 +68,36 @@ public interface DepartmentDao {
    	 * @mbg.generated 2018-11-15
    	 */
     List<Department> selectTreeDepartment();
-    
+    /**
+   	 * Description:通过id查找部门信息
+   	 * 
+   	 * @mbg.generated 2018-11-15
+   	 */
     Department findOneDepartmentById(String departmentId);
-    
+    /**
+   	 * Description:查找部门信息通过简称
+   	 * 
+   	 * @mbg.generated 2018-11-15
+   	 */
     Department findOneDepartmentByAbbrev(String departmentAbbreviation);
     //查找一个新的部门的父部门是否存在
     int selectCountByPid(String departmentPid);
-    
+    /**
+   	 * Description:查找所有部门信息
+   	 * 
+   	 * @mbg.generated 2018-11-15
+   	 */
     Department findOneDepartmentByName(String departmentName);
+    /**
+   	 * Description:查找一个部门的子部门信息
+   	 * 
+   	 * @mbg.generated 2018-11-15
+   	 */
+    List<Department> selectSubDep(String departmentId);
+    /**
+   	 * Description:查找部门的部门id和名字信息
+   	 * 
+   	 * @mbg.generated 2018-11-15
+   	 */
+    List<Department> findDepartmentNamesAndId();
 }

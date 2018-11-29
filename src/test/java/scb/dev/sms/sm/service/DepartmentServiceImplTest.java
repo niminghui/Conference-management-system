@@ -5,7 +5,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.List;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSessionContext;
 
 import org.apache.log4j.Logger;
 import org.junit.After;
@@ -18,6 +23,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import scb.dev.sms.common.CommonData;
+import scb.dev.sms.sm.controller.DepartmentController;
+import scb.dev.sms.sm.dao.DepartmentDao;
 import scb.dev.sms.sm.pojo.Department;
 import scb.dev.sms.sm.service.IDepartmentService;
 
@@ -29,6 +36,9 @@ public class DepartmentServiceImplTest {
 	private IDepartmentService departmentService;
 	@Autowired
 	private Department department = new Department();
+	@Autowired
+	private DepartmentController departmentController;
+	private List<Department> departments = new ArrayList<>();
 	private Logger logger = Logger.getLogger(Logger.class);
 	
 	@Before
@@ -59,10 +69,10 @@ public class DepartmentServiceImplTest {
     @Test
 	public void testupdateDepartment() {
 		
-		department.setDepartmentName("部门名称6");
+		department.setDepartmentName("部门名称1大苏打大苏打大撒大");
 		// department.setDepartmentPid("1");
-		department.setDepartmentAbbreviation("RB6");
-		department.setDepartmentId("7630a31b226c48aab4c2558e524e30e1");
+		department.setDepartmentAbbreviation("RB1");
+		department.setDepartmentId("0da29d223d8d48eeb11caa85fc6c95ee");
 		Assert.assertEquals("success", departmentService.updateDepartmentByDepartmentId(department));
 		
 
@@ -89,7 +99,7 @@ public class DepartmentServiceImplTest {
     public void testfindDepartmentById() {
     	
     	
-    	department=departmentService.findOneDepartmentById("7630a31b226c48aab4c2558e524e30e1");
+    	department=departmentService.findOneDepartmentById("0");
     	System.out.println(department.toString());
     	
     }
@@ -105,5 +115,21 @@ public class DepartmentServiceImplTest {
     	department=departmentService.findOneDepartmentByName("零售银行");
     	logger.info(department.toString());
     }
+    @Test
+    public void findParentDepartment() {
+    	departments=departmentService.findParentDepartment();
+    	logger.info(department.toString());
+    }
+   
+    /*public  void uppdateDepartment() {
+    	HttpSession session = null;
+	
+    	Department updateDepartment=new Department();
+    	updateDepartment.setDepartmentId("0da29d223d8d48eeb11caa85fc6c95ee");
+    	updateDepartment.setDepartmentName("部门名称1大苏打大苏打大撒大");
+    	updateDepartment.setDepartmentPid("RB11");
+    	updateDepartment
+    	departmentController.updateDepartment(session, updateDepartment);
+    }*/
 
 }

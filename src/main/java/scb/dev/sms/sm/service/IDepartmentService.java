@@ -58,6 +58,7 @@ public interface IDepartmentService {
 	 * @param 
 	 * @return Department，查找的部门信息
 	 */
+	//
 	public List<Department> findTreeDepartmentsInfo();
 	/**
 	 * 
@@ -84,6 +85,29 @@ public interface IDepartmentService {
 	 */
 	public Department findOneDepartmentByName(String departmentName);
 
-	
+	/**
+	 * 
+	 * Description: 通过部门名称查找一个部门以及子部门信息.<br/>
+	 * 
+	 * @param 
+	 * @return Department，查找到的部门信息，是tree模式
+	 */
+	public List<Department> findDepartmentAndSubInfo(String departmentId) ;
+	/**
+	 * 
+	 * Description: 查找跟部门（pid是1）.<br/>
+	 * 
+	 * @param 
+	 * @return Department，查找的部门信息
+	 */
+	public List<Department> findParentDepartment();
+	/**
+	 * 
+	 * Description: 查找跟部门（pid是1）.<br/>
+	 * 
+	 * @param 
+	 * @return Department，查找的部门信息
+	 */
+	public List<Department> findDepartmentNamesAndId();
 	
 }

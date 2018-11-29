@@ -16,7 +16,7 @@ import scb.dev.sms.log.service.IDepartmentLogService;
 
 /**
  * ClassName: DepartmentLogServiceImpl <br/>
- * Description: TODO ADD REASON(可选). <br/><br/>
+ * Description: 
  * date: 2018年11月16日 上午10:24:21 <br/>
  *
  * @author Oscar.Zhang
