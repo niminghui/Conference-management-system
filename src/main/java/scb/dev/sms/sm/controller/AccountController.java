@@ -22,9 +22,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import scb.dev.sms.common.CommonData;
+import scb.dev.sms.sm.pojo.Account;
 import scb.dev.sms.sm.pojo.LoginInfo;
 import scb.dev.sms.sm.service.IAccountService;
 
@@ -124,4 +127,14 @@ public class AccountController {
 		return "redirect:index.jsp";
 	}
 
+	@GetMapping("/Account/{account_id}")
+	public @ResponseBody Account getAccount(@PathVariable String account_id) {
+		Account account = accountService.getAccountByID(account_id);
+		return account;
+	}
+
+	@GetMapping("/Account/{account_id}/updatePWD")
+	public String updatePassword(@PathVariable String account_id) {
+		return "";
+	}
 }
