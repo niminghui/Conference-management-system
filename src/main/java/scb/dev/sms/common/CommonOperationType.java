@@ -23,4 +23,8 @@ public interface CommonOperationType {
 	public static final String REMENBER_PASSWORD = "remen_pwd";
 	public static final String FORGET_PASSWORD = "forget_pwd";
 	public static final String LOGOUT = "logout";
+	public static final String SAVE = "save";
+	public static final String DELETE = "delete";
+	public static final String UPDATE = "update";
+	public static final String QUERY = "query";
 }

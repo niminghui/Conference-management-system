@@ -114,7 +114,6 @@ public class EmployeeController {
 				request.getServerPort()+request.getContextPath()+"/sm/employee/active/"+employee.getEmployeeId();
 		
 		String content=CommonData.MAIL_CONTENT_FRONT+"<a href='"+url+"'>"+url+"</a>";
-		System.out.println(content);
 		JMail.sendMail(CommonData.MAIL_FROM, CommonData.MAIL_USER, CommonData.MAIL_PASSWORD, 
 				employeeContactInfo.getEmployeeEmail(), CommonData.MAIL_TITLE, content);
 		
