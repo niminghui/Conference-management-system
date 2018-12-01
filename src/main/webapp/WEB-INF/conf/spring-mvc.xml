@@ -45,4 +45,20 @@
 		<property name="uploadTempDir" value="fileUpload/temp" />
 	</bean>
 
+	<!-- 使用jackson 支持json Java中直接返回类，而不用再使用Json转换 2015.12.27 -->
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<ref bean="jsonHttpMessageConverter" />
+			</list>
+		</property>
+	</bean>
+	<bean id="jsonHttpMessageConverter"
+		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>application/json;charset=UTF-8</value>
+			</list>
+		</property>
+	</bean>
 </beans>

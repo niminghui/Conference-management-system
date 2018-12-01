@@ -120,4 +120,15 @@ public class AccountServiceImpl implements IAccountService {
 		return accountDao.selectAccountIdByAccountName(account_name);
 	}
 
+	/**
+	 * Description: 通过账户ID得到账户.<br/>
+	 * 
+	 * @see scb.dev.sms.sm.service.IAccountService#getAccountByID(java.lang.String)
+	 */
+	@Override
+	public Account getAccountByID(String account_id) {
+		Account account = accountDao.selectByAccountId(account_id);
+		return account;
+	}
+
 }
