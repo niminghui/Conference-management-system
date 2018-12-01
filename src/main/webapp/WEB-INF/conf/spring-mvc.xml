@@ -14,10 +14,14 @@
        	http://www.springframework.org/schema/tx/spring-tx.xsd      
         http://www.springframework.org/schema/mvc      
         http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
-	<!-- 配置SpringMVC -->
-	<!-- 1.开启SpringMVC注解模式 -->
-	<!-- 注册HandlerMapper、HandlerAdapter两个映射类 URL URI -->
-	<mvc:annotation-driven />
+        
+    <!-- 1.开启SpringMVC注解模式 -->
+	<mvc:annotation-driven validator="validator" />
+	
+	<!-- 注册hibernate的校验器 -->
+	<bean id = "validator" class = "org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+	    <property name="providerClass" value ="org.hibernate.validator.HibernateValidator"></property>          
+	</bean>
 
 	<!-- 2.静态资源默认servlet配置 (1)加入对静态资源的处理：js,gif,png (2)允许使用"/"做整体映射 -->
 	<mvc:default-servlet-handler />

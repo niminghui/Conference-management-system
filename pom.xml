@@ -322,6 +322,26 @@
 			<version>1.8.13</version>
 		</dependency>
 
+		<!-- 数据校验依赖包 -->
+		<dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-validator</artifactId>
+		    <version>4.3.0.Final</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.jboss.logging/jboss-logging -->
+		<dependency>
+		    <groupId>org.jboss.logging</groupId>
+		    <artifactId>jboss-logging</artifactId>
+		    <version>3.1.4.GA</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/javax.validation/validation-api -->
+		<dependency>
+		    <groupId>javax.validation</groupId>
+		    <artifactId>validation-api</artifactId>
+		    <version>1.0.0.GA</version>
+		</dependency>
+		
+
 	</dependencies>
 	<build>
 		<finalName>scb.sms</finalName>

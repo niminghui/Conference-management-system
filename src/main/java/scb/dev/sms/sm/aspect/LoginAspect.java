@@ -76,6 +76,9 @@ public class LoginAspect {
 				.getRequest();
 		String account_name = request.getParameter("account_name");
 		String account_id = accountService.getAccountID(account_name);
+		if (account_id == null) {
+			return;
+		}
 		AccountLog accountLog = new AccountLog();
 		accountLog.setLogAccountId(TokenIDFactory.getUUID());
 		accountLog.setLogAccountOperatorEid(account_id);
