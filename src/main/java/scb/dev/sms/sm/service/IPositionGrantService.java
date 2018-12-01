@@ -13,12 +13,12 @@ import scb.dev.sms.sm.pojo.PositionGrant;
 public interface IPositionGrantService {
 
 	/**
-	 * 根据每个人的职位返回不同的菜单
+	 * 根据每个人的账户id返回不同的菜单
 	 * 
-	 * @param positionId
+	 * @param accoountId
 	 * @return
 	 */
-	List<Menu> getOwnMenu(String positionId);
+	List<Menu> getOwnMenu(String accountId);
 
 	boolean addPositionGrant(PositionGrant record);
 

@@ -21,7 +21,7 @@
     <div class="panel-head"><strong class="icon-reorder"> 内容列表</strong> <a href="" style="float:right; display:none;">添加字段</a></div>
     <div class="padding border-bottom">
       <ul class="search" style="padding-left:10px;">
-        <li> <a class="button border-main icon-plus-square-o" href="${basepath }/sm/goAddEmployee"> 添加内容</a> </li>
+        <li> <a class="button border-main icon-plus-square-o" href="${basepath }/sm/employee/goadd"> 添加内容</a> </li>
         
       </ul>
     </div>
@@ -38,7 +38,7 @@
         <th>邮箱</th>
         <th>操作</th>
       </tr>
-      <volist name="list" id="vo">
+
      <c:forEach items="${employees }" var="employee">
         <tr>
           <td>${employee.employeeName }</td>
@@ -50,13 +50,19 @@
           <td>${employee.employeeContactInfo.employeeLandline }</td>
           <td>${employee.employeeContactInfo.employeePhone }</td>
           <td>${employee.employeeContactInfo.employeeEmail }</td>
-          <td><div class="button-group"> <a class="button border-main" href="${basepath }/sm/goEditEmployee?employeeId=${employee.employeeId}"><span class="icon-edit"></span> 修改</a> <a class="button border-red" href="javascript:void(0)" onclick="return del('${employee.employeeId}')"><span class="icon-trash-o"></span> 删除</a> </div></td>
+          <td><div class="button-group"> <a class="button border-main" href="${basepath }/sm/employee/goedit?employeeId=${employee.employeeId}"><span class="icon-edit"></span> 修改</a> 
+          <a id="${employee.employeeId }" class="button border-red delbutton" href="javascript:void(0)" ><span class="icon-trash-o"></span> 删除</a> </div></td>
         </tr>
         </c:forEach>
       
     </table>
   </div>
 </form>
+
+<form id="toleave" action="" method="post">
+<input type="hidden" name="_method" value="PUT"/><br/>
+</form>
+
 <script src="${basepath }/js/page.js"></script>
 		<div id="pagelist" class="pagelist"></div>
 		
@@ -65,27 +71,19 @@
 		 $("#pagelist").mypage({
 			pageNo:${pagingVO.curentPageNo},
 			params:"",
-			url:"${basepath }/sm/employeeList",
+			url:"${basepath }/sm/employee/list",
 			totalPage:${pagingVO.totalCount} 
 		}); 
 	});
+	
+	$(".delbutton").click(function(){
+		if(confirm("您确定要删除吗?")){
+			var employeeId=$(this).attr("id");
+			$("#toleave").attr("action","${basepath}/sm/employee/toleave/"+employeeId);
+			$("#toleave").submit();
+		}
+	});
 </script>
 		
-<script type="text/javascript">
-
-//搜索
-function changesearch(){	
-		
-}
-
-//单个删除
-function del(id){
-	if(confirm("您确定要删除吗?")){
-		window.location.href="${basepath}/sm/editEmployeeToLeave?employeeId="+id;
-	}
-}
-
-
-</script>
 </body>
 </html>

@@ -19,7 +19,7 @@
 <div class="panel admin-panel">
   <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span>增加员工</strong></div>
   <div class="body-content">
-    <form method="post" class="form-x" action="${basepath }/sm/addEmployee">  
+    <form method="post" class="form-x" action="${basepath }/sm/employee/add">  
       <div class="form-group">
         <div class="label">
           <label>姓名：</label>

@@ -17,7 +17,7 @@ import scb.dev.sms.util.tool.PagingVO;
  * 
  * @ClassName: PositionServiceImp
  * @Description: 职位信息service层实现类
- * @author: Steven.Lee
+ * @author: Zither.Chen
  * @date: 2018年11月18日 下午5:53:43
  * 
  * @Copyright: 2018 www.tydic.com Inc. All rights reserved.

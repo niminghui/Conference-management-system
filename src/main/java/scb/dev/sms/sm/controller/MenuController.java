@@ -23,7 +23,7 @@ import scb.dev.sms.sm.service.IPositionGrantService;
  * @author Weilei
  *
  */
-@Controller
+@RestController
 @RequestMapping(value="/menu",produces="text/html;charset=utf-8")
 public class MenuController {
 
@@ -60,8 +60,8 @@ public class MenuController {
 	@RequestMapping("/getAllMenu")
 	public String getAllMenu(Model model) {
 		model.addAttribute("menus",menuService);
-		//return JSON.toJSONString(menuService.queryAllMenu());
-		return "menu_list"; 
+		return JSON.toJSONString(menuService.queryAllMenu());
+		//return "menu_list"; 
 	}
 
 	/**
