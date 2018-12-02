@@ -10,6 +10,7 @@ package scb.dev.sms.sm.service.imp;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import scb.dev.sms.common.CommonData;
 import scb.dev.sms.sm.dao.AccountDao;
@@ -30,6 +31,7 @@ import scb.dev.sms.util.tool.MD5Utils;
  * @since JDK 1.8 date: 2018年11月15日 上午11:08:20 <br/>
  */
 @Service
+@Transactional
 public class AccountServiceImpl implements IAccountService {
 	@Autowired
 	private AccountDao accountDao;
@@ -118,6 +120,17 @@ public class AccountServiceImpl implements IAccountService {
 	@Override
 	public String getAccountID(String account_name) {
 		return accountDao.selectAccountIdByAccountName(account_name);
+	}
+
+	/**
+	 * Description: 通过账户ID得到账户.<br/>
+	 * 
+	 * @see scb.dev.sms.sm.service.IAccountService#getAccountByID(java.lang.String)
+	 */
+	@Override
+	public Account getAccountByID(String account_id) {
+		Account account = accountDao.selectByAccountId(account_id);
+		return account;
 	}
 
 }

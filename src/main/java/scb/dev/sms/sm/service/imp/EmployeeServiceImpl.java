@@ -17,7 +17,6 @@ import scb.dev.sms.sm.pojo.EmployeeAddress;
 import scb.dev.sms.sm.pojo.EmployeeContactInfo;
 import scb.dev.sms.sm.service.IAccountService;
 import scb.dev.sms.sm.service.IEmployeeService;
-import scb.dev.sms.util.factory.TokenIDFactory;
 import scb.dev.sms.util.tool.PagingVO;
 
 /**
@@ -52,6 +51,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
 	public String initEmployee(Employee employee,EmployeeAddress employeeAddress,
 			EmployeeContactInfo employeeContactInfo) {
 		logger.info("initEmployee");
+		String password="";
 		try {
 			
 			setWorkId(employee);
@@ -59,7 +59,8 @@ public class EmployeeServiceImpl implements IEmployeeService {
 			employeeAddressDao.insertSelective(employeeAddress);
 			employeeContactInfoDao.insertSelective(employeeContactInfo);
 			
-			accountService.initAccount(employee.getEmployeeId(), employee.getEmployeeNickname());
+			password=accountService.initAccount(employee.getEmployeeId(), employee.getEmployeeNickname());
+			
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -67,7 +68,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
 			return CommonData.SAVE_FAILURE;
 		}
 		logger.info(CommonData.SAVE_SUCCESS);
-		return CommonData.SAVE_SUCCESS;
+		return password;
 	}
 
 	@Override

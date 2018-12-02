@@ -55,6 +55,7 @@ public class PositionController {
 		pagingVO.setTotalCount(this.positionService.getCountPosition());
         if (page == null || page == 0) {
             pagingVO.setToPageNo(1);
+            System.out.println("*****************");
             positions = this.positionService.findByPaging(pagingVO);
         } else {
             pagingVO.setToPageNo(page);//设置要前往的页码
@@ -68,7 +69,7 @@ public class PositionController {
         	logger.error(CommonData.QUERY_FAILURE);	
         }
 
-        return "sms/position_list";
+        return "position_list";
 
 	}
 
@@ -141,6 +142,8 @@ public class PositionController {
 			position.setPositionCreatedUser((String)request.getSession().getAttribute("account"));
 			//设置职位更改人
 			position.setPositionUpdatedUser(position.getPositionCreatedUser());
+			//设置新增时间
+			position.setPositionCreatedTime((new Timestamp(new Date().getTime())));
 			logger.info(positionService.insertPosition(position));
 			//设置总页数
 			pagingVO.setTotalCount(this.positionService.getCountPosition());

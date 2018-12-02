@@ -8,6 +8,8 @@
  */
 package scb.dev.sms.log.service;
 
+import java.util.List;
+
 import scb.dev.sms.log.pojo.EmployeeLog;
 
 /**
@@ -23,4 +25,6 @@ public interface IEmployeeLogService {
 	public String addEmployeeLog(EmployeeLog employeeLog);
 
 	public String deleteEmployeeLog(String EmployeeLogId);
+	
+	public List<EmployeeLog> showAllEmployeeLog();
 }

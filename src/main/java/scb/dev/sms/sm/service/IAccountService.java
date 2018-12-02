@@ -8,6 +8,8 @@
  */
 package scb.dev.sms.sm.service;
 
+import scb.dev.sms.sm.pojo.Account;
+
 /**
  * ClassName: IAccountService <br/>
  * Description: IAccountService interface. <br/>
@@ -62,4 +64,13 @@ public interface IAccountService {
 	 * @return String
 	 */
 	public String getAccountID(String account_name);
+
+	/**
+	 * 
+	 * Description: 通过账户ID得到账户.<br/>
+	 * 
+	 * @param String account_id
+	 * @return Account
+	 */
+	public Account getAccountByID(String account_id);
 }

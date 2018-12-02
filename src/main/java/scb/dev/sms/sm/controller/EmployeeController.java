@@ -10,17 +10,24 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.alibaba.fastjson.JSONObject;
+
 import scb.dev.sms.common.CommonData;
 import scb.dev.sms.sm.dao.DepartmentDao;
+import scb.dev.sms.sm.pojo.Account;
 import scb.dev.sms.sm.pojo.Department;
 import scb.dev.sms.sm.pojo.Employee;
 import scb.dev.sms.sm.pojo.EmployeeAddress;
 import scb.dev.sms.sm.pojo.EmployeeContactInfo;
 import scb.dev.sms.sm.pojo.Position;
+import scb.dev.sms.sm.service.IAccountService;
 import scb.dev.sms.sm.service.IEmployeeService;
 import scb.dev.sms.sm.service.IPositionService;
 import scb.dev.sms.util.factory.TokenIDFactory;
 import scb.dev.sms.util.tool.JMail;
+import scb.dev.sms.util.tool.MD5Utils;
 import scb.dev.sms.util.tool.PagingVO;
 
 @Controller
@@ -36,6 +43,8 @@ public class EmployeeController {
 	@Resource
 	private IPositionService positionService;
 	
+	@Resource
+	private IAccountService accountService;
 	
 	//页码对象
 	private PagingVO pagingVO=new PagingVO();
@@ -109,12 +118,13 @@ public class EmployeeController {
 		//设置职位更改人
 		employee.setEmployeeUpdatedUser(employee.getEmployeeCreatedUser());
 		
-		employeeService.initEmployee(employee,address,employeeContactInfo);
+		String password=employeeService.initEmployee(employee,address,employeeContactInfo);
 		String url = request.getScheme()+"://"+ request.getServerName()+":"+
-				request.getServerPort()+request.getContextPath()+"/sm/employee/active/"+employee.getEmployeeId();
+				request.getServerPort()+request.getContextPath()+"/sm/employee/goactive/"+employee.getEmployeeId()+"/"+employee.getEmployeeNickname();
 		
-		String content=CommonData.MAIL_CONTENT_FRONT+"<a href='"+url+"'>"+url+"</a>";
-		System.out.println(content);
+		String content=CommonData.MAIL_CONTENT_FRONT+"<a href='"+url+"'>"+url+"</a><br>账号："
+		+employee.getEmployeeNickname()+"<br>密码："+password;
+		
 		JMail.sendMail(CommonData.MAIL_FROM, CommonData.MAIL_USER, CommonData.MAIL_PASSWORD, 
 				employeeContactInfo.getEmployeeEmail(), CommonData.MAIL_TITLE, content);
 		
@@ -201,6 +211,24 @@ public class EmployeeController {
 	
 	/**
 	 * 
+	 * goActiveAccount:(跳转到激活页面). <br/>
+	 * @param userName 用户名
+	 * @param employeeId 员工id
+	 * @throws
+	 * @return
+	 *
+	 * @author ryan.li
+	 * @since JDK 1.8
+	 */
+	@RequestMapping(value="/employee/goactive/{employeeId}/{userName}",method=RequestMethod.GET)
+	public String goActiveAccount(@PathVariable("userName")String userName,@PathVariable("employeeId")String employeeId,Model model) {
+		model.addAttribute("userName", userName);
+		model.addAttribute("employeeId", employeeId);
+		return "employee_active";
+	}
+	
+	/**
+	 * 
 	 * activeAccount:激活账户. <br/>
 	 * @param employeeId
 	 * @throws
@@ -210,17 +238,42 @@ public class EmployeeController {
 	 * @since JDK 1.8
 	 */
 	@RequestMapping(value="/employee/active/{employeeId}")
-	public String activeAccount(@PathVariable("employeeId") String employeeId) {
+	public String activeAccount(@PathVariable("employeeId") String employeeId,String newPassword ) {
 		Employee employee = new Employee();
 		
 		employee.setEmployeeId(employeeId);
 		employee.setEmployeeStatus(CommonData.STATUS_INUSED);
 		
 		employeeService.editEmployee(employee);
+		accountService.updateAccountPwd(employeeId, newPassword);
 		return "employee_active_success";
 	}
 	
-	
+	/**
+	 * 
+	 * checkOldPassword:(检查密码是否正确). <br/>
+	 * @param oldPassword
+	 * @param employeeId
+	 * @throws
+	 * @return
+	 *
+	 * @author ryan.li
+	 * @since JDK 1.8
+	 */
+	@ResponseBody
+	@RequestMapping(value="/employee/checkOldPassword",method=RequestMethod.GET)
+	public String checkOldPassword(String oldPassword,String employeeId) {
+		Account account = accountService.getAccountByID(employeeId);
+		if(MD5Utils.MD5(oldPassword).equals(account.getAccountPassword())) {
+			
+			return JSONObject.toJSONString(CommonData.STRING_SUCCESS);
+		}
+		else {
+			
+			return JSONObject.toJSONString(CommonData.STRING_FAILURE);
+		}
+		
+	}
 	/**
 	 * 
 	 * paging:(分页查询操作). <br/>
