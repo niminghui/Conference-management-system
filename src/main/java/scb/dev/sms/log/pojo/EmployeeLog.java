@@ -6,29 +6,29 @@ public class EmployeeLog {
     /**
      * 
      */
-    private String logEmployeeId;
+    private String log_employee_id;
 
     /**
      * 操作类型
      */
-    private String logEmployeeOperatorType;
+    private String log_employee_operator_type;
 
     /**
      * 操作账户
      */
-    private String logEmployeeOperatorEid;
+    private String log_employee_operator_eid;
 
     /**
      * 操作时间
      */
-    private Date logEmployeeOperatorTime;
+    private Date log_employee_operator_time;
 
     /**
      * 
      * @return log_employee_id 
      */
     public String getLogEmployeeId() {
-        return logEmployeeId;
+        return log_employee_id;
     }
 
     /**
@@ -36,7 +36,7 @@ public class EmployeeLog {
      * @param logEmployeeId 
      */
     public void setLogEmployeeId(String logEmployeeId) {
-        this.logEmployeeId = logEmployeeId;
+        this.log_employee_id = logEmployeeId;
     }
 
     /**
@@ -44,7 +44,7 @@ public class EmployeeLog {
      * @return log_employee_operator_type 操作类型
      */
     public String getLogEmployeeOperatorType() {
-        return logEmployeeOperatorType;
+        return log_employee_operator_type;
     }
 
     /**
@@ -52,7 +52,7 @@ public class EmployeeLog {
      * @param logEmployeeOperatorType 操作类型
      */
     public void setLogEmployeeOperatorType(String logEmployeeOperatorType) {
-        this.logEmployeeOperatorType = logEmployeeOperatorType;
+        this.log_employee_operator_type = logEmployeeOperatorType;
     }
 
     /**
@@ -60,7 +60,7 @@ public class EmployeeLog {
      * @return log_employee_operator_eid 操作账户
      */
     public String getLogEmployeeOperatorEid() {
-        return logEmployeeOperatorEid;
+        return log_employee_operator_eid;
     }
 
     /**
@@ -68,7 +68,7 @@ public class EmployeeLog {
      * @param logEmployeeOperatorEid 操作账户
      */
     public void setLogEmployeeOperatorEid(String logEmployeeOperatorEid) {
-        this.logEmployeeOperatorEid = logEmployeeOperatorEid;
+        this.log_employee_operator_eid = logEmployeeOperatorEid;
     }
 
     /**
@@ -76,7 +76,7 @@ public class EmployeeLog {
      * @return log_employee_operator_time 操作时间
      */
     public Date getLogEmployeeOperatorTime() {
-        return logEmployeeOperatorTime;
+        return log_employee_operator_time;
     }
 
     /**
@@ -84,6 +84,18 @@ public class EmployeeLog {
      * @param logEmployeeOperatorTime 操作时间
      */
     public void setLogEmployeeOperatorTime(Date logEmployeeOperatorTime) {
-        this.logEmployeeOperatorTime = logEmployeeOperatorTime;
+        this.log_employee_operator_time = logEmployeeOperatorTime;
     }
+
+	/**
+	 * TODO 简单描述该方法的实现功能（可选）.
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "EmployeeLog [log_employee_id=" + log_employee_id + ", log_employee_operator_type="
+				+ log_employee_operator_type + ", log_employee_operator_eid=" + log_employee_operator_eid
+				+ ", log_employee_operator_time=" + log_employee_operator_time + "]";
+	}
+    
 }

@@ -8,7 +8,10 @@
  */
 package scb.dev.sms.log.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import scb.dev.sms.log.dao.EmployeeLogDao;
 import scb.dev.sms.log.pojo.EmployeeLog;
@@ -23,6 +26,7 @@ import scb.dev.sms.log.service.IEmployeeLogService;
  * @version V1.0
  * @since JDK 1.8
  */
+@Service
 public class EmployeeLogServiceImpl implements IEmployeeLogService {
 
 	@Autowired
@@ -47,6 +51,15 @@ public class EmployeeLogServiceImpl implements IEmployeeLogService {
 	public String deleteEmployeeLog(String EmployeeLogId) {
 
 		return employeeLogDao.deleteByPrimaryKey(EmployeeLogId) == 1 ? "SUCCESS" : "ERROR";
+	}
+
+	/**
+	 * 查询所有的employee日志
+	 * @see scb.dev.sms.log.service.IEmployeeLogService#showAllEmployeeLog()
+	 */
+	@Override
+	public List<EmployeeLog> showAllEmployeeLog() {	
+		return employeeLogDao.findAllEmployeeLog();
 	}
 
 }

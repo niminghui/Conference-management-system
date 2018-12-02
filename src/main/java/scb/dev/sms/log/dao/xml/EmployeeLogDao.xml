@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="scb.dev.sms.log.dao.EmployeeLogDao">
+
+	<select id="findAllEmployeeLog" resultType="scb.dev.sms.log.pojo.EmployeeLog">
+		select * from log_employee
+	</select>
+
+
   <resultMap id="BaseResultMap" type="scb.dev.sms.log.pojo.EmployeeLog">
     <id column="log_employee_id" jdbcType="VARCHAR" property="logEmployeeId" />
     <result column="log_employee_operator_type" jdbcType="VARCHAR" property="logEmployeeOperatorType" />

@@ -1,5 +1,7 @@
 package scb.dev.sms.log.dao;
 
+import java.util.List;
+
 import scb.dev.sms.log.pojo.EmployeeLog;
 
 public interface EmployeeLogDao {
@@ -38,4 +40,6 @@ public interface EmployeeLogDao {
      * @mbg.generated 2018-11-15
      */
     int updateByPrimaryKey(EmployeeLog record);
+    
+    List<EmployeeLog> findAllEmployeeLog();
 }
