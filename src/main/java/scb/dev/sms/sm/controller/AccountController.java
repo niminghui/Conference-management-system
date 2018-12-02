@@ -13,6 +13,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.List;
 import java.util.Random;
 
 import javax.annotation.Resource;
@@ -20,7 +21,11 @@ import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,6 +50,8 @@ public class AccountController {
 
 	@Resource
 	private IAccountService accountService;
+
+	private Logger logger = Logger.getLogger(AccountController.class);
 
 	@GetMapping("/yzm")
 	public void returnYZM(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -94,12 +101,24 @@ public class AccountController {
 	}
 
 	@PostMapping("/login")
-	public String loginValidate(HttpServletRequest request, LoginInfo loginInfo) {
+	public String loginValidate(HttpServletRequest request, @Validated LoginInfo loginInfo,
+			BindingResult bindingResult) {
 		String yzm = request.getSession().getAttribute("yzm").toString();
+		// 数据校验错误，返回校验信息
+		if (bindingResult.hasErrors()) {
+			List<ObjectError> allErrors = bindingResult.getAllErrors();
+			for (ObjectError objectError : allErrors) {
+				logger.warn(objectError.getDefaultMessage());
+			}
+			request.getSession().setAttribute("errors", allErrors);
+			return "redirect:index.jsp";
+		}
+		// 验证码不匹配，写入message（应该自定义验证码校验，进行统一校验）
 		if (!yzm.equals(loginInfo.getUyzm())) {
 			request.getSession().setAttribute("message", CommonData.STRING_YZMERROR);
 			return "redirect:index.jsp";
 		}
+		// 登录认证
 		String info = accountService.validateAccount(loginInfo.getAccount_name(), loginInfo.getAccount_pwd());
 		if (info.equals(CommonData.STRING_SUCCESS)) {
 			String account_id = accountService.getAccountID(loginInfo.getAccount_name());

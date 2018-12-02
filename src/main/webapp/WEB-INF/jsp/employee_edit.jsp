@@ -31,15 +31,6 @@
           <div class="tips"></div>
         </div>
       </div>
-      <div class="form-group">
-        <div class="label">
-          <label>英文名：</label>
-        </div>
-        <div class="field">
-          <input type="text" class="input w50" value="${employee.employeeNickname }" name="employeeNickname" data-validate="required:请输入员工英文名" />
-          <div class="tips"></div>
-        </div>
-      </div>
       
       <div class="form-group">
           <div class="label">

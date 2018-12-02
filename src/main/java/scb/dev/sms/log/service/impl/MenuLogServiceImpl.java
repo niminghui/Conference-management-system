@@ -9,6 +9,7 @@
 package scb.dev.sms.log.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import scb.dev.sms.log.dao.MenuLogDao;
 import scb.dev.sms.log.pojo.MenuLog;
@@ -23,6 +24,7 @@ import scb.dev.sms.log.service.IMenuLogService;
  * @version V1.0
  * @since JDK 1.8
  */
+@Service
 public class MenuLogServiceImpl implements IMenuLogService {
 	@Autowired
 	MenuLogDao menuLogDao;

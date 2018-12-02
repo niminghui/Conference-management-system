@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -9,12 +10,12 @@
 <link rel="stylesheet" href="css/login.css" />
 <script type="text/javascript" src="js/index.js"></script>
 <script>
-			function changeYZM(){
-				document.getElementById("yzmImg").setAttribute('src','/scb.sms/yzm?'+Math.random());
-			}
-			if(${not empty message})
-				alert("${message}");
-		</script>
+	function changeYZM(){
+		document.getElementById("yzmImg").setAttribute('src','/scb.sms/yzm?'+Math.random());
+	}
+	if(${not empty message})
+		alert("${message}");
+</script>
 </head>
 <body>
 	<div class="slider">
@@ -65,6 +66,11 @@
 	</div>
 	<div class="bottom">
 		<h3>这里显示已有的会议信息（待完善）</h3>
+		<c:if test="${errors != null && errors.size() > 0}">
+			<c:forEach items="${errors}" var="err">
+				<span>${err.defaultMessage}</span> <br/>
+			</c:forEach>
+		</c:if>	
 	</div>
 </body>
 </html>
