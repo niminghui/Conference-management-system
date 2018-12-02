@@ -310,5 +310,7 @@ public class Department implements Serializable{
 				+ departmentCreatedUser + ", departmentCreatedTime=" + departmentCreatedTime + ", departments="
 				+ departments + "]";
 	}
+
+	
 	
 }

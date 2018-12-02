@@ -1,7 +1,9 @@
 package scb.dev.sms.sm.controller;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
-
 
 import javax.servlet.http.HttpSession;
 
@@ -24,6 +26,7 @@ import scb.dev.sms.sm.pojo.Employee;
 import scb.dev.sms.sm.service.IDepartmentService;
 import scb.dev.sms.sm.service.IEmployeeService;
 
+
 @CrossOrigin
 @Controller
 public class DepartmentController {
@@ -32,7 +35,7 @@ public class DepartmentController {
 	private IDepartmentService iDepartmentService;
 	@Autowired
 	private IEmployeeService iEmployeeService;
-
+	List<String> IdRes=new LinkedList<>();
 	Department department;
 	List<Department> departments, findAllDepartmentToSelect;
 
@@ -70,28 +73,76 @@ public class DepartmentController {
 		} else {
 			department.setDepartmentPid("总部门");
 		}
+		//添加下边子部门信息
 		departments = iDepartmentService.findDepartmentAndSubInfo(department.getDepartmentId());
-		// 查找部门信息，用来修改信息时做选择列表
+		// 查找所有部门信息，用来修改信息时做选择列表
 		findAllDepartmentToSelect = getAllDepartmentToSelect();
-		// 从选择列中去掉自己部门
+		System.out.println("所有信息："+findAllDepartmentToSelect.toString());
+		//查找所有子部门id信息
+	    List<Department> departmentss=iDepartmentService.selectIdAndSubId(department.getDepartmentId());
+	    System.out.println("departmentss:"+departmentss.toString());
+	 // 从选择列中去掉自己部门以及子部门
+	
+	  //  System.out.println(resAllDepToSelect.size());
+		if(departmentss.size()!=0) {
+			resetDep(departmentss);
+			for(int i=0;i<findAllDepartmentToSelect.size();i++) {
+				
+				for(String str:IdRes) {
+					if(findAllDepartmentToSelect.get(i).getDepartmentId().equals(str)) {
+						findAllDepartmentToSelect.remove(i);
+						
+					}
+				}
+			}
+		//	System.out.println("findAllDepartmentToSelect.toString():"+findAllDepartmentToSelect.size()+findAllDepartmentToSelect.toString());
+		//	System.out.println("resAllDepToSelect.toString()："+resAllDepToSelect.size()+resAllDepToSelect.toString());
+		//	Iterator<Department> iterator=findAllDepartmentToSelect.iterator();
+			//从列表里去掉自己全部子部门选项
+			/*while(iterator.hasNext()) {
+				synchronized (iterator) {
+				       Department dep=iterator.next();
+				       for(String str:IdRes){
+				    	   if(!dep.getDepartmentId().equals(str)) {
+					    	 //  iterator.remove();
+					    	 //  break;
+				    		 //  resAllDepToSelect.add(iterator);
+					       } 
+				       }
+				       
+				}
+			}*/
+		}
+		
+		//从列表里去掉自己部门选项
 		for (int i = 0; i < findAllDepartmentToSelect.size(); i++) {
 			if (findAllDepartmentToSelect.get(i).getDepartmentId().equals(department.getDepartmentId())) {
-				System.out.println(" 从选择列中去掉自己部门");
+				System.out.println(" 从选择列中去掉自己部门及子部门");
 				findAllDepartmentToSelect.remove(i);
 				break;
 			}
-
 		}
+	//	System.out.println(findAllDepartmentToSelect.toString());
 		mv.addObject("findAllDepartmentToSelect", findAllDepartmentToSelect);
 
 		mv.addObject("departments", departments);
 		mv.addObject("department", department);
 		mv.setViewName("department");
-		System.out.println(departments.toString());
-		System.out.println("----------------");
 		return mv;
 	}
-
+	
+	private List<String> resetDep(List<Department> departments){
+		
+		for(Department d: departments) {
+			IdRes.add(d.getDepartmentId());
+			if(d.getDepartments().size()!=0) {
+				resetDep(d.getDepartments());
+			}
+		}
+			
+		return IdRes;
+	}
+	
 	// 圆连接点击方法
 	@RequestMapping(value = "/findOneDepartmentById", method = RequestMethod.GET) // O是id,1是名称，2是简称
 	public ModelAndView findOneDepartmentById(@RequestParam(value = "searchString") String departmentString) {
@@ -114,10 +165,23 @@ public class DepartmentController {
 			department.setDepartmentPid("总部门");
 		}
 
-		// 查找子部门
+		// 查找下一层子部门
 		departments = iDepartmentService.findDepartmentAndSubInfo(department.getDepartmentId());
 		// 查找部门信息，用来修改信息时做选择列表
 		findAllDepartmentToSelect = getAllDepartmentToSelect();
+		// 从选择列中去掉自己部门以及子部门
+	    List<Department> departmentss=iDepartmentService.selectIdAndSubId(department.getDepartmentId());
+		if(departmentss.size()!=0) {
+			resetDep(departmentss);
+			for(int i=0;i<findAllDepartmentToSelect.size();i++) {
+				for(String str:IdRes) {
+					if(findAllDepartmentToSelect.get(i).getDepartmentId().equals(str)) {
+						findAllDepartmentToSelect.remove(i);
+						
+					}
+				}
+			}
+		}
 		// 从选择列中去掉自己本身
 		for (int i = 0; i < findAllDepartmentToSelect.size(); i++) {
 			// int a=0,b=0;
@@ -137,6 +201,7 @@ public class DepartmentController {
 		return mv;
 	}
 
+	//获得部门列表
 	private List<Department> getAllDepartmentToSelect() {
 		List<Department> getAlldepartments = iDepartmentService.findDepartmentNamesAndId();
 		Department OneDepartment = new Department();
@@ -166,7 +231,6 @@ public class DepartmentController {
 		return mv;
 	}
 
-	
 	@RequestMapping("/CreateNewDepartment")
 	public ModelAndView CreateNewDepartment(HttpSession session, Department createDepartment) {
 		// 查找部门信息，用来修改信息时做选择列表
@@ -175,13 +239,13 @@ public class DepartmentController {
 		mv.setViewName("createNewDep");
 		return mv;
 	}
-	
-	@RequestMapping(value="/FinishCreateNewDepartment",method=RequestMethod.POST)
+
+	@RequestMapping(value = "/FinishCreateNewDepartment", method = RequestMethod.POST)
 	public ModelAndView FinishCreateNewDepartment(HttpSession session, Department createDepartment) {
 		mv.clear();
 		String employeeId = (String) session.getAttribute("account_id");
 		Employee employee = null;
-	//	Employee employee = iEmployeeService.queryByEmployeeId(employeeId);
+		// Employee employee = iEmployeeService.queryByEmployeeId(employeeId);
 		// 因为没有登录，所以会报错 -------需要改
 		if (employeeId == null) {
 			System.out.println("神秘人");
@@ -192,13 +256,13 @@ public class DepartmentController {
 			createDepartment.setDepartmentUpdatedUser(employee.getEmployeeName());
 			createDepartment.setDepartmentCreatedUser(employee.getEmployeeName());
 		}
-		
+
 		String res = iDepartmentService.insertDepartment(createDepartment);
-		
+
 		if (res.equals(CommonData.STRING_SUCCESS)) {
-			System.out.println("重新装载页面数据前");
+
 			// 无论改变成功与否，重新装载页面数据 TODO
-			findOneDepartment(createDepartment.getDepartmentAbbreviation(),"2");
+			findOneDepartment(createDepartment.getDepartmentAbbreviation(), "2");
 			System.out.println("重新装载页面数据后");
 			mv.addObject("msg", "创建成功");
 			mv.setViewName("department");
@@ -207,35 +271,37 @@ public class DepartmentController {
 			mv.addObject("msg", "创建失败,部门名称、部门简称不能重复");
 			mv.setViewName("createNewDep");
 		}
-		
+
 		return mv;
 	}
 
 	@RequestMapping("/cheakSameUsername")
 	@ResponseBody
-	public String cheakSameUsername(@RequestBody() String departmentStr){
-		
-		String departmentName=(String) JSON.parseObject(departmentStr).get("departmentName");
-		System.out.println("-----------------------"+departmentName);
-		if(iDepartmentService.selectCountByName(departmentName)>0) {
+	public String cheakSameUsername(@RequestBody() String departmentStr) {
+
+		String departmentName = (String) JSON.parseObject(departmentStr).get("departmentName");
+		System.out.println("-----------------------" + departmentName);
+		if (iDepartmentService.selectCountByName(departmentName) > 0) {
 			return "false";
-		}else {
+		} else {
 			return "true";
 		}
 	}
+
 	@RequestMapping("/cheakSameAbbreviation")
 	@ResponseBody
-	public String cheakSameAbbreviation(@RequestBody() String departmentStr){
+	public String cheakSameAbbreviation(@RequestBody() String departmentStr) {
 		System.out.println(departmentStr);
-		String departmentAbbreviation=(String) JSON.parseObject(departmentStr).get("departmentAbbreviation");
-		System.out.println("-----------------------"+departmentAbbreviation);
-		
-		if(iDepartmentService.selectCountByAbbrev(departmentAbbreviation)>0) {
+		String departmentAbbreviation = (String) JSON.parseObject(departmentStr).get("departmentAbbreviation");
+		System.out.println("-----------------------" + departmentAbbreviation);
+
+		if (iDepartmentService.selectCountByAbbrev(departmentAbbreviation) > 0) {
 			return "false";
-		}else {
+		} else {
 			return "true";
 		}
 	}
+
 	@RequestMapping("/updateNewDepartment")
 	public ModelAndView updateDepartment(HttpSession session, Department updateDepartment) {
 		mv.clear();
@@ -270,31 +336,28 @@ public class DepartmentController {
 		return mv;
 	}
 
-	@RequestMapping(value="/deleteDepartment",method=RequestMethod.POST)
+	@RequestMapping(value = "/deleteDepartment", method = RequestMethod.POST, produces = {
+			"application/json;charset=UTF-8" }) // produces = {"application/json;charset=UTF-8"}解决json中文乱码问题
 	@ResponseBody
-	public String  deleteDepartment(@RequestBody String departmentStr) {
+	public String deleteDepartment(@RequestBody String departmentStr) {
 		mv.clear();
-		JSONObject jsonObject=new JSONObject();
+		JSONObject jsonObject = new JSONObject();
 		System.out.println(departmentStr);
-		String departmentName=(String) JSON.parseObject(departmentStr).get("departmentId");
+		String departmentName = (String) JSON.parseObject(departmentStr).get("departmentId");
 		System.out.println(departmentName);
-		if(departmentName!=null) {
+		if (departmentName != null) {
 			String res = iDepartmentService.deleteDepartmentByDepartmentId(departmentName);
-			
 			if (res.equals(CommonData.STRING_SUCCESS)) {
-			
+
 				jsonObject.put("msg", "删除成功");
+			} else if (res.equals(CommonData.DEPARTMENT_NOT_EXIST)) {
+                 jsonObject.put("msg", "该部门已经不存在，请刷新页面");
 			} else {
-			
 				jsonObject.put("msg", "删除失败,服务器错误");
 			}
-		}else {
-			
+		} else {
 			jsonObject.put("msg", "页面错误，请联系维护人员");
-			
-		}
-		
-		System.out.println(jsonObject.toJSONString());
+		}		
 		return jsonObject.toJSONString();
 	}
 

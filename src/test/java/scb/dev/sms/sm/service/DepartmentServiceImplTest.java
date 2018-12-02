@@ -120,16 +120,11 @@ public class DepartmentServiceImplTest {
     	departments=departmentService.findParentDepartment();
     	logger.info(department.toString());
     }
-   
-    /*public  void uppdateDepartment() {
-    	HttpSession session = null;
-	
-    	Department updateDepartment=new Department();
-    	updateDepartment.setDepartmentId("0da29d223d8d48eeb11caa85fc6c95ee");
-    	updateDepartment.setDepartmentName("部门名称1大苏打大苏打大撒大");
-    	updateDepartment.setDepartmentPid("RB11");
-    	updateDepartment
-    	departmentController.updateDepartment(session, updateDepartment);
-    }*/
+    @Test
+    public void selectIdAndSubId() {
+    	departments=departmentService.selectIdAndSubId("1");
+    	logger.info(departments.toString());
+    	System.out.println(departments.toString());
+    }
 
 }

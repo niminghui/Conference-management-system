@@ -67,20 +67,20 @@ function deleteWarning() {
 				dataType: "json",//返回普通的字符流不要写 dataType : "json" 
 				data: jsonStr,
 				catch: true,
-				async: true,
+				async: false,
 				success: function(result, textStatus, jqXHR) {
 					alert(result.msg);
 				},
 				error: function(XMLHttpRequest, textStatus, errorThrown) {
-					alert(XMLHttpRequest.readyState);
-					alert(textStatus);
-					alert(errorThrown);
+					
 					alert("服务器错误，请稍后再试或者联系网站维护人员");
 				}
 			});
 
 		}
-     /*   window.location.href = "http://127.0.0.1:8080/scb.sms/findParentDepartments?a=";*/
+		
+		setTimeout(window.location.href = "http://127.0.0.1:8080/scb.sms/findParentDepartments?a="+new Date().getTime(),3000);
+        
 	} else {
 		alert("删除操作取消");
 	}

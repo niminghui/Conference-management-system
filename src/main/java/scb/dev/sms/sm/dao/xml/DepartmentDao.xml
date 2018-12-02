@@ -35,9 +35,14 @@
   <resultMap id="PathResultMap" type="scb.dev.sms.sm.pojo.Department">
     <id column="department_id" jdbcType="VARCHAR" property="departmentId" />
     <result column="department_name" jdbcType="VARCHAR" property="departmentName" />
-     <result column="department_abbreviation" jdbcType="VARCHAR" property="departmentAbbreviation" />
+    <result column="department_abbreviation" jdbcType="VARCHAR" property="departmentAbbreviation" />
     <result column="department_detail" jdbcType="VARCHAR" property="departmentDetail" />
   </resultMap>
+  <resultMap id="IdResultMap" type="scb.dev.sms.sm.pojo.Department">
+    <id column="department_id" jdbcType="VARCHAR" property="departmentId" />
+    <collection property="departments"  column="department_id" select="selectIdAndSubId"></collection>
+  </resultMap>
+  
   <sql id="Base_Column_List">
     department_id, department_name, department_abbreviation, department_pid, department_orderId, 
     department_phone, department_email, department_detail, department_head, department_updated_user, 
@@ -49,7 +54,9 @@
     from sm_department
     where department_id = #{departmentId,jdbcType=VARCHAR}
   </select>
-  
+  <select id="selectIdAndSubId" parameterType="java.lang.String" resultMap="IdResultMap">
+  select department_id from sm_department where department_pid = #{departmentId,jdbcType=VARCHAR}
+  </select>
   <select id="selectSubClassByDepartmentId" parameterType="java.lang.String" resultMap="PathResultMap">
   select department_name,department_id,department_abbreviation,department_detail from sm_department where department_pid = #{departmentId,jdbcType=VARCHAR}
   </select>

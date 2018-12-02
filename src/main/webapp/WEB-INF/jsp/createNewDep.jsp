@@ -16,6 +16,9 @@
 
 	<div class="detailDep">
 		<a style="text-align: center; font-size: 30px; display: block;">创建部门</a>
+		<c:if test="${!empty msg}">
+				<p style="text-align: center; color: red;">${msg}</p>
+			</c:if>
 		<form action="FinishCreateNewDepartment" method="post" autocomplete="off">
 
 			<a>部门名称：<input type="text" class="departmentInput1" id="departmentName" required="required" name="departmentName"  onchange="selectNameConflict()"/>

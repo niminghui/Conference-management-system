@@ -104,4 +104,6 @@ public interface DepartmentDao {
    	 * @mbg.generated 2018-11-15
    	 */
     List<Department> findDepartmentNamesAndId();
+    //查找一个部门以及所有子部门信息
+    List<Department> selectIdAndSubId(String departmentId);
 }

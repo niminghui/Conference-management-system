@@ -46,6 +46,9 @@ public class DepartmentServiceImpl implements IDepartmentService {
 		// status参数 0: 未激活 1：已激活 2：离职 3：部门解散待业
 		if (departmentId == null)
 			return CommonData.STRING_FAILURE;
+		if(findOneDepartmentById(departmentId)==null) {
+			return CommonData.DEPARTMENT_NOT_EXIST;
+		}
 		if (!deleteDepAndSubClassById(departmentId))
 			return CommonData.STRING_FAILURE;
 		employeeDao.deleteDepartmentInEmployee(CommonData.STATUS_DISSOLVE, departmentId);
@@ -65,16 +68,19 @@ public class DepartmentServiceImpl implements IDepartmentService {
 	public String updateDepartmentByDepartmentId(Department department) {
 		if (department.getDepartmentId().equals("") || department.getDepartmentId() == null)
 			return CommonData.STRING_FAILURE;
-
-		if (department.getDepartmentPid() != null) {
-			if (!department.getDepartmentPid().equals(CommonData.DEPARTMENT_PID)) {
-				if (selectCountByPid(department.getDepartmentPid()) == 0)
-					return CommonData.STRING_FAILURE;
-			}
-		}
-		/*else {
+		// 判断必须项是否存在
+		if (!checkDepartmentIfQualified(department)) {
 			return CommonData.STRING_FAILURE;
-		}*/
+		}
+		 
+		if (!department.getDepartmentPid().equals(CommonData.DEPARTMENT_PID)) {
+			if (selectCountByPid(department.getDepartmentPid()) == 0)
+				return CommonData.STRING_FAILURE;
+		}
+		
+		//判断是否存在冲突
+		if(selectCountByAbbrev(department.getDepartmentAbbreviation())!=0||selectCountByName(department.getDepartmentName())!=0)
+			return CommonData.STRING_FAILURE;
 		System.out.println("departmentImpl:"+department);
 		return departmentDao.updateByPrimaryKeySelective(department) == 1 ? CommonData.STRING_SUCCESS
 				: CommonData.STRING_FAILURE;
@@ -90,7 +96,7 @@ public class DepartmentServiceImpl implements IDepartmentService {
 	@Override
 	public String insertDepartment(Department department) {
 
-		System.out.println(department.toString());
+		
 		
 		//排序属性废弃，全部填1
 		department.setDepartmentOrderid("1");
@@ -106,6 +112,7 @@ public class DepartmentServiceImpl implements IDepartmentService {
 			if (selectCountByPid(department.getDepartmentPid()) == 0)
 				return CommonData.STRING_FAILURE;
 		}
+		//判断是否存在冲突
 		if(selectCountByAbbrev(department.getDepartmentAbbreviation())!=0||selectCountByName(department.getDepartmentName())!=0)
 			return CommonData.STRING_FAILURE;
 		
@@ -232,6 +239,13 @@ public class DepartmentServiceImpl implements IDepartmentService {
 	public List<Department> findDepartmentNamesAndId() {
 		departments = departmentDao.findDepartmentNamesAndId();
 		return departments;
+	}
+
+	@Override
+	public List<Department> selectIdAndSubId(String departmentId) {
+		if(departmentId==null)
+			departmentId="";
+		return departmentDao.selectIdAndSubId(departmentId);
 	}
 
 	

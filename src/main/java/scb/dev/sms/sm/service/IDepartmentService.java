@@ -90,7 +90,7 @@ public interface IDepartmentService {
 	 * Description: 通过部门名称查找一个部门以及子部门信息.<br/>
 	 * 
 	 * @param 
-	 * @return Department，查找到的部门信息，是tree模式
+	 * @return Department，查找到的部门信息，不是tree模式
 	 */
 	public List<Department> findDepartmentAndSubInfo(String departmentId) ;
 	/**
@@ -113,5 +113,7 @@ public interface IDepartmentService {
 	public int selectCountByAbbrev(String departmentAbbreviation);
 	 //查找一个新的部门的名字是否存在冲突
     public int selectCountByName(String departmentName);
+    //  //查找一个部门以及所有子部门信息
+    public List<Department> selectIdAndSubId(String departmentId);
 	
 }

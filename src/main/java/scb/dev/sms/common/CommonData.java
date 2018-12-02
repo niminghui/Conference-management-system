@@ -38,6 +38,7 @@ public interface CommonData {
 	public static final String STATUS_DISSOLVE = "003";
 
 	public static final String DEPARTMENT_PID = "1";
+	public static final String DEPARTMENT_NOT_EXIST="notExist";
 
 	public static final String STRING_SUCCESS = "success";
 	public static final String STRING_FAILURE = "failure";
