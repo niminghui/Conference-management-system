@@ -40,7 +40,7 @@ public class MenuAspect {
 	/**
 	 * 增加菜单时作为切入点
 	 */
-	@Pointcut("execution(* scb.dev.sms.controller.MenuController.addMenu(..))")
+	@Pointcut("execution(* scb.dev.sms.sm.controller.MenuController.addMenu(..))")
 	public void addMenuPointCut() {
 
 	}
@@ -48,7 +48,7 @@ public class MenuAspect {
 	/**
 	 * 修改菜单时作为切入点
 	 */
-	@Pointcut("execution(* scb.dev.sms.controller.MenuController.updateMenu(..))")
+	@Pointcut("execution(* scb.dev.sms.sm.controller.MenuController.updateMenu(..))")
 	public void updateMenuPointCut() {
 
 	}
