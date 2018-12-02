@@ -12,7 +12,11 @@ import scb.dev.sms.log.pojo.DepartmentLog;
 
 /**
  * ClassName: IDepartmentLogService <br/>
+<<<<<<< HEAD
  * Description: 
+=======
+ * Description: IDepartmentLogService <br/>
+>>>>>>> branch 'master' of git@gitee.com:Steve_Ni/scb.sms.git
  * date: 2018年11月16日 上午10:22:46 <br/>
  *
  * @author Oscar.Zhang
@@ -21,5 +25,6 @@ import scb.dev.sms.log.pojo.DepartmentLog;
  */
 public interface IDepartmentLogService {
 	public String addDepartmentLog(DepartmentLog departmentLog);
+
 	public String deleteDepartmentLog(String DepartmentLogId);
 }

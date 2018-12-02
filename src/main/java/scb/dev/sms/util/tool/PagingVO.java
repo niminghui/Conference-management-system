@@ -27,13 +27,14 @@ public class PagingVO {
 	 * @param toPageNo
 	 */
     public void setToPageNo(Integer toPageNo) {
+    	//设置跳转后当前的页码
+        setCurentPageNo(toPageNo);
         //新一页
         this.toPageNo = (toPageNo-1) * pageSize ;
-        //设置跳转后当前的页码
-        setCurentPageNo(toPageNo);
+        
     }
 
-    public Integer getTopageNo() {
+    public Integer getToPageNo() {
         return toPageNo;
     }
 

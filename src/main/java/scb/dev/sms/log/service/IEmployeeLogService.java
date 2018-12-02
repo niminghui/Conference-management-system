@@ -12,7 +12,7 @@ import scb.dev.sms.log.pojo.EmployeeLog;
 
 /**
  * ClassName: IEmployeeLogService <br/>
- * Description: TODO ADD REASON(可选). <br/><br/>
+ * Description: IEmployeeLogService <br/>
  * date: 2018年11月16日 上午10:26:16 <br/>
  *
  * @author Oscar.Zhang
@@ -21,5 +21,6 @@ import scb.dev.sms.log.pojo.EmployeeLog;
  */
 public interface IEmployeeLogService {
 	public String addEmployeeLog(EmployeeLog employeeLog);
+
 	public String deleteEmployeeLog(String EmployeeLogId);
 }

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/common/Head.jsp" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
@@ -18,7 +19,7 @@
 <div class="panel admin-panel">
   <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span>增加员工</strong></div>
   <div class="body-content">
-    <form method="post" class="form-x" action="${basepath }/sm/addEmployee">  
+    <form method="post" class="form-x" action="${basepath }/sm/employee/add">  
       <div class="form-group">
         <div class="label">
           <label>姓名：</label>
@@ -56,9 +57,12 @@
             <label>职位：</label>
           </div>
           <div class="field">
-            <select name="positionId" class="input w50">
+            <select name="positionId" class="input w50" data-validate="required:请选择职位" >
               <option value="">请选择职位</option>
-              <option value="97442221f9074c7186314ac181c2e119">软件工程师</option>
+              
+              <c:forEach items="${positions }" var="position">
+              	<option value="${position.positionId }">${position.positionName }</option>
+              </c:forEach>
             </select>
             <div class="tips"></div>
           </div>
@@ -68,9 +72,11 @@
             <label>部门：</label>
           </div>
           <div class="field">
-            <select name="departmentId" class="input w50">
+            <select name="departmentId" class="input w50" data-validate="required:请选择部门" >
               <option value="">请选择部门</option>
-              <option value="0c8723ad251acd5225fbc56743d813ad">RB</option>
+              <c:forEach items="${departments }" var="department">
+              	<option value="${department.departmentId }">${department.departmentName }</option>
+              </c:forEach>
             </select>
             <div class="tips"></div>
           </div>
@@ -81,7 +87,7 @@
             <label>公司：</label>
           </div>
           <div class="field">
-            <select name="employeeCompany" class="input w50">
+            <select name="employeeCompany" class="input w50" data-validate="required:请选择公司" >
               <option value="">请选择公司</option>
               <option value="渣打">渣打</option>
             </select>

@@ -74,9 +74,17 @@
   <select id="findOneDepartmentByAbbrev"  parameterType="java.lang.String" resultMap="BaseResultMap">
   select * from sm_department where  department_abbreviation=#{departmentAbbreviation,jdbcType=VARCHAR}
   </select>
+  
   <select id="selectCountByPid" parameterType="java.lang.String" resultType="Integer">
   select count(*) from sm_department where department_id=#{departmentPid,jdbcType=VARCHAR}
   </select>
+   <select id="selectCountByName" parameterType="java.lang.String" resultType="Integer">
+  select count(*) from sm_department where department_name= #{departmentName,jdbcType=VARCHAR}
+  </select>
+   <select id="selectCountByAbbrev" parameterType="java.lang.String" resultType="Integer">
+  select count(*) from sm_department where department_abbreviation=#{departmentAbbreviation,jdbcType=VARCHAR}
+  </select>
+  
   <select id="findOneDepartmentByName" parameterType="java.lang.String" resultMap="BaseResultMap">
   select * from sm_department where department_name=#{departmentName,jdbcType=VARCHAR}
   </select>

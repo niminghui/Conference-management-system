@@ -3,6 +3,7 @@ package scb.dev.sms.sm.service.imp;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.maven.artifact.repository.metadata.RepositoryMetadataResolutionException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
@@ -89,20 +90,25 @@ public class DepartmentServiceImpl implements IDepartmentService {
 	@Override
 	public String insertDepartment(Department department) {
 
-		// 如果是主部门，设置父类pid为1（字符串）
-		if (department.getDepartmentPid().equals("") || department.getDepartmentPid() == null)
-			department.setDepartmentPid(CommonData.DEPARTMENT_PID);
+		System.out.println(department.toString());
+		
+		//排序属性废弃，全部填1
+		department.setDepartmentOrderid("1");
 		// 判断必须项是否存在
 		if (!checkDepartmentIfQualified(department)) {
 			return CommonData.STRING_FAILURE;
 		}
-		// 创建时插入修改人
-		department.setDepartmentUpdatedUser(department.getDepartmentCreatedUser());
+		// 创建时插入修改人   --controller层已做
+		//department.setDepartmentUpdatedUser(department.getDepartmentCreatedUser());
 
 		// 判断父类是否存在
-		if (department.getDepartmentPid() != null)
+		if (!department.getDepartmentPid().equals(CommonData.DEPARTMENT_PID)) {
 			if (selectCountByPid(department.getDepartmentPid()) == 0)
 				return CommonData.STRING_FAILURE;
+		}
+		if(selectCountByAbbrev(department.getDepartmentAbbreviation())!=0||selectCountByName(department.getDepartmentName())!=0)
+			return CommonData.STRING_FAILURE;
+		
 		return departmentDao.insertSelective(department) == 1 ? CommonData.STRING_SUCCESS : CommonData.STRING_FAILURE;
 	}
 
@@ -168,6 +174,17 @@ public class DepartmentServiceImpl implements IDepartmentService {
 		return departments;
 	}
 
+	@Override
+	public int selectCountByAbbrev(String departmentAbbreviation) {
+		return departmentDao.selectCountByAbbrev(departmentAbbreviation);
+		
+	}
+
+	@Override
+	public int selectCountByName(String departmentName) {
+		
+		return departmentDao.selectCountByName(departmentName);
+	}
 	/**
 	 * 
 	 * Description: 类内方法.<br/>
@@ -216,5 +233,7 @@ public class DepartmentServiceImpl implements IDepartmentService {
 		departments = departmentDao.findDepartmentNamesAndId();
 		return departments;
 	}
+
+	
 
 }

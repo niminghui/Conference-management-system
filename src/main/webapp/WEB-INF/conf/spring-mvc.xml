@@ -3,10 +3,13 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans      
         http://www.springframework.org/schema/beans/spring-beans.xsd      
         http://www.springframework.org/schema/context      
         http://www.springframework.org/schema/context/spring-context-4.3.xsd
+        http://www.springframework.org/schema/aop 
+        http://www.springframework.org/schema/aop/spring-aop.xsd 
         http://www.springframework.org/schema/tx 
        	http://www.springframework.org/schema/tx/spring-tx.xsd      
         http://www.springframework.org/schema/mvc      
@@ -29,9 +32,9 @@
 	</bean>
 
 	<!-- 4.扫描web相关的bean -->
-	<context:component-scan
-		base-package="scb.dev.sms.*" />
-	<!--200*1024*1024即200M resolveLazily属性启用是为了推迟文件解析，以便捕获文件大小异常 -->
+	<context:component-scan base-package="scb.dev.sms.*" />
+	<!-- 激活自动代理功能 -->
+	<aop:aspectj-autoproxy/>
 
 	<!-- 上传文件的设置 ，maxUploadSize=-1，表示无穷大。uploadTempDir为上传的临时目录 -->
 	<bean id="multipartResolver"
@@ -41,4 +44,5 @@
 		<property name="resolveLazily" value="true" />
 		<property name="uploadTempDir" value="fileUpload/temp" />
 	</bean>
+
 </beans>

@@ -12,7 +12,7 @@ import scb.dev.sms.log.pojo.RoleGroupLog;
 
 /**
  * ClassName: IRoleGroupLogService <br/>
- * Description: TODO ADD REASON(可选). <br/><br/>
+ * Description: IRoleGroupLogService <br/>
  * date: 2018年11月16日 上午10:48:19 <br/>
  *
  * @author Oscar.Zhang
@@ -21,5 +21,6 @@ import scb.dev.sms.log.pojo.RoleGroupLog;
  */
 public interface IRoleGroupLogService {
 	public String addRoleGroupLog(RoleGroupLog roleGroupLog);
+
 	public String deleteRoleGroupLog(String RoleGroupLogId);
 }

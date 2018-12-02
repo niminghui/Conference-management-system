@@ -37,12 +37,12 @@
 			<div class="input">
 				<img src="img/login-id.png" alt="用户密码" class="loginImg" /> 
 				&nbsp; 
-				<input type="text" name="uid" id="uid" autocomplete="off" placeholder="请输入登录帐号" />
+				<input type="text" name="account_name" id="account_name" autocomplete="off" placeholder="请输入登录帐号" />
 			</div>
 			<div class="input">
 				<img src="img/login-pwd.png" alt="用户密码" class="loginImg" /> 
 				&nbsp; 
-				<input type="password" name="upwd" id="upwd" placeholder="请输入登录密码" />
+				<input type="password" name="account_pwd" id="account_pwd" placeholder="请输入登录密码" />
 			</div>
 			<div class="input">
 				<img src="img/login-yzm.jpg" alt="验证码" class="loginImg" /> 

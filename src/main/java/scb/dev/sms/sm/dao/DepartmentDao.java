@@ -82,6 +82,10 @@ public interface DepartmentDao {
     Department findOneDepartmentByAbbrev(String departmentAbbreviation);
     //查找一个新的部门的父部门是否存在
     int selectCountByPid(String departmentPid);
+    //查找一个新的部门的缩写是否存在冲突
+    int selectCountByAbbrev(String departmentAbbreviation);
+    //查找一个新的部门的名字是否存在冲突
+    int selectCountByName(String departmentName);
     /**
    	 * Description:查找所有部门信息
    	 * 

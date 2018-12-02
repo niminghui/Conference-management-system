@@ -12,7 +12,7 @@ import scb.dev.sms.log.pojo.PositionLog;
 
 /**
  * ClassName: IPositionLogService <br/>
- * Description: TODO ADD REASON(可选). <br/><br/>
+ * Description: IPositionLogService <br/>
  * date: 2018年11月16日 上午10:42:47 <br/>
  *
  * @author Oscar.Zhang
@@ -21,5 +21,6 @@ import scb.dev.sms.log.pojo.PositionLog;
  */
 public interface IPositionLogService {
 	public String addPositionLog(PositionLog positionLog);
+
 	public String deletePositionLog(String PositionLogId);
 }

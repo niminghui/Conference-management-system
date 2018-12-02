@@ -15,32 +15,34 @@ import scb.dev.sms.util.tool.PagingVO;
 
 /**
  * 
- * @ClassName:  PositionServiceImp   
- * @Description:TODO(职位信息service层实现类)   
- * @author: Steven.Lee 
- * @date:   2018年11月18日 下午5:53:43   
- *     
+ * @ClassName: PositionServiceImp
+ * @Description: 职位信息service层实现类
+ * @author: Zither.Chen
+ * @date: 2018年11月18日 下午5:53:43
+ * 
  * @Copyright: 2018 www.tydic.com Inc. All rights reserved.
  */
 @Service
 public class PositionServiceImpl implements IPositionService {
 
-	private Logger logger=Logger.getLogger(this.getClass());
-	
+	private Logger logger = Logger.getLogger(this.getClass());
+
 	@Autowired
 	private PositionDao positionDao;
 
 	/*
 	 * 通过职位ID查询出相应的职位信息
-	 * @see scb.dev.sms.sm.service.IPositionService#queryPositionById(java.lang.Integer)
+	 * 
+	 * @see
+	 * scb.dev.sms.sm.service.IPositionService#queryPositionById(java.lang.Integer)
 	 */
 	@Override
 	public Position queryPositionById(Integer positionId) {
 		Position position = positionDao.selectByPrimaryKey(positionId);
-		if (position!=null) {
+		if (position != null) {
 			logger.info(CommonData.QUERY_SUCCESS);
 			return position;
-		}else {
+		} else {
 			logger.info(CommonData.QUERY_FAILURE);
 			return null;
 		}
@@ -48,14 +50,17 @@ public class PositionServiceImpl implements IPositionService {
 
 	/*
 	 * 修改职位信息
-	 * @see scb.dev.sms.sm.service.IPositionService#modifyPositionInfo(scb.dev.sms.sm.pojo.Position)
+	 * 
+	 * @see
+	 * scb.dev.sms.sm.service.IPositionService#modifyPositionInfo(scb.dev.sms.sm.
+	 * pojo.Position)
 	 */
 	@Override
 	public String modifyPositionInfo(Position position) {
-		if (position!=null) {
-			if (positionDao.updateByPrimaryKeySelective(position)>0) {
+		if (position != null) {
+			if (positionDao.updateByPrimaryKeySelective(position) > 0) {
 				return CommonData.UPDATE_SUCCESS;
-			}else {
+			} else {
 				return CommonData.UPDATE_FAILURE;
 			}
 		}
@@ -64,27 +69,31 @@ public class PositionServiceImpl implements IPositionService {
 
 	/*
 	 * 通过职位ID删除相应的职位信息
+	 * 
 	 * @see scb.dev.sms.sm.service.IPositionService#removePosition(java.lang.String)
 	 */
 	@Override
 	public String removePosition(String positionId) {
-		if (positionDao.deleteByPrimaryKey(positionId)>0) {
+		if (positionDao.deleteByPrimaryKey(positionId) > 0) {
 			return CommonData.DELETE_SUCCESS;
-		}else {
+		} else {
 			return CommonData.DELETE_FAILURE;
 		}
 	}
 
 	/*
 	 * 新增职位信息
-	 * @see scb.dev.sms.sm.service.IPositionService#insertPosition(scb.dev.sms.sm.pojo.Position)
+	 * 
+	 * @see
+	 * scb.dev.sms.sm.service.IPositionService#insertPosition(scb.dev.sms.sm.pojo.
+	 * Position)
 	 */
 	@Override
 	public String insertPosition(Position position) {
-		if(position!=null) {
-			if (positionDao.insertSelective(position)>0) {
+		if (position != null) {
+			if (positionDao.insertSelective(position) > 0) {
 				return CommonData.SAVE_SUCCESS;
-			}else {
+			} else {
 				return CommonData.SAVE_FAILURE;
 			}
 		}
@@ -93,15 +102,16 @@ public class PositionServiceImpl implements IPositionService {
 
 	/*
 	 * 查询所有职位信息
+	 * 
 	 * @see scb.dev.sms.sm.service.IPositionService#queryAllPosition()
 	 */
 	@Override
 	public List<Position> queryAllPosition() {
 		List<Position> positionInfos = positionDao.selectAllPositionInfo();
-		if (positionInfos!=null) {
+		if (positionInfos != null) {
 			logger.info(CommonData.QUERY_SUCCESS);
 			return positionInfos;
-		}else {
+		} else {
 			logger.info(CommonData.QUERY_FAILURE);
 			return null;
 		}
@@ -109,31 +119,40 @@ public class PositionServiceImpl implements IPositionService {
 
 	/**
 	 * 
-	 * <p>Title: getCountPosition</p>   
-	 * <p>Description: 获取职位信息条数</p>   
-	 * @return   
+	 * <p>
+	 * Title: getCountPosition
+	 * </p>
+	 * <p>
+	 * Description: 获取职位信息条数
+	 * </p>
+	 * 
+	 * @return
 	 * @see scb.dev.sms.sm.service.IPositionService#getCountPosition()
 	 */
 	@Override
 	public int getCountPosition() {
-		int count=this.positionDao.getCountPosition();
-		if(count>0){
+		int count = this.positionDao.getCountPosition();
+		if (count > 0) {
 			logger.info(CommonData.QUERY_SUCCESS);
 			return count;
-		}
-		else{
+		} else {
 			logger.error(CommonData.QUERY_FAILURE);
 			return 0;
 		}
-		
+
 	}
 
 	/**
 	 * 
-	 * <p>Title: findByPaging</p>   
-	 * <p>Description: 通过分页查询职位信息</p>   
+	 * <p>
+	 * Title: findByPaging
+	 * </p>
+	 * <p>
+	 * Description: 通过分页查询职位信息
+	 * </p>
+	 * 
 	 * @param pageVo
-	 * @return   
+	 * @return
 	 * @see scb.dev.sms.sm.service.IPositionService#findByPaging(scb.dev.sms.util.tool.PagingVO)
 	 */
 	@Override
@@ -142,7 +161,7 @@ public class PositionServiceImpl implements IPositionService {
 		if (positions != null) {
 			logger.info(CommonData.QUERY_SUCCESS);
 			return positions;
-		} else{
+		} else {
 			logger.error(CommonData.QUERY_FAILURE);
 			return null;
 		}
@@ -150,10 +169,15 @@ public class PositionServiceImpl implements IPositionService {
 
 	/**
 	 * 
-	 * <p>Title: selectByPositionName</p>   
-	 * <p>Description: 通过职位名称查询相应的职位信息   </p>   
+	 * <p>
+	 * Title: selectByPositionName
+	 * </p>
+	 * <p>
+	 * Description: 通过职位名称查询相应的职位信息
+	 * </p>
+	 * 
 	 * @param positionName
-	 * @return   
+	 * @return
 	 * @see scb.dev.sms.sm.service.IPositionService#selectByPositionName(java.lang.String)
 	 */
 	@Override
@@ -162,12 +186,10 @@ public class PositionServiceImpl implements IPositionService {
 		if (positions != null) {
 			logger.info(CommonData.QUERY_SUCCESS);
 			return positions;
-		} else{
+		} else {
 			logger.error(CommonData.QUERY_FAILURE);
 			return null;
 		}
 	}
-	
+
 }
-
-

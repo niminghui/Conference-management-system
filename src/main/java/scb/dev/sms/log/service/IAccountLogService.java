@@ -12,7 +12,7 @@ import scb.dev.sms.log.pojo.AccountLog;
 
 /**
  * ClassName: IAccountLogService <br/>
- * Description: TODO ADD REASON(可选). <br/><br/>
+ * Description: IAccountLogService <br/>
  * date: 2018年11月16日 上午10:11:18 <br/>
  *
  * @author Oscar.Zhang
@@ -21,5 +21,6 @@ import scb.dev.sms.log.pojo.AccountLog;
  */
 public interface IAccountLogService {
 	public String addAccountLog(AccountLog accountLog);
+
 	public String deleteAccountLog(String AccountLogId);
 }

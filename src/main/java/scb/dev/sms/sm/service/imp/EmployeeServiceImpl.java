@@ -53,17 +53,13 @@ public class EmployeeServiceImpl implements IEmployeeService {
 			EmployeeContactInfo employeeContactInfo) {
 		logger.info("initEmployee");
 		try {
-			String employeeId=TokenIDFactory.getUUID();		
-			setWorkId(employee);
-			employee.setEmployeeId(employeeId);
-			employeeAddress.setEmployeeId(employeeId);
-			employeeContactInfo.setEmployeeId(employeeId);
 			
+			setWorkId(employee);
 			employeeDao.insertSelective(employee);
 			employeeAddressDao.insertSelective(employeeAddress);
 			employeeContactInfoDao.insertSelective(employeeContactInfo);
 			
-			accountService.initAccount(employeeId, employee.getEmployeeNickname());
+			accountService.initAccount(employee.getEmployeeId(), employee.getEmployeeNickname());
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -83,6 +79,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
 			employeeAddressDao.updateByPrimaryKeySelective(employeeAddress);
 			employeeContactInfoDao.updateByPrimaryKeySelective(employeeContactInfo);
 		}catch(Exception e) {
+			e.printStackTrace();
 			logger.error(CommonData.UPDATE_FAILURE);
 			return CommonData.UPDATE_FAILURE;
 		}
@@ -220,6 +217,12 @@ public class EmployeeServiceImpl implements IEmployeeService {
 		}
 		System.out.println(employee.getEmployeeWorkId());
 		
+	}
+
+	@Override
+	public int editEmployee(Employee employee) {
+		
+		return employeeDao.updateByEmployeeIdSelective(employee);
 	}
 
 }

@@ -109,5 +109,9 @@ public interface IDepartmentService {
 	 * @return Department，查找的部门信息
 	 */
 	public List<Department> findDepartmentNamesAndId();
+	//查找一个新的部门的缩写是否存在冲突
+	public int selectCountByAbbrev(String departmentAbbreviation);
+	 //查找一个新的部门的名字是否存在冲突
+    public int selectCountByName(String departmentName);
 	
 }

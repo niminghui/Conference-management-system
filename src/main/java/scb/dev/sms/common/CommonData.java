@@ -50,4 +50,15 @@ public interface CommonData {
 	public static final String STRING_HASLEFT = "Employee has left.";
 
 	public static final String STRING_YZMERROR = "Verification code error.";
+	
+	public static final String MAIL_FROM = "zither_chen@163.com";
+	
+	public static final String MAIL_USER = "zither_chen";
+	
+	public static final String MAIL_PASSWORD = "CHENKE517";
+	
+	public static final String MAIL_TITLE = "账户激活";
+	
+	public static final String MAIL_CONTENT_FRONT = "请点击下方链接完成注册：<br>";
+	
 }

@@ -8,12 +8,11 @@
  */
 package scb.dev.sms.log.service;
 
-
 import scb.dev.sms.log.pojo.MenuLog;
 
 /**
  * ClassName: IMenuLogService <br/>
- * Description: TODO ADD REASON(可选). <br/><br/>
+ * Description: IMenuLogService <br/>
  * date: 2018年11月16日 上午10:39:17 <br/>
  *
  * @author Oscar.Zhang
@@ -22,5 +21,6 @@ import scb.dev.sms.log.pojo.MenuLog;
  */
 public interface IMenuLogService {
 	public String addMenuLog(MenuLog menuLog);
+
 	public String deleteMenuLog(String MenuLogId);
 }

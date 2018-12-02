@@ -16,32 +16,36 @@ import scb.dev.sms.log.service.ISysParamLogService;
 
 /**
  * ClassName: SysParamLogServiceImpl <br/>
- * Description: TODO ADD REASON(可选). <br/><br/>
+ * Description: SysParamLogServiceImpl <br/>
  * date: 2018年11月16日 上午10:55:54 <br/>
  *
  * @author Oscar.Zhang
  * @version V1.0
  * @since JDK 1.8
  */
-public class SysParamLogServiceImpl implements ISysParamLogService{
+public class SysParamLogServiceImpl implements ISysParamLogService {
 
 	@Autowired
 	SysParamLogDao sysParamLogDao;
+
 	/**
 	 * 添加SysParamLog日志
+	 * 
 	 * @see scb.dev.sms.log.service.ISysParamLogService#addSysParamLog(scb.dev.sms.log.pojo.SysParamLog)
 	 */
 	@Override
-	public String addSysParamLog(SysParamLog sysParamLog) {		
-		return sysParamLogDao.insert(sysParamLog)==1?"SUCCESS":"ERROR";
+	public String addSysParamLog(SysParamLog sysParamLog) {
+		return sysParamLogDao.insert(sysParamLog) == 1 ? "SUCCESS" : "ERROR";
 	}
+
 	/**
 	 * 删除SysParamLog日志
+	 * 
 	 * @see scb.dev.sms.log.service.ISysParamLogService#deleteSysparamLog(java.lang.String)
 	 */
 	@Override
 	public String deleteSysparamLog(String SysParamLogId) {
-		return sysParamLogDao.deleteByPrimaryKey(SysParamLogId)==1?"SUCCESS":"ERROR";
+		return sysParamLogDao.deleteByPrimaryKey(SysParamLogId) == 1 ? "SUCCESS" : "ERROR";
 	}
 
 }
