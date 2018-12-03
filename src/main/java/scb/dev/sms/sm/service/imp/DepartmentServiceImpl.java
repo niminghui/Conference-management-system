@@ -69,9 +69,9 @@ public class DepartmentServiceImpl implements IDepartmentService {
 		if (department.getDepartmentId().equals("") || department.getDepartmentId() == null)
 			return CommonData.STRING_FAILURE;
 		// 判断必须项是否存在
-		if (!checkDepartmentIfQualified(department)) {
+		/*if (!checkDepartmentIfQualified(department)) {
 			return CommonData.STRING_FAILURE;
-		}
+		}*/
 		 
 		if (!department.getDepartmentPid().equals(CommonData.DEPARTMENT_PID)) {
 			if (selectCountByPid(department.getDepartmentPid()) == 0)
@@ -79,8 +79,23 @@ public class DepartmentServiceImpl implements IDepartmentService {
 		}
 		
 		//判断是否存在冲突
-		if(selectCountByAbbrev(department.getDepartmentAbbreviation())!=0||selectCountByName(department.getDepartmentName())!=0)
-			return CommonData.STRING_FAILURE;
+		Department dep=new Department();
+		dep=findOneDepartmentById(department.getDepartmentId());
+		if(dep.getDepartmentAbbreviation().equals(department.getDepartmentAbbreviation())) {
+			
+		}else {
+			if(selectCountByAbbrev(department.getDepartmentAbbreviation())!=0)
+				return CommonData.STRING_FAILURE;
+		}
+		if(dep.getDepartmentName().equals(department.getDepartmentName())) {
+			
+		}else {
+			if(selectCountByName(department.getDepartmentName())!=0) {
+				return CommonData.STRING_FAILURE;
+			}
+		}
+	/*	if(selectCountByAbbrev(department.getDepartmentAbbreviation())!=0||selectCountByName(department.getDepartmentName())!=0)
+			return CommonData.STRING_FAILURE;*/
 		System.out.println("departmentImpl:"+department);
 		return departmentDao.updateByPrimaryKeySelective(department) == 1 ? CommonData.STRING_SUCCESS
 				: CommonData.STRING_FAILURE;

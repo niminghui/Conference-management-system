@@ -323,7 +323,7 @@ public class DepartmentController {
 		System.out.println(department.toString());
 		String res = iDepartmentService.updateDepartmentByDepartmentId(department);
 		System.out.println("res" + res);
-		// 无论改变成功与否，重新装载页面数据 TODO
+		// 无论改变成功与否，重新装载页面数据 
 		findOneDepartmentById(updateDepartment.getDepartmentId());
 
 		if (res.equals(CommonData.STRING_SUCCESS)) {
