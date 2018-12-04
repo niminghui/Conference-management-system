@@ -29,12 +29,14 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import scb.dev.sms.common.CommonData;
 import scb.dev.sms.sm.pojo.Account;
 import scb.dev.sms.sm.pojo.LoginInfo;
 import scb.dev.sms.sm.service.IAccountService;
+import scb.dev.sms.util.tool.MD5Utils;
 
 /**
  * ClassName: AccountController <br/>
@@ -139,11 +141,21 @@ public class AccountController {
 		return "enroll";
 	}
 
+	@GetMapping("/user")
+	public String turnToUser() {
+		return "user";
+	}
+
 	@GetMapping("/quit")
 	public String writeOff(HttpServletRequest request) {
 		request.getSession().invalidate();// 将用户信息注销
 		request.getSession().setAttribute("message", "用户已经注销");
 		return "redirect:index.jsp";
+	}
+
+	@GetMapping("/Account/updatePWD")
+	public String updatePassword() {
+		return "updatePWD";
 	}
 
 	@GetMapping("/Account/{account_id}")
@@ -152,8 +164,23 @@ public class AccountController {
 		return account;
 	}
 
-	@GetMapping("/Account/{account_id}/updatePWD")
-	public String updatePassword(@PathVariable String account_id) {
-		return "";
+	@PostMapping("/Account/{account_id}")
+	public String updatePassword(@PathVariable String account_id, @RequestParam("pwd") String pwd,
+			@RequestParam("newPwd1") String newPwd1, @RequestParam("newPwd2") String newPwd2,
+			HttpServletRequest request) {
+		Account account = accountService.getAccountByID(account_id);
+		if (!account.getAccountPassword().equals(MD5Utils.MD5(pwd))) {
+			request.getSession().setAttribute("updatePWDMessage", "原密码错误。");
+			return "updatePWD";
+		}
+		if (!newPwd1.equals(newPwd2)) {
+			request.getSession().setAttribute("updatePWDMessage", "请确认两次密码是否输入正确。");
+			return "updatePWD";
+		}
+		if (CommonData.STRING_FAILURE.equals(accountService.updateAccountPwd(account_id, newPwd1))) {
+			request.getSession().setAttribute("updatePWDMessage", "修改失败。");
+			return "updatePWD";
+		}
+		return "redirect:/user";
 	}
 }
