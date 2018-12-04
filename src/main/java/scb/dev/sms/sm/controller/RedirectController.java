@@ -12,4 +12,9 @@ public class RedirectController {
 	public String showMenu() {
 		return "user_index";
 	}
+	
+	@RequestMapping(value="/map",method=RequestMethod.GET)
+	public String showMap() {
+		return "map";
+	}
 }

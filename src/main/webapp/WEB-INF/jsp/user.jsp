@@ -70,7 +70,7 @@
       
       <ul class="nav navbar-nav navbar-right">
       <li><iframe width="300" scrolling="no" height="25" frameborder="0" allowtransparency="true" src="//i.tianqi.com/index.php?c=code&id=10&color=%230070C0&bdc=%23&icon=2&site=15"></iframe></li>
-        <li><a href="#"><i class="fa fa-bell-o fa-2x" aria-hidden="true"></i></a></li>
+        <li><a href="#"><i class="fa fa-bell-o fa-2x" aria-hidden="true"></i><span class="badge">12</span></a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle-o fa-2x" aria-hidden="true"></i>${account_name} <span class="caret"></span></a>
           <ul class="dropdown-menu">

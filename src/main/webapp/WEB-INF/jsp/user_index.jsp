@@ -11,6 +11,7 @@
 <!-- 时钟css -->
 <link href="css/style.css" rel="stylesheet" />
 
+
 <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
 <!-- 日历 js -->
 <script type="text/javascript" src="js/jalendar.js"></script>
@@ -30,9 +31,9 @@ $(function () {
 
 
 
-		<div class="left_middle" style="width: 50%; border: 0px solid red;">
+		<div class="left_middle" style="width: 50%; border: 0px solid red;display:inline;">
 
-			<div id="clock" class="light">
+			<div id="clock" class="light" style="width:100%;text-align:center;">
 				<div class="display">
 					<div class="weekdays"></div>
 					<div class="ampm"></div>
@@ -53,10 +54,15 @@ $(function () {
 				<div class="added-event" data-date="17/12/2017" data-time="22:00"
 					data-title="Lorem ipsum dolor sit amet"></div>
 			</div>
+			
+			<div style="height:250px">
+			    <iframe  frameborder="0" src="map" style="width:100%;height:250px"></iframe>
+			</div>
 		</div>
 
 
 
 	</div>
 </body>
+
 </html>
