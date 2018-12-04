@@ -1,12 +1,13 @@
-<%@page contentType="text/html"%>
+
 <%@page pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ include file="/WEB-INF/jsp/common/Head.jsp" %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Position Page</title>
-        <link rel="stylesheet" href="css/position.css" />
+        <link rel="stylesheet" href="${basepath }/css/position.css" />
     </head>
     <body>
     	<div >   		
@@ -20,7 +21,7 @@
 				</form>	
 				<a href="${basepath }/sms/positionAdd" style="float: left;"><button style="margin-top: 20px" class="button_chaxun">新增职位</button></a>
 			</div>
-			
+			<div style="float:left">
 			<table class="position_table">
 				 <tr style="text-align: center;">
 					<td><span class="position_word"><b>职位ID</b></span></td>
@@ -30,9 +31,9 @@
 					<td><span class="position_word"><b>修改人</b></span></td>
 					<td><span class="position_word"><b>修改时间</b></span></td>	
 				</tr>
-				<c:foreach iteams="positions" var="position">
+				<c:forEach items="${positions}" var="position">
 					<tr style="text-align: center;">
-						<td><span class="position_word_1">${position.positionId }</span></td>
+						<td><span class="position_word_1">${position.positionId}</span></td>
 						<td><span class="position_word_1">${position.positionName}</span></td>
 						<td><span class="position_word_1">${position.positionCreatedUser}</span></td>
 						<td><span class="position_word_1">${position.positionCreatedTime}</span></td>
@@ -41,8 +42,9 @@
 						<td><a href="${basepath }/sms/positionUpdate"><button class="position_list_button">编辑</button></a></td>
 						<td><a href="${basepath }/sms/positionDelete"><button class="position_list_button">删除</button></a></td>
 					</tr>
-				</c:foreach>
+				</c:forEach>
 			</table>
+			</div>
     	</div>
     	
  	</body>

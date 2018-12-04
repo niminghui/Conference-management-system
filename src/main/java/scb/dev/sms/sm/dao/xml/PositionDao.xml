@@ -45,8 +45,7 @@
 		select
 		<include refid="Base_Column_List" />
 		from sm_position
-		ORDER BY
-		position_updated_datetime DESC
+		
 		limit #{toPageNo}, #{pageSize}
 	</select>
 	

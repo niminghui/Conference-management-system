@@ -75,7 +75,7 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle-o fa-2x" aria-hidden="true"></i>${account_name} <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="#">账户信息</a></li>
-            <li><a href="/scb.sms/Account/updatePWD">修改密码</a></li>
+            <li><a href="#">修改密码</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="/scb.sms/quit">退出</a></li>
           </ul>
@@ -102,7 +102,7 @@
     <!-- 中间iframe部分 -->
 	<div region="center">
 		<div class="easyui-tabs" id="tabs" fit="true" border="false" >
-			<div title="首页"><p style="text-align: center;valign:middle;">主页面内容,未完待续......</p></div>
+			<div title="首页"><iframe scrolling="auto" frameborder="0" src="userIndex" style="width:100%;height:100%;"></iframe></div>
 		</div>
 	</div>
 
