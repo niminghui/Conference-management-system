@@ -1,0 +1,27 @@
+.position_add_beijing{
+	background-color: #FFFFCC;
+	width: 100%;
+	height: 100%;
+}
+
+.addForm{
+	margin-top: 36px;
+	
+}
+.row{
+	padding-top: 140px;
+}
+
+.position_add_button{
+	margin-left: 8px;
+	text-align: center;
+	color: white;
+	background-color: skyblue;
+	width: 60px;
+	height: 30px;
+	-webkit-border-radius: 8px;
+	cursor: pointer;
+	outline: none;
+	margin-left: 24px;
+}
+

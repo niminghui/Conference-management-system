@@ -1,0 +1,63 @@
+.position_beijing{
+	background-color: #FFFFCC;
+	width: 100%;
+	height: 100%;
+}
+
+.tittle{
+	padding-top: 60px;
+	color: #99CCFF;
+	text-shadow: 5px 5px 8px lightgray;
+}
+
+.button_chaxun{
+	margin-left: 24px;
+	text-align: center;
+	color: white;
+	background-color: skyblue;
+	width: 80px;
+	height: 40px;
+	-webkit-border-radius: 8px;
+	cursor: pointer;
+	outline: none;
+}
+
+.button_chaxun:hover{
+	transition: 2s;
+	color: black;
+	background-color: #66CCCC;
+}
+
+.chaxunkuang{
+	height: 40px;
+	width: 240px;
+	box-shadow: 3px 3px 2px gainsboro;
+}
+
+.position_table{
+	margin-top: 36px;
+}
+
+.position_list_button{
+	margin-left: 8px;
+	text-align: center;
+	color: white;
+	background-color: skyblue;
+	width: 60px;
+	height: 30px;
+	-webkit-border-radius: 8px;
+	cursor: pointer;
+	outline: none;
+}
+
+.position_word{
+	font-family: "仿宋";
+	color: #006699;
+	font-size: 24px;
+}
+
+.position_word_1{
+	font-family: "仿宋";
+	color: #006699;
+	
+}

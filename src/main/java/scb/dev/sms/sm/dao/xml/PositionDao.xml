@@ -45,7 +45,7 @@
 		select
 		<include refid="Base_Column_List" />
 		from sm_position
-		where position_isVaild = 1 ORDER BY
+		ORDER BY
 		position_updated_datetime DESC
 		limit #{toPageNo}, #{pageSize}
 	</select>
