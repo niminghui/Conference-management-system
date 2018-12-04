@@ -120,7 +120,7 @@ public class PositionController {
 	 */
 	@RequestMapping(value = "/positionAdd", method = RequestMethod.GET)
 	public String addPosition() {
-		return "sms/position_add";
+		return "position_add";
 	}
 
 	/**
@@ -185,7 +185,7 @@ public class PositionController {
 	 */
 	@RequestMapping(value = "/positionUpdate", method = RequestMethod.GET)
 	public String update(HttpServletRequest request, Model model,Integer page) {
-		int positionid = Integer.parseInt(request.getParameter("positionid"));
+		int positionid = Integer.parseInt(request.getParameter("positionId"));
 		Position position = positionService.queryPositionById(positionid);
 		if(null!=position){
 			model.addAttribute("position", position);
@@ -196,7 +196,7 @@ public class PositionController {
 			logger.error(CommonData.QUERY_FAILURE);
 		}
 
-		return "sms/position_edit";
+		return "position_edit";
 	}
 
 	/**

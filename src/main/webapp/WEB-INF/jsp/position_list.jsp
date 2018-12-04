@@ -39,7 +39,7 @@
 						<td><span class="position_word_1">${position.positionCreatedTime}</span></td>
 						<td><span class="position_word_1">${position.positionUpdatedUser}</span></td>
 						<td><span class="position_word_1">${position.positionUpdatedTime}</span></td>
-						<td><a href="${basepath }/sms/positionUpdate"><button class="position_list_button">编辑</button></a></td>
+						<td><a href="${basepath }/sms/positionUpdate?positionId="${position.positionId}><button class="position_list_button">编辑</button></a></td>
 						<td><a href="${basepath }/sms/positionDelete"><button class="position_list_button">删除</button></a></td>
 					</tr>
 				</c:forEach>
