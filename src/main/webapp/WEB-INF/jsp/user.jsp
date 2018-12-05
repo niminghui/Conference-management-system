@@ -75,7 +75,7 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle-o fa-2x" aria-hidden="true"></i>${account_name} <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="#">账户信息</a></li>
-            <li><a href="#">修改密码</a></li>
+            <li><a href="/scb.sms/Account/updatePWD">修改密码</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="/scb.sms/quit">退出</a></li>
           </ul>
